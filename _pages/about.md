@@ -8,15 +8,15 @@ redirect_from:
   - /about.html
 ---
 
-About My Work
+About Me, Professionally
 ======
 
 
-About My Self
+About Me, Personally
 ======
 
 
-About My Family
+About Others
 ======
 
 

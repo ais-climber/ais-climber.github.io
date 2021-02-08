@@ -9,7 +9,7 @@
 locale                   : "en-US"
 title                    : "About Me"
 title_separator          : "-"
-name                     : &name "Caleb Kisby"
+name                     : &name "About Me"
 description              : &description ""
 url                      : https://ais-climber.github.io/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
