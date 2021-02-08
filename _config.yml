@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Caleb Kisby"
+title                    : "About Me"
 title_separator          : "-"
 name                     : &name "Caleb Kisby"
 description              : &description ""
