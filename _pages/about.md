@@ -8,23 +8,19 @@ redirect_from:
   - /about.html
 ---
 
-About Me, Professionally
+About my work
 ======
 Hi, I'm Caleb.  I am currently working through a PhD in Computer Science at Indiana University, with the supervision of [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](http://homes.sice.indiana.edu/sblancor/).
 
-I aspire to do machine learning (ML) and cognition research from the vantage point of formal logic.  The dominant paradigms of the two (neural networks, knowledge representation) may appear incompatible, synthesizing the two is necessary to resolve a deep mystery in artificial intelligence:  Why must we trade off between deep (yet brittle) reasoning, and flexible (yet shallow) learning, when humans and other animals seem to pull off both just fine?
+The bee in my bonnet at the moment concerns how we can consider machine learning systems as dynamic modal logics.  The point is to integrate reasoning alongside learning _on the logical front_; by doing so, we can apply well-known completeness, complexity, and expressivity results to better understand machine learning.
 
-Typically, work blending the two happens on the connectionist front.  For example, the Neural-Symbolic Learning and Reasoning effort [link](https://arxiv.org/pdf/1711.03902.pdf) aims to embed logical reasoning within special neural network architectures.  My current kick is "reversing" this work -- embedding connectionist learning (and other ML) within special logics.
-
-I also have a little bee in my bonnet:  Cognitively plausible logics.  These systems aim to formalize fragments of _actual_ cognitive reasoning, rather than the traditional logical domain of _ideal_ or _correct_ reasoning.  Today, these take the following forms:
-- Description logics for reasoning about concepts
+More broadly, I study _cognitively plausible logics_ -- logics that  formalize fragments of _actual_ cognitive reasoning, rather than the traditional logical subject of _ideal_ or _rational_ reasoning.  I can be spotted in the wild reading papers on:
+- Syllogistic and description logics for reasoning about concepts
 - Natural logics for reasoning in natural language
-- Epistemic logics for boundedly rational reasoning
-- Dynamic, modal, and hybrid logics for reasoning alongside learning
-The ground here is fertile, and I take every opportunity to fly out and see the greenery.
+- Dynamic, modal, and hybrid logics for learning alongside traditional reasoning
 
 
-About Me, Personally
+About myself
 ======
 The PhD is all-consuming; even when I'm not doing work, I tend to wear the above hat 24/7.  So when I do relax, I tend to prefer low-overhead fun:  Reading comics, watching movies, and (typical of my generation) sharing memes.  Here are some of my favorites:
 
@@ -36,13 +32,13 @@ The PhD is all-consuming; even when I'm not doing work, I tend to wear the above
 - **Memes:** [1](https://ais-climber.github.io/images/good-boy.jpg) [2](https://ais-climber.github.io/images/crossover.png) [3](https://ais-climber.github.io/images/theory.png) [4](https://ais-climber.github.io/images/conspiracy.jpg)
 
 
-About Others
+About my family
 ======
 I live with my kaleidoscopic partner Sabrina and our two strawberry-scented cats Gunter and Garnet.  
 
 My family and friends are all people of strong character (and high ambition, whether they would admit it themselves).  Here is a shameless signal boost of some of their work:
 - [Ruth E](https://www.instagram.com/krispyfanart/), sister who was raised by horses
-- [Amanda](https://amandagames.itch.io/), sister who was raised by herself 
+- [Amanda](https://amandagames.itch.io/), sister who was raised by dreams 
 - [Tiff](https://lunarhallowstudio.carrd.co/), sister who was raised by wolves
 - [Adam](https://lifeboat.com/ex/bios.adam.kisby), our father who must be an anomaly for the above to be true
 - L. Lebron, close friend raised by the sea -- and a man of many titles (website coming soon!)
