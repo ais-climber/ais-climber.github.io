@@ -82,13 +82,14 @@ analytics:
 author:
   name             : "Caleb Kisby"
   avatar           : "us.jpg"
-  bio              : "[CV](https://ais-climber.github.io/files/cv)"
+  bio              : 
   location         : 
   employer         :
   pubmed           : 
   googlescholar    : 
+  - text           : "CV"
+    url            : https://ais-climber.github.io/files/cv.pdf
   email            : "cckisby@gmail.com"
-  cv               : "https://ais-climber.github.io/files/cv.pdf"
   researchgate     :  
   uri              :
   bitbucket        :
@@ -262,14 +263,14 @@ timezone: America/Los_Angeles # http://en.wikipedia.org/wiki/List_of_tz_database
 # Plugins
 plugins:
   - jekyll-paginate
-  - jekyll-sitemap
+#  - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
   - jekyll-redirect-from
 # mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate
-  - jekyll-sitemap
+#  - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
   - jemoji
