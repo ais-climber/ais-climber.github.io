@@ -87,11 +87,9 @@ author:
   employer         :
   pubmed           : 
   googlescholar    : 
-  text             : "CV"
-  url              : https://ais-climber.github.io/files/cv.pdf
   email            : "cckisby@gmail.com"
   researchgate     :  
-  uri              :
+  cv               : "CV"
   bitbucket        :
   codepen          :
   dribbble         :
