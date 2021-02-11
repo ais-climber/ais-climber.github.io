@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-About my work
+About me
 ======
 Hi, I'm Caleb.  I am currently working through a PhD in Computer Science at Indiana University, with the supervision of [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](http://homes.sice.indiana.edu/sblancor/).
 
@@ -20,7 +20,7 @@ More broadly, I study _cognitively plausible logics_ -- logics that  formalize f
 - Dynamic, modal, and hybrid logics for learning alongside traditional reasoning
 
 
-About myself
+More about me
 ======
 The PhD is all-consuming; even when I'm not doing work, I tend to wear the above hat 24/7.  So when I do relax, I tend to prefer low-overhead fun:  Reading comics, watching movies, and (typical of my generation) sharing memes.  Here are some of my favorites:
 
