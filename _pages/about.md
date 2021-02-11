@@ -23,16 +23,6 @@ More broadly, I study _cognitively plausible logics_ -- logics that  formalize f
 More about me
 ======
 The PhD is all-consuming; even when I'm not doing work, I tend to wear the above hat 24/7.  So when I do relax, I tend to prefer low-overhead fun:  Reading comics, watching movies, and (typical of my generation) sharing memes.  Here are some of my favorites:
-
-| Syntax      | Description |
-| ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
-
-| **Comics** | some text here that will definitely word wrap I hope |
-| **Books** | some text here that will definitely word wrap I hope |
-| **Video Games** | some text here that will definitely word wrap I hope |
-
 - **Comics:** [Dumbing of Age](https://www.dumbingofage.com/), [Rock and Riot](https://rockandriotcomic.com/), [Broodhollow](http://broodhollow.chainsawsuit.com/), [Where is Fancy Bread?](http://www.thenerdsofparadise.com/time1.htm), [Saint Young Men](https://kodanshacomics.com/series/saint-young-men/), [Gwenpool](https://www.goodreads.com/book/show/29467805-gwenpool-the-unbelievable-vol-1), ...
 - **Books:** ["The Complete Works of Marvin K. Mooney"](https://www.goodreads.com/book/show/7854170-the-complete-works-of-marvin-k-mooney), ["Dump This Book"](https://www.goodreads.com/book/show/409293.Dump_This_Book_While_You_Still_Can_), ["Small Gods"](https://www.goodreads.com/book/show/34484.Small_Gods)
 - **Video games:** [Celeste](http://www.celestegame.com/), [Omori](http://omori-game.com/), [LoZ](https://en.wikipedia.org/wiki/The_Legend_of_Zelda)
