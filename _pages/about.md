@@ -29,12 +29,12 @@ The PhD is all-consuming; even when I'm not doing work, I tend to wear the above
 - **Video games:** [Celeste](http://www.celestegame.com/), [Omori](http://omori-game.com/), [LoZ](https://en.wikipedia.org/wiki/The_Legend_of_Zelda)
 - **Movies:** [Synecdoche, NY](https://www.imdb.com/title/tt0383028/), [The Queen's Gambit](https://www.imdb.com/title/tt10048342/)
 - **Papers:** ["The Phrasal Lexicon"](https://www.aclweb.org/anthology/T75-2013.pdf), ["AI meets Natural Stupidity"](http://www.cs.yorku.ca/~jarek/courses/ai/F11/naturalstupidity.pdf)
-- **Memes:** [1](https://ais-climber.github.io/images/good-boy.jpg) [2](https://ais-climber.github.io/images/crossover.png) [3](https://ais-climber.github.io/images/theory.png) [4](https://ais-climber.github.io/images/conspiracy.jpg)
+- **Memes:** [1](https://ais-climber.github.io/images/good-boy.jpg) [2](https://ais-climber.github.io/images/crossover.png)
 
 
 About my family
 ======
-I live with my kaleidoscopic partner Sabrina and our two strawberry-scented cats Gunter and Garnet.  
+I live with my kaleidoscopic partner Sabrina and our two strawberry-scented cats [Gunter](https://ais-climber.github.io/images/gunter2.jpg) and [Garnet](https://ais-climber.github.io/images/garnet.jpg).  
 
 My family and friends are all people of strong character (and high ambition, whether they would admit it themselves).  Here is a shameless signal boost of some of their work:
 - [Ruth E](https://www.instagram.com/krispyfanart/), sister who was raised by horses

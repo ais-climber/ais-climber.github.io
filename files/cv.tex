@@ -1,33 +1,146 @@
-\documentclass[11pt,a4paper,sans]{moderncv}
-\usepackage[utf8]{inputenc}
 
-\moderncvstyle{classic}
-\moderncvcolor{blue}
+% \name{Caleb}{Kisby}
+% \title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
+% \address{312 West Kenwood Drive}{Bloomington, IN 47404}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+% \email{cckisby@indiana.edu}                               % optional, remove / comment the line if not wanted
+% \homepage{https://ais-climber.github.io/}                         % optional, remove / comment the line if not wanted
 
-\usepackage[scale=0.75]{geometry}
+\documentclass[12pt]{res} % default is 10 pt
+\usepackage{setspace}
+\onehalfspacing
+%\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
+%\usepackage{newcent}   % uses new century schoolbook postscript font 
+\setlength{\textheight}{9.5in} % increase text height to fit resume on 1 page
+\newsectionwidth{0pt}  % So the text is not indented under section headings
 
-\name{Caleb}{Kisby}
-\title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
-\address{312 West Kenwood Drive}{Bloomington, IN 47404}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
-\email{cckisby@indiana.edu}                               % optional, remove / comment the line if not wanted
-\homepage{https://ais-climber.github.io/}                         % optional, remove / comment the line if not wanted
 
-%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+\renewcommand{\namefont}{\Large}
+\renewcommand{\sectionfont}{\Large\bf}
 
-\begin{document}
+\begin{document} 
 
-\makecvtitle
+\name{Caleb C.\ Kisby\\\\\hfil {\small Curriculum Vitae} \hfil\\} % the \\[12pt] adds a blank line after name
+
+\address{\small 312 West Kenwood Drive \\ \small Bloomington, IN 47404}
+\address{\small \hfill cckisby@indiana.edu \\ \small \hfill https://ais-climber.github.io/}
+                                    
+\begin{resume}
+
+
 
 \section{Education}
+\vspace{5mm}
+\begin{tabular}{ll}
+    Ph.D. & Computer Science, Indiana University, 2018--2023 (anticipated) \\
+    B.S. & Computer Science \& Mathematics, University of South Carolina, 2018
+\end{tabular}
 
 \section{Experience}
 
+
 \section{Publications}
+\vspace{5mm}
+\begin{tabular}{rl}
+    2020 & \textbf{C.\ Kisby}, S.\ A.\ Blanco, A.\ Kruckman, and L.\ Moss, Logics for Sizes with\\[-4pt]
+         & Union or Intersection.  In \textbf{Proceedings of AAAI’20}, New York NY, \\[-4pt]
+         & 2870--2876\\
+    2019 & Gates, Lawrence, \textbf{Caleb Kisby}, and David Leake, CBR confidence as a basis\\[-4pt]
+         & for confidence in black box systems.  In \textbf{Proceedings of ICCBR 2019},\\[-4pt]
+         & Otzenhausen Germany, 95-109\\
+\end{tabular}
 
 \section{Conference Activity}
+\vspace{5mm}
+\begin{tabular}{rl}
+    2020 & Talk \\[-4pt]
+         & \\[-4pt]
+         & \\
+        
+         & Poster \\[-4pt]
+         & \\[-4pt]
+         & \\
 
-% Talks
+    2019 & Talk \\[-4pt]
+         & \\[-4pt]
+         & \\
+\end{tabular}
 
-% Posters
+\section{Fellowships \& Awards}
+\vspace{5mm}
+\begin{tabular}{rl}
+2018--2019 & Paul Purdom Fellowship, Department of Computer Science, Indiana University\\
+    2018 & Outstanding Senior in Computer Science, USC Columbia\\
+         & Jeong S.\ Yang Award for Excellence in Undergraduate Mathematics,\\[-4pt]
+         & \quad USC Columbia\\
+    2017 & Thomas Markham Mathematics Scholarship, USC Columbia \\
+         & Magellan Scholar Undergraduate Research Grant, USC Columbia
+\end{tabular}
 
+\section{Teaching}
+
+\section{Professional Service}
+\vspace{5mm}
+\begin{tabular}{rl}
+    2019 & Reviewer for the Journal of Logic, Language, and Information\\
+\end{tabular}
+
+% \section{EDUCATION} 
+%  \noindent RENSSELAER POLYTECHNIC INSTITUTE, Troy, NY \\
+% B.S. Mechanical Engineering, May 1989 \\
+% Q.P.A. 3.2/4.0 (in major) 
+ 
+% \section{EXPERIENCE} 
+%  CO-OP STUDENT TRAINEE \\
+% Naval Research Laboratory, Washington, DC \\
+% Summer, Fall 1988, Fall 1987 
+% \vspace{0.2in}
+%    \begin{itemize} \itemsep -2pt  % reduce space between items
+%    \item Conducted  mechanical  testing  of  various  alloys. Operated 
+%     machining equipment, scanning electron microscopes, and other 
+%     equipment  in  the  preparation  and  analysis  of tested and 
+%     nontested samples. 
+%    \item Designed and coordinated the phases of the experiment  in  an 
+%     attempt  to  determine  the cause of a problem encountered in 
+%     the production of a new tank armor. 
+%  \end{itemize}
+
+% CO-OP ENGINEERING TRAINEE \\
+% Environmental Protection Agency, Washington, DC \\ 
+% Summer 1986 
+% \vspace{0.2in}
+%  \begin{itemize} \itemsep -2pt
+%    \item Programmed for data entry, storage, and retrieval and managed 
+%     the databases. 
+%   \item  Restructured existing programming and data files  to  improve 
+%     data entry time by 100% and data retrieval time by over 500%. 
+%   \item Taught classes in database management and programming. 
+% \end{itemize} 
+
+% \section{HONORS} 
+ 
+% Rensselaer  Medal,  High  School  Valedictorian,  Dean's  List of 
+% Distinguished Students 
+ 
+% \section{ACTIVITIES} 
+ 
+% Alpha Epsilon  Pi  Fraternity,  American  Society  of  Mechanical 
+% Engineers, Karate and Skydiving Clubs 
+ 
+% \section{HOBBIES} 
+ 
+% Volleyball, weightlifting, and automotive repair 
+ 
+
+\end{resume}
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
