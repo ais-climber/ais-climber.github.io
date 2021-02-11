@@ -10,7 +10,7 @@ redirect_from:
 
 About me
 ======
-Hi, I'm Caleb.  I am currently working through a PhD in Computer Science at Indiana University, with the supervision of [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](http://homes.sice.indiana.edu/sblancor/).
+Hi, I'm Caleb.  I am currently working through a PhD in Computer Science (artificial intelligence \& formal logic) at Indiana University, with the supervision of [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](http://homes.sice.indiana.edu/sblancor/).  I regularly engage with the [IU Pure and Applied Logic group](https://iulg.sitehost.iu.edu/index.shtml), many members of the [IU Case-Based Reasoning lab](http://vision.soic.indiana.edu/projects/deepcbr/), and the [plwonks](http://wonks.github.io/) group. 
 
 The bee in my bonnet at the moment concerns how we can consider machine learning systems as dynamic modal logics.  The point is to integrate reasoning alongside learning _on the logical front_; by doing so, we can apply well-known completeness, complexity, and expressivity results to better understand machine learning.
 
