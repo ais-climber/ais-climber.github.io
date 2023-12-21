@@ -1,0 +1,11 @@
+# main links links
+main:
+  - title: "Papers"
+    url: /papers/
+#  - title: "Projects"
+#    url: /projects/
+#  - title: "Bibs and Resources"
+#    url: /bibliographies/
+  - title: "Contact"
+    url: /contact/
+
