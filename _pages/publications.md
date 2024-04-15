@@ -17,7 +17,7 @@ nav_order: 2
 ---
 
 <!-- _pages/publications.md -->
-<div class="papers">
+<div class="publications">
 
 {% bibliography %}
 
