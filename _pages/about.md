@@ -2,12 +2,10 @@
 layout: about
 title: about
 permalink: /about/
-subtitle: >
-  PhD Candidate in Computer Science
-  Luddy School, Indiana University Bloomington
+subtitle: 
 
 profile:
-  align: right
+  align: left
   image: me.jpg
   image_circular: false # crops the image to make it circular
   more_info: 
