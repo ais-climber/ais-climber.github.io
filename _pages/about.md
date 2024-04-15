@@ -3,8 +3,8 @@ layout: about
 title: About
 permalink: /
 subtitle: 
-nav: true
-nav_order: 1
+# nav: true
+# nav_order: 
 
 profile:
   align: right
@@ -14,7 +14,7 @@ profile:
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 ---
 
 Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supervised by [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](https://homes.luddy.indiana.edu/sblancor).  I'm a member of the [IU logic group](https://iulg.sitehost.iu.edu/) and [plwonks](https://wonks.github.io/).
