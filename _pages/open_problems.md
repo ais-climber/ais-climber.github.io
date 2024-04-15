@@ -1,3 +1,12 @@
+---
+layout: page
+permalink: /open_problems/
+title: open problems
+description: 
+nav: false
+nav_order: 
+---
+
 # Open Problems I Like
 
 ## Network Semantics
