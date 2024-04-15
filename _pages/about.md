@@ -21,7 +21,7 @@ Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supe
 
 ## Research
 I work on the mathematical foundations of artificial intelligence.  Currently I am developing formal groundwork for *neural-symbolic AI*, the bridge between neural networks and logic.  Besides this, I am interested in:
-   neural net learning (gradient descient, Hebbian learning), dynamic epistemic logic, belief revision, reasoning about {belief, preference, prototypes}, and formal verification (especially for neural nets)
+> neural net learning (gradient descient, Hebbian learning), dynamic epistemic logic, belief revision, reasoning about {belief, preference, prototypes}, and formal verification (especially for neural nets)
 
 If you're interested in hearing more, take a look at my [publications](publications.md).  I also keep a list of [open problems](open_problems.md) that I'm interested in.
 
