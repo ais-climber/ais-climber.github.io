@@ -1,0 +1,163 @@
+{
+  "main": {
+    "id": "a9f15de4b2663b0b",
+    "type": "split",
+    "children": [
+      {
+        "id": "c8cfe414d9d81907",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c0d10ea1f0699da7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_pages/about_me.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "79ea170f94ea764a",
+    "type": "split",
+    "children": [
+      {
+        "id": "944d93f8d6da713b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bec9b53d72d542f5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "52be643000bd6248",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "182e663e6df95dad",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "aa85838402f7de4b",
+    "type": "split",
+    "children": [
+      {
+        "id": "3249392d5aa8a789",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e629eb92aff76c4d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_pages/about_me.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3dd6711d4052b40f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_pages/about_me.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a1e64f4856be4da0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "6e52fb8a7e76e68e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_pages/about_me.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "c0d10ea1f0699da7",
+  "lastOpenFiles": [
+    "preamble.sty",
+    "_pages/about.md",
+    "_pages/about_me.md",
+    "_pages/404.md",
+    "readme_preview/blog.png",
+    "readme_preview/al-folio-preview.png",
+    "README.md",
+    "INSTALL.md",
+    "FAQ.md",
+    "CUSTOMIZE.md",
+    "CONTRIBUTING.md"
+  ]
+}
