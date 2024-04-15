@@ -1,13 +1,11 @@
 ---
 layout: page
 permalink: /open_problems/
-title: open problems
+title: Open Problems I Like
 description: 
 nav: false
 nav_order: 
 ---
-
-# Open Problems I Like
 
 ## Network Semantics
 
