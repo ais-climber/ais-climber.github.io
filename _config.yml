@@ -129,7 +129,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 
 blog_name: # blog_name will be displayed in your blog page
 blog_description: 
-permalink: /
+permalink: 
 
 # Pagination
 pagination:
@@ -174,10 +174,10 @@ collections:
     defaults:
       layout: post
     output: false
-    permalink: /
+    permalink: /news/:path/
   projects:
     output: false
-    permalink: /
+    permalink: /projects/:path/
 
 announcements:
   enabled: false
@@ -278,9 +278,9 @@ jekyll-archives:
     tag: archive-tag
     category: archive-category
   permalinks:
-    year: /
-    tag: /
-    category: /
+    year: '/blog/:year/'
+    tag: '/blog/tag/:name/'
+    category: '/blog/category/:name/'
 
 display_tags: ["formatting", "images", "links", "math", "code"] # these tags will be displayed on the front page of your blog
 display_categories: ["blockquotes"] # these categories will be displayed on the front page of your blog
