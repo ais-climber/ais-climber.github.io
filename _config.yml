@@ -325,6 +325,7 @@ filtered_bibtex_keywords:
   [
     abbr,
     abstract,
+    year,
     additional_info,
     altmetric,
     arxiv,
