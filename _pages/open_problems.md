@@ -3,8 +3,8 @@ layout: page
 permalink: /open_problems/
 title: Open Problems I Like
 description: 
-nav: false
-nav_order: 
+nav: true
+nav_order: 5
 ---
 
 ## Network Semantics
