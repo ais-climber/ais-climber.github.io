@@ -6,7 +6,8 @@ description:
 nav: true
 nav_order: 5
 ---
-## Epistemic Logic
+## Modal Logics
+### Classical Modal Logics
 ### Classical 
 
 ## Neural Network Models
