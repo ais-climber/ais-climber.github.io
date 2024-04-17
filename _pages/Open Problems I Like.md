@@ -7,13 +7,18 @@ nav: true
 nav_order: 5
 ---
 
-## Network Semantics
+## Neural Network Models
+
+## Plausibility Models
+
+## Neighborhood Models
+
 
 ## Learning, Belief Revision, and Dynamic Update
 
 ## Belief, Preference, and Prototypes
 
-## Straight Modal Logic
+## Modal Logic
 
 ## Experimental Questions
 
