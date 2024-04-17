@@ -8,7 +8,7 @@ nav_order: 5
 ---
 ## Modal Logics
 ### Classical Modal Logics
-### Classical 
+### Epistemic Logics
 
 ## Neural Network Models
 
