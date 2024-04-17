@@ -14,12 +14,3 @@ nav_order: 5
 ## Neural & Social Network Models
 
 
-
-## Learning, Belief Revision, and Dynamic Update
-
-## Belief, Preference, and Prototypes
-
-## Modal Logic
-
-## Experimental Questions
-
