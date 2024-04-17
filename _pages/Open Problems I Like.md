@@ -6,8 +6,9 @@ description:
 nav: true
 nav_order: 5
 ---
-## Neural (and Social!) Network Models
+## Neural & Social Network Models
 
+## 
 
 ## Modal Logics
 ### Epistemic Logics
