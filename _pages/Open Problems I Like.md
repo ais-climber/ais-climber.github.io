@@ -5,11 +5,7 @@ title: Open Problems I Like
 description: 
 nav: false
 ---
-Here is a list of open problems I like -- I'm always [
-
-### ✨
-
-](https://emojipedia.org/sparkles)
+Here is a list of open problems I like
 ## Epistemic Logic
 
 ## Logics for Learning & Belief Revision
