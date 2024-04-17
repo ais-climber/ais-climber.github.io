@@ -3,7 +3,7 @@ layout: page
 permalink: /open_problems/
 title: Open Problems I Like
 description: 
-nav: true
+nav: false
 nav_order: 5
 ---
 
