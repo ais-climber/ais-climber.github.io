@@ -8,8 +8,9 @@ nav_order: 5
 ---
 ## Neural & Social Network Models
 
-## Epistemic Logic
+## Static Epistemic Logic
 
+## Logics for Learning & Belief Revision
 
 
 ## Learning, Belief Revision, and Dynamic Update
