@@ -148,6 +148,7 @@
   },
   "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
+    "preamble.sty",
     "_pages/project_notes/alphago_on_misere.md",
     "_pages/project_notes/notes_on_tcfgs.md",
     "_pages/open_problems.md",
@@ -161,7 +162,6 @@
     "_pages/publications.md",
     "_pages/teaching.md",
     "_pages/404.md",
-    "preamble.sty",
     "_pages/about_me.md",
     "readme_preview/blog.png",
     "readme_preview/al-folio-preview.png",
