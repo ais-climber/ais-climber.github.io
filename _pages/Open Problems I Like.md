@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 5
 ---
-blah blah blah
+
 ## Network Semantics
 
 ## Learning, Belief Revision, and Dynamic Update
