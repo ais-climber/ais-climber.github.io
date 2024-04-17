@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/Open Problems I Like.md",
+                "file": "_pages/Contact.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/Open Problems I Like.md",
+                "file": "_pages/Contact.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/Open Problems I Like.md",
+                "file": "_pages/Contact.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/Open Problems I Like.md"
+                "file": "_pages/Contact.md"
               }
             }
           }
@@ -148,9 +148,9 @@
   },
   "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
+    "_pages/Open Problems I Like.md",
     "_pages/Contact.md",
     "_pages/publications.md",
-    "_pages/Open Problems I Like.md",
     "_pages/project_notes/AlphaGo on Misère Games.md",
     "_pages/about.md",
     "_pages/teaching.md",
