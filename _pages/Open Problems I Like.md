@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 5
 ---
-## Classical Belief Revision ()
+## Logics 
 ## Neural Network Models
 
 ## Plausibility Models
