@@ -146,15 +146,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c0d10ea1f0699da7",
+  "active": "bec9b53d72d542f5",
   "lastOpenFiles": [
-    "_pages/about.md",
+    "_pages/publications.md",
     "_pages/Open Problems I Like.md",
+    "_pages/teaching.md",
+    "_pages/404.md",
+    "_pages/about.md",
     "_pages/project_notes/Untitled.md",
     "_pages/project_notes/AlphaGo on Misère Games.md",
     "preamble.sty",
     "_pages/about_me.md",
-    "_pages/404.md",
     "readme_preview/blog.png",
     "readme_preview/al-folio-preview.png",
     "README.md",
