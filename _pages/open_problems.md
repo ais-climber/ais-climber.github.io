@@ -16,6 +16,6 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 ## Games
 - [📝](/alphago_misere/) (TODO) AlphaGo Zero, via reinforcement learning and self-play, can learn winning strategies for nearly any two-player turn-based game, including Go, Chess, Othello, Connect4, Tic-Tac-Toe, and more.  Recently, TODO showed that AlphaGo Zero fails to learn a winning strategy for the game [Notakto](https://en.wikipedia.org/wiki/Notakto).  What is it about Notakto that makes it challenging to learn?
-- [📝](/notes_on_tcfgs/) (TODO) Given a tournament, we can make a tier list that resolves all the cycles in a stable way (this is called a "tiered coalition formation game", see TODO).  There are many different ways to define stability -- one is "local stability," which asserts that swapping any 
+- [📝](/notes_on_tcfgs/) (TODO) Given a tournament, we can make a tier list that resolves all the cycles in a stable way (this is called a "tiered coalition formation game", see TODO).  There are many different ways to define stability -- one is "local stability," which asserts that swapping any two agents 
 
 AlphaGo {% cite  %}
