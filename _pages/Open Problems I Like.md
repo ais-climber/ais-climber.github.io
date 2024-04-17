@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 5
 ---
-## Logics 
+## Modal and Epistemic Logic
 ## Neural Network Models
 
 ## Plausibility Models
