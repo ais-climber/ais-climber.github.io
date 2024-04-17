@@ -16,4 +16,4 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 ## Games
 - (✨, inspired by ) AlphaGo, which 
-AlphaGo 
+AlphaGo {% cite  %}
