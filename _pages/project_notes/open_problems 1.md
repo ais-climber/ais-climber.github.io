@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /open_problems/
+permalink: /alphago_misere/
 title: Open Problems I Like
 description: 
 nav: false
