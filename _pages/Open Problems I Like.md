@@ -15,7 +15,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Neural & Social Network Models
 
 ## Games
-- (✨, inspired by TODO) AlphaGo Zero has demonstrated claims to learn via self-play any two-player 
+- (✨, inspired by TODO) AlphaGo Zero has demonstrated its ability to self-play nearly any two-player tclaims to learn via self-play any two-player 
 - 
 - AlphaGo, which 
 AlphaGo {% cite  %}
