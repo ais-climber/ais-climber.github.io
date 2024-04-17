@@ -7,7 +7,7 @@ nav: true
 nav_order: 5
 ---
 
-## Static Epistemic Logic
+## Epistemic Logic
 
 ## Logics for Learning & Belief Revision
 
