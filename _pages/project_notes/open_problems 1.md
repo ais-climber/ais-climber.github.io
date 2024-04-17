@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /alphago_misere/
-title: Open Problems I Like
+title: AlphaGo on Misère Games
 description: 
 nav: false
 ---
