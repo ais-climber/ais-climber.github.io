@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/open_problems.md",
+                "file": "_pages/project_notes/PROJECT_TEMPLATE.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/open_problems.md",
+                "file": "_pages/project_notes/PROJECT_TEMPLATE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/open_problems.md",
+                "file": "_pages/project_notes/PROJECT_TEMPLATE.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/open_problems.md"
+                "file": "_pages/project_notes/PROJECT_TEMPLATE.md"
               }
             }
           }
@@ -148,9 +148,9 @@
   },
   "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
+    "_pages/open_problems.md",
     "_pages/project_notes/alphago_on_misere.md",
     "_pages/about.md",
-    "_pages/open_problems.md",
     "Contact.md",
     "_pages/Contact.md",
     "_pages/project_notes/PROJECT_TEMPLATE.md",
