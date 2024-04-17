@@ -13,7 +13,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 
 ## Neural & Social Network Models
-- (✨) What is the "classical equivalent" of Hebbian learning?  More precisely, what dynamic epistemic update satisfies the 
+- (✨) What is the "classical equivalent" of Iterated Hebbian learning?  More precisely, what dynamic epistemic update satisfies the same re
 - 
 - 
 - Neural network learning policies, such as Hebbian learning, can be viewed as dynamic epistemic updates on neural network models.  But 
