@@ -6,11 +6,13 @@ description:
 nav: true
 nav_order: 5
 ---
-## Neural & Social Network Models
 
 ## Static Epistemic Logic
 
 ## Logics for Learning & Belief Revision
+
+## Neural & Social Network Models
+
 
 
 ## Learning, Belief Revision, and Dynamic Update
