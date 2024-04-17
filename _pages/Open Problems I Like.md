@@ -6,8 +6,8 @@ description:
 nav: true
 nav_order: 5
 ---
-## Neural & Social Network Models
-
+## Network Models
+These problems are primarily 
 
 ## Modal Logics
 ### Epistemic Logics
