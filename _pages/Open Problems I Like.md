@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 5
 ---
-## Distributed Network Models
+## Neural Network Models
 
 
 ## Modal Logics
