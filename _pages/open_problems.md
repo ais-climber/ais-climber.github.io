@@ -20,3 +20,5 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 - [📝](/notes_on_tcfgs/) (TODO) Given a tournament, a Tiered Coalition Formation Game is the task of making a tier list that resolves all the cycles in a stable way.  There are many different ways to define stability; one is "local stability," which asserts that swapping any two agents in the tier list results in a *worse* `#forward edges - #backward edges`.  Is local stability polynomial time for weighted tournaments?
 
 AlphaGo {% cite  %}
+
+$\Prop(S)$
