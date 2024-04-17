@@ -13,7 +13,9 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 
 ## Neural & Social Network Models
-- (✨) Iterated Hebbian learning, viewed as a dynamic epistemic update
+- (✨) Neural network learning policies, such as Hebbian learning, can be viewed as dynamic epistemic updates on neural network models.  But 
+- 
+- Iterated Hebbian learning, viewed as a dynamic epistemic update
 - 
 - One learning policy over neural network models is "Hebbian learning"
 - 
