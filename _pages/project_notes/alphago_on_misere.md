@@ -4,6 +4,6 @@ permalink: /alphago_misere/
 title: AlphaGo on Misère Games
 nav: false
 ---
-## Introduction
+## The Problem
 
 ## Things to Try
