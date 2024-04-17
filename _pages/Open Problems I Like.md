@@ -8,7 +8,7 @@ nav_order: 5
 ---
 ## Neural & Social Network Models
 
-## 
+## Epistemic Logic
 
 ## Modal Logics
 ### Epistemic Logics
