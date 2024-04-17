@@ -10,9 +10,7 @@ nav_order: 5
 
 ## Epistemic Logic
 
-## Modal Logics
-### Epistemic Logics
-### 
+
 ### Miscellaneous
 
 ## Neural Network Models
