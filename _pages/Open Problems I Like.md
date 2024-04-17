@@ -15,7 +15,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Neural & Social Network Models
 
 ## Games
-- (TODO) AlphaGo Zero has demonstrated its ability to self-play nearly any two-player turn-based game, including Go, Chess, Othello, Connect4, Tic-Tac-Toe, and more.  Recently, TODO showed that AlphaGo Zero fails to learn a winning strategy for the game [Notakto](https://en.wikipedia.org/wiki/Notakto).  What is it about Notakto that makes it challenging to learn?  
+- (TODO) AlphaGo Zero has demonstrated its ability to self-play nearly any two-player turn-based game, including Go, Chess, Othello, Connect4, Tic-Tac-Toe, and more.  Recently, TODO showed that AlphaGo Zero fails to learn a winning strategy for the game [Notakto](https://en.wikipedia.org/wiki/Notakto).  What is it about Notakto that makes it challenging to learn?  See my [project notes](AlphaGo%20on%20)
 - 
 - AlphaGo, which 
 AlphaGo {% cite  %}
