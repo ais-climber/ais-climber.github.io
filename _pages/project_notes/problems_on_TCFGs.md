@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: //
-title: 
+title: Some Notes on Tiered Coalition Formation Games
 nav: false
 ---
 ## Introduction
