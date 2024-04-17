@@ -15,5 +15,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Neural & Social Network Models
 
 ## Games
-- (✨, inspired by ) AlphaGo, which 
+- (✨, inspired by TODO) AlphaGo 
+- 
+- AlphaGo, which 
 AlphaGo {% cite  %}
