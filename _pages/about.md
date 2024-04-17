@@ -2,19 +2,15 @@
 layout: about
 title: About
 permalink: /
-subtitle: 
-# nav: true
-# nav_order: 
-
+subtitle: PhD Candidate
 profile:
   align: right
   image: me.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: false
   more_info: 
-
-news: false # includes a list of news items
-selected_papers: false # includes a list of papers marked as "selected={true}"
-social: false # includes social icons at the bottom of the page
+news: false
+selected_papers: false
+social: false
 ---
 
 Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supervised by [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](https://homes.luddy.indiana.edu/sblancor).  I'm a member of the [IU logic group](https://iulg.sitehost.iu.edu/) and [plwonks](https://wonks.github.io/).
