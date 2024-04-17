@@ -5,7 +5,7 @@ title: Open Problems I Like
 description: 
 nav: false
 ---
-Here is a list of open problems I'm personally invested in.  The list is somewhat disor
+Here is a list of open problems I'm personally invested in.  
 ## Epistemic Logic
 
 ## Logics for Learning & Belief Revision
