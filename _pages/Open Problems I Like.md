@@ -7,7 +7,7 @@ nav: true
 nav_order: 5
 ---
 
-## Epistemic Logic
+## Logics for Belief
 
 ## Logics for Learning & Belief Revision
 
