@@ -6,7 +6,7 @@ description:
 nav: true
 nav_order: 5
 ---
-## Neural Network Models
+## Neural & Social Network Models
 
 
 ## Modal Logics
