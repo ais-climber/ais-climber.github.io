@@ -15,7 +15,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Neural & Social Network Models
 
 ## Games
-- (✨, inspired by TODO) AlphaGo has demonstrated competent blank-s
+- (✨, inspired by TODO) AlphaGo Zero has demonstrated competent blank-s
 - 
 - AlphaGo, which 
 AlphaGo {% cite  %}
