@@ -2,3 +2,65 @@
 \usepackage{mathtools}
 \usepackage{proof}
 \usepackage{bussproofs}
+
+\newcommand{\key}[1]{\emph{#1}}
+\newcommand{\Rat}{\mathbb{Q}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\State}{\mathsf{State}} 
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\uplang}{\mathcal{L}^\ast}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\proves}{\vdash}
+\renewcommand{\o}{\cdot}
+\newcommand{\orr}{\vee}
+\newcommand{\andd}{\wedge}
+\newcommand{\nott}{\neg}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\rem}[1]{\relax}
+ \newcommand{\NP}{\mbox{\sc np}}
+\newcommand{\axiom}{\textsc}
+\newcommand*{\bigchi}{\mbox{\Large$\chi$}}% big chi
+\newcommand{\degree}[1]{\mathrm{deg}(#1)}
+\newcommand{\preds}[1]{\mbox{preds}(#1)}
+\newcommand{\layer}[1]{\mathsf{layer}(#1)}
+\newcommand{\activ}[2]{\mathsf{activ}_{#1}(#2)}
+\newcommand{\layerNoArgs}{\mathsf{layer}}
+
+\newcommand{\negweightscore}[1]{\mathsf{nws}(#1)}
+\newcommand{\minscore}{\mathsf{mnws}}
+\newcommand{\numiterations}{\mathsf{iter}}
+
+\newcommand{\AllNets}{\mathsf{Net}}
+\newcommand{\Net}{\mathcal{N}}
+\newcommand{\op}{\mathsf{op}}
+\newcommand{\Prop}{\mathsf{Prop}}
+\newcommand{\Reach}{\mathsf{Reach}}
+\newcommand{\Hebb}[2]{\mathsf{Hebb}(#1, #2)}
+\newcommand{\HebbNoArgs}{\mathsf{Hebb}}
+\newcommand{\Hebbstar}[2]{\mathsf{Hebb}^*(#1, #2)}
+\newcommand{\HebbstarNoArgs}{\mathsf{Hebb}^*}
+\newcommand{\hebbweight}{W_\mathsf{Hebb}}
+\newcommand{\hebbstarweight}{W_{\mathsf{Hebb}^*}}
+
+\newcommand{\Typ}[1]{\textrm{\textup{\textbf{T}}} #1}
+\newcommand{\Know}[1]{\textrm{\textup{\textbf{K}}} #1}
+% \newcommand{\Know}[2]{\textrm{\textup{\textbf{K}}}(#1, #2)}
+\newcommand{\KnowNoArgs}{\textrm{\textup{\textbf{K}}}}
+\newcommand{\TypNoArgs}{\textrm{\textup{\textbf{T}}}}
+% \newcommand{\Hebbop}[1]{[#1]_\textrm{\textup{hebb}\:}}
+% \newcommand{\Hebbop}[1]{[#1]_{\HebbstarNoArgs}\:}
+\newcommand{\Hebbop}[1]{[#1]}
+
+\newcommand{\diaTyp}[1]{\langle \textrm{\textup{\textbf{T}}} \rangle #1}
+\newcommand{\diaKnow}[1]{\langle \textrm{\textup{\textbf{K}}} \rangle #1}
+% \newcommand{\diaKnow}[2]{\langle \textrm{\textup{\textbf{K}}} \rangle(#1, #2)}
+\newcommand{\diaTypNoArgs}{\langle \textrm{\textup{\textbf{T}}} \rangle}
+\newcommand{\diaKnowNoArgs}{\langle \textrm{\textup{\textbf{K}}} \rangle}
+% \newcommand{\diaHebbop}[1]{\langle #1\rangle_\textrm{\textup{hebb}}}
+\newcommand{\diaHebbop}[1]{\langle #1\rangle}
