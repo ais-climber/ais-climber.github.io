@@ -13,7 +13,9 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 
 ## Neural & Social Network Models
-- (✨) One class of learning policies over neural network models are the "Hebbian" onesis "Hebbian learning"
+- (✨) 
+- 
+- One learning policy over neural network models is "Hebbian learning"
 - 
 - The Hebbian neural network learning policy is one p
 
