@@ -11,14 +11,6 @@ nav_order: 5
 ## Epistemic Logic
 
 
-### Miscellaneous
-
-## Neural Network Models
-
-## Plausibility Models
-
-## Neighborhood Models
-
 
 ## Learning, Belief Revision, and Dynamic Update
 
