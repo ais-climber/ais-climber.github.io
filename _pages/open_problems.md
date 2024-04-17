@@ -13,7 +13,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 
 ## Neural & Social Network Models
-- (✨) 
+- (✨) One learning policy 
 - 
 - One learning policy over neural network models is "Hebbian learning"
 - 
