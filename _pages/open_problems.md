@@ -21,4 +21,5 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 AlphaGo {% cite  %}
 
-$\Prop(S)$
+$\Prop(S \cap T)$
+
