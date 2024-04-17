@@ -6,3 +6,4 @@ nav: false
 ---
 ## Introduction
 
+## Things to Try
