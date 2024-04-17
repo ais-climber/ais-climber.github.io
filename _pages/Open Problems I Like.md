@@ -13,4 +13,4 @@ nav_order: 5
 
 ## Neural & Social Network Models
 
-## Graphs & Games
+## Miscellaneous Discrete Math
