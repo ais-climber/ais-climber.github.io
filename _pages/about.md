@@ -21,5 +21,3 @@ Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supe
 
 ## Research
 I work on the mathematical foundations of artificial intelligence.  Currently I am developing formal groundwork for *neural-symbolic AI*, the bridge between neural networks and logic.  More generally, I am interested in neural net learning, dynamic epistemic logic, belief revision, formal verification, and model building.
-
-
