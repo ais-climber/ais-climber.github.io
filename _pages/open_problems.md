@@ -14,7 +14,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 ## Neural & Social Network Models
 - (✨) What is the "classical equivalent" of Iterated Hebbian Learning?  i.e. is there a dynamic update, over possible-worlds models, that is equivalent to Iterated Hebbian Learning?  (We can ask the same question for other variants.)
-- (✨) Can we extend the analysis of Iterated Hebbian Learning to *convergent* Hebbian learning (using Oja's rule)?  In particular, can we do model building, and what do the axioms look like?
+- (✨) What are the complete axioms & model building for *convergent* Hebbian learning (using Oja's rule)?
 - (TODO) Can we characterize the class of neural networks whose forward propagation (of node activations) has a unique fixed point?
 - (TODO) Can we prove soundness for Logic Tensor Networks?  What axioms are they sound with respect to?
 
