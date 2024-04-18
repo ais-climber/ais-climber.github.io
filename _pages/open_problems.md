@@ -13,6 +13,8 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Logics for Learning & Belief Revision
 
 
+## Miscellaneous Modal Logic
+
 ## Neural & Social Network Models
 - (TODO) Can we characterize the class of neural networks whose forward propagation (of node activations) has a unique fixed point?
 - (TODO) Can we prove soundness for Logic Tensor Networks?  What axioms are they sound with respect to?
