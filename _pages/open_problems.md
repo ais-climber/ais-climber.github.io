@@ -20,7 +20,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 - (✨) What is the "classical model equivalent" of Iterated Hebbian Learning?  i.e. is there a dynamic update, over say possible-worlds models, that is equivalent to Iterated Hebbian Learning?  What about other variants of Hebbian learning?
 - (✨) What is the complete logic for *convergent* Hebbian learning (using Oja's rule)?
 - (✨) What is the complete logic for supervised learning by gradient descent?
-- (TODO) There are many different measures of complexity for neural networks.  On the one hand, we can view different neural networks as language recognizers (CITE).  On the other, we can view a neural network architecture as a logical model, and then characterize its complexity by the complexity of the logic needed to 
+- (TODO) There are many different measures of complexity for neural networks.  On the one hand, we can view different neural networks as language recognizers (CITE).  On the other, we can view a neural network architecture as a logical model, and then characterize its complexity by the expressivity of the logic.  Moreover, the logic
 
 ## Games
 - [📝](/alphago_misere/) (TODO) AlphaGo Zero, via reinforcement learning and self-play, can learn winning strategies for nearly any two-player turn-based game, including Go, Chess, Othello, Connect4, Tic-Tac-Toe, and more.  Recently, TODO showed that AlphaGo Zero fails to learn a winning strategy for the game [Notakto](https://en.wikipedia.org/wiki/Notakto).  What is it about Notakto that makes it challenging to learn?
