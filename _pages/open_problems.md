@@ -9,7 +9,6 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Epistemic Logic
 - (TODO) Modern syllogistic logics tend to consider counting quantifiers such as `More x y`, `AtLeast x y`, and `Most x y`.  As a qualitative alternative, consider `Typically x y`.  What is the complete 'minimal' syllogistic logic of `Typically`?  How does it relate to `Most`?  How does it relate to conditional logics?
 - 
-- What is the complete syllogistic logic of 
 
 ## Logics for Learning & Belief Revision
 
