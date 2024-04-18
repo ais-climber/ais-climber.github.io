@@ -12,7 +12,6 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 ## Logics for Learning & Belief Revision
 
-
 ## Miscellaneous Modal Logic
 
 ## Neural & Social Network Models
