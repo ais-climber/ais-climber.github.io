@@ -12,7 +12,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 
 ## Logics for Learning & Belief Revision
 - [📝](/model_theory_of_learning/) (TODO) Develop the model theory of learning.  What axioms capture important properties of learning (e.g. induction, no forgetting, )?  What do models of these properties look like?  Are there "correspondences" between axioms and properties of models, as there often are in modal logic?
-- We can think of belief revision operators $[P]$ as a kind of unsupervised learning; they *push us in the direction* of $P$, but otherwise do not give us an expected "answer" or "inference" for $P$.  What about 
+- We can think of belief revision operators $[P]$ as a kind of unsupervised learning; they *push us in the direction* of $P$, but otherwise do not give us an expected "answer" or "inference" for $P$.  What about supervised learning?
 
 ## Neural & Social Network Models
 - (TODO) Can we characterize the class of neural networks whose forward propagation (of node activations) has a unique fixed point?
