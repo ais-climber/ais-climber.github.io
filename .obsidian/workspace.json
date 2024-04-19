@@ -146,8 +146,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c0d10ea1f0699da7",
+  "active": "bec9b53d72d542f5",
   "lastOpenFiles": [
+    "_bibliography/references.bib",
     "_pages/project_notes/nn_learning_and_belief_revision.md",
     "_pages/open_problems.md",
     "_pages/project_notes/model_theory_of_learning.md",
