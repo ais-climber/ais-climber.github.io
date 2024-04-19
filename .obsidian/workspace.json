@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/open_problems.md",
+                "file": "_pages/project_notes/nn_learning_and_belief_revision.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/open_problems.md",
+                "file": "_pages/project_notes/nn_learning_and_belief_revision.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/open_problems.md",
+                "file": "_pages/project_notes/nn_learning_and_belief_revision.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/open_problems.md"
+                "file": "_pages/project_notes/nn_learning_and_belief_revision.md"
               }
             }
           }
@@ -148,9 +148,10 @@
   },
   "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
+    "_pages/open_problems.md",
+    "_pages/project_notes/nn_learning_and_belief_revision.md",
     "_pages/project_notes/model_theory_of_learning.md",
     "_pages/project_notes/alphago_on_misere.md",
-    "_pages/open_problems.md",
     "_pages/project_notes/notes_on_tcfgs.md",
     "_pages/project_notes/PROJECT_TEMPLATE.md",
     "preamble.sty",
