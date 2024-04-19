@@ -313,7 +313,7 @@ scholar:
   order: descending
   locale: en
   query: "@*"
-  group_by: type
+  group_by: none, type
   group_order: descending
 
 # Display different badges withs stats for your publications
