@@ -11,7 +11,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 - 
 
 ## Logics for Learning & Belief Revision
-- 
+- What axioms capture important properties of learning?  And which models 
 - 
 
 ## Neural & Social Network Models
