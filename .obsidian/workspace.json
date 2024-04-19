@@ -147,11 +147,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6e52fb8a7e76e68e",
+  "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
+    "_pages/project_notes/Untitled.md",
+    "_pages/open_problems.md",
     "_bibliography/references.bib",
     "_pages/project_notes/nn_learning_and_belief_revision.md",
-    "_pages/open_problems.md",
     "_pages/project_notes/model_theory_of_learning.md",
     "_pages/project_notes/alphago_on_misere.md",
     "_pages/project_notes/notes_on_tcfgs.md",
@@ -160,7 +161,6 @@
     "_pages/about.md",
     "Contact.md",
     "_pages/contact.md",
-    "_pages/project_notes/Untitled.md",
     "_pages/project_notes/alphago_misere.md",
     "Open.md",
     "_pages/publications.md",
