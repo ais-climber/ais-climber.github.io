@@ -17,7 +17,9 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Neural & Social Network Models
 - (TODO) Can we characterize the class of neural networks whose forward propagation (of node activations) has a unique fixed point?
 - (TODO) What are the complete axioms for Logic Tensor Networks?  (Just showing soundness is still open!)
-- (✨) What is the "classical model equivalent" of Iterated Hebbian Learning?  i.e. is there a dynamic update, over say possible-worlds models, that is equivalent to Iterated Hebbian Learning?  What about other variants of Hebbian learning?
+- (✨) What is the precise relationship between 
+- 
+- What is the "classical model equivalent" of Iterated Hebbian Learning?  i.e. is there a dynamic update, over say possible-worlds models, that is equivalent to Iterated Hebbian Learning?  What about other variants of Hebbian learning?
 - (✨) What is the complete logic for *convergent* Hebbian learning (using Oja's rule)?
 - (✨) What is the complete logic for supervised learning by gradient descent?
 - (TODO) There are many different measures of complexity for neural networks.  On the one hand, we can view different neural networks as language recognizers (CITE).  On the other, we can view a neural network architecture as a logical model, and then characterize its complexity by the expressivity of the logic.  Moreover, the logic has its own complexity measures (satisfiability, decidability, ...).  How precisely are these all related?
