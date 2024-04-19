@@ -9,6 +9,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Epistemic & Modal Logics
 - Open Question 2.6 in {% cite sizes_of_sets --file references %}: Modern syllogistic logics tend to consider counting quantifiers such as 'More x y', 'AtLeast x y', and 'Most x y'.  As a qualitative alternative, consider reasoning about prototypes, 'Typically x y'.  What is the complete 'minimal' syllogistic logic of `Typically`?
 - (✨) In the Coda of {% cite open_minds --file references %}, van Benthem introduces a sequence of dynamic logics for reasoning about quantifiers, building up to standard first-order logic.  Using description complexity, what complexity classes (if any) correspond to these logics?  What about if we added a fixed-point operator to each of these logics?  What can we say about the expressivity of each of these logics, when compared against other extensions of FOL?
+  *Warning: This problem is dangerously close to P vs NP!  Try not to look it directly in the eyes!*
 
 ## Logics for Learning & Belief Revision
 - [📝](/model_theory_of_learning/) (TODO) Develop the model theory of learning.  What axioms capture important properties of learning (e.g. induction, no forgetting, )?  What do models of these properties look like?  Are there "correspondences" between axioms and properties of models, as there often are in modal logic?
