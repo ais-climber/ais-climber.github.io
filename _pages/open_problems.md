@@ -21,7 +21,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 - (✨) What is the precise relationship between neural network models for learning and "classical" models for dynamic update?  Are there dynamic updates that correspond to neural network learning policies (e.g. Hebbian learning)?  And the other way around, are there neural network learning policies that correspond to known dynamic updates?
 - (✨) What is the complete logic for *convergent* Hebbian learning (using Oja's rule)?
 - (✨) What is the complete logic for supervised learning by gradient descent?
-- (TODO) 
+- (TODO) On the one hand, we can view neural networks as language recognizers (CITE).  On the other, we can view them as models of particular logics (CITE).  What is the precise relationship between these two perspectives on neural network complexity?
 - 
 - What is the precise relationship between 
 - 
