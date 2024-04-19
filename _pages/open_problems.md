@@ -7,8 +7,8 @@ nav: false
 ---
 Here is a list of open problems I'm personally invested in. I'm writing this to help myself stay organized and motivated, and also to share what I'm currently thinking about. Problems attributed with ✨ are, as far as I'm aware, my own. If you spot any errors/misattributions, or if you're aware of any updates please let me know!  I'm also open to collaborate on any of these -- see my [contact page](/contact/).
 ## Epistemic & Modal Logics
-- (TODO) Modern syllogistic logics tend to consider counting quantifiers such as `More x y`, `AtLeast x y`, and `Most x y`.  As a qualitative alternative, consider reasoning about prototypes, `Typically x y`.  What is the complete 'minimal' syllogistic logic of `Typically`?
-- 
+1. TODO) Modern syllogistic logics tend to consider counting quantifiers such as `More x y`, `AtLeast x y`, and `Most x y`.  As a qualitative alternative, consider reasoning about prototypes, `Typically x y`.  What is the complete 'minimal' syllogistic logic of `Typically`?
+2. 
 
 ## Logics for Learning & Belief Revision
 - [📝](/model_theory_of_learning/) (TODO) What axioms capture important properties of learning (e.g. induction, no forgetting, )?  What do models of these properties look like?  Are there "correspondences" between axioms and properties of models, as there often are in modal logic?  This ambitious problem asks us to develop the "model theory of learning."
