@@ -294,9 +294,6 @@ scholar:
   first_name: [Caleb]
 
   style: apa
-  sort_by: year, month
-  order: descending
-  locale: en
 
   source: /_bibliography/
   bibliography: papers.bib
@@ -312,6 +309,9 @@ scholar:
   details_dir: bibliography
   details_link: Details
 
+  sort_by: year, month
+  order: descending
+  locale: en
   query: "@*"
   group_by: type
   group_order: descending
