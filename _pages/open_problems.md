@@ -11,7 +11,7 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 - 
 
 ## Logics for Learning & Belief Revision
-- What axioms capture important properties of learning (e.g. induction, no forgetting, )?  What do models of these properties look like?  
+- () What axioms capture important properties of learning (e.g. induction, no forgetting, )?  What do models of these properties look like?  Are there "correspondences" between axioms and properties of models, as there often are in modal logic?  This ambitious problem asks us to develop the "model theory of learning."
 - 
 
 ## Neural & Social Network Models
