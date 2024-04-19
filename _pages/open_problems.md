@@ -17,7 +17,9 @@ Here is a list of open problems I'm personally invested in. I'm writing this to 
 ## Neural & Social Network Models
 - (TODO) Can we characterize the class of neural networks whose forward propagation (of node activations) has a unique fixed point?
 - (TODO) What are the complete axioms for Logic Tensor Networks?  (Just showing soundness is still open!)
-- (✨) What is the precise relationship between neural network models for learning and "classical" models for dynamic update?  
+- (✨) What is the precise relationship between neural network models for learning and "classical" models for dynamic update?  Are there dynamic updates that correspond to neural network learning policies (e.g. Hebbian learning)?  And the other way around, are there neural network learning policies that correspond to known dynamic updates?
+- 
+- Is there a dynamic update, say over possible-worlds models, that is equivalent to iterated Hebbian learning?  And the other way 
 - 
 - What is the "classical model equivalent" of Iterated Hebbian Learning?  i.e. is there a dynamic update, over say possible-worlds models, that is equivalent to Iterated Hebbian Learning?  What about other variants of Hebbian learning?
 - (✨) What is the complete logic for *convergent* Hebbian learning (using Oja's rule)?
