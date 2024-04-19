@@ -293,7 +293,7 @@ scholar:
   last_name: [Schultz Kisby]
   first_name: [Caleb]
 
-  style: acm
+  style: apa
 
   source: /_bibliography/
   bibliography: papers.bib
