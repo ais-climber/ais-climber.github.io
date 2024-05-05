@@ -71,7 +71,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Meaningness (David Chapman)
 - The Psychonaut Field Manual (Bluefluke) (MANGA)
 - The Illusion of Life (Frank Thomas, Ollie Johnston) (PICTURES)
-- 
+- The Principles of Pychology, Vol 1 & 2 (William James)
 
 ### papers
 - Emil Post (Alasdair Urquhart)
