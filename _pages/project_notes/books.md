@@ -19,4 +19,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Black Books (Carl Jung)
 - Earthbound, Boss Fight Books (Ken Baumann)
 - Ask Iwata: Words of Wisdom (Hobonichi, Sam Bett)
+- Handbook of Epistemic Logic (Hans van Ditmarsch, Joseph Halpern)
+- Journey into Mathematics (Joseph Rotman)
+- The Algorithm Design Manual (Steve Skiena)
+- A Mathematical Introduction to Logic (Herbert Enderton)
 - 
