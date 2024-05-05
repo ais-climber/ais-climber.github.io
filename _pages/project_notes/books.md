@@ -81,6 +81,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Writing Workshop (Barbara W. Sarnecka)
 - Collected Works of A.M. Turing - Mechanical Intelligence (A.M. Turing)
 - Logics for the XXIst Century Vol 1 (Ed. Dov Gabbay, Michael Zakharyaschev)
+- Neuro-Symbolic Artificial Intelligence: The State of the Art
 - 
 
 ### papers
