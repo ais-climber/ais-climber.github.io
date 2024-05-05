@@ -95,6 +95,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Endless forms Most Beautiful (Sean Carroll)
 - Four Thousand Weeks (Oliver Burkeman)
 - Visual Explanations (Edward Tufte)
+- Webster's Unabridged Dictionary 1913 (Webster)
 - 
 
 ### papers
