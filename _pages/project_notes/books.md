@@ -4,3 +4,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Introduction to Mathematical Thinking (Keith Devlin)
 - The Geometry of Musical Rhythm (Godfried Toussaint)
 - The Algebraic Mind (Gary Marcus)
+- A Scientific Assessment of the Validity of Mystical Experiences (Andrew Papanicolaou)
+- 
