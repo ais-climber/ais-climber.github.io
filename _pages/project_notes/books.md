@@ -38,4 +38,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Foundations of Machine Learning (Mehryar Mohri et al)
 - The Little Learner (Daniel Friedman, Anurag Mendhekar)
 - Quantum Computing Since Democritus (Scott Aaronson)
+- Picturing Quantum Processes (Aleks Kissinger, Bob Coecke)
 - 
