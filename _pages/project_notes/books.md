@@ -61,6 +61,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Modal Logic for Open Minds (Johan van Benthem)
 - Logical Dynamics of Information and Interaction (Johan van Benthem)
 - A Theorist's Toolkit (Sanjeev Arora)
+- What My Bones Know (Stephanie Foo)
+- I'm Glad My Mom Died (Jeanette McCurdy)
 - 
 
 ### papers
