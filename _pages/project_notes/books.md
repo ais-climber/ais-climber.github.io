@@ -87,7 +87,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Networking on the Network (Phil Agre)
 - Atlas of Ultrastructural Neurocytology (Josef Spacek)
 - Topics of Thought (Francesco Berto)
-- 
+- The Description Logic Handbook ()
 
 ### papers
 - Emil Post (Alasdair Urquhart)
