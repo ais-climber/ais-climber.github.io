@@ -54,6 +54,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Beautiful Racket (Matthew Butterick)
 - Practical Typography (Matthew Butterick)
 - Out of Their Minds (Cathy Lazere, Dennis Shasha)
+- Reasoning about Knowledge (Joseph Halpern)
+- Reasoning about Uncertainty (Joseph Halpern)
 - 
 
 ### papers
