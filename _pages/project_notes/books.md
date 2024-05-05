@@ -92,6 +92,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
+- The history of the use of [[]]-notation in natural language semantics (Brian Rabern)
 
 ### blogs
 - colah's blog
