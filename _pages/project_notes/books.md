@@ -51,3 +51,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Hypergraph Theory (Alain Bretto)
 - Mathematical Writing (Donald Knuth, Tracy Larrabee, Paul M. Roberts)
 - Beautiful Racket (Matthew Butterick)
+- Practical Typography (Matthew Butterick)\
+- 
