@@ -89,7 +89,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Topics of Thought (Francesco Berto)
 - The Description Logic Handbook (Ed. Franz Baader et al)
 - Handbook of Modal Logic (Ed. Johan Van Benthem et al)
-- The Laundry Files
+- The Laundry Files (Charles Stross)
+- 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
