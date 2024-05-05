@@ -74,6 +74,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Principles of Pychology, Vol 1 & 2 (William James)
 - The Six Basic Exercises (Rudolph Steiner)
 - The Chicken Qabalah (Lon Milo Duquette)
+- Adult Children of Emotionally Immature Parents (Lindsay Gibson)
+- 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
