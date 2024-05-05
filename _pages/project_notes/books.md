@@ -106,6 +106,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Algorithms (Jeff Erickson)
 - Probably Approximately Correct Book (Leslie Valiant)
 - Mathematics: A Very Short Introduction (Timothy Gowers)
+- The Man Who Loved Only Numbers (Paul Hoffman, a biography of Paul Erdos)
 - 
 
 ### papers
