@@ -83,7 +83,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Logics for the XXIst Century Vol 1 (Ed. Dov Gabbay, Michael Zakharyaschev)
 - Neuro-Symbolic Artificial Intelligence: The State of the Art
 - Introduction to Formal Philosophy (Ed. Sven Ove Hansson, Vincent Hendricks)
-- Truth and Repair (Judith Lewis Herman)
+- Trauma and Recovery (Judith Lewis Herman)
 - 
 
 ### papers
