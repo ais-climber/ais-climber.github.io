@@ -86,3 +86,6 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
+
+### blogs
+- colah's blog
