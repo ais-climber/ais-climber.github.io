@@ -25,3 +25,4 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - A Mathematical Introduction to Logic (Herbert Enderton)
 - Philosophy of Computer Science (William Rapaport)
 - The Anthropocene Reviewed (John Green)
+- In Search of the Light (Susan Blackmore)
