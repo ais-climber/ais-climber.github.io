@@ -67,7 +67,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Wandering Son (Shimura Takako) (MANGA)
 - Crossplay (Niki Smith) (MANGA)
 - Sunstone (Stjepan Sejic) (MANGA)
-- The Book of Lilith
+- The Book of Lilith (Robert G. Brown)
+- 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
