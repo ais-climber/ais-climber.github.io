@@ -73,7 +73,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Illusion of Life (Frank Thomas, Ollie Johnston) (PICTURES)
 - The Principles of Pychology, Vol 1 & 2 (William James)
 - The Six Basic Exercises (Rudolph Steiner)
-- 
+- The Chicken Qabalah (Lon Milo Duquette)
 
 ### papers
 - Emil Post (Alasdair Urquhart)
