@@ -96,6 +96,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Four Thousand Weeks (Oliver Burkeman)
 - Visual Explanations (Edward Tufte)
 - Webster's Unabridged Dictionary 1913 (Webster)
+- The Unwritten (Mike Carey) (MANGA)
 - 
 
 ### papers
