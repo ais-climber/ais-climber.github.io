@@ -6,3 +6,4 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Algebraic Mind (Gary Marcus)
 - A Scientific Assessment of the Validity of Mystical Experiences (Andrew Papanicolaou)
 - Extrasensory Perception: Support, Skepticism, and Science (2 Volumes, Ed. Edwin May, Sonali Bhatt Marwaha)
+- The Trouble with Being Born (E. M. Cioran, Richard Howard)
