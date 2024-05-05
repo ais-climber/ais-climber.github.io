@@ -27,4 +27,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Anthropocene Reviewed (John Green)
 - In Search of the Light (Susan Blackmore)
 - Beyond the Body: An Investigation of Out-of-the-body Experiences (Susan Blackmore)
+- States of Consciousness (Charles Tart)
 - 
