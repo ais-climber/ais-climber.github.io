@@ -91,6 +91,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Handbook of Modal Logic (Ed. Johan Van Benthem et al)
 - The Laundry Files (Charles Stross)
 - The Great Mental Models Vol 3: Systems and Mathematics (Rhiannon Beaubien, Rosie Leizrowice, via Latticework Publishing)
+- The Woodnotes Guide to Emacs for Writers (Randall Wood)
+- 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
