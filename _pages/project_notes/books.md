@@ -9,4 +9,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Trouble with Being Born (E. M. Cioran)
 - The Golden Dawn (Israel Regardie)
 - The War of Art (Steven Pressfield)
+- Mathematical Structures of Natural Intelligence (Yair Neuman)
+- The Brainwashing Book: Hypnotic, Erotic Behaviorism and Beyond
+- Blood on the Tracks (Shuzo Oshimi) (MANGA)
+- Alan Turing: The Enigma (Andrew Hodges)
 - 
