@@ -84,6 +84,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Neuro-Symbolic Artificial Intelligence: The State of the Art
 - Introduction to Formal Philosophy (Ed. Sven Ove Hansson, Vincent Hendricks)
 - Trauma and Recovery (Judith Lewis Herman)
+- Networking on the Network (Phil Agre)
 - 
 
 ### papers
