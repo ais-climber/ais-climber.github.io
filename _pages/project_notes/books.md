@@ -65,6 +65,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - I'm Glad My Mom Died (Jeanette McCurdy)
 - The Body Keeps the Score (van der Kolk)
 - Wandering Son (Shimura Takako) (MANGA)
+- Crossplay (Niki Smith) (MANGA)
+- Sunstone ()
 
 ### papers
 - Emil Post (Alasdair Urquhart)
