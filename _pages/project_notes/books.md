@@ -43,4 +43,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Programming Language Foundations in Agda (Philip Wadler, Wen Kokke, Jeremy Siek)
 - Theorem Proving in Lean 4 (Jeremy Avigad et al)
 - Functional Programming in Lean 4 (David Thrane Christiansen)
+- Purely Functional Data Structures (Chris Okasaki)
 - 
