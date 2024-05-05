@@ -46,4 +46,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Purely Functional Data Structures (Chris Okasaki)
 - Lectures on the Curry-Howard Isomorphism (M. H. Sorensen, P. Urzyczyn)
 - The Cauchy-Schwarz Master Class (Michael Steele)
+- Introduction to Neural Network Verification (Aws Albarghouthi)
 - 
