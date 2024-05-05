@@ -90,7 +90,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Description Logic Handbook (Ed. Franz Baader et al)
 - Handbook of Modal Logic (Ed. Johan Van Benthem et al)
 - The Laundry Files (Charles Stross)
-- 
+- The Great Mental Models Vol 3: Systems and Mathematics ()
 
 ### papers
 - Emil Post (Alasdair Urquhart)
