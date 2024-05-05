@@ -13,4 +13,6 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Brainwashing Book: Hypnotic, Erotic Behaviorism and Beyond
 - Blood on the Tracks (Shuzo Oshimi) (MANGA)
 - Alan Turing: The Enigma (Andrew Hodges)
+- Mind MGMT Omnibus (Matt Kindt) (MANGA)
+- The Academic Self: An Owner's Manual (Donald Hall)
 - 
