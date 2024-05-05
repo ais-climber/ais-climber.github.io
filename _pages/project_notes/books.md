@@ -79,7 +79,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Meditation and Kabbalah (Aryeh Kaplan)
 - Prometheus Rising (Robert Anton Wilson)
 - The Writing Workshop ()
-- 
+- Collected Works of A.M. Turing - Mechanical Intelligence ()
 
 ### papers
 - Emil Post (Alasdair Urquhart)
