@@ -97,6 +97,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Visual Explanations (Edward Tufte)
 - Webster's Unabridged Dictionary 1913 (Webster)
 - The Unwritten (Mike Carey) (MANGA)
+- The Enchanted Places (Christopher Milne)
 - 
 
 ### papers
