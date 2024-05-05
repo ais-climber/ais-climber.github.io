@@ -68,6 +68,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Crossplay (Niki Smith) (MANGA)
 - Sunstone (Stjepan Sejic) (MANGA)
 - The Book of Lilith (Robert G. Brown)
+- Meaningness (David Chapman)
 - 
 
 ### papers
