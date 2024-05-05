@@ -64,7 +64,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - What My Bones Know (Stephanie Foo)
 - I'm Glad My Mom Died (Jeanette McCurdy)
 - The Body Keeps the Score (van der Kolk)
-- 
+- Wandering Son (Shimura Takako) (MANGA)
 
 ### papers
 - Emil Post (Alasdair Urquhart)
