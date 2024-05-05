@@ -98,3 +98,6 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - colah's blog
 - Nature columns
 - The reasoner (thereasoner.org)
+
+### wikis
+- 
