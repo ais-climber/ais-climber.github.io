@@ -66,7 +66,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Body Keeps the Score (van der Kolk)
 - Wandering Son (Shimura Takako) (MANGA)
 - Crossplay (Niki Smith) (MANGA)
-- Sunstone ()
+- Sunstone (Stjepan Sejic) (MANGA)
 
 ### papers
 - Emil Post (Alasdair Urquhart)
