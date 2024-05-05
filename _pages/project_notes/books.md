@@ -32,4 +32,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - What Babies Know, Volume 1 (Elizabeth Spelke)
 - The Connectives, Illustrated Edition (Lloyd Humberstone)
 - Modal Logic (Patrick Blackburn)
-- Neighborhood 
+- Neighborhood Semantics for Modal Logic (Eric Pacuit)
+- 
