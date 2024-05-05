@@ -23,4 +23,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Journey into Mathematics (Joseph Rotman)
 - The Algorithm Design Manual (Steve Skiena)
 - A Mathematical Introduction to Logic (Herbert Enderton)
+- Philosophy of Computer Science (William Rapaport)
 - 
