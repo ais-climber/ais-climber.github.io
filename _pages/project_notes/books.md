@@ -109,6 +109,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Man Who Loved Only Numbers (Paul Hoffman, a biography of Paul Erdos)
 - Letters to a Young Mathematician (Ian Stewart)
 - A Mathematician's Apology (Hardy)
+- Proofs and Refutations (Imre Lakatos)
 
 ### papers
 - Emil Post (Alasdair Urquhart)
@@ -116,7 +117,6 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The history of the use of [[]]-notation in natural language semantics (Brian Rabern)
 - A Mathematician's Lament (Paul Lockhart)
 - On Proof and Progress in Mathematics (William Thurston)
-- 
 
 ### blogs
 - colah's blog
