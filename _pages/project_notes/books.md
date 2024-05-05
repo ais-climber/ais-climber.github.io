@@ -30,4 +30,4 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - States of Consciousness (Charles Tart)
 - Constructing a Language (Michael Tomasello)
 - What Babies Know, Volume 1 (Elizabeth Spelke)
-- 
+- The Connectives, Illustrated Edition (Lloyd Humberstone)
