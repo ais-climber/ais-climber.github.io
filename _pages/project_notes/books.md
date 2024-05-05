@@ -75,6 +75,9 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Six Basic Exercises (Rudolph Steiner)
 - The Chicken Qabalah (Lon Milo Duquette)
 - Adult Children of Emotionally Immature Parents (Lindsay Gibson)
+- The Book of Minds (Philip Ball)
+- Meditation and Kabbalah (Aryeh Kaplan)
+- Prometheus Rising (Robert Anton Wilson)
 - 
 
 ### papers
