@@ -36,4 +36,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Computational Complexity: A Modern Approach (Sanjeev Arora, Boaz Barak)
 - Descriptive Complexity (Neil Immerman)
 - Foundations of Machine Learning (Mehryar Mohri et al)
+- The Little Learner (Daniel Friedman, Anurag Mendhekar)
 - 
