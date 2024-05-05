@@ -99,6 +99,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Unwritten (Mike Carey) (MANGA)
 - The Enchanted Places (Christopher Milne)
 - Dive Manual (Anthony Tyler)
+- Chaos: An Introduction to Dynamical Systems
+- 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
