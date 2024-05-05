@@ -48,4 +48,4 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Cauchy-Schwarz Master Class (Michael Steele)
 - Introduction to Neural Network Verification (Aws Albarghouthi)
 - How to Solve It (George Polya)
-- 
+- Hypergraph Theory (Alain Bretto)
