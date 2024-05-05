@@ -33,4 +33,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Connectives, Illustrated Edition (Lloyd Humberstone)
 - Modal Logic (Patrick Blackburn)
 - Neighborhood Semantics for Modal Logic (Eric Pacuit)
+- Computational Complexity: A Modern Approach (Sanjeev Arora, Boaz Barak)
 - 
