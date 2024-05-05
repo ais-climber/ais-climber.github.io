@@ -105,6 +105,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Mathematical Typography (Donald Knuth)
 - Algorithms (Jeff Erickson)
 - Probably Approximately Correct Book (Leslie Valiant)
+- Mathematics: A Very Short Introduction (Timothy Gowers)
 - 
 
 ### papers
