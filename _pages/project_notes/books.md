@@ -108,6 +108,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Mathematics: A Very Short Introduction (Timothy Gowers)
 - The Man Who Loved Only Numbers (Paul Hoffman, a biography of Paul Erdos)
 - Letters to a Young Mathematician (Ian Stewart)
+- A Mathematician's Apology (Hardy)
 - 
 
 ### papers
