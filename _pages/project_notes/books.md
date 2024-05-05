@@ -88,6 +88,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Atlas of Ultrastructural Neurocytology (Josef Spacek)
 - Topics of Thought (Francesco Berto)
 - The Description Logic Handbook (Ed. Franz Baader et al)
+- Handbook of Modal Logic ()
 
 ### papers
 - Emil Post (Alasdair Urquhart)
