@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "aa85838402f7de4b",
@@ -147,7 +148,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c0d10ea1f0699da7",
+  "active": "bec9b53d72d542f5",
   "lastOpenFiles": [
     "_pages/project_notes/model_theory_of_learning.md",
     "_pages/project_notes/books.md",
