@@ -86,6 +86,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Trauma and Recovery (Judith Lewis Herman)
 - Networking on the Network (Phil Agre)
 - Atlas of Ultrastructural Neurocytology (Josef Spacek)
+- Topics of Thought (Francesco Berto)
 - 
 
 ### papers
