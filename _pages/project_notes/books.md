@@ -15,4 +15,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Alan Turing: The Enigma (Andrew Hodges)
 - Mind MGMT Omnibus (Matt Kindt) (MANGA)
 - The Academic Self: An Owner's Manual (Donald Hall)
+- The Red Book (Carl Jung)
+- The Black Books (Carl Jung)
+- Earthbound, Boss Fight Books (Ken Baumann)
+- Ask Iwata: Words of Wisdom (Hobonichi, Sam Bett)
 - 
