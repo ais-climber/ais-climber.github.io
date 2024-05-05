@@ -94,6 +94,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Woodnotes Guide to Emacs for Writers (Randall Wood)
 - Endless forms Most Beautiful (Sean Carroll)
 - Four Thousand Weeks (Oliver Burkeman)
+- Visual Explanations (Edward Tufte)
 - 
 
 ### papers
