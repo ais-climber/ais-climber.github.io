@@ -56,6 +56,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Out of Their Minds (Cathy Lazere, Dennis Shasha)
 - Reasoning about Knowledge (Joseph Halpern)
 - Reasoning about Uncertainty (Joseph Halpern)
+- Actual Causality (Joseph Halpern)
 - 
 
 ### papers
