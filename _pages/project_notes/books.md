@@ -57,7 +57,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Reasoning about Knowledge (Joseph Halpern)
 - Reasoning about Uncertainty (Joseph Halpern)
 - Actual Causality (Joseph Halpern)
-- The Jolly Writer ()
+- The Jolly Writer (Joris van der Hoeven)
+- 
 
 ### papers
 - 
