@@ -35,4 +35,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Neighborhood Semantics for Modal Logic (Eric Pacuit)
 - Computational Complexity: A Modern Approach (Sanjeev Arora, Boaz Barak)
 - Descriptive Complexity (Neil Immerman)
+- Foundations of Machine Learning (Mehryar Mohri et al)
 - 
