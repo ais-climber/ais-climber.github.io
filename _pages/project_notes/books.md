@@ -80,7 +80,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Prometheus Rising (Robert Anton Wilson)
 - The Writing Workshop (Barbara W. Sarnecka)
 - Collected Works of A.M. Turing - Mechanical Intelligence (A.M. Turing)
-- 
+- Logics for the XXIst Century Vol 1 (Ed. Dov Gabbay, )
 
 ### papers
 - Emil Post (Alasdair Urquhart)
