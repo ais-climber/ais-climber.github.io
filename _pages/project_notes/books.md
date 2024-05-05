@@ -26,3 +26,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Philosophy of Computer Science (William Rapaport)
 - The Anthropocene Reviewed (John Green)
 - In Search of the Light (Susan Blackmore)
+- Beyond the Body: An Investigation of Out-of-the-body Experiences (Susan Blackmore)
+- 
