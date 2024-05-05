@@ -39,4 +39,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Little Learner (Daniel Friedman, Anurag Mendhekar)
 - Quantum Computing Since Democritus (Scott Aaronson)
 - Picturing Quantum Processes (Aleks Kissinger, Bob Coecke)
+- A Guide to the Theory of NP-Completeness (Garey, Johnson)
 - 
