@@ -82,6 +82,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Collected Works of A.M. Turing - Mechanical Intelligence (A.M. Turing)
 - Logics for the XXIst Century Vol 1 (Ed. Dov Gabbay, Michael Zakharyaschev)
 - Neuro-Symbolic Artificial Intelligence: The State of the Art
+- Introduction to Formal Philosophy (Ed. Sven Ove Hansson, Vincent Hendricks)
 - 
 
 ### papers
