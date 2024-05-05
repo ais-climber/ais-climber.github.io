@@ -69,9 +69,9 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Sunstone (Stjepan Sejic) (MANGA)
 - The Book of Lilith (Robert G. Brown)
 - Meaningness (David Chapman)
+- The Psychonaut Field Manual (Bluefluke) (MANGA)
 - 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
-- The Psychonaut Field Manual (Bluefluke)
