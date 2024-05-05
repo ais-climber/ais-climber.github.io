@@ -85,7 +85,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Introduction to Formal Philosophy (Ed. Sven Ove Hansson, Vincent Hendricks)
 - Trauma and Recovery (Judith Lewis Herman)
 - Networking on the Network (Phil Agre)
-- 
+- Atlas of Ultrastructural Neurocytology
 
 ### papers
 - Emil Post (Alasdair Urquhart)
