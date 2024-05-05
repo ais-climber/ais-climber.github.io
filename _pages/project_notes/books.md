@@ -102,6 +102,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Chaos: An Introduction to Dynamical Systems
 - A Topological Picture Book (Francis)
 - The Elements of Euclid (Oliver Byrne colored edition)
+- Mathematical Typography (Donald Knuth)
 - 
 
 ### papers
