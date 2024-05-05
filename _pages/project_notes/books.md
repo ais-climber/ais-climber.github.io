@@ -60,6 +60,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Jolly Writer (Joris van der Hoeven)
 - Modal Logic for Open Minds (Johan van Benthem)
 - Logical Dynamics of Information and Interaction (Johan van Benthem)
+- A Theorist's Toolkit (Sanjeev Arora)
 - 
 
 ### papers
