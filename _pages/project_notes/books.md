@@ -70,7 +70,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Book of Lilith (Robert G. Brown)
 - Meaningness (David Chapman)
 - The Psychonaut Field Manual (Bluefluke) (MANGA)
-- 
+- The Illusion of Life (Frank Thomas, Ollie Johnston) (PICTURES)
 
 ### papers
 - Emil Post (Alasdair Urquhart)
