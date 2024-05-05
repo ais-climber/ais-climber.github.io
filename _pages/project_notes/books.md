@@ -2,4 +2,5 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 
 - Basic Category Theory (Tom Leinster)
 - Introduction to Mathematical Thinking (Keith Devlin)
+- The Geometry of Musical Rhythm (Godfried Toussaint)
 - 
