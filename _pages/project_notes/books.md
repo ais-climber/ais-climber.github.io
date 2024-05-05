@@ -78,6 +78,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Book of Minds (Philip Ball)
 - Meditation and Kabbalah (Aryeh Kaplan)
 - Prometheus Rising (Robert Anton Wilson)
+- The Writing Workshop ()
 - 
 
 ### papers
