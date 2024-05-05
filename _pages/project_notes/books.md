@@ -104,6 +104,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Elements of Euclid (Oliver Byrne colored edition)
 - Mathematical Typography (Donald Knuth)
 - Algorithms (Jeff Erickson)
+- Probably Approximately Correct Book (Leslie Valiant)
+- 
 
 ### papers
 - Emil Post (Alasdair Urquhart)
