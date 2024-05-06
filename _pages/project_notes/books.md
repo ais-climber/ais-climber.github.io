@@ -110,7 +110,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Letters to a Young Mathematician (Ian Stewart)
 - A Mathematician's Apology (Hardy)
 - Proofs and Refutations (Imre Lakatos)
-
+- Georg Cantor (I believe the one written by AA Fraenkel)
+- 
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
