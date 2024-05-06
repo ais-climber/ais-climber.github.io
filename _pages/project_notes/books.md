@@ -114,6 +114,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - A Beautiful Mind (Sylvia Nasar)
 - R´ecoltes et Semailles (Alexandre Grothendieck)
 - Topoi (Robert Goldblatt)
+- Mathematical Problem Solving (Alan Schoenfeld)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
