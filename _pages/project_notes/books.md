@@ -121,7 +121,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Educated (Tara Westover)
 - Man's Search for Meaning (Victor Frankl)
 - The Autobiography of Malcom X
-- 
+- Buy Yourself the Fucking Lillies ()
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
