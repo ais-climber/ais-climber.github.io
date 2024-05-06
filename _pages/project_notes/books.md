@@ -113,6 +113,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Georg Cantor (I believe the one written by AA Fraenkel)
 - A Beautiful Mind (Sylvia Nasar)
 - R´ecoltes et Semailles (Alexandre Grothendieck)
+- Topoi (Robert Goldblatt)
+- 
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
