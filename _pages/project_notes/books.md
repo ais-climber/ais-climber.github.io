@@ -116,6 +116,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Topoi (Robert Goldblatt)
 - Mathematical Problem Solving (Alan Schoenfeld)
 - The Mathematical Experience (Philip Davis, Reuben Hersh)
+- Hilbert (Constance Reid)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
