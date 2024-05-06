@@ -111,6 +111,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - A Mathematician's Apology (Hardy)
 - Proofs and Refutations (Imre Lakatos)
 - Georg Cantor (I believe the one written by AA Fraenkel)
+- A Beautiful Mind (Sylvia Nasar)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
