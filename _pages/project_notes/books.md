@@ -115,6 +115,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - R´ecoltes et Semailles (Alexandre Grothendieck)
 - Topoi (Robert Goldblatt)
 - Mathematical Problem Solving (Alan Schoenfeld)
+- The Mathematical Experience (Philip Davis, Reuben Hersh)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
