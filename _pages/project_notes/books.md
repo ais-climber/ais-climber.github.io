@@ -112,7 +112,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Proofs and Refutations (Imre Lakatos)
 - Georg Cantor (I believe the one written by AA Fraenkel)
 - A Beautiful Mind (Sylvia Nasar)
-- 
+- R´ecoltes et Semailles (Alexandre Grothendieck)
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
