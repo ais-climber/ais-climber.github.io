@@ -119,6 +119,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The history of the use of [[]]-notation in natural language semantics (Brian Rabern)
 - A Mathematician's Lament (Paul Lockhart)
 - On Proof and Progress in Mathematics (William Thurston)
+- Mathematics as a Creative Art (Paul Halmos)
+- 
 
 ### blogs
 - colah's blog
