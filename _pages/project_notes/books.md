@@ -119,6 +119,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Hilbert (Constance Reid)
 - The Glass Castle (Jeannette Walls)
 - Educated (Tara Westover)
+- Man's Search for Meaning (Victor Frankl)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
