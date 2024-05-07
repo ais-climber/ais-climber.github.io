@@ -128,6 +128,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Denial of Death (Ernest Becker)
 - Resiliency: What We Have Learned (Bonnie Bernard)
 - Learned Optimism (Martin Seligman)
+- Infinite Jest (David Foster Wallace)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
