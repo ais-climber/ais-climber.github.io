@@ -118,6 +118,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Mathematical Experience (Philip Davis, Reuben Hersh)
 - Hilbert (Constance Reid)
 - The Glass Castle (Jeannette Walls)
+- Educated (Tara Westover)
+- 
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
