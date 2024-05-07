@@ -129,6 +129,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Resiliency: What We Have Learned (Bonnie Bernard)
 - Learned Optimism (Martin Seligman)
 - Infinite Jest (David Foster Wallace)
+- Finnegan's Wake (James Joyce)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
