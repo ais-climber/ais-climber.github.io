@@ -131,7 +131,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Infinite Jest (David Foster Wallace)
 - Finnegan's Wake (James Joyce)
 - The Perks of Being a Wallflower (Stephen Chbosky)
-- Slaughterhouse Five ()
+- Slaughterhouse Five (Kurt Vonnegut)
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
