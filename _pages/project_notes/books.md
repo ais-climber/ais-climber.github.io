@@ -130,7 +130,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Learned Optimism (Martin Seligman)
 - Infinite Jest (David Foster Wallace)
 - Finnegan's Wake (James Joyce)
-- 
+- The Perks of Being a Wallflower ()
+- Slaughterhouse Five ()
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
