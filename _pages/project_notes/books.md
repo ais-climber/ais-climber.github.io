@@ -126,6 +126,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - What is Life? (Erwin Schrodinger)
 - The Dragons of Eden (Carl Sagan)
 - The Denial of Death (Ernest Becker)
+- Resiliency: What We Have Learned (Bonnie Bernard)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
