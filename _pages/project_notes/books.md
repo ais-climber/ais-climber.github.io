@@ -132,6 +132,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Finnegan's Wake (James Joyce)
 - The Perks of Being a Wallflower (Stephen Chbosky)
 - Slaughterhouse Five (Kurt Vonnegut)
+- 
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
@@ -139,6 +140,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - A Mathematician's Lament (Paul Lockhart)
 - On Proof and Progress in Mathematics (William Thurston)
 - Mathematics as a Creative Art (Paul Halmos)
+- Finite-Model Theory -- A Personal Perspective (Ronald Fagin)
 - 
 
 ### blogs
