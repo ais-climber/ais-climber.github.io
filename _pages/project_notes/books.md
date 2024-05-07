@@ -125,6 +125,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Born a Crime (Trevor Noah)
 - What is Life? (Erwin Schrodinger)
 - The Dragons of Eden (Carl Sagan)
+- The Denial of Death (Ernest Becker)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
