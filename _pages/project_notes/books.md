@@ -124,6 +124,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Buy Yourself the Fucking Lillies (Tara Schuster)
 - Born a Crime (Trevor Noah)
 - What is Life? (Erwin Schrodinger)
+- The Dragons of Eden (Carl Sagan)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
