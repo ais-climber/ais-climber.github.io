@@ -122,6 +122,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Man's Search for Meaning (Victor Frankl)
 - The Autobiography of Malcom X
 - Buy Yourself the Fucking Lillies (Tara Schuster)
+- Born a Crime (Trevor Noah)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
