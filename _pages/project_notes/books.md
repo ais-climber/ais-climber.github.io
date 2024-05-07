@@ -123,6 +123,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Autobiography of Malcom X
 - Buy Yourself the Fucking Lillies (Tara Schuster)
 - Born a Crime (Trevor Noah)
+- What is Life? (Erwin Schrodinger)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
