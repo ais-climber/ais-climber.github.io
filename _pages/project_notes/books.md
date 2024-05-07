@@ -120,6 +120,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Glass Castle (Jeannette Walls)
 - Educated (Tara Westover)
 - Man's Search for Meaning (Victor Frankl)
+- The Autobiography of Malcom X
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
