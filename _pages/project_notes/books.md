@@ -127,6 +127,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Dragons of Eden (Carl Sagan)
 - The Denial of Death (Ernest Becker)
 - Resiliency: What We Have Learned (Bonnie Bernard)
+- Learned Optimism (Martin Seligman)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
