@@ -133,7 +133,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Perks of Being a Wallflower (Stephen Chbosky)
 - Slaughterhouse Five (Kurt Vonnegut)
 - The Wild Edge of Sorrow (Francis Weller)
-- 
+- From Frege to Gödel: A Source Book in Mathematical Logic ()
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
