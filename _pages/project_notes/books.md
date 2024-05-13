@@ -134,6 +134,8 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Slaughterhouse Five (Kurt Vonnegut)
 - The Wild Edge of Sorrow (Francis Weller)
 - From Frege to Gödel: A Source Book in Mathematical Logic (Jean van Heijenoort)
+- Braiding Sweetgrass (Robin Wall Kimmerer)
+- How to Do Nothing (Jenny Odell)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
