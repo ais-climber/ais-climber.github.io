@@ -132,6 +132,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Finnegan's Wake (James Joyce)
 - The Perks of Being a Wallflower (Stephen Chbosky)
 - Slaughterhouse Five (Kurt Vonnegut)
+- The Wild Edge of Sorrow (Francis Weller)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
