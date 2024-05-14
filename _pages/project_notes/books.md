@@ -138,6 +138,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - How to Do Nothing (Jenny Odell)
 - Amusing Ourselves to Death (Neil Postman)
 - Gems of Theoretical Computer Science (Uwe Schoning)
+- An Introduction to Computational Learning Theory (Kearns, Vazirani)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
