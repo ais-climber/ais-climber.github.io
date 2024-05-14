@@ -136,6 +136,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - From Frege to Gödel: A Source Book in Mathematical Logic (Jean van Heijenoort)
 - Braiding Sweetgrass (Robin Wall Kimmerer)
 - How to Do Nothing (Jenny Odell)
+- Amusing Ourselves to Death (Neil Postman)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
