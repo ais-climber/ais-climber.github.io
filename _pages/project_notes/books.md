@@ -147,6 +147,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Who is Alexander Grothendieck? (Winfried Scharlau, translated Melissa Schneps)
 - Soul of a New Machine (Tracey Kidder)
 - Turing's Cathedral (George Dyson)
+- Fire in the Valley (Paul Freiberg)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
