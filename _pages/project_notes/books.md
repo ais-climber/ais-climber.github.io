@@ -144,7 +144,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - I'm Thinking of Ending Things (Iain Reid)
 - The Queen's Gambit (Walter Tevis)
 - My Life with The Hustler (Jamie Griggs Tevis)
-- Who is Alexander Grothendeick 
+- Who is Alexander Grothendieck? ()
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
