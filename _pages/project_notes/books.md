@@ -141,6 +141,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - An Introduction to Computational Learning Theory (Kearns, Vazirani)
 - Earthed: A Memoir (Rebecca Schiller)
 - Confessions of a Dangerous Mind (Chuck Barris)
+- I'm Thinking of Ending Things (Iain Reid)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
