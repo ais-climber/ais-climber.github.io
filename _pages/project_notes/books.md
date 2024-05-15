@@ -146,6 +146,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - My Life with The Hustler (Jamie Griggs Tevis)
 - Who is Alexander Grothendieck? (Winfried Scharlau, translated Melissa Schneps)
 - Soul of a New Machine (Tracey Kidder)
+- Turing's Cathedral (George Dyson)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
