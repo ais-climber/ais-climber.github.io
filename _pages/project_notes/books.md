@@ -142,7 +142,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Earthed: A Memoir (Rebecca Schiller)
 - Confessions of a Dangerous Mind (Chuck Barris)
 - I'm Thinking of Ending Things (Iain Reid)
-- 
+- The Queen's Gambit ()
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
