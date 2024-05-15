@@ -139,6 +139,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Amusing Ourselves to Death (Neil Postman)
 - Gems of Theoretical Computer Science (Uwe Schoning)
 - An Introduction to Computational Learning Theory (Kearns, Vazirani)
+- Earthed: A Memoir (Rebecca Schiller)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
