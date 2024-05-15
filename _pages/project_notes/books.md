@@ -140,6 +140,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Gems of Theoretical Computer Science (Uwe Schoning)
 - An Introduction to Computational Learning Theory (Kearns, Vazirani)
 - Earthed: A Memoir (Rebecca Schiller)
+- Confessions of a Dangerous Mind (Chuck Barris)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
