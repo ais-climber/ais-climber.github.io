@@ -148,6 +148,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Soul of a New Machine (Tracey Kidder)
 - Turing's Cathedral (George Dyson)
 - Fire in the Valley (Paul Freiberg)
+- Unix: A History and a Memoir (Brian Kernighan)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
