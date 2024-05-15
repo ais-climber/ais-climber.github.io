@@ -145,6 +145,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - The Queen's Gambit (Walter Tevis)
 - My Life with The Hustler (Jamie Griggs Tevis)
 - Who is Alexander Grothendieck? (Winfried Scharlau, translated Melissa Schneps)
+- Soul of a New Machine (Tracey Kidder)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
