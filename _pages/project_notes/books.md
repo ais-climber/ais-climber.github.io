@@ -143,6 +143,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Confessions of a Dangerous Mind (Chuck Barris)
 - I'm Thinking of Ending Things (Iain Reid)
 - The Queen's Gambit (Walter Tevis)
+- My Life with The Hustler (Jamie Griggs Tevis)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
