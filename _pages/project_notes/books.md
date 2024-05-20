@@ -150,6 +150,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - What the Dormouse Said (John Markoff)
 - Unix: A History and a Memoir (Brian Kernighan)
 - Inductive Logic (Handbook of The History of Logic) (Dov Gabbay)
+- A Mathematical Introduction to Logic (Herbert Enderton)
 - 
 ### papers
 - Emil Post (Alasdair Urquhart)
