@@ -151,7 +151,7 @@ A list of every book and paper I *might* want to read (up to a certain quality).
 - Unix: A History and a Memoir (Brian Kernighan)
 - Inductive Logic (Handbook of The History of Logic) (Dov Gabbay)
 - A Mathematical Introduction to Logic (Herbert Enderton)
-- 
+- Obsession: A History (Lennard J. Davis)
 ### papers
 - Emil Post (Alasdair Urquhart)
 - Variable Binding in Biologically Plausible Neural Networks (Master's Thesis) (Douwe Kiela)
