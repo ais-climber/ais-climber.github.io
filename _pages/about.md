@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: PhD Candidate, *he/him*
+subtitle: PhD Candidate, he/him
 profile:
   align: right
   image: me.jpg
