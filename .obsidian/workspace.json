@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/project_notes/books.md",
+                "file": "_pages/about.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "aa85838402f7de4b",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/project_notes/books.md",
+                "file": "_pages/about.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/project_notes/books.md",
+                "file": "_pages/about.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/project_notes/books.md"
+                "file": "_pages/about.md"
               }
             }
           }
@@ -148,10 +147,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6e52fb8a7e76e68e",
+  "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
-    "_pages/project_notes/model_theory_of_learning.md",
     "_pages/project_notes/books.md",
+    "_pages/project_notes/model_theory_of_learning.md",
     "_pages/open_problems.md",
     "_bibliography/references.bib",
     "_pages/project_notes/nn_learning_and_belief_revision.md",

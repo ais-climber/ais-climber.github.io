@@ -16,4 +16,7 @@ social: false
 Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supervised by [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](https://homes.luddy.indiana.edu/sblancor).  I'm a member of the [IU logic group](https://iulg.sitehost.iu.edu/) and [plwonks](https://wonks.github.io/).
 
 ## Research
+I am a computer scientist studying the foundations of machine learning and cognition, often through the lens of formal logic. My current work is in the theory of neuro-symbolic AI, through which I hope to (1) better understand the power and limitations of neural network learning, (2) bridge the gap between neural network learning and belief revision, and (3) explore the possibility of neural network alignment.
+Besides this, I have a soft spot for dynamic epistemic logics, natural language inference, and philosophical issues in AI and cognitive science.
+
 I work on the mathematical foundations of artificial intelligence.  Currently I am developing formal groundwork for *neural-symbolic AI*, the bridge between neural networks and logic.  More generally, I am interested in neural net learning, dynamic epistemic logic, belief revision, formal verification, and model building.  If you’d like to see what I’m thinking about _right now_, check out this list of [open problems I like](/open_problems/).
