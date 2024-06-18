@@ -18,10 +18,7 @@ Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supe
 ## Research
 I study the foundations of machine learning and cognition, often through the lens of formal logic. My current work is in the *theory of neuro-symbolic AI*, through which I hope to (1) better understand the power and limitations of neural network learning, (2) bridge the gap between neural network learning and belief revision, and (3) explore the possibility of neural network alignment.
 
-More generally, I like to prove theorems in dynamic logic that 
-
-
-I am interested in the role of logic -- especially dynamic logics -- in modelling cognitive agents.  
+More generally, I am interested in the role of logic -- especially dynamic logics -- in modelling cognitive agents.  
 
 
 More generally, I am interested in neural network
