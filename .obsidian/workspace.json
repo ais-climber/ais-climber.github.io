@@ -18,19 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "f648b9cab3a6ca19",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.6.3"
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -158,7 +147,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f648b9cab3a6ca19",
+  "active": "c0d10ea1f0699da7",
   "lastOpenFiles": [
     "_pages/project_notes/books.md",
     "_pages/project_notes/model_theory_of_learning.md",
