@@ -13,13 +13,24 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/about.md",
+                "file": "_pages/open_problems.md",
                 "mode": "source",
                 "source": false
               }
             }
+          },
+          {
+            "id": "0189ec548c38b3d2",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.6.5"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/about.md",
+                "file": "_pages/open_problems.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/about.md",
+                "file": "_pages/open_problems.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/about.md"
+                "file": "_pages/open_problems.md"
               }
             }
           }
@@ -147,17 +158,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c0d10ea1f0699da7",
+  "active": "0189ec548c38b3d2",
   "lastOpenFiles": [
-    "_pages/open_problems.md",
     "_pages/about.md",
+    "_pages/project_notes/PROJECT_TEMPLATE.md",
+    "_pages/project_notes/alphago_on_misere.md",
     "_pages/project_notes/books.md",
     "_pages/project_notes/model_theory_of_learning.md",
-    "_bibliography/references.bib",
     "_pages/project_notes/nn_learning_and_belief_revision.md",
-    "_pages/project_notes/alphago_on_misere.md",
     "_pages/project_notes/notes_on_tcfgs.md",
-    "_pages/project_notes/PROJECT_TEMPLATE.md",
+    "_pages/open_problems.md",
+    "_bibliography/references.bib",
     "preamble.sty",
     "Contact.md",
     "_pages/contact.md",
