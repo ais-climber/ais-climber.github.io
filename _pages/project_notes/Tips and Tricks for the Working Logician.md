@@ -13,5 +13,4 @@ I find myself doing a lot of theoretical work in logic. Every now and then I try
 2. If you're trying to characterize some property and you've tried various forms of 'for all ...' and 'there exists ...' properties with no success, the property you're trying to capture might be second-order.  That is, there may be no first-order description of the property whatsoever (which is easy to forget). I've found that a common second-order property is the 'core' construction from topology, which looks something like:
    $a \in \bigcap_{X \in f(b)} X$
    **Example:** (example from recent work, where I have a neural network closure function $g : \mathcal{P}(S) \to \mathcal{P}(S)$) and I want to make a relation $R : S \times S$ that aligns with it in some sense.)
-   A sort of prototypical situation where this comes up for me: I already have a neighborhood function $f : S \to \mathcal{P}(\mathcal{P}(S))$ (or equivalently, some $g : \mathcal{P}(S) \to \mathcal{P}(S)$) and I want to "shove" it into a relation, i.e. make a relation $R : S \times S$ that aligns somehow with $f$.
 2. 
