@@ -4,7 +4,7 @@ permalink: /tipsandtricks/
 title: Tips and Tricks for the Working Logician
 nav: false
 ---
-I find myself doing a lot of theoretical work in logic. Every now and then I try to prove something ambitious, and learn some hard lesson in the process. And sometimes I'll take a lesson from others, through papers and talks. This page is me attempting to write these down so that I don't make the same mistakes again and again. If you yourself work with logics, algebras, or any other abstract object in computer science, linguistics, or cognition, I hope you find these helpful. I make no guarantees, of course -- I'm writing this primarily for myself.
+I find myself doing a lot of theoretical work in logic. Every now and then I try to prove something ambitious, and learn some hard lesson in the process. And sometimes I'll take a lesson from others, through papers, talks, and advice. This page is me attempting to write these down so that I don't make the same mistakes again and again. If you yourself work with logics, algebras, or any other abstract object in computer science, linguistics, or cognition, I hope you find these helpful. I make no guarantees, of course -- I'm writing this primarily for myself.
 
 **TODO:** Include examples for each tip, it helps to see how it's actually used
 
