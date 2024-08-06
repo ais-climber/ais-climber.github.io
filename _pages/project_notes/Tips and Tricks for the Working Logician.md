@@ -8,7 +8,7 @@ I find myself doing a lot of theoretical work in logic. Every now and then I try
 
 **TODO:** Include examples for each tip, it helps to see how it's actually used
 
-1. This is a well-known phenomenon in dynamic epistemic logic circles, but it's worth saying. If you're trying to model a situation, but any model you come up with leads to some inconsistency $A \land \neg A$, consider modelling it dynamically.  That is, identify a process *before which* $A$ holds, and *after which* $\neg A$ holds. Very often, contradictions aren't really contradictions, but rather not being careful about the dynamics, actions, and effects at play.
+1. This is a well-known phenomenon in dynamic epistemic logic circles, but it's worth saying. If you're trying to model a situation, but any model you come up with leads to some inconsistency $A \land \neg A$, consider modelling it dynamically.  That is, identify a process *before which* $A$ holds, and *after which* $\neg A$ holds. Very often, contradictions aren't really contradictions, but a result of not being explicit about the dynamics, actions, and effects at play.
    **Example:** (example from recent logic seminar talk)
 2. If you're trying to characterize some property and you've tried various forms of 'for all ...' and 'there exists ...' properties with no success, the property you're trying to capture might be second-order.  That is, there may be no first-order description of the property whatsoever (which is easy to forget). I've found that a common second-order property is the 'core' construction from topology, which looks something like:
    $a \in \bigcap_{X \in f(b)} X$
