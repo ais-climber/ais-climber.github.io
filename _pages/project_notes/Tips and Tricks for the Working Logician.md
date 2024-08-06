@@ -13,5 +13,4 @@ I find myself doing a lot of theoretical work in logic. Every now and then I try
 2. If you're trying to characterize some property and you've tried various forms of 'for all ...' and 'there exists ...' with no success, the property you're trying to capture might be second-order.  That is, there may be no first-order description of the property whatsoever (which is easy to forget). I've found that a common second-order property is the 'core' construction from topology, which looks something like:
    $a \in \bigcap_{X \in f(b)} X$
    **Example:** (example from recent work, where I have a neural network closure function $g : \mathcal{P}(S) \to \mathcal{P}(S)$) and I want to make a relation $R : S \times S$ that aligns with it in some sense.)
-2. j
 3. 
