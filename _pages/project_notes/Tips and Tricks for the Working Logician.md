@@ -8,4 +8,4 @@ I find myself doing a lot of theoretical work in logic. Every now and then I try
 
 1. If you're trying to characterize some property -- say, you're trying to create a relation $a{R}b$ that satisfies some property -- and you've tried various forms of 'for all ...' and 'there exists ...' properties with no success, the property you're trying to capture might be second-order.  That is, there may be no first-order description of the property whatsoever (which is easy to forget). I've found that a common second-order property is the 'core' construction from topology, which looks something like:
    
-   $a \in \bigcap_$
+   $a \in \bigcap_{} X$
