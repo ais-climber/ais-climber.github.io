@@ -6,7 +6,7 @@ nav: false
 ---
 I find myself doing a lot of theoretical work in logic. Every now and then I try to prove something ambitious, and learn some hard lesson in the process. And sometimes I'll take a lesson from others, through papers and talks. This page is me attempting to write these down so that I don't make the same mistakes again and again. If you yourself work with logics, algebras, or any other abstract object in computer science, linguistics, or cognition, I hope you find these helpful. I make no guarantees, of course -- I'm writing this primarily for myself.
 
-**TODO:** Include examples for each tip, to see how it's actually done in practice
+**TODO:** Include examples for each tip, it helps to see how it's actually used
 
 1. This is a well-known phenomenon in dynamic epistemic logic circles, but it's worth saying. If you're trying to model a situation, but any model you come up with leads to some inconsistency $A \land \neg A$, consider modelling it dynamically.  That is, identify a process *before which* $A$ holds, and *after which* $\neg A$ holds. Very often, contradictions aren't really contradictions, but rather not being careful about the dynamics, actions, and effects at play.
    **Example:** (example from recent logic seminar talk)
