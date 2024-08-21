@@ -16,7 +16,6 @@ social: false
 Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supervised by [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](https://homes.luddy.indiana.edu/sblancor).  I'm a member of the [IU logic group](https://iulg.sitehost.iu.edu/) and [plwonks](https://wonks.github.io/).
 
 **Contact:** cckisby$\Diamond$gmail.com (preferred), cckisby$\Diamond$iu.edu (alternate)
-
 ## Research
 I study the foundations of machine learning and cognition from the perspective of logic. I'm especially interested in issues at the intersection of neural network learning, belief revision, dynamic epistemic logic, and descriptive complexity. 
 
