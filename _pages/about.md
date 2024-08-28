@@ -17,7 +17,7 @@ Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supe
 
 **Note:** I'm on the academic job market this year (Fall 2024). I am primarily looking for postdoc positions, but I am open to any opportunity to continue research in academia or industry.
 
-**Contact:** cckisby (at) gmail.com
+**Contact:** cckisby (youknowhowitgoes) gmail.com
 ## Research
 I study the foundations of machine learning and cognition from the perspective of logic. I'm especially interested in issues at the intersection of neural network learning, belief revision, dynamic epistemic logic, and descriptive complexity. 
 
