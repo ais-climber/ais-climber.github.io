@@ -15,7 +15,7 @@ social: false
 
 Welcome!  I'm a PhD Candidate in Computer Science at Indiana University, co-supervised by [Larry Moss](https://iulg.sitehost.iu.edu/moss/) and [Saúl Blanco](https://homes.luddy.indiana.edu/sblancor).  I'm a member of the [IU logic group](https://iulg.sitehost.iu.edu/) and [plwonks](https://wonks.github.io/).
 
-Note: I'm on the academic job market this year (Fall 2024). I'm primarily looking for postdoc positions, but I'm also open to opportunities across academia and industry.
+Note: I'm on the academic job market this year (Fall 2024). I am primarily looking for postdoc positions, but more generally I am open to opportunities to do research in academia and industry.
 
 **Contact:** cckisby (at) gmail.com
 ## Research
