@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.3/full/pyodide.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+        async function main(){
+            const python_code = `
+            animalese.main(input_string="hello world", output_file="", language="japanese")
+            `;
+
+            document.write("Loading Python & WebAssembly scripts, please hold...");
+            const pyodide = await loadPyodide();
+            await pyodide.loadPackage('micropip')
+            pyodide.runPython("import micropip");
+
+            await pyodide.runPython("micropip.install");
+
+            await pyodide.loadPackage('colored');
+            await pyodide.loadPackage('digiformatter');
+            await pyodide.loadPackage('pydub');
+            await pyodide.loadPackage('simpleaudio');
+            await pyodide.loadPackage('romkan');
+            await pyodide.loadPackage('animalese');
+            pyodide.runPython("import animalese.main as animalese");
+
+            const result = pyodide.runPython(python_code);
+            document.write("DONE!");
+            
+            // console.log("DONE!");
+            // document.write(result.toJs());
+      }
+      main();
+    </script>
+  </body>
+</html>
