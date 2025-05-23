@@ -1,0 +1,45 @@
+1 Introduction   1
+
+2 Background: Defeasible Reasoning in Artificial Intelligence   5
+---
+1 Defeasible Reasoning in Conditional Logic   5
+2 Defeasible Reasoning in Modal Logic   7
+3 Dynamic Epistemic Logic and Belief Revision   10
+4 Defeasible Reasoning in Neural Networks   11
+
+3 Neural Network Semantics   12
+---
+1 Introduction   12
+2 Neural Network Models   12
+3 Properties of Clos, Reach, and Reach^↓   18
+4 Neural Network Semantics for Conditional Logic   22
+5 Neural Network Semantics for the Modal Logic of [best]   24
+6 Proof System and Soundness   28
+7 Reflections on Neural Network Verification   31
+8 A History and Survey of Neural Network Semantics   32
+
+4 Neural Network Model Constructions   34
+---
+1 Introduction   34
+2 The Canonical Neural Network Construction   35
+3 Filtration: Building a Finite Neural Network   38
+4 Model Building and Completeness Theorems   39
+5 The Modelling Power of Neural Networks   42
+6 Reflections on Model Building and Interpretability   57
+
+5 Dynamic Update in Neural Network Semantics   58
+---
+1 Introduction   58
+2 Hebbian Learning: A Simple Neural Network Update Policy   59
+3 Properties of Hebb and Hebb^∗   63
+4 Neural Network Semantics for Hebbian Update   67
+5 A Complete Logic of Iterated Hebbian Update   67
+6 Reflections on Neural Network Alignment   72
+
+6 Neural Network Semantics for First-Order Logic   73
+---
+1 Introduction   73
+2 Lifting a Modal Logic to First-Order Logic   73
+3 Neural Network Semantics for First-Order Logic   74
+4 Axioms, Soundness, and Frame Conditions   76
+5 Reflections on First-Order Reasoning using Neural Networks   81

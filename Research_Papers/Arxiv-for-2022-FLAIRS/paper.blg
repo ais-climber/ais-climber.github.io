@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: plainnat.bst
+Database file #1: neurosymbolic.bib
+Warning--can't use both volume and number fields in kisby2024hebbian
+You've used 21 entries,
+            2773 wiz_defined-function locations,
+            725 strings with 8261 characters,
+and the built_in function-call counts, 9720 in all, are:
+= -- 889
+> -- 471
+< -- 19
++ -- 163
+- -- 141
+* -- 742
+:= -- 1451
+add.period$ -- 68
+call.type$ -- 21
+change.case$ -- 107
+chr.to.int$ -- 20
+cite$ -- 43
+duplicate$ -- 484
+empty$ -- 855
+format.name$ -- 171
+if$ -- 2080
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 22
+newline$ -- 115
+num.names$ -- 84
+pop$ -- 229
+preamble$ -- 1
+purify$ -- 88
+quote$ -- 0
+skip$ -- 363
+stack$ -- 0
+substring$ -- 409
+swap$ -- 73
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 221
+warning$ -- 1
+while$ -- 95
+width$ -- 0
+write$ -- 284
+(There was 1 warning)

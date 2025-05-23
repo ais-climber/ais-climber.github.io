@@ -1,0 +1,284 @@
+\documentclass[letterpaper]{article}
+\usepackage{notes}
+\begin{document}
+
+\section*{Problem Statement}
+
+One big open problem in belief revision, dynamic epistemic logic, and machine learning is to develop the ``model theory of learning,'' i.e.
+
+\begin{question}
+    What axioms capture important properties of learning (e.g.\ induction, no forgetting, no hallucinations, robustness)? What do models of these properties look like? Are there “correspondences” between axioms and properties of models, as there often are in modal logic?
+\end{question}
+
+A lot of work has already been done on this --- see the two very relevant papers~\cite{truthtracking, dellearningtheory}.  In particular,~\cite{truthtracking} shows that, given a stream of true data, announcement and lexicographic upgrade converge to the full truth (whereas conservative upgrade does not).  And if the stream has finitely many false data, only lexicographic upgrade converges to the full truth (of the three).
+
+I was reading the second volume of~\cite{polya1954mathematics} recently.  In it, George P\'{o}lya makes some empirical observations about the role of guessing and induction in mathematics, and then tries to formalize these as logical rules.  I got interested in this because I noticed that his rules of induction capture axioms for \emph{plausibility upgrade / belief revision} that I believe have been overlooked by work on DEL and belief revision.
+
+For the rest of this note, I want to formalize P\'{o}lya's inductive rules as DEL axioms and explore the models that satisfy them.  This is a bit of a detour from the question above, but I've been having fun thinking about it (and I hope you do too)!
+
+\section*{P\'{o}lya's Stepwise Induction}
+
+P\'{o}lya charts about 16 different rules in his book, but for now I'm interested in the two that relate to induction.  First, let's look at his Stepwise Induction rule
+\[
+    \frac{P \to Q \quad \quad Q \mbox{ true}}{P \mbox{ more plausible}}
+\]
+P\'{o}lya gives this rule the following reading: If we discover that some consequence $Q$ of $P$ is true, then $P$ becomes more plausible.  He refers to this as just ``induction''; I prefer to call it \emph{stepwise} induction because a modern understanding of induction is \emph{convergence to the truth}, and this rule says what ought to happen in a single discovery step rather than at some point of convergence.
+
+P\'{o}lya wrote this 30 years before logics for plausibility upgrade were developed.  But with the hindsight we have today, it's clear that his rule expresses a DEL constraint for plausibility upgrade.  
+
+Suppose we have a plausibility model $\Model = \langle W, R, \leq, V \rangle$.  Let $\Update{P}$ be the action ``make $P$ more plausible,'' which updates $\Model$ to $\Model^{\star}_P$.  Let $[!P]$ be the action ``discover that $P$ is true, which updates $\Model$ to $\Model^{!}_P$ (we could do this by conditionalization / public announcement).
+
+To make things concrete, let's consider the full language
+\[
+    p \mid \neg \varphi \mid \varphi \land \psi \mid \Diamond \varphi \mid \Know{\varphi} \mid \Believe{\varphi}{\psi} \mid [!P] \varphi \mid \Update{P} \varphi
+\]
+with the semantics
+\[
+    \begin{array}{lcl}
+        \Model, w \Vdash p & \mbox{ iff } & w \in V(p)\\
+        \Model, w \Vdash \neg \varphi & \mbox{ iff } & \Model, w \not \Vdash \varphi\\
+        \Model, w \Vdash \varphi \land \psi & \mbox{ iff } & \Model, w \Vdash \varphi \mbox{ and } \Model, w \Vdash \psi\\
+        \Model, w \Vdash \Diamond \varphi & \mbox{ iff } & \mbox{there exists } u \mbox{ with } \Model, u \Vdash \varphi\\
+        \Model, w \Vdash \Know \varphi & \mbox{ iff } & \mbox{for all } u \mbox{ with } w{R}u, \Model, u \Vdash \varphi \\
+        \Model, w \Vdash \Believe{\varphi}{\psi} & \mbox{ iff } & \best_\leq(\semantics{\varphi}) \subseteq \semantics{\psi} \\
+        \Model, w \Vdash [!P] \varphi & \mbox{ iff } & \Model^{!}_P, w \models \varphi\\
+        \Model, w \Vdash \Update{P} \varphi & \mbox{ iff } & \Model^\star_P, w \models \varphi
+    \end{array}
+\]
+where $\semantics{\varphi} = \set{u \mid \Model, u \Vdash \varphi}$, and $\best_\leq(S) = \set{u \in S \mid u \mbox{ is } {\leq}\mbox{-minimal over } S}$.
+
+We can't express the rule in DEL as-stated, since $\Update{P}$ and $[!P]$ can't occur by themselves.  But we can rephrase the rule in terms of the \emph{effects} that the updates have: The rule says that any effect of making $P$ more plausible is also an effect of discovering that $Q$ is true.  More formally, if $\Model, w \Vdash P \to Q$ then
+\[
+    \Model^{\star}_P, w \Vdash \varphi \mbox{ implies } \Model^{!}_Q, w \Vdash \varphi
+\]
+And this holds iff $\Model, w$ satisfies
+\[
+    (P \to Q) \to (\Update{P} \varphi \to [!Q] \varphi) \quad \mbox{\textsc{(Step-Ind)}}
+\]
+The second rule I'd like to explore is Shaded Stepwise Induction (``shaded'' is P\'{o}lya's terminology)
+\[
+    \frac{P \to Q \quad \quad Q \mbox{ more plausible}}{P \mbox{ more plausible}}
+\]
+We can do a similar analysis on this, and express it in DEL as
+\[
+    (P \to Q) \to (\Update{P} \varphi \to \Update{Q} \varphi) \quad \mbox{\textsc{(Shaded-Step-Ind)}}
+\]
+
+I want to ask the same questions from before, but now zoomed-in at these two axioms.  Specifically,
+
+\begin{question}
+    What do satisfying models of \textsc{(Step-Ind)} and \textsc{(Shaded-Step-Ind)} look like?  I'll be happy to find just one for each, but I'd like to completely axiomatize them if possible.
+\end{question}
+
+\begin{question}
+    What is the relationship between \textsc{(Step-Ind)} and \textsc{(Shaded-Step-Ind)}?  Is one `stronger' than the other, and in what sense?
+\end{question}
+
+\begin{question}
+    What is the relationship between \emph{stepwise} induction and induction understood as convergence to the truth?  Does stepwise induction imply regular induction (as the name suggests)?  Or is this notion of stepwise induction irrelevant to regular induction?
+\end{question}
+
+
+\section*{Progress So Far}
+
+\subsection*{A Model for Shaded Stepwise Induction}
+
+\begin{definition}
+    Given $\Model = \langle W, R, \leq, V \rangle$, let the update $\Model^\star_P = \langle W, R, \leq^\star_P, V \rangle$, where $\leq^\star_P$ is reordered according to the rule:
+    \begin{center}
+    \begin{tabular}{l}
+        Put all states where \emph{some} (non-$\top$) consequence of
+        $P$ holds in front of all the other states;\\
+        the order within the two groups is kept the same.
+    \end{tabular}
+    \end{center}
+    Note that this is a variation on Lexicographic upgrade.
+
+    % In other words, this is a variation of Lexicographic upgrade, where we put the following set up front.
+    % \[ \set{u \mid \mbox{ there exists } X \mbox{ such that } \Model, w \Vdash P \to X \mbox{ and } \Model, u \Vdash X}\]
+\end{definition}
+
+\begin{lemma}\label{lemma-best-upgrade}
+    For all formulas $P$, $Q$ and all sets $S$, $\best_{\leq^\star_Q}(S) \subseteq \best_{\leq^\star_P}(S)$.
+\end{lemma}
+\begin{proof}
+    We have two cases:
+    \begin{itemize}
+        \item No state $w \in S$ satisfies a consequence of $Q$.  Note that this also implies that no state satisfies a consequence of $P$, since TODO
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    \textsc{(Shaded-Step-Ind)} is sound for this update.
+\end{theorem}
+\begin{proof}
+    By induction on $\varphi$.  The interesting case is conditional belief $\Believe{\varphi}{\psi}$, since it is the only case affected by the upgrade.  Suppose $\Model, w \Vdash P \to Q$, and $\Model, w \Vdash \Update{P} \Believe{\varphi}{\psi}$.  So $\best_{\leq^\star_P}(\semantics{\varphi}) \subseteq \semantics{\psi}$.  By Lemma~\ref{lemma-best-upgrade} we have
+    \[
+        \best_{\leq^\star_Q}(\semantics{\varphi}) \subseteq \best_{\leq^\star_P}(\semantics{\varphi}) \subseteq \semantics{\psi}
+    \]
+    And so $\Model, w \Vdash \Update{Q} \Believe{\varphi}{\psi}$.
+\end{proof}
+
+So we have an update that models \textsc{(Shaded-Step-Ind)}. My goal will now be to completely axiomatize this update.
+
+\begin{proposition}
+    We can completely characterize the effect this update has on $\best$.  For all $S \subseteq W$,
+    \[
+        \best_{\leq^\star_P}(S) =
+        \begin{cases}
+             \best_\leq(S \cap \set{w \mid \exists X\not\equiv\top \mbox{ such that } \Model, w \Vdash P \to X \mbox{ and } \Model, w \Vdash X})\\
+             \quad \quad \mbox{if } S \cap \set{w \mid \exists X\not\equiv\top \mbox{ such that } \Model, w \Vdash P \to X \mbox{ and } \Model, w \Vdash X} \ne \emptyset\\
+            \best_\leq(S) \quad \mbox{otherwise}
+        \end{cases}
+    \]
+\end{proposition}
+\begin{proof}
+    Notice that this expression is exactly the characterization of lexicographic upgrade
+    \[  \best_{\leq^\Uparrow_P}(S) = 
+        \begin{cases}
+            \best_\leq(S \cap \semantics{P}) & \mbox{if } S \cap \semantics{P} \ne \emptyset\\
+            \best_\leq(S) & \mbox{otherwise}
+        \end{cases}
+    \]
+    except instead of upgrading the set
+    \[
+        \semantics{P} = \set{w \mid \Model, w \Vdash P}
+    \]
+    we upgrade
+    \[
+        \set{w \mid \exists X\not\equiv\top \mbox{ such that } \Model, w \Vdash P \to X \mbox{ and } \Model, w \Vdash X}
+    \]
+    From here, the proof is identical to the proof for lexicographic upgrade.
+\end{proof}
+
+\paragraph*{Discussion.} Consider the expression
+\[
+    \exists X\not\equiv\top \mbox{ such that } \Model, w \Vdash P \to X \mbox{ and } \Model, w \Vdash X
+\]
+If we could express this in DEL, we would have a complete axiomatization for the upgrade (just modify the reduction axioms for lexicographic upgrade).  This has an undeniably modal flavor to it; think of $P \to X$ as an accessibility relation over formulas.  It doesn't seem to be expressible in our language so far, so let's go ahead and define it.
+
+\begin{definition}
+    Let $\spiral$ be a new operator in our language, with semantics given by
+    \[
+        \Model, w \Vdash \spiral P \mbox{ iff } \exists \mbox{ formula } X\not\equiv\top \mbox{ such that } \Model, w \Vdash P \to X \mbox{ and } \Model, w \Vdash X
+    \]
+    We read $\spiral P$ as ``some consequence of $P$ holds.''  $\spiral$ is an existential modality; we define the dual $\squareSpiral P \leftrightarrow \neg \spiral \neg P$ (``all consequences of $P$ hold'').  (The $\spiral$ symbol evokes an image of the winding paths we may take in finding consequences of $P$.)
+\end{definition}
+
+\begin{proposition}
+    The following are sound:
+    \begin{enumerate}
+        \item If $\proves P$ then $\proves \squareSpiral P$ \quad \textsc{(Necess)}
+        \item $(P \to Q) \to (\spiral Q \to \spiral P)$ \quad \textsc{(Antitone)}
+        \item $P \to \spiral P$ \quad \textsc{(Refl)}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    (1) is easy: If $P$ holds in all $\Model, w$, then so do all of its (nontrivial) consequences.  (3) is also easy, since $P$ is a consequence of itself.
+
+    For (2), suppose $\Model, w \Vdash P \to Q$ and $\Model, w \Vdash \spiral Q$.  Then $\Model, w \Vdash X$ for some $X\not\equiv\top$ such that $\Model, w \Vdash Q \to X$.  But then by transitivity of consequence ($X$ is a consequence of $Q$, which is a consequence of $P$), $\Model, w \Vdash P \to X$, which gives us $\Model, w \Vdash \spiral P$.
+\end{proof}
+
+\begin{corollary}
+    Here are some interesting consequences of \textsc{(Antitone)} and \textsc{(Refl)}.  Notice that they are flipped from their usual $\Box$ presentation.
+    \begin{enumerate}
+        \item $\spiral P \land \spiral Q \to \spiral(P \land Q)$ \quad \textsc{(M)}
+        \item $\spiral(P \lor Q) \to \spiral P \lor \spiral Q$ \quad \textsc{(Or)}
+        \item $\spiral \spiral P \leftrightarrow \spiral P$ \quad \textsc{(Trans)}
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    For (1), since $\proves P \land Q \to P$, by \textsc{(Antitone)} we have $\proves \spiral P \to \spiral (P \land Q)$.  But then we have $\proves \spiral P \land \spiral Q \to \spiral (P \land Q)$.  (2) is similar:  Since $\proves P \to P \lor Q$, by \textsc{(Antitone)} we have $\proves \spiral (P \lor Q) \to \spiral P$.  Consequently, $\proves \spiral (P \lor Q) \to \spiral P \lor \spiral Q$.
+
+    Now consider (3).  The backwards direction is just \textsc{(Refl)}.  As for the other direction, \textsc{(Refl)} gives us $\proves P \to \spiral P$.  Applying \textsc{(Antitone)} we get $\proves \spiral \spiral P \to \spiral P$. \qedhere
+
+    % Finally, for (4) suppose $\proves \spiral P \to \spiral Q$.  We first apply \textsc{(Antitone)} to get $\proves \spiral \spiral Q \to \spiral \spiral P$.  We can simplify both terms with \textsc{(Trans)}, resulting in our goal $\proves \spiral Q \to \spiral P$.
+\end{proof}
+
+Importantly, $\spiral$ is \emph{not} a normal modality --- the converse of \textsc{(M)}, $\spiral(P \land Q) \to (\spiral P \land \spiral Q)$, is not sound.  Surprisingly, $\spiral$ is completely axiomatized by \textsc{(Necess)}, \textsc{(Antitone)}, and \textsc{(Refl)}.
+
+\begin{lemma}\label{lemma-existence}
+    (Existence Lemma). Suppose $\Delta$ is a maximally consistent set with $\spiral \varphi \in \Delta$.  Then there is a formula $X\not\equiv\top$ of complexity less than or equal to $\varphi$ with $\varphi \to X \in \Delta$ and $X \in \Delta$.
+\end{lemma}
+\begin{proof}
+    Suppose for contradiction that there is no such $X$, i.e.\ for all $X$ of complexity less than or equal to $\varphi$, if $\varphi \to X \in \Delta$ then $X \not \in \Delta$.  Let's now construct the formula
+    \[
+        \psi = \bigvee \set{X \not\equiv\top \mid X \mbox{ has complexity} \leq \varphi \mbox{ and } \varphi \to \spiral X \in \Delta}
+    \]
+    Intuitively, this formula says ``some consequence of some consequence of $\varphi$ holds.''  Is it well-defined?  Well, by \textsc{(Refl)} $\varphi \to \spiral \varphi \in \Delta$, so the set is nonempty.  Moreover, since the complexity of these formulas is bounded there are only finitely many of them.  So this formula is well-defined.
+
+    % First, notice that $\varphi \to \psi \in \Delta$, since $\varphi$ is one of the disjuncts of $\psi$.  But then \textsc{(Antitone)} gives $\spiral \psi \to \spiral \varphi \in \Delta$.  By \textsc{(Flip)} we then have $\spiral \varphi \to \spiral \psi \in \Delta$.
+    
+    First, since $\spiral \varphi \in \Delta$ and $\Delta$ is maximally consistent, $\psi \to \spiral \varphi \in \Delta$ (by $\to$-introduction: if we suppose $\psi \in \Delta$ then trivially $\spiral \varphi \in \Delta$).
+    
+    Second, I claim that $\neg \spiral \psi \in \Delta$.  Why?  Let $\psi = X_1 \lor \ldots \lor X_k$.  For each $X_i$ occurring in $\psi$, $(\varphi \to \spiral X_i) \in \Delta$.  By our very first assumption, every $\spiral X_i \not \in \Delta$.  So $\spiral X_1 \lor \ldots \lor \spiral X_k \not \in \Delta$.  But then by \textsc{(Or)},
+    \[
+        \spiral \psi = \spiral (X_1 \lor \ldots \lor X_k) \not \in \Delta
+    \]
+    And since $\Delta$ is maximally consistent, we have $\neg \spiral \psi \in \Delta$.
+    
+    Let's put everything together.  Since $\psi \to \spiral \varphi \in \Delta$, by \textsc{(Antitone)} we have $\spiral \spiral \varphi \to \spiral \psi \in \Delta$.  \textsc{(Refl)} gives us $\spiral \varphi \to \spiral \spiral \varphi$, and then by modus ponens we have $\spiral \varphi \to \spiral \psi \in \Delta$.  But since $\neg \spiral \psi \in \Delta$, by contraposition $\neg \spiral \varphi \in \Delta$.  But $\spiral \varphi \in \Delta$, so this contradicts the fact that $\Delta$ is consistent.
+\end{proof}
+
+\begin{proposition}
+    Suppose we build the canonical model $\Model^c$ using the usual maximally-consistent set construction for the base logic of $\Diamond \varphi$, $\Know{\varphi}$, $\Believe{\varphi}{\psi}$.  The $\spiral$-case of the truth lemma holds, i.e. for all maximally consistent $\Delta$,
+    \[
+        \Model^c, \Delta \Vdash \spiral \varphi \quad \mbox{iff} \quad \spiral \varphi \in \Delta
+    \]
+\end{proposition}
+\begin{proof}
+    $(\rightarrow)$ Suppose $\Model^c, \Delta \Vdash \spiral \varphi$.  So $\Model^c, \Delta \Vdash X$ for some $X\not\equiv\top$ such that $\Model^c, \Delta \Vdash \varphi \to X$.  Now apply the inductive hypothesis to both $\varphi \to X$ and $X$ to get $\varphi \to X \in \Delta$ and $X \in \Delta$.  From $X \in \Delta$ and \textsc{(Refl)} we have $\spiral X \in \Delta$.  And from $\varphi \to X \in \Delta$, $\spiral X \in \Delta$, and \textsc{(Antitone)}, we have $\spiral \varphi \in \Delta$.
+    
+    $(\leftarrow)$ Now suppose $\spiral \varphi \in \Delta$.  By Lemma~\ref{lemma-existence} there is a formula $X\not\equiv\top$ of complexity less than or equal to $\varphi$ with $\varphi \to X \in \Delta$ and $X \in \Delta$.  Since its complexity is less than or equal to $\varphi$, we can apply the inductive hypothesis to $\varphi \to X$ and $X$.  So $\Model^c, \Delta \Vdash \varphi \to X$ and $\Model^c, \Delta \Vdash X$.  By the semantics of $\spiral$, $\Model^c, \Delta \Vdash \spiral \varphi$.
+\end{proof}
+
+\begin{theorem}
+    Assuming model building for the logic $\set{\Diamond \varphi, \Know{\varphi}, \Believe{\varphi}{\psi}}$, given any consistent $\Gamma$ over $\set{\Diamond \varphi, \Know{\varphi}, \Believe{\varphi}{\psi}, \spiral \varphi}$ we can build a model and point $\Model, w \models \Gamma$.
+\end{theorem}
+\begin{proof}
+    This proof is totally standard: 
+    
+    First, extend $\Gamma$ to maximally consistent $\Gamma \supseteq \Gamma$ in the usual way, and let $\Model^c$ be the canonical model for the logic $\set{\Diamond \varphi, \Know{\varphi}, \Believe{\varphi}{\psi}}$ (no need to modify it for $\spiral$).  By the Truth Lemma, for all $\varphi \in \Delta$, $\Model^c, \Delta \Vdash \varphi$.  So in particular, for all $\varphi \in \Gamma$, $\Model^c, \Delta \Vdash \varphi$.
+\end{proof}
+
+\begin{corollary}
+    Assuming completeness for the logic $\set{\Diamond \varphi, \Know{\varphi}, \Believe{\varphi}{\psi}}$, the logic\\
+    $\set{\Diamond \varphi, \Know{\varphi}, \Believe{\varphi}{\psi}, \spiral \varphi}$ is also complete.
+\end{corollary}
+\begin{proof}
+    This proof is also standard:
+
+    Suppose contrapositively that $\Gamma \not \proves \varphi$.  Then $\Gamma \cup \set{\neg \varphi}$ is consistent.  We can then build a model $\Model$ and point $w$ such that $\Model, w \Vdash \Gamma \cup \set{\neg \varphi}$.  But then $\Model, w \Vdash \Gamma$ yet $\Model, w \not \Vdash \varphi$, which is what we wanted to show.
+\end{proof}
+
+\begin{theorem}
+    The upgrade defined above is completely axiomatized by the reduction axioms (over DEL + $\spiral$):
+    \[
+    \begin{array}{lcll}
+        \Update{P} p & \leftrightarrow & p \\
+        \Update{P} \neg \varphi & \leftrightarrow & \neg \Update{P} \varphi \\
+        \Update{P} (\varphi \land \psi) & \leftrightarrow & \Update{P} \varphi \land \Update{P} \psi \\
+
+        \Update{P} \Diamond \varphi & \leftrightarrow & \Diamond \Update{P} \varphi\\
+        \Update{P} \spiral \varphi & \leftrightarrow & \spiral \Update{P} \varphi\\
+        \Update{P} \Know{\varphi} & \leftrightarrow & \Know{\Update{P} \varphi}\\
+        \Update{P} \Believe{\varphi}{\psi} & \leftrightarrow & (\Diamond (\spiral P \land \Update{P} \varphi) \land \Believe{\spiral P \land \Update{P} \varphi}{\Update{P} \psi})\\
+        & & \lor (\neg \Diamond (\spiral P \land \Update{P} \varphi) \land \Believe{\Update{P} \varphi}{\Update{P} \psi})
+    \end{array}
+    \]
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
+\section*{Things To Try}
+\begin{enumerate}
+    \item go through mathreviews and google scholar to make sure this hasn't been done yet
+    \item Prove that $\spiral$ is not expressible in the base language (it is a genuine language extension).
+    \item Find a model satisfying \textsc{(Step-Ind)} (do a similar analysis of this upgrade).
+    \item Think about Question 3: What is the relationship between \textsc{(Step-Ind)} and \textsc{(Shaded-Step-Ind)}?
+    \item Think about Question 4: Do either of these axioms gurantee convergence to the truth, under reasonable assumptions?
+\end{enumerate}
+
+\printbibliography
+\end{document}

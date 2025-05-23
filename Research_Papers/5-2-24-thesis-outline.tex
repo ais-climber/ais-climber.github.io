@@ -1,0 +1,195 @@
+\documentclass[letterpaper]{article}
+\usepackage{notes}
+\begin{document}
+
+\section*{Neural Network Models: Thesis Outline}
+
+\begin{enumerate}
+    \item \textbf{Introduction}
+    \begin{itemize}
+        \item Introduce in the modern context of GPT \& transformers not being able to reason / explain their reasoning, ``black boxes'' making important decisions, of ``AI Alignment'', interpretability, explainability, self-driving cars making mistakes due to lack of reasoning.  There have been many, many proposals for fixing this, but the choices are disparate and it's not clear how they relate to each other, or if there are any mathematical guarantees we can make, etc.  Emphasize the need for principled, mathematical foundations of neural networks, especially of integrating \emph{learning and reasoning}, as well as \emph{neural and symbolic systems}.  (\emph{So many} speakers have emphasized this point, draw on all of the ones I know)  This thesis stands in the center of this tension.  (Make claims about what this thesis does.  Since the consequences of this work are interdisciplinary, I'll follow this up with different introductions depending on where the reader is coming from (literally just tell the reader to skip to their section first, then return to the others):)
+        
+        \item Main Thesis
+        \begin{itemize}
+            \item \textbf{Simple Idea:} Take ordinary neural networks, attach a valuation function (interpretation) to them, and then apply standard logic techniques (treat neural networks as a model for logic).  The claim is that this is a fruitful approach for understanding neural networks --- many things a logician wants to know turn out to correspond to things a machine learning researcher wants to know:
+            \begin{itemize}
+                \item Static Logic:
+                \begin{itemize}
+                    \item Soundness : Formally verifying properties of neural network inference
+                    \item Completeness : Neural network model building (encoding desired inferences in a net)
+                    \item Expressive Power --- ``What is the minimal logic that can express closure properties of neural networks'' is a sort of descriptive complexity version of ``What functions can neural networks encode/represent?'' (It would be cool to relate this work to Will \& Lena \& et al's work on this.)
+                \end{itemize}
+                
+                \item Dynamic Logic:
+                \begin{itemize}
+                    \item Soundness : Formally verifying properties of neural network \emph{learning}
+                    \item Completeness : Neural network model building with \emph{learning} constraints (one of the goals of AI Alignment)
+                    \item Expressive Power --- Somehow related to ``What functions can neural networks \emph{learn}''.  Though be careful here; most properties of learning probably won't be expressible \emph{in} the logic per se.\
+                \end{itemize}
+            \end{itemize}
+        \end{itemize}
+        
+        \item Logic
+        \begin{itemize}
+            \item The bulk of the work in this thesis really is standard logic methodology stuff --- we define models for a language, give formal semantics, prove soundness and completeness of axioms, etc.  We expect logicians to feel the most at home here.  Consider neural network models as an \emph{alternative choice} to, e.g., possible-worlds models, KLM-style plausibility models, neighborhood models, etc.  This work spans all sorts of different logic systems, including conditional logics, modal logics, epistemic and doxastic logics, dynamic logics, and belief revision.
+        \end{itemize}
+
+        \item Machine Learning
+        \begin{itemize}
+            \item This work is about interfacing logic with neural networks.  I do this using the standard logic methodology, but it turns out that issues like soundness, completeness, minimal models, etc. correspond directly to issues about the verification and construction of neural networks with certain properties!  The best way to think about this work is a map for building neural networks that have learning constraints, as well as proving general characterizations of different learning methods.
+        \end{itemize}
+
+        
+        \item Cognitive Science
+        \begin{itemize}
+            \item Mental representations, symbol grounding, neuro-philosophy and connectionism, frame problem
+        \end{itemize}
+        
+        \item Computational Learning Theory
+        \begin{itemize}
+            \item Emphasize that these are two different theoretical perspectives on understanding machine learning.  Say what the benefits of each are, and then foreshadow to the connection/bridge between them.
+        \end{itemize}
+
+        \item Epistemology
+        \begin{itemize}
+            \item Explain what an epistemologist gets from this; what a neuro-philosopher gets from this; what a philosopher of mind gets from this
+        \end{itemize}
+
+        \item Dynamical Systems
+        \begin{itemize}
+            \item I can't do much for the dynamical systems mathematician, but I do want to encourage more of these people to consider working on these problems!  Point them to \emph{specific} open problems that rely on dynamical systems expertise!  (e.g. the stability of forward propagation, stable descriptions of iterated learning methods, etc.)
+        \end{itemize}
+
+
+    \end{itemize}
+
+    \item \textbf{Basics of Neural Network Models}
+    \begin{enumerate}
+        \item Neural Network Preliminaries
+
+        \item State and Forward Propagation
+        \begin{itemize}
+            \item The idea is very simple: Neural network models are just ordinary neural networks, plus its current 'state'
+            \item Clarify what we mean by state in a general sense, assumptions we make on state (allowing both binary and fuzzy)
+            \item Some examples!  Clarify what we mean by the net's ``inference''
+            \item The state of a neural network changes (according to its activation function)
+            \item Assumptions we make about the forward propagation closure operator (e.g. it stabilizes).
+            \item properties of propagation
+        \end{itemize}
+
+        \item Neural Network Semantics for Belief
+        \begin{itemize}
+            \item Give several languages in increasing order of expressive power: Belief, conditional belief, and `best'/prototypes.  Since the `best' language can express both belief and conditional belief, I'll stick with it for the rest of this thesis.
+        \end{itemize}
+
+        \item Inference and Axioms
+        \begin{itemize}
+            \item These neural network semantics satisfy exactly the axioms of `best' given in Appendix A (prove them each individually here, although it's just a quick check)
+        \end{itemize}
+        
+        \item Model Building and Completeness
+        \begin{itemize}
+            \item Include the modifications to the completeness proof for each conditional axiom we could satisfy.
+        \end{itemize}
+        
+        \item Reflections on Methodology
+        \begin{itemize}
+            \item The main point: Forward propagation is a sort of prototype --- generally, identify \emph{what closure operators over the network are important}.  For forward propagation, we mapped it to the `best' modality
+            \item (new subsection) Graph Reachability is another good example --- show that our completeness proof extends to $\KnowNoArgs$: $\Reach$ (Alexandru said he is skeptical of this point, so I should clarify that the network flips in the construction, so ``worlds above'' also flips)
+            \item Determining which closure operators are most relevant for understanding a neural network architecture is an art.  For feed-forward nets (in general, terminating nets), it's clear that forward propagation carries the full information of its inference.  What about unstable/oscillating nets?  What about first-order quantifiers? etc.
+            \item Our story doesn't end at the dynamics of inference/forward propagation.  In fact, the main contribution of this thesis is an account for \emph{learning} on neural network models.  The trick is essentially the same, extending it with the DEL methodology (will explain)
+        \end{itemize}
+
+    \end{enumerate}
+
+    \item \textbf{Dynamics on Neural Network Models}
+    \begin{enumerate}
+        \item Hebbian Learning Inspired Update
+        \begin{itemize}
+            \item Explain the idea behind Hebbian learning (we're using it as a simple update on neural networks)
+            \item Give the four updates that I've come up with (``make neurons wire together''; ``only if they fired together''; ``iterated Hebbian learning''; ``single-step Hebbian learning'') and the relationships between these methods
+            \item Reduction Axioms and Completeness
+        \end{itemize}
+
+        \item Properties of Hebbian Update
+
+        \item Reduction Axioms and Completeness
+        \begin{itemize}
+            \item Give reduction axioms for all three of the methods, and then also think about completeness for single-step update!
+        \end{itemize}
+        
+        \item Expressive Power of Neural Network Update
+        \begin{itemize}
+            \item Answer the questions: Are there any classical updates (over plausibility models) corresponding to our three neural network updates (turns out to be no! --- consider graded plausibility and in the worst-case think about neighborhood models)?  Are there any neural network updates corresponding to plausiblity updates (conditioning, lexicographic, conservative)?
+        \end{itemize}
+
+        \item Reflections on Interpretability and Alignment
+        \begin{itemize}
+            \item give an explicit example!  Show an actual neural network with learning guarantees!
+            \item Mention the caveat on interpretability, which is that we \emph{don't} have a classical model corresponding to Hebbian learning
+        \end{itemize}
+    \end{enumerate}
+
+    \item \textbf{Bridges to Related Work}
+    \begin{enumerate}
+
+        \item Bridge to Other Neural-Symbolic Proposals
+        \begin{itemize}
+            \item Understand the recent survey by Simon \& Artur
+            \item Understand \& relate Logic Tensor Networks
+            \item Understand \& relate Neural ProbLog
+        \end{itemize}        
+
+        \item Bridge to Social Networks
+        
+        \item Bridge to Neural Network Extraction
+        \begin{itemize}
+            \item We assumed that the interpretation of neurons is given to us.  But the task of neural network extraction is identifying these variables!  But this work does give some perspective to neural network extraction (think of it as coming up with a valuation function without knowing it a priori).  Think about how this relates to Thomas Icard's work
+        \end{itemize}
+        
+        \item Bridge to Computational Learning Theory
+        \begin{itemize}
+            \item Here it would be good to formalize the learning method corresponding to neural network update (see Alexandru, Sonja, and Nina's paper, and model it in a similar way)
+        \end{itemize}
+        
+        \item Bridge to Cognitive Science
+        \begin{itemize}
+            \item A simple idea that connects neuroscience/connectionism with psychology/conceptual cognition.  Does this say anything about linguistics?  What exactly does this suggest / what assumptions are we making about how we should interpret the conceptual contents of brains?
+        \end{itemize}
+    \end{enumerate}
+    
+    \item \textbf{Future Directions and Open Problems}
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Appendix}
+
+\begin{enumerate}[label=\Alph*]
+    \item \textbf{``Classical'' Plausibility Models}
+    \begin{enumerate}
+        \item Plausibility Models and Properties
+        \item Language and Semantics
+        \item Inference and Axioms
+        \item Model Building and Completeness
+    \end{enumerate}
+    
+    \item \textbf{Dynamics on Plausibility Models}
+    \begin{enumerate}
+        \item Belief Update with Hard Information
+        \item Belief Update with Soft Information
+        \item Language and Semantics
+        \item The DEL Methodology
+        \item Reduction Axioms and Completeness
+    \end{enumerate}
+
+\end{enumerate}
+
+
+
+% Maybe put in the forward --- the reason this work is so logic-forward is this:  I am one of many young researchers that fell in love with logic, and secretly hoped that the study of reasoning would have something to do with the study of actual (human) reasoning and learning.  My dearest hope is that this work sets up the foundations for a new home for these displaced logicians and AI researchers
+
+% Better hope --- that symbolic and connectionist people can learn to overcome their prejudices and discomfort with the unfamiliar other side
+
+\end{document}

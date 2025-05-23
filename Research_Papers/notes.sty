@@ -1,0 +1,252 @@
+\usepackage[left=1.25in, right=1.25in, top=1.25in, bottom=1.25in]{geometry}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+
+%═══════════════════════════════════════════
+% Math packages
+%═══════════════════════════════════════════
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools,mathrsfs}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{marvosym}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\usepackage{fontawesome5}
+
+%═══════════════════════════════════════════
+% Formatting, margins, and spacing packages
+%═══════════════════════════════════════════
+\usepackage{microtype}
+\usepackage{enumitem}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+\setlist[enumerate]{itemsep=0mm}
+\setlist[itemize]{itemsep=0mm}
+\setlist[description]{itemsep=0mm}
+
+%-- TODO lists
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+%-- Redefining title to reduce space in notes files.
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \bfseries{\@title}\par}
+  \end{center}%
+  \par
+}
+\makeatother
+
+%-- New quote environment with attribution
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}[2][]
+  {\if\relax\detokenize{#1}\relax
+     \def\quoteauthor{#2}%
+   \else
+     \def\quoteauthor{#2~---~#1}%
+   \fi
+   \oldquote}
+  {\par\nobreak\smallskip\hfill---\quoteauthor%
+   \endoldquote\addvspace{\bigskipamount}}
+
+\newcommand{\quotecite}[1]{\citeauthor{#1}, \citetitle{#1} \cite{#1}}
+
+%═══════════════════════════════════════════
+% Graphics packages
+%═══════════════════════════════════════════
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit, backgrounds}
+\usepackage{tikz-cd}
+
+\tikzset{
+  symbol/.style={
+    draw=none,
+    every to/.append style={
+      edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+  }
+}
+
+\makeatletter
+\DeclareRobustCommand{\rvdots}{%
+  \vbox{
+    \baselineskip4\p@\lineskiplimit\z@
+    \kern-\p@
+    \hbox{.}\hbox{.}\hbox{.}
+  }}
+\makeatother
+
+%═══════════════════════════════════════════
+% Environments
+%═══════════════════════════════════════════
+\usepackage{mdframed}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newmdtheoremenv{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem*{claim*}{Claim}
+\newtheorem*{postulate*}{Postulate}
+\newtheorem{corollary}[theorem]{Corollary}
+\newmdtheoremenv{proposition}[theorem]{Proposition}
+\newtheorem{example}{Example}
+\newtheorem*{example*}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{aside}{Quick Aside}
+\newtheorem{question}{Question}
+\newtheorem*{thesis}{Thesis Statement}
+\newenvironment{sketch}{\begin{proof}[Proof Sketch]}{\end{proof}}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+%═══════════════════════════════════════════
+% References, Links, and Color
+%═══════════════════════════════════════════
+% AAAI requires that color is never used in text
+% (can be used in diagrams carefully though!)
+\usepackage{biblatex}
+\addbibresource{references.bib}
+\usepackage{xcolor}
+\definecolor{mygreen}{RGB}{171, 201, 120}
+\definecolor{myblue}{RGB}{77, 150, 255}
+\usepackage[colorlinks,allcolors=myblue]{hyperref}
+
+% Remove for editing
+% \usepackage{pagecolor}
+% \definecolor{background}{HTML}{f9f6e1}
+% \pagecolor{background}
+
+%═══════════════════════════════════════════
+% Custom Commands, General Use
+%═══════════════════════════════════════════
+\newcommand{\embed}{\hookrightarrow}
+\newcommand{\key}[1]{\emph{#1}}
+\newcommand{\Rat}{\mathbb{Q}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\State}{\mathsf{State}} 
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\newcommand{\Class}{\mathscr{C}}
+\newcommand{\Theory}[1]{\mathrm{Th}( #1 )}
+\newcommand{\Satisfy}[1]{\mathrm{Sat}( #1 )}
+\newcommand{\DynSatisfy}[1]{\mathrm{DynSat}( #1 )}
+\newcommand{\Definable}[1]{\mathrm{Def}( #1 )}
+\newcommand{\Rel}{\textrm{\textbf{Rel}}}
+\newcommand{\Relrefl}{\textrm{\textbf{Rel}}_\textrm{\textbf{S4}}}
+\newcommand{\Plaus}{\textrm{\textbf{Plaus}}}
+\newcommand{\Nbhd}{\textrm{\textbf{Nbhd}}}
+\newcommand{\Nbhdrefl}{\textrm{\textbf{Nbhd}}_\textrm{\textbf{S4}}}
+\newcommand{\NetModels}{\textrm{\textbf{Net}}}
+\newcommand{\SocialNet}{\textrm{\textbf{SocialNet}}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\uplang}{\mathcal{L}^\ast}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\proves}{\vdash}
+\renewcommand{\o}{\cdot}
+\newcommand{\orr}{\vee}
+\newcommand{\andd}{\wedge}
+\newcommand{\nott}{\neg}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\rem}[1]{\relax}
+\newcommand{\axiom}{\textsc}
+\newcommand*{\bigchi}{\mbox{\Large$\chi$}}% big chi
+\newcommand{\degree}[1]{\mathrm{deg}(#1)}
+\newcommand{\preds}[1]{\mathrm{preds}(#1)}
+\newcommand{\nextstate}{\mathrm{ns}}
+\newcommand{\layer}[1]{\mathsf{layer}(#1)}
+\newcommand{\activ}[2]{\mathsf{activ}_{#1}(#2)}
+\newcommand{\layerNoArgs}{\mathsf{layer}}
+
+\newcommand{\negweightscore}[1]{\mathsf{nws}(#1)}
+\newcommand{\minscore}{\mathsf{mnws}}
+\newcommand{\numiterations}{\mathsf{iter}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%═══════════════════════════════════════════
+% Custom Commands, Complexity Theory
+%═══════════════════════════════════════════
+% \newcommand{?}{\mbox{\sc ?}^0}
+\newcommand{\AC}{\mbox{\sc AC}^0}
+\newcommand{\Log}{\mbox{\sc L}}
+\newcommand{\Poly}{\mbox{\sc P}}
+\newcommand{\NP}{\mbox{\sc NP}}
+\newcommand{\PSPACE}{\mbox{\sc PSPACE}}
+\newcommand{\EXPTIME}{\mbox{\sc EXPTIME}}
+
+\newcommand{\Modal}{\mbox{\sc MODAL}}
+\newcommand{\FO}{\mbox{\sc FO}}
+\newcommand{\FODTC}{\mbox{\sc FO[DTC]}}
+\newcommand{\FOLFP}{\mbox{\sc FO[LFP]}}
+\newcommand{\SOex}{\mbox{\sc SO}\exists}
+\newcommand{\SOTC}{\mbox{\sc SO[TC]}}
+\newcommand{\SOLFP}{\mbox{\sc SO[LFP]}}
+
+\newcommand{\Modalnbhd}{\mbox{\sc MODAL}_\mathrm{Nbhd}}
+\newcommand{\FOnbhd}{\mbox{\sc FO}_\mathrm{Nbhd}}
+\newcommand{\FODTCnbhd}{\mbox{\sc FO[DTC]}_\mathrm{Nbhd}}
+\newcommand{\FOLFPnbhd}{\mbox{\sc FO[LFP]}_\mathrm{Nbhd}}
+\newcommand{\SOexnbhd}{\mbox{\sc SO}\exists_\mathrm{Nbhd}}
+\newcommand{\SOTCnbhd}{\mbox{\sc SO[TC]}_\mathrm{Nbhd}}
+\newcommand{\SOLFPnbhd}{\mbox{\sc SO[LFP]}_\mathrm{Nbhd}}
+
+%═══════════════════════════════════════════
+% Custom Commands, Hebbian Learning
+%═══════════════════════════════════════════
+\newcommand{\AllNets}{\mathsf{Net}}
+\newcommand{\Net}{\mathcal{N}}
+\newcommand{\op}{\mathsf{op}}
+\newcommand{\Prop}{\mathsf{Prop}}
+\newcommand{\Reach}{\mathsf{Reach}}
+\newcommand{\bias}{\mathsf{bias}}
+\newcommand{\Closure}{\mathsf{Cl}}
+\newcommand{\Hebb}[2]{\mathsf{Hebb}(#1, #2)}
+\newcommand{\HebbNoArgs}{\mathsf{Hebb}}
+\newcommand{\Hebbstar}[2]{\mathsf{Hebb}^*(#1, #2)}
+\newcommand{\HebbstarNoArgs}{\mathsf{Hebb}^*}
+\newcommand{\hebbweight}{W_\mathsf{Hebb}}
+\newcommand{\hebbstarweight}{W_{\mathsf{Hebb}^*}}
+\newcommand{\best}{\mathsf{best}}
+\newcommand{\UpdateVerbatim}{\mathsf{Update}}
+
+\newcommand{\Typ}[1]{\textrm{\textup{\textbf{T}}} #1}
+\newcommand{\Know}[1]{\textrm{\textup{\textbf{K}}} #1}
+% \newcommand{\Know}[2]{\textrm{\textup{\textbf{K}}}(#1, #2)}
+\newcommand{\KnowNoArgs}{\textrm{\textup{\textbf{K}}}}
+\newcommand{\TypNoArgs}{\textrm{\textup{\textbf{T}}}}
+% \newcommand{\Hebbop}[1]{[#1]_\textrm{\textup{hebb}\:}}
+% \newcommand{\Hebbop}[1]{[#1]_{\HebbstarNoArgs}\:}
+\newcommand{\Hebbop}[1]{[#1]}
+\newcommand{\Update}[1]{[#1]}
+\newcommand{\BestNoArgs}{[\mathsf{best}]}
+\newcommand{\Believe}[2]{\textrm{\textup{\textbf{B}}}^{#1} #2}
+
+\newcommand{\diaTyp}[1]{\langle \textrm{\textup{\textbf{T}}} \rangle #1}
+\newcommand{\diaKnow}[1]{\langle \textrm{\textup{\textbf{K}}} \rangle #1}
+% \newcommand{\diaKnow}[2]{\langle \textrm{\textup{\textbf{K}}} \rangle(#1, #2)}
+\newcommand{\diaTypNoArgs}{\langle \textrm{\textup{\textbf{T}}} \rangle}
+\newcommand{\diaKnowNoArgs}{\langle \textrm{\textup{\textbf{K}}} \rangle}
+% \newcommand{\diaHebbop}[1]{\langle #1\rangle_\textrm{\textup{hebb}}}
+\newcommand{\diaHebbop}[1]{\langle #1\rangle}
+\newcommand{\diaUpdate}[1]{\langle #1\rangle}
+\newcommand{\diaBest}[1]{\langle \mathsf{best}\rangle #1}
+
+\newcommand*\spiral{\includegraphics[width=0.8em]{spiral.png}}
+\newcommand{\squareSpiral}{[ \spiral ]}

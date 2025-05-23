@@ -1,0 +1,742 @@
+\documentclass[letterpaper]{article}
+\usepackage{notes}
+\title{The Modeling Power of Neural Network Models}
+\begin{document}
+
+\maketitle
+
+\section*{Problem Statement}
+
+These days I've been trying to understand the bigger picture of our work on neural network models.  I'll start by asking some suggestive questions, to point us in the right direction. I've been wondering:
+
+\begin{question}
+    How do neural network models relate to other models for conditional \& modal logic?  What about the dynamics --- how do policies like Hebbian learning relate to belief revision policies such as lexicographic \& conservative upgrade?
+\end{question}
+
+\begin{question}
+    The \href{http://flann.super.site/}{FLaNN Group}, specifically the work~\cite{merrill2019sequential,merrill2020formal,merrill2023expressive,strobl2024formal} considers neural networks as automata, and asks the question ``what functions can different neural networks encode?''  Similarly, we consider neural networks as models for logic, and ask the question ``what formulas can different neural networks model?''  These questions are clearly related --- but how, precisely?
+\end{question}
+
+\begin{question}
+    The FLaNN perspective (neural networks as automata) is one way to characterize the computational power of neural networks.  Can we use neural network models to characterize the \emph{modeling} power of neural networks?  How does this all relate to the computational and descriptive complexity hierarchies?
+\end{question}
+
+\section*{Basic Setup and Definitions}
+
+My first goal is to compare neural network models against other models.  To make the comparison fair, all models will share the basic multi-modal language $\lang$, given by
+\[
+    p \mid \neg \varphi \mid \varphi \land \psi \mid \set{\Box_i}_{i \in \textbf{I}} \hspace*{0.5em} \varphi
+\]
+where \textbf{I} is some fixed set of indices.  I have in mind that each $\Box_i$ represents a different modality per use-case (e.g. belief vs knowledge), although they could also be used to model a multi-agent setting (e.g. agent 1's belief vs agent 2's belief).
+
+Here are some classes of models I'm interested in:
+
+\paragraph*{Relational (Kripke) Models.} A relational model is $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle$, where 
+\begin{itemize}
+    \item $W$ is some finite set of worlds (or states)
+    \item Each $R_i \subseteq W \times W$ (the accessibility relations)
+    \item $V : \textrm{Proposition} \to \mathcal{P}(W)$ (the valuation function)
+\end{itemize}
+Define $\Rel$ to be the class of all such models, and define $\Relrefl$ to be the class of all such models where each $R_i$ is additionally reflexive and transitive.  The semantics for both classes is given by:
+\[
+\begin{array}{lcl}
+    \Model, w \Vdash p & \mbox{ iff } & w \in V(p)\\
+    \Model, w \Vdash \neg \varphi & \mbox{ iff } & \Model, w \not \Vdash \varphi\\
+    \Model, w \Vdash \varphi \land \psi & \mbox{ iff } & \Model, w \Vdash \varphi \mbox{ and } \Model, w \Vdash \psi\\
+    \Model, w \Vdash \Box_i \varphi & \mbox{ iff } & \mbox{for all } u \mbox{ with } w{R_i}u, \Model, u \Vdash \varphi
+\end{array}
+\]
+
+\paragraph*{Plausibility Models.}
+A plausibility model, first introduced in \cite{kraus1990nonmonotonic}, is $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle$, i.e. the models themselves are just relational models.  As before, I assume that $W$ is finite, and as with $\Relrefl$, $R_i$ is reflexive and transitive.  The key difference is that we interpret $\Box_i \varphi$ to hold in the best (or most plausible) states satisfying $\varphi$.  Formally, let $\best_{R_i}{(S)} = \set{w \in S \mid \textrm{For all } u \in S, \neg u {R_i} w}$ (the $R_i$-minimal states over $S$).  We additionally impose the following ``smoothness condition'' \cite{kraus1990nonmonotonic} on $\best_{R_i}$:
+\begin{postulate*}
+    For all models $\Model$, $i \in \textbf{I}$, sets $S$, and all $w \in W$, if $w \in S$ then either $w \in \best_{R_i}(S)$, or there is some $v{R_i}w$ better than $w$ that \emph{is} the best, i.e. $v \in \best_{R_i}(S)$.
+\end{postulate*}
+The new semantics for $\Box_i$ is
+\[
+\begin{array}{lcl}
+    \Model, w \Vdash \Box_i \varphi & \mbox{ iff } & w \in \best_{R_i}{(\semantics{\varphi})}
+\end{array}
+\]
+where $\semantics{\varphi} = \set{u \mid \Model, u \Vdash \varphi}$.  In practice, plausibility semantics coexist alongside relational semantics, so I allow some $\Box_i \varphi$ to be given relational semantics instead.  Let $\Plaus$ be the class of all such models.  Since we include relational operators, note that $\Relrefl \subseteq \Plaus$.
+
+Any plausibility operator $\Box_i$ picks out a corresponding conditional: $\Box_i \varphi \to \psi$ reads ``the best $\varphi$ are $\psi$,'' which in the KLM tradition is the semantics for the conditional $\varphi \Rightarrow \psi$.
+
+\paragraph*{Neighborhood Models.} A neighborhood model is $\Model = \langle W, \set{f_i}_{i \in \textbf{I}}, V \rangle$, where $W$ and $V$ are as before and each $f_i : W \to \mathcal{P}(\mathcal{P}(W))$ is an accessibility \emph{function}.  The intuition is that $f_i$ maps each state $w$ to the ``formulas'' (sets of states) that hold at $w$.  Define $\Nbhd$ to be the class of all neighborhood models.  
+
+Moreover, the \emph{core} of $f$ is $\cap f(x) = \bigcap_{X \in f(w)} X$.  As with $\Rel$, let $\Nbhdrefl$ be the class of all neighborhood models that are additionally reflexive ($\forall w, w \in \cap f(w)$) and transitive ($\forall w$, if $X \in f(w)$ then $\set{v \mid X \in f(v)} \in f(w)$).
+
+The semantics for both classes is the same as the previous classes, except the $\Box_i$ case is now:
+\[
+\begin{array}{lcl}
+    \Model, w \Vdash \Box_i \varphi & \mbox{ iff } & \semantics{\varphi} \in f_i(w)
+\end{array}
+\]
+where again $\semantics{\varphi} = \set{u \mid \Model, u \Vdash \varphi}$.
+
+\paragraph*{Weighted Neural Network Models.} 
+In our work \cite{kisby2024hebbian} so far, we've only defined the neural network state operators $\Prop$ and $\Reach$.  But in principle, we could define other closure operators, each reflecting a different kind of modality or conditional.  I want to characterize what a neural network  can \emph{in principle model}, and for this we need a more general definition.
+
+A neural network model is $\Net = \langle N, \bias, \set{E_i}_{i \in \textbf{I}}, \set{W_i}_{i \in \textbf{I}}, \set{A}_{i \in \textbf{I}}, V \rangle$, where
+\begin{itemize}
+    \item $N$ is a finite nonempty set (the set of neurons)
+    \item $\bias$ is a fixed node (the bias node)
+    \item Each $E_i \subseteq N \times N$ (the edge relations)
+    \item $W_i : E_i \to \mathbb{Q}$ (the weights for each edge relation)
+    \item $A_i : \mathbb{Q} \to \mathbb{Q}$ (the activation function for each edge relation)
+    \item $V : \textrm{Proposition} \to \mathcal{P}(N)$ (the valuation function)
+\end{itemize}
+I assume that each $A_i$ is a binary step function. Using the terminology of \cite{merrill2020formal}, this means the net is \emph{saturated}.  Later, I will assume one more constraint on the architecture of these nets.
+
+A \emph{state} is just a possible activation pattern of the net. Since our activation functions $A_i$ are binary, either a neuron is active (1) or it is not (0).  So states are just binary sets of neurons. Additionally, the $\bias$ node is the only node active in every state. (Since it is active in every state, we can assume that no edges go into $\bias$.) Formally, we have
+\[
+    \State = \set{S \mid S \subseteq N \mbox{ and } \bias \in S}
+\]
+
+I've generalized the definition from previous papers: These neural network models can have multiple kinds of edges (indexed by $i \in \textbf{I}$) connecting the same nodes, along with their weights and a corresponding activation function for each $i$.  Each choice $E_i, W_i, A_i$ specifies a state transition function from state $S \in \mathcal{P}(W)$ to the next state, given by
+\[
+    F_i(S) = S \cup \set{n \mid A_i(\sum_{m \in \preds{n}} W_i(m, n) \cdot \bigchi_S(m)) = 1}
+\]
+where $\bigchi_S(m) = 1$ iff $m \in S$ is the indicator function.  In other words, $F_i(S)$ is the current state $S$, along with the set of nodes that are activated by their predecessors in $S$.  Notice that $F_i(S)$ is extensive --- once activated, a node will stay activated in the next state.
+
+Let $\NetModels$ be the class of all neural network models defined above, with the following additional constraint: 
+% (with one more constraint that I'll say soon).  The semantics for $\Net \in \NetModels$ is a bit more roundabout than for the previous classes.  First, we define a ``next state'' function $\nextstate_i : \mathcal{P}(N) \to \mathcal{P}(N)$ for each $i \in \textbf{I}$ as follows:
+% \[
+%     \nextstate_i(S) = S \cup F_i(S)
+% \]
+
+\begin{postulate*}
+    I assume that for all $i \in \textbf{I}$ and all states $S$, $F_i$ applied to $S$, i.e.
+    \[
+        S, F_i(S), F_i(F_i(S)), \ldots, F^k_i(S), \ldots
+    \]
+    has a (finite) least fixed point, and moreover that it is \emph{unique}.  Let $\Closure_i : \mathcal{P}(N) \to \mathcal{P}(N)$ (``closure'') be the function that produces that least fixed point.  For concreteness, we can say that there is some $k\in \mathbb{N}$ for which
+    \[
+        \Closure_i(S) = F_i^k(S)
+    \]
+\end{postulate*}
+This assumption implicitly constrains the allowed neural network architectures: We allow feed-forward nets, as well as certain controlled forms of recurrence.  Characterizing nets that have a unique least fixed point is a big open problem.
+
+I can now state the semantics for $\Net \in \NetModels$:
+\[
+\begin{array}{lcl}
+    \Net, n \Vdash p & \mbox{ iff } & n \in V(p)\\
+    \Net, n \Vdash \neg \varphi & \mbox{ iff } & \Net, n \not \Vdash \varphi\\
+    \Net, n \Vdash \varphi \land \psi & \mbox{ iff } & \Net, n \Vdash \varphi \mbox{ and } \Model, n \Vdash \psi\\
+    \Net, n \Vdash \Diamond_i \varphi & \mbox{ iff } & 
+    n \in \Closure_i(\semantics{\varphi})
+\end{array}
+\]
+where $\semantics{\varphi} = \set{n \mid \Net, n \Vdash \varphi}$.  A technical point is that our semantics differ from Hannes' \cite{leitgeb2001nonmonotonic} in how we handle propositions and connectives --- his semantics are entirely neural, whereas the semantics above handle propositions and connectives classically.  He battles with this issue of how to correctly interpret negation; I sidestep this issue by using neural networks for interpreting $\Diamond_i \varphi$ (where the ``action'' happens), but not for the propositional base.
+
+Any network diffusion operator $\Diamond_i$ picks out a corresponding neural network inference: $\Diamond_i \varphi \leftarrow \psi$ says that on input $\varphi$ the neural network ``answers'' with classification $\psi$.  This is analogous to the way a plausibility operator picks out a conditional (I will say more about this later).
+
+In the following examples, I'll walk through common constructions for neural networks.  I mentioned before that each choice of $E_i, W_i, A_i$ specifices a transition function $F_i(S)$.  Different choices for $F_i(S)$ in turn give different interpretations for the closure function $\Closure_i(S)$.  These examples should give you a feel for what sorts of state transitions we can represent with neural networks.
+
+\paragraph*{Example: The Graph-Reachability Construction.}
+    Say we want to build a neural network 
+    \[\Net = \langle N, \bias, \set{E_i}_{i \in \textbf{I}}, \set{W_i}_{i \in \textbf{I}}, \set{A}_{i \in \textbf{I}}, V \rangle\]
+    Let's consider a particular $i$. Suppose the graph $\langle N, E_i \rangle$, $\bias$, and evaluation $V$ are given.  Pick 
+    \[
+        W_i(m, n) = 
+        \begin{cases}
+            1 & \mbox{if } m{E_i}n \\
+            0 & \mbox{otherwise}
+        \end{cases}
+    \]
+    Then pick $A_i(x) = 1$ iff $x > 0$. Recall that $n \in F_i(S)$ iff $n$ is activated by its predecessors in $S$ (by the weighted sum term, see the discussion earlier).  In this case, $n \in F_i(S)$ whenever $n$ is active ($n \in S$) or at least one $E_i$-predecessor $m$ of $n$ is in $S$.  I call this the graph-reachability construction because the closure $\Closure_i(S)$ gives exactly the nodes graph-reachable from $S$:
+
+    \begin{claim*}
+        $\Closure_i(S) = \set{n \mid \exists \mbox{ an } E_i\mbox{-path from some } m \in S \mbox{ to } n}$
+    \end{claim*}
+    \begin{proof}
+        First, the $(\subseteq)$ direction.  Let $n \in \Closure_i(S) = F^k_i(S)$ for some $k \in \mathbb{N}$.  We proceed by induction on $k$.
+        \begin{description}
+            \item[Base Step.] $n \in F^0_i(S) = S$.  So there is a trivial $E_i$-path (length $= 0$) from $n \in S$ to itself.
+            
+            \item[Inductive Step.] Let $k \geq 0$.  We have $n \in F^k_i(S) = F_i(F^{k-1}_i(S))$.  By construction of $F_i$, we have two cases:
+            Either $n \in F^{k-1}_i(S)$ or at least one $E_i$-predecessor $x$ of $n$ is in $F^{k-1}_i(S)$.  In the first case, our inductive hypothesis gives a path from some $m \in S$ to $n$.  In the second case, our inductive hypothesis gives a path from some $m \in S$ to $x$.  But since $x{E_i}n$, we can extend this path to be from $m$ to $n$.
+        \end{description}
+
+        As for the $(\supseteq)$ direction, suppose there is an $E_i$-path from some $m \in S$ to $n$.  We proceed by induction on the length of that path.
+        \begin{description}
+            \item[Base Step.] The path is trivial, i.e. has length $0$.  So $n \in S$.  But $S = F^0_i(S) \subseteq \Closure_i(S)$, and so $n \in \Closure_i(S)$.
+            
+            \item[Inductive Step.] Say the path is of length $l \geq 0$.  Let $x$ be some immediate $E_i$-predecessor of $n$.  By the inductive hypothesis, $x \in \Closure_i(S)$, and so $x \in F^k_i(S)$ for some natural $k$.  But since $x$ is an $E_i$-predecessor of $n$, by construction of $F_i$, $n \in F_i(F^k_i(S)) = F^{k+1}_i(S)$.  Since $\Closure_i(S)$ is a closure, it includes $F^{k+1}_i(S)$.  So $n \in \Closure_i(S)$.
+        \end{description}
+    \end{proof}
+
+\paragraph*{Example: The Social Majority Construction.}
+    As before, we want to build a neural network $\Net$ where the graph $\langle N, E_i \rangle$, $\bias$, and evaluation $V$ are given.  This time, pick $W_i(m, n) = \frac{1}{|\preds{n}|}$, and then pick $A_i(x) = 1$ iff $x \geq \frac{1}{2}$. Visually, for each node $n$ and its predecessors $m_1, \ldots, m_r$ we have
+    \begin{center}
+    \begin{tikzpicture}[loose/.style={inner sep=.  7em},edge/.style = {->,-Latex}, oval/.style={ellipse,draw}]
+        %--------------------------------------------
+        % Nodes
+        \node[circle,fill,inner sep=2pt,label=left:$m_1$](a){};
+        \node[below=0.75 of a,circle,fill,inner sep=2pt,label=left:$m_2$](b){};
+        
+        \node[below=0.5 of b](dots){$\rvdots$};
+
+        \node[below=0.5 of dots,circle,fill,inner sep=2pt,label=left:$m_{r}$](c){};
+        \coordinate (midway) at ($(a)!0.5!(c)$);
+        \node[right=3 of midway,circle,fill,inner sep=2pt,label=right:$n$](n){};
+        
+        %--------------------------------------------
+        % Excitatory edges
+        \draw[edge, color=black, opacity=0.4] (a) -- (n) node [near start, above] {$\frac{1}{r}$};
+        \draw[edge, color=black, opacity=0.4] (b) -- (n) node [near start, above] {$\frac{1}{r}$};
+        \draw[edge, color=black, opacity=0.4] (c) -- (n) node [near start, above] {$\frac{1}{r}$};
+    \end{tikzpicture}
+    \end{center}
+    This gives us $n \in F_i(S)$ if $n$ is already active ($n \in S$) or if the majority (more than half) of $E_i$-predecessors are in $S$.  In this case, the closure $\Closure_i$ can be interpreted as the diffusion of an opinion or attitude through a social network.  This is one of the choices that \cite{baltag2019socialnetworks} consider for modelling influence in social networks.
+
+\paragraph*{Example: The Not-Every Construction.}
+    Here is an interesting construction that Hannes uses in \cite{leitgeb2001nonmonotonic} to prove completeness for weighted neural network models.  He does this by way of inhibition nets, i.e. nets with inhibitory edges that block excitatory edges.
+    
+    As before, we want to build a neural network $\Net$ where the graph $\langle N, E_i \rangle$, $\bias$, and evaluation $V$ are given.  Here's the \emph{inhibition net} construction:  First, create an edge from $\bias$ to every $n$ that is not $E_i$-minimal (in other words, if $n$ has any predecessors at all, then $\bias$ is one of them). Then for each node $n$ and its predecessors $\bias=m_0, m_1, \ldots, m_r$, connect inhibition edges as follows.
+    
+    \begin{center}
+    \begin{tikzpicture}[loose/.style={inner sep=.  7em},edge/.style = {->,-Latex}, oval/.style={ellipse,draw}]
+        %--------------------------------------------
+        % Nodes
+        \node[circle,fill,inner sep=2pt,label=left:$\bias$](a){};
+        \node[below=0.75 of a,circle,fill,inner sep=2pt,label=left:$m_1$](b){};
+        \node[below=0.75 of b,circle,fill,inner sep=2pt,label=left:$m_2$](c){};
+        
+        \node[below=0.5 of c](dots){$\rvdots$};
+
+        \node[below=0.5 of dots,circle,fill,inner sep=2pt,label=left:$m_{r-1}$](d){};
+        \node[below=0.75 of d,circle,fill,inner sep=2pt,label=left:$m_r$](e){};
+        
+        \coordinate (midway) at ($(a)!0.5!(e)$);
+        \node[right=3 of midway,circle,fill,inner sep=2pt,label=right:$n$](n){};
+        
+        % Draw the inhibitory edge that crosses over first
+        \draw[edge, -Circle, color=black, opacity=0.4] (e) -- ($(a)!0.35!(n)$) node [near start, above] {};
+
+        %--------------------------------------------
+        % Excitatory edges
+        % draw white over each of the middle ones to
+        % erase the crossover
+        \draw[edge, color=black, opacity=0.4] (a) -- (n) node [near start, above] {};
+        \draw[edge, color=white, opacity=1, line width=3pt, -, shorten >=10pt, shorten <=4pt] (b) -- (n) node [near start, above] {};
+        \draw[edge, color=black, opacity=0.4] (b) -- (n) node [near start, above] {};
+        \draw[edge, color=white, opacity=1, line width=3pt, -, shorten >=10pt, shorten <=4pt] (c) -- (n) node [near start, above] {};
+        \draw[edge, color=black, opacity=0.4] (c) -- (n) node [near start, above] {};
+        \draw[edge, color=white, opacity=1, line width=3pt, -, shorten >=10pt, shorten <=4pt] (d) -- (n) node [near start, above] {};
+        \draw[edge, color=black, opacity=0.4] (d) -- (n) node [near start, above] {};
+        \draw[edge, color=black, opacity=0.4] (e) -- (n) node [near start, above] {};
+
+        %--------------------------------------------
+        % Inhibitory edges
+        % draw white over each of them to erase the crossover
+        \draw[edge, color=white, opacity=1, line width=3pt, -, shorten >=10pt, shorten <=10pt] (a) -- ($(b)!0.5!(n)$) node [near start, above] {};
+        \draw[edge, -Circle, color=black, opacity=0.4] (a) -- ($(b)!0.5!(n)$) node [near start, above] {};
+        
+        \draw[edge, color=white, opacity=1, line width=3pt, -, shorten >=10pt, shorten <=4pt] (b) -- ($(c)!0.5!(n)$) node [near start, above] {};
+        \draw[edge, -Circle, color=black, opacity=0.4] (b) -- ($(c)!0.5!(n)$) node [near start, above] {};
+        
+        \node[right=1 of dots,yshift=0.5em](dotsb){$\rvdots$};
+
+        \draw[edge, color=white, opacity=1, line width=3pt, -, shorten >=10pt, shorten <=4pt] (d) -- ($(e)!0.5!(n)$) node [near start, above] {};
+        \draw[edge, -Circle, color=black, opacity=0.4] (d) -- ($(e)!0.5!(n)$) node [near start, above] {};
+    \end{tikzpicture}
+    \end{center}
+    
+    That is, each node $m_i$ is inhibited by $m_{i-1}$ ($\bias=m_0$ inhibited by $m_r$).  This has the following effect: if all $m_i$ activate, they each inhibit each other, and so $n$ does not activate.  If only \emph{some} $m_i$ activate, then there is some $m_i$ that is uninhibited, and so $n$ activates.  And finally, since $\bias$ is always active we cannot have \emph{no} $m_i$ active.  In other words, $n \in F_i(S)$ iff $n$ is already active ($n \in S$), or \emph{at least one, but not all} predecessors $m_i$ are in $S$.
+    
+    We can simulate this effect with weighted neural networks. Create an edge from $\bias$ to every $n$ that is not $E_i$-minimal. Then pick $W_i(m, n) = \frac{1}{|\preds{n}|+1}$ (the extra $+1$ accounts for the $\bias$). Finally, pick $A_i(x) = 1$ iff $x < 1$.  Take a moment to check that $n \in F_i(S)$ iff $n \in S$, or at least one, but not all predecessors $m$ are in $S$.
+
+    Consider the $\best$ function from before, but over $E_i$.  That is, $\best_{E_i}(S)$ is the set of $E_i$-minimal nodes in $S$.  It turns out that, \emph{if} $E_i$ is transitive (which is true in our use case), the closure function $\Closure_i$ for the not-every construction is precisely the \emph{dual} of $\best_{E_i}$:
+    \begin{claim*} (Leitgeb, \cite{leitgeb2001nonmonotonic})
+        Suppose $E_i$ is transitive.  Then for all $S$, $\Closure_i(S) = (\best_{E_i}(S^\complement))^\complement$
+    \end{claim*}
+    \begin{proof}
+        First, the $(\subseteq)$ direction.  Let $n \in \Closure_i(S) = F^k_i(S)$ for some $k \in \mathbb{N}$.  We proceed by induction on $k$.
+        \begin{description}
+            \item[Base Step.] $n \in F^0_i(S) = S$.  By $\best_{E_i}$-inclusion, $\best_{E_i}(S^\complement) \subseteq S^\complement$. Flipping this containment gives us $S \subseteq \best_{E_i}(S^\complement)^\complement$.  So $n \in \best_{E_i}(S^\complement)^\complement$.
+            
+            \item[Inductive Step.] Let $k \geq 0$.  We have $n \in F^k_i(S) = F_i(F^{k-1}_i(S))$.  By construction of $F_i$, we have two cases: $n$ is already active ($n \in F^{k-1}_i(S)$), or some predecessor is $m \in F^{k-1}_i(S)$, and not all predecessors are.  In the first case, our inductive hypothesis says $n \in \best_{E_i}(S^\complement)^\complement$.  In the latter case, the inductive hypothesis gives $m \in \best_{E_i}(S^\complement)^\complement$.  From here we split by cases: either $m \in S$ or $m \not \in S$.
+            \begin{description}
+                \item[Case: $m \in S$.] In this case, we trivially have $n \not \in \best_{E_i}(S^\complement)$, since $n$ is not even in $S^\complement$.
+
+                \item[Case: $m \not \in S$.]
+                Since $m \in S^\complement$ but $m \not \in \best_{E_i}(S^\complement)$, by the smoothness condition there must be some better $x$ with $x{E_i}m$ that \emph{is} the best, i.e. $x \in \best_{E_i}(S^\complement)$.  By $\best$-inclusion, $x \in S^\complement$.  Well, $x{E_i}m{E_i}n$, and since $E_i$ is transitive we have $x{E_i}n$.  And so we have an $x \in S^\complement$ that is $E_i$-better than $n$.  So $n \not \in \best_{E_i}(S^\complement)$, which is what we wanted to show.
+            \end{description}
+        \end{description}
+
+        As for the $(\supseteq)$ direction, suppose contrapositively that $n \not \in \Closure_i(S)$. Note that $n \not \in S$, by $\Closure$-inclusion.  First, I claim that every predecessor $m$ of $n$ is in $S$.  Suppose not, i.e. suppose that some predecessor $m \not \in S$.  Note that we always have $\bias \in S$.  By construction, we also have $\bias{E_i}n$.  So $n$ has one predecessor, $m$, not in $S$, and another predecessor, $\bias$, in $S$.  In other words, some but not all predecessors of $n$ are in $S$.  By construction of $F_i$, $n \in F_i(S)$.  But $F_i(S) \subseteq \Closure_i(S)$, so this contradicts $n \not \in \Closure_i(S)$.
+
+        So every predecessor $m$ of $n$ is in $S$.  But this implies that any $m \not \in S$ cannot be an $E_i$-predecessor of $n$.  In other words, $\forall m \in S^\complement, \neg m{E_i}n$.  Since $n \in S^\complement$ from before, we have $n \in \best_{E_i}(S)$ by the definition of $\best$.  This concludes this direction of the proof.
+    \end{proof}
+
+% \begin{example*}
+%     In general, $\Closure_i(S)$ is exactly $\Prop(S)$, the forward propagation (or diffusion) of the signal $S$ through the net.  But different constructions for $F_i(S)$ give different interpretations for $\Closure(S)$.  
+    
+%     Consider the constructions from the previous example.  The graph-reachability construction gives us $\Closure_i(S) = \Reach(S)$, the nodes graph-reachable from $S$ (I will prove this later, when we need it).  Similarly, $\Closure_i$ for the social majority construction can be interpreted as the diffusion of an opinion or attitude through a social network (see \cite{baltag2019socialnetworks}).  As we'll see later, $\Closure_i$ for the not-every construction gives $\Closure_i(S) = \best_{R_i}(S^\complement)^\complement$, the dual to the set of $R_i$-minimal elements of $S$.
+% \end{example*}
+
+
+% A dynamic relational model is $\Model' = \langle W, \set{R_i}_{i \in \textbf{I}}, \set{\UpdateVerbatim_j}_{j \in \textbf{J}}, V \rangle$, where each $\UpdateVerbatim_j : \Rel \times \mathcal{P}(W) \to \Rel$ is a dynamic update function that produces a new model given a set $S \in \mathcal{P}(W)$.  Given $\Model \in \Rel$ and $S \in \mathcal{P}(W)$, I'll write $\Model_S^{\star_j} = \UpdateVerbatim_j(\Model, S)$ as shorthand.  Define $\Rel^\star$ to be the class of all such models.
+
+% $\Plaus^\star$, $\Nbhd^\star$, and $\NetModels^\star$ are defined similarly --- just extend the model with update functions $\UpdateVerbatim_j$ and the semantics are the same.
+
+
+% P ] is some dynamic update given by M → M⋆
+% P (this is a free variable; the problem will be to find the right update).
+
+\subsection*{Measuring Modeling Power.}
+
+To compare the modeling power of neural networks with other logic models, I need to pick a measure of complexity.  There are three questions about model complexity we can answer this way:
+\begin{description}
+    \item[Satisfiability.] ``What formulas can a class of models in-principle model (satisfy)?''
+    \item[Validity.] ``What formulas \emph{must} a class of models satisfy (make valid)?''
+    \item[Definability.] ``What properties (or formal languages) can a class of models \emph{define}?''
+\end{description}
+
+I will focus on comparing \emph{satisfiability}, in part because for neural networks it is a useful proxy for the question ``what functions can a neural network architecture in-principle compute?'' I'm going to state definability for the sake of completeness, and in the future I want to relate it to my work (to connect with descriptive complexity of neural networks). But at the moment, I don't have anything interesting to say about definability. (Maybe I'll add something here when I do.)
+
+\begin{definition}
+    Let $\Model$ be any model whatsoever with universe $W$ and satisfaction relation $\Vdash$.  $\Model \models \varphi$ if for all $w \in W$, $\Model, w \Vdash \varphi$.
+\end{definition}
+
+\begin{definition}
+    Let $\Class_1, \Class_2$ be two classes of models. A \emph{class embedding} $f : \Class_1 \to \Class_2$ is an injective function such that for all models $\Model \in \Class_1$, and formulas $\varphi \in \lang$, $\Model \models \varphi \mbox{ iff } f(\Model) \models \varphi$. If there is an embedding from $\Class_1$ into $\Class_2$, we write $\Class_1 \embed \Class_2$.
+\end{definition}
+
+Satisfiability and validity are the measures of complexity preferred in model theory. We define them as follows. Note that the two are duals of one another --- intuitively, $\Satisfy{\Class}$ puts more ``powerful'' models on top, whereas $\Theory{\Class}$ puts them on the bottom.
+
+\begin{definition}
+    Let $\Class$ be a class of models, $\Model$ be a model in $\Class$, and $\lang$ be a language.  The \emph{formulas satisfied by} $\Model$ over $\lang$ is given by $\Satisfy{\Model} = \set{\varphi \in \lang \mid \Model \models \varphi}$.  The \emph{formulas satisfiable by class $\Class$} over $\lang$ is given by 
+    \[
+        \Satisfy{\Class} = \set{\varphi \in \lang \mid \textrm{there is some } \Model \in \Class \textrm{ such that } \Model \models \varphi}
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $\Class$ be a class of models, and $\lang$ be a language. The \emph{theory} of $\Class$ over $\lang$ is given by
+    \[
+        \Theory{\Class} = \set{\varphi \in \lang \mid \textrm{for all } \Model \in \Class \textrm{ we have } \Model \models \varphi}
+    \]
+\end{definition}
+
+\begin{proposition}
+    Suppose $\Class_1 \embed \Class_2$. We have $\Satisfy{\Class_1} \subseteq \Satisfy{\Class_2}$, and similarly, $\Theory{\Class_2} \subseteq \Theory{\Class_1}$.
+\end{proposition}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
+
+Definability is the measure preferred in descriptive complexity. It's usually considered a measure of complexity of a \emph{language}, while the models are kept fixed. But we can also consider it a measure of complexity of models, with the language kept fixed.
+
+\begin{definition}
+    Let $\Class$ be a class of models. The \emph{properties (problems) definable by $\Class$ over $\lang$} is given by
+    \[
+        \Definable{\Class} = \set{P \subseteq \Class \mid \textrm{there exists } \varphi \in \lang \textrm{ such that for all } \Model \in \Class, \Model \in P \textrm{ iff } \Model \models \varphi}
+    \]
+\end{definition}
+
+\begin{example*}
+    Here's an example that's a sort of tutorial for comparing the modeling power of different model classes using $\Satisfy{\Class}$.  Let's compare relational models $\Rel$ with neighborhood models $\Nbhd$ over the static language.  Our goal is to show that neighborhood models are strictly more powerful than relational models: $\Satisfy{\Rel} \subset \Satisfy{\Nbhd}$.
+    
+    First, here are some formulas that are valid in every relational model:
+    \begin{itemize}
+        \item $\Box_i(\varphi \land \psi) \to (\Box_i \varphi \land \Box_i \psi)$
+        \item $(\Box_i \varphi \land \Box_i \psi) \to \Box_i(\varphi \land \psi)$
+        \item $\Box_i \top$
+    \end{itemize}
+    This means that \emph{no} $\Model \in \Rel$ can satisfy their negations (for details, see \cite{pacuit2017neighborhood}, page 8).  But neighborhood models can: Let $\Model = \langle W, f, V \rangle$ be a neighborhood model with $W = \set{a, b, c}$, propositions $\set{p, q}$ with $V(p) = \set{a, b}, V(q) = \set{b, c}$, and $f$ given by
+    \[
+    \begin{tikzcd}[column sep=1em]
+        \set{a, c} & \set{c} & \set{b} & \emptyset & \set{a} & \set{b,c} & \set{b} \\
+           &  a \arrow{lu} \arrow{u} \arrow{ru}  &     &  b \arrow{lu} \arrow{u} \arrow{ru}  &    &  c \arrow{lu} \arrow{u} \arrow{ru} &
+    \end{tikzcd}
+    \]
+    For all $w \in W$ we have $\semantics{p} \cap \semantics{q} = \set{b} \in f(w)$, but also $\semantics{p} = \set{a, b} \not \in f(w)$. This means that for all $w$, $\Model, w \not \Vdash \Box(\varphi \land \psi) \to (\Box \varphi \land \Box \psi)$ --- in other words, $\Model \models \neg (\Box(\varphi \land \psi) \to (\Box \varphi \land \Box \psi))$.  Consequently, this formula is in $\Satisfy{\Nbhd}$, but \emph{not} in $\Satisfy{\Rel}$.
+    
+    Moreover, we can embed relational models into neighborhood models. That is, $\Rel \embed \Nbhd$, which gives us $\Satisfy{\Rel} \subseteq \Satisfy{\Nbhd}$.  Let $\varphi \in \lang$ and suppose $\Model \models \varphi$ for some $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle \in \Rel$.  Eric Pacuit in \cite{pacuit2017neighborhood}, page 47 shows how to construct an equivalent neighborhood model:  Let $f(\Model) = \langle W, \set{f_i}_{i \in \textbf{I}}, V \rangle$, where each $f_i(w) = \set{X \mid \set{v \mid w{R_i}v } \subseteq X}$.  All we need to show is $\Model' \models \varphi$, but we are able to prove something even stronger:
+    \begin{claim*}
+        For all $\varphi$ and all $w$, $\Model, w \Vdash \varphi$ iff $\Model', w \Vdash \varphi$.
+    \end{claim*}
+    \begin{proof}
+        By induction on $\varphi$.  The key case is $\Box_i \varphi$.  
+        
+        $(\to)$: Suppose $\Model, w \Vdash \Box_i \varphi$, i.e. for all $u$ with $w{R_i}u$, $\Model, u \Vdash \varphi$.  It follows that $\set{u \mid w{R_i}u } \subseteq \semantics{\varphi}$. By construction of $\Model'$, this means $\semantics{\varphi} \in f_i(w)$, and so $\Model', w \Vdash \Box_i \varphi$.
+
+        $(\leftarrow)$: Now suppose $\Model', w \Vdash \Box_i \varphi$, i.e. $\semantics{\varphi} \in f_i(w)$.  By construction of $\Model'$, we have $\set{u \mid w{R_i}u } \subseteq \semantics{\varphi}$.  So for all $u$ with $w{R_i}u$, $\Model, u \Vdash \varphi$.  This gives us $\Model, w \Vdash \Box_i \varphi$.
+    \end{proof}
+\end{example*}
+
+
+\section*{Known Results (The Static Case)}
+Recall the first part of Question 1: ``how do neural network models relate to other models for conditional \& modal logic?'' The static case is already understood. I'll collect the known results in this section.
+
+We can see how the modeling power of neural network models compares against known models in logic by arranging their satisfiable sets in a ``modeling hierarchy.''  To make the comparison with neural networks fair, I will only consider the reflexive and transitive variants $\Relrefl, \Nbhdrefl$ of relational and neighborhood models.  Over the static language (no dynamic operators), we have:
+\[
+\Satisfy{\Relrefl} \subset \Satisfy{\Plaus} = \Satisfy{\NetModels} \subset \Satisfy{\Nbhdrefl}
+% \begin{tikzcd}
+%     & \Satisfy{\Nbhd} \arrow[symbol=\supset]{ld} \arrow[symbol=\supset]{rd} & & \\
+%     \Satisfy{\Rel} \arrow[symbol=\supset]{rd} & & \Satisfy{\Plaus} \arrow[symbol={=}]{r} \arrow[symbol=\supset]{ld} & \Satisfy{\NetModels} \\
+%     & \Satisfy{\Relrefl} & &
+%     % A \arrow[r,symbol=\supseteq] &B \arrow[d] \\
+%     % & G \arrow[r,symbol=\leq] & H
+% \end{tikzcd}
+\]
+
+Both $\Plaus$-inclusions are folklore. Rather than showing these, I will instead prove $\Satisfy{\Relrefl} \subset \Satisfy{\NetModels}$ and $\Satisfy{\NetModels} \subseteq \Satisfy{\Nbhdrefl}$, putting the emphasis on how neural networks compare to the other models. The inclusion $\Satisfy{\Plaus} = \Satisfy{\NetModels}$ is already known, but the backwards direction has never been proven with an explicit model construction. So although the results in this section are already known, three of the four proofs I give here are totally new (indicated by \faHandPointRight[regular]).
+
+\begin{proposition}
+    (\faHandPointRight[regular])
+    $\Satisfy{\Relrefl} \subset \Satisfy{\NetModels}$
+\end{proposition}
+\begin{proof}
+    First, let's show inclusion. Let $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle \in \Relrefl$ be a model satisfying $\varphi$. We construct the neural network model $\Net = \langle N, \bias, \set{E_i}_{i \in \textbf{I}}, \set{W_i}_{i \in \textbf{I}}, \set{A_i}_{i \in \textbf{I}}, V \rangle$ as follows.  First, let $N = W$ and keep the propositional evaluation $V$ the same. We first \emph{reverse} $R_i$, and then do the graph-reachability construction.  In other words, let $u{E_i}v$ iff $v{R_i}u$,
+    \[
+        W_i(m, n) = 
+        \begin{cases}
+            1 & \mbox{if } m{E_i}n \\
+            0 & \mbox{otherwise}
+        \end{cases}
+    \]
+    Then pick $A_i(x) = 1$ iff $x > 0$.  Recall that this choice gives us
+    \[
+        \Closure_i(S) = \set{w \mid \exists \mbox{ an } E_i\mbox{-path from some } u \in S \mbox{ to } w}            
+    \]
+
+    From here, we need to show that for all $\varphi, w$, $\Model, w \Vdash \varphi$ iff $\Net, w \Vdash \varphi$.  We do this by induction on $\varphi$.  The key inductive case is $\Diamond_i \varphi$.
+    \[
+    \begin{array}{lcll}
+        \Model, w \Vdash \Diamond_i \varphi & \mbox{iff} & \exists \mbox{ some } u \mbox{ with } w{R_i}u \mbox{ and } \Model, u \Vdash \varphi & (\mbox{By relational semantics}) \\
+        & \mbox{iff} & \exists \mbox{ some } u \mbox{ with } u{E_i}w \mbox{ and } \Model, u \Vdash \varphi & (\mbox{Since we reversed } R_i) \\
+        & \mbox{iff} & \exists \mbox{ some } u \mbox{ with } u{E_i}w \mbox{ and } \Net, u \Vdash \varphi & (\mbox{Inductive hypothesis}) \\
+        & \mbox{iff} & \exists \mbox{ an } E_i\mbox{-path from some } u \in \semantics{\varphi}_\Net \mbox{ to } w & (\mbox{Defn of } \semantics{\varphi} \mbox{ and since } \\
+        & & & \quad E_i \mbox{ is refl and trans}) \\
+        & \mbox{iff} & w \in \Closure_i(\semantics{\varphi}_\Net) & (\mbox{By construction}) \\
+        & \mbox{iff} & \Net, w \Vdash \Diamond_i \varphi & 
+    \end{array}
+    \]
+    We conclude that for our particular $\varphi$, $\Model \models \varphi$ implies $\Net \models \varphi$.
+
+    As for strictness, nonmonotonicity $\neg (\Box(\varphi \land \psi) \to (\Box \varphi \land \Box \psi)) \in \Satisfy{\NetModels}$, yet it is not satisfiable by $\Model \in \Relrefl$.
+\end{proof}
+
+% \textbf{LEGACY:}
+% \begin{proposition}
+%     $\Satisfy{\Relrefl} \subset \Satisfy{\Plaus}$
+% \end{proposition}
+% \begin{proof}
+%     First, since I allowed reflexive, transitive relational operators in plausibility models, we immediately have $\Relrefl \subseteq \Plaus$.  This means that, given any $\Model \in \Relrefl$ satisfying $\varphi$, the very same model is $\in \Rel$.  As for strictness, nonmonotonicity $\neg (\Box(\varphi \land \psi) \to (\Box \varphi \land \Box \psi)) \in \Satisfy{\Plaus}$, yet it is not satisfiable by $\Model \in \Relrefl$.
+% \end{proof}
+
+\begin{proposition}
+    (\faHandPointRight[regular])
+    $\Satisfy{\Plaus} \subset \Satisfy{\Nbhdrefl}$
+\end{proposition}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
+
+\textbf{LEGACY:}
+\begin{proposition}
+    $\Satisfy{\Plaus} \subset \Satisfy{\Nbhdrefl}$
+\end{proposition}
+\begin{proof}
+    First, let's show inclusion.  Let $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle$ be a plausibility model satisfying $\varphi$.  We construct the neighborhood model $\Model' = \langle W, \set{f_i}_{i \in \textbf{I}}, V \rangle$, where $f_i$ is given as follows.  If $\Box_i$ is given relational semantics, then $f_i(w) = \set{X \mid \set{v \mid w{R_i}v }\subseteq X}$ as in our example above.  But if $\Box_i$ has plausibility semantics,
+    \[
+        f_i(w) = \set{X \in \mathcal{P}(W) \mid w \in \best_{R_i}(X)}
+    \]
+    First, we need to check that this is in fact in $\Nbhdrefl$, i.e. these choices of $f_i$ are reflexive and transitive.
+    \begin{description}
+        \item[$f_i$ is reflexive (relational case).]
+        We want to show that for all $w$, $w \in \cap f_i(w)$.  First, since $R_i$ is reflexive, for all $w$, $w{R_i}w$.  So $w \in \set{u \mid w{R_i}u}$.  But this means $\set{u \mid w{R_i}u}$ implies $w \in X$.  Applying our choice of $f_i$, we have $X \in f(w)$ implies $w \in X$.  This immediately gives $w \in \bigcap_{X \in f_i(w)} X = \cap f_i(w)$.
+
+        \item[$f_i$ is transitive (relational case).]
+        We want to show that for all $w$ and $X$, if $X \in f_i(w)$ then $\set{u \mid X \in f_i(u)} \in f_i(w)$.  Suppose that $X \in f_i(w)$.  By definition, $\set{u \mid w{R_i}u} \subseteq X$.  Now let $u, v$ be arbitrary, and suppose $w{R_i}u, u{R_i}v$.  Since $R_i$ is transitive, $w{R_i}v$.  But then $v \in \set{u \mid w{R_i}u} \subseteq X$, so $v \in X$.  Since $u$ and $v$ were chosen arbitrarily, in general we have
+        \[
+            \set{u \mid w{R_i}u} \subseteq \set{u \mid \set{v \mid u{R_i}v} \subseteq X}
+        \]
+        But by choice of $f_i$, this is exactly $\set{u \mid X \in f(u)} \in f(w)$.
+
+        \item[$f_i$ is reflexive (plausibility case).]
+        We want to show that for all $w$, $w \in \cap f_i(w)$.  First, for all sets $X$ we have $\best_{R_i}(X) \subseteq X$.  In other words, $w \in \best_{R_i}(X)$ implies $w \in X$.  So $X \in f_i(w)$ implies $w \in X$.  But this immediately gives $w \in \bigcap_{X \in f_i(w)} X = \cap f_i(w)$.
+
+        \item[$f_i$ is transitive (plausibility case).]
+        We want to show that for all $w$ and $X$, if $X \in f_i(w)$ then $\set{u \mid X \in f_i(u)} \in f_i(w)$.  Suppose that $X \in f_i(w)$.  By definition, $w \in \best_{R_i}(X)$.  But by idempotence of $\best$, $w \in \best_{R_i}(\best_{R_i}(X))$.  Applying our choice of $f_i$ to the inner $\best$, we get $w \in \best_{R_i}(\set{u \mid X \in f(u)})$.  Applying the definition once more, we have $\set{u \mid X \in f(u)} \in f(w)$.
+
+    \end{description}
+
+    Next, we will show that for all $\varphi, w$, $\Model, w \Vdash \varphi$ iff $\Model', w \Vdash \varphi$.  We do this by induction on $\varphi$.  The key inductive case is $\Box_i \varphi$.  The relational case is handled by the example in the previous section.  For plausibility operators $\Box_i$, we have
+    \[
+    \begin{array}{lcl}
+        \Model, w \Vdash \Box_i \varphi & \mbox{ iff } & w \in \best_{R_i}(\semantics{\varphi}) \\
+        & \mbox{ iff } & \semantics{\varphi} \in f_i(w) \\
+        & \mbox{ iff } & \Model', w \Vdash \Box_i \varphi
+    \end{array}
+    \]
+    We conclude that for our particular $\varphi$, $\Model \models \varphi$ implies $\Model' \models \varphi$.
+
+    Strictness is easy: nonreflexivity $\neg (\Box \varphi \to \varphi) \in \Satisfy{\Nbhd}$, but $\neg (\Box \varphi \to \varphi) \not \in \Satisfy{\Plaus}$ (since both relational \emph{and} plausibility operators are always reflexive).
+\end{proof}
+
+Let's move on to the neural network inclusions.  I claim that $\Satisfy{\NetModels} = \Satisfy{\Plaus}$: neural network and plausibility models are equally powerful (up to inference in the static language).  The $(\to)$ direction follows from Hannes' completeness result \cite{leitgeb2001nonmonotonic, leitgeb2003nonmonotonic} --- he uses the \emph{not-every construction} from before to build a neural net from a plausibility model.  The $(\leftarrow)$ direction is essentially the soundness result \cite{leitgeb2001nonmonotonic, leitgeb2003nonmonotonic}. But explicitly building a plausibility model from a neural net has not been done, as far as I know.  So the proof of $(\leftarrow)$ is my own.
+
+% It is known that neural network models and plausibility models are both complete with respect to the proof system of cumulative conditionals \cite{leitgeb2001nonmonotonic, leitgeb2003nonmonotonic} -- the fact that $\Satisfy{\NetModels} = \Satisfy{\Plaus}$ should follow.  But (1) Hannes shows how to construct a net from a plausibility model, but not the other way around, and (2) my definitions are slightly different from Hannes'.  So I will re-prove this result, adapted for my setting, as a sort of sanity check.
+
+\begin{proposition}
+    $\Satisfy{\Plaus} \subseteq \Satisfy{\NetModels}$
+\end{proposition}
+\begin{proof}
+    Let $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle \in \Plaus$ be a plausibility model satisfying $\varphi$.  We construct the neural network model $\Net = \langle N, \bias, \set{E_i}_{i \in \textbf{I}}, \set{W_i}_{i \in \textbf{I}}, \set{A_i}_{i \in \textbf{I}}, V \rangle$ as follows.  First, let $N{=}W$, let $\bias$ be a fresh node, and keep the propositional evaluation $V$ the same.  If $\Diamond_i$ is given relational semantics, then we first \emph{reverse} $R_i$, and then do the graph-reachability construction.  In other words, let $u{E_i}v$ iff $v{R_i}u$, 
+    % \[
+    %     W_i(u, w) = 1 \quad \quad u{E_i}w
+    % \]
+    \[
+        W_i(u, v) = 
+        \begin{cases}
+            1 & \mbox{if } u{E_i}v \\
+            0 & \mbox{otherwise}
+        \end{cases}
+    \]
+    Then pick $A_i(x) = 1$ iff $x > 0$.  Recall that this choice gives us
+    \[
+        \Closure_i(S) = \set{w \mid \exists \mbox{ an } E_i\mbox{-path from some } u \in S \mbox{ to } w}            
+    \]
+
+    If instead $\Diamond_i$ is given plausibility semantics, we simply do the ``not-every'' construction.  In other words, let $E_i$ be $R_i$ (we do not reverse it), and create an edge from $\bias$ to every $n$ that is not $E_i$-minimal.  Then pick $W_i(m, n) = \frac{1}{|\preds{n}|+1}$.  Finally, pick $A_i(x) = 1$ iff $x < 1$.  Recall that this choice gives us (since $E_i = R_i$ and $R_i$ is transitive):
+    \[
+        \Closure_i(S) = \best_{R_i}(S^\complement)^\complement
+    \]
+    
+    From here, we need to show that For all $\varphi, w$, $\Model, w \Vdash \varphi$ iff $\Net, w \Vdash \varphi$.  We do this by induction on $\varphi$.  The key inductive case is $\Diamond_i \varphi$.  We have the two cases:
+    \begin{description}
+        \item[$\Diamond_i$ is given relational semantics.] 
+        \[
+        \begin{array}{lcll}
+            \Model, w \Vdash \Diamond_i \varphi & \mbox{iff} & \exists \mbox{ some } u \mbox{ with } w{R_i}u \mbox{ and } \Model, u \Vdash \varphi & (\mbox{By relational semantics}) \\
+            & \mbox{iff} & \exists \mbox{ some } u \mbox{ with } u{E_i}w \mbox{ and } \Model, u \Vdash \varphi & (\mbox{Since we reversed } R_i) \\
+            & \mbox{iff} & \exists \mbox{ some } u \mbox{ with } u{E_i}w \mbox{ and } \Net, u \Vdash \varphi & (\mbox{Inductive hypothesis}) \\
+            & \mbox{iff} & \exists \mbox{ an } E_i\mbox{-path from some } u \in \semantics{\varphi}_\Net \mbox{ to } w & (\mbox{Defn of } \semantics{\varphi} \mbox{ and since } \\
+            & & & \quad E_i \mbox{ is refl and trans}) \\
+            & \mbox{iff} & w \in \Closure_i(\semantics{\varphi}_\Net) & (\mbox{By construction}) \\
+            & \mbox{iff} & \Net, w \Vdash \Diamond_i \varphi & 
+        \end{array}
+        \]
+        
+        \item[$\Diamond_i$ is given plausibility semantics.]
+        \[
+        \begin{array}{lcll}
+            \Model, w \Vdash \Diamond_i \varphi & \mbox{iff} & \Model, w \Vdash \neg \Box_i \neg  \varphi & \\
+            & \mbox{iff} & w \in \best_{R_i}(\set{u \mid \Model, u \Vdash \varphi}^\complement)^\complement & (\mbox{By plausibility semantics}) \\
+            & \mbox{iff} & w \in \best_{R_i}(\set{u \mid \Net, u \Vdash \varphi}^\complement)^\complement & (\mbox{Inductive hypothesis})\\
+            & \mbox{iff} & w \in \best_{R_i}(\semantics{\varphi}_\Net^\complement)^\complement & (\mbox{Defn of } \semantics{\varphi}) \\
+            & \mbox{iff} & w \in \Closure_i(\semantics{\varphi}_\Net) & (\mbox{By construction}) \\
+            & \mbox{iff} & \Net, w \Vdash \Diamond_i \varphi & 
+        \end{array}
+        \]
+    \end{description}
+    We conclude that for our particular $\varphi$, $\Model \models \varphi$ implies $\Net \models \varphi$.
+\end{proof}
+
+\begin{proposition}
+    (\faHandPointRight[regular])
+    $\Satisfy{\NetModels} \subseteq \Satisfy{\Plaus}$
+\end{proposition}
+\begin{proof}
+    Let $\Net = \langle N, \bias, \set{E_i}_{i \in \textbf{I}}, \set{W_i}_{i \in \textbf{I}}, \set{A_i}_{i \in \textbf{I}}, V \rangle$ be a neural network model satisfying $\varphi$.  For each $i$, we have a closure operator $\Closure_i$ that is specified by the particular choice of $E_i, W_i, A_i$.  We construct the plausibility model $\Model = \langle W, \set{R_i}_{i \in \textbf{I}}, V \rangle$, where $W = N$, $V$ is kept the same, and
+    \[ u{R_i}v \mbox{ iff } u \in \bigcap_{v \in \Closure_i(X^\complement)}X \]
+    
+    It helps to think of this as a kind of topological ``core'' construction.  As with the ``not-every'' construction from before, the $\best_{R_i}$ we get from this construction is precisely the dual of the neural network closure $\Closure_i$:
+    \begin{claim*}
+        For all $S$, $\best_{R_i}(S) = (\Closure_i(S^\complement))^\complement$
+    \end{claim*}
+    \begin{proof}
+        $(\rightarrow)$ Suppose $w \in \best_{R_i}(S)$. By definition, $w \in S$ and for all $u \in S$, $\neg u{R_i}w$.  By construction of $R_i$, $u \not \in \cap_{w \in \Closure_i(X^\complement)}X$.  Since $w \in S$, we have in particular $w \not \in \cap_{w \in \Closure_i(X^\complement)}X$.  \textbf{Wait, did I mess up the negation-intersection???}  We want to show that $w \not \in \Closure_i(S^\complement)$; suppose for contradiction that $w \in \Closure_i(S^\complement)$.  But then it follows from our choice of $R_i$ that $w \not \in S$, which is a contradiction.  This concludes this direction of the proof.
+    
+        $(\leftarrow)$ \textbf{TODO}
+    \end{proof}
+    For convenience, I'll deal with $\Box_i$ modalities.  All $\Box_i$ operators are given plausibility semantics.  From here, I want to show:
+    
+    \begin{claim*}
+        For all $\varphi, w$, $\Net, w \Vdash \varphi$ iff $\Model, w \Vdash \varphi$.
+    \end{claim*}
+    \begin{proof}
+        By induction on $\varphi$.  The key inductive case is $\Box_i \varphi$, which each have plausibility semantics:
+        \[
+        \begin{array}{lcll}
+            \Net, w \Vdash \Box_i \varphi & \mbox{iff} & w \in (\Closure_i(\semantics{\varphi}_\Net^\complement))^\complement & (\mbox{By neural network semantics}) \\
+            & \mbox{iff} & w \in (\Closure_i(\set{u \mid \Net, u \Vdash \varphi}^\complement))^\complement & (\mbox{Defn of } \semantics{\varphi}) \\
+            & \mbox{iff} & w \in (\Closure_i(\set{u \mid \Model, u \Vdash \varphi}^\complement))^\complement & (\mbox{Inductive hypothesis}) \\
+            & \mbox{iff} & w \in \best_{R_i}(\set{u \mid \Model, u \Vdash \varphi}) & (\mbox{By construction}) \\
+            & \mbox{iff} & \Model, w \Vdash \Box_i \varphi & (\mbox{By plausibility semantics})
+        \end{array}
+        \]
+    \end{proof}
+    We conclude that for our particular $\varphi$, $\Model \models \varphi$ implies $\Net \models \varphi$.
+\end{proof}
+
+% \begin{proof}
+%     As for $\Satisfy{\NetModels} = \Satisfy{\Plaus}$, Hannes in \cite{leitgeb2001nonmonotonic, leitgeb2003nonmonotonic} proved this for particular classes of plausibility models and networks over a conditional language.  Since my models are somewhat more general, and I use a modal language, I just need to lift his result to the new setting:
+%     sorry
+% \end{proof}
+
+% \paragraph*{What does this say about interpreting neural networks?}
+% The popular conception of neural networks is that they are ``black boxes'' whose behavior is difficult to understand.  This last fact tells us, however, that neural network inference (classification) corresponds precisely to defeasible conditionals.  When Thomas Icard last visited, he pointed out to me that this intuition is only helpful for describing the net's input/output behavior, but not for explaining the net's hidden states.  Because of this, Thomas thinks that the ``neural network model'' formalism is on the wrong track (or at least, unenlightening), and he decided not to continue working on it.
+
+% I take this criticism seriously, but to me the underlying issue is that the hidden states are determined through learning, and we don't yet have a classical intuition for neural network learning.  If we did, then we could understand and track the changes in the hidden states during the learning process, and there would be no need for extraction.  I'll revisit this point at the end of the next section.
+
+\section*{Progress So Far (The Dynamic Case)}
+
+\paragraph*{Dynamic Models.}
+
+I would also like to compare neural network \emph{update} against other model updates --- what kind of updates are neural networks capable of modelling, and how powerful are they in this sense?  We can ``dynamify'' each of the models above using the dynamic epistemic logic trick.  First, we extend our language $\lang$ to $\lang^\star$, which includes dynamic modal operators:
+\[
+    p \mid \neg \varphi \mid \varphi \land \psi \mid \set{\Box_i}_{i \in \textbf{I}} \hspace*{0.5em} \varphi \mid \set{\Update{\varphi}_j}_{j \in \textbf{J}} \hspace*{0.5em} \psi
+\]
+where \textbf{J} is a new set of indices.  As before, the idea is that each $\Update{\varphi}_i$ represents a different update per use-case, although taking $\textbf{I} = \textbf{J}$ these could also be used to model different updates per agent.
+
+I will define the semantics for dynamic models by example.  First, consider $\Rel$.  For any $\Model \in \Rel$ and $S \in \mathcal{P}(W)$, we can define a variety of dynamic update functions $\set{\UpdateVerbatim_j}_{j \in \textbf{J}}$, where each $\UpdateVerbatim_j : \Rel \times \mathcal{P}(W) \to \Rel$.  A classical example is public announcement, where $\UpdateVerbatim(\langle W, R, V \rangle, S) = \langle W \cap S, R, V \rangle$.  Note that we're using sets $S$ as input rather than formulas, although the choice of one over the other is just my preference.
+
+Also note that these updates don't depend on the current world $w$.  I've read a good bit of \cite{van2011logicaldynamics} (a great book on dynamic epistemic logics), and while Johan includes dependence on $w$ I haven't yet run across an update that uses this extra information.  I'll drop it for now, but if we need it later I can add it back in.
+
+The semantics for $\Model \in \Rel$ over the dynamic language is exactly as before, with an additional case for $\Update{\varphi}_j \psi$.  We just interpret $\Update{\varphi}_j \psi$ as ``$\psi$ holds after updating by $\varphi$'':
+\[
+\begin{array}{lcl}
+    \Model, w \Vdash \Update{\varphi}_j \psi & \mbox{ iff } & \Model^\star_{\semantics{\varphi}}, w \Vdash \psi
+\end{array}
+\]
+We make the same move for each of the other model classes.  For all classes $\Class$, define $\Class^\star$ to be the class of all such models with the new semantics over the dynamic language (e.g. $\Rel^\star$).
+
+The dynamic case is much more interesting.  For a class of models $\Class$, $\Satisfy{\Class^\star}$ captures those dynamic updates that $\Class$ is capable of modelling.  This gets at the second part of Question 1: What updates are possible over neural networks?  What updates are possible over plausibility models?  What is the relationship between neural network updates and plausibility model updates?
+
+I'm not aware of any work that compares different model classes' capacity to model different dynamic updates --- this is unexplored turf.  I'll take a first stab by \textbf{conjecturing} the following:
+\[
+\begin{tikzcd}
+    & \Satisfy{\Nbhdrefl^\star} \arrow[symbol=\supset]{ld} \arrow[symbol=\supset]{rd} & \\
+    \Satisfy{\Plaus^\star} \arrow[symbol=\supset]{rd} \arrow[dash]{r} & \circled{?} & \Satisfy{\NetModels^\star} \arrow[symbol=\supset]{ld} \arrow[dash]{l} \\
+    & \Satisfy{\Relrefl^\star} & 
+\end{tikzcd}
+\]
+I expect that the outermost inclusions are going to be easy(ish).  The crucial inclusion is $\circled{?}$, which I'm not willing to conjecture on yet.  There are exactly four possibilities, and fortunately for us all of them are exciting:
+\begin{description}
+    \item[$\Satisfy{\Plaus^\star} = \Satisfy{\NetModels^\star}$.] If the two are equal, this work creates a bridge between plausibility models and neural networks.  It would suggest that two groups of mostly independent researchers arrived at the same representation for learning.  And in this case, it would be nice to explicitly see (1) what neural network updates radical and conservative upgrade correspond to, and (2) what ``classical'' plausibility updates correspond to network policies such as Hebbian learning or backpropagation.
+    \item[$\Satisfy{\Plaus^\star} \subset \Satisfy{\NetModels^\star}$.] In this case, we discover that neural networks are strictly more powerful than plausibility models: for every plausibility upgrade there is a neural network equivalent, but not the other way around.  What kind of neural network policies cannot be represented as plausibility upgrade?  Is this what makes Hebbian learning or backpropagation special?  This possibility offers a theoretical justification for why we use neural networks in machine learning rather than plausibility models, and perhaps why classical models historically have not had the same kind of success as neural networks.
+    \item[$\Satisfy{\Plaus^\star} \supset \Satisfy{\NetModels^\star}$.] This flips the previous scenario, and perhaps goes counter to common wisdom.  Instead we discover that plausibility models can represent any kind of update neural networks can.  What kind of plausiblity updates can't be represented with a neural network?  This case offers a new direction for machine learning researchers to look for new learning algorithms, and suggests that they should adopt a different model. 
+    \item[$\Satisfy{\Plaus^\star}$ and $\Satisfy{\NetModels^\star}$ are incomparable.] This is the case that I personally believe is most likely.  As before, we can ask: what specific update policies aren't representable with the other model?  But we see that neither plausibility models nor neural networks are as rich as we would like them to be.  This puts us in the difficult --- but exciting! --- position of finding a model class $\Class$ that can model both types of update.  Of course, $\Nbhdrefl^\star$ will work, but it would be nice to find a tighter bound.
+\end{description}
+
+Okay, enough waxing philosophical. Let's get to work. A first observation is that if an inclusion holds in the dynamic case, it holds in the static case as well.  This is because the dynamic language $\lang^\star$ extends $\lang$, and static formulas have the exact same semantics in the dynamic setting.
+
+\begin{lemma}
+    For all classes of models $\Class_1, \Class_2$, if $\Satisfy{\Class_1^\star} \subseteq \Satisfy{\Class_2^\star}$ then $\Satisfy{\Class_1} \subseteq \Satisfy{\Class_2}$.
+\end{lemma}
+\begin{proof}
+    Suppose $\Satisfy{\Class_1^\star} \subseteq \Satisfy{\Class_2^\star}$, and let $\varphi \in \lang$ be a static formula satisfied by some (static) model $\Model \in \Class_1$. \textbf{TODO}
+\end{proof}
+
+A major consequence is that we inherit inequalities from the static case.  This means that, for the outer inclusions, we only need to show $\subseteq$ (we get $\ne$ for free).
+
+\begin{corollary}
+    For all classes of models $\Class_1, \Class_2$, if $\Satisfy{\Class_1} \ne \Satisfy{\Class_2}$ then $\Satisfy{\Class_1^\star} \ne \Satisfy{\Class_2^\star}$.
+\end{corollary}
+\begin{proof}
+    Suppose $\Satisfy{\Class_1} \ne \Satisfy{\Class_2}$.  Then either $\Satisfy{\Class_1} \not \subseteq \Satisfy{\Class_2}$, or $\Satisfy{\Class_2} \not \subseteq \Satisfy{\Class_1}$.  In the first case, the previous lemma gives us $\Satisfy{\Class_1^\star} \not \subseteq \Satisfy{\Class_2^\star}$, and in the second case we have $\Satisfy{\Class_2^\star} \not \subseteq \Satisfy{\Class_1^\star}$.  Regardless of which case we're in, we see that $\Satisfy{\Class_1^\star} \ne \Satisfy{\Class_2^\star}$.
+\end{proof}
+
+Now let's tackle the outer inclusions:
+\begin{proposition}
+    $\Satisfy{\Relrefl^\star} \subset \Satisfy{\Plaus^\star}$
+\end{proposition}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
+
+\begin{proposition}
+    $\Satisfy{\Plaus^\star} \subset \Satisfy{\Nbhdrefl^\star}$
+\end{proposition}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
+
+\begin{proposition}
+    $\Satisfy{\Relrefl^\star} \subset \Satisfy{\NetModels^\star}$
+\end{proposition}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
+
+\begin{proposition}
+    $\Satisfy{\NetModels^\star} \subset \Satisfy{\Nbhdrefl^\star}$
+\end{proposition}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
+
+As for the center relationship, for now I'll just pose the question. 
+\begin{question}
+    What is the relationship between $\Satisfy{\Plaus^\star}$ and $\Satisfy{\NetModels^\star}$?
+\end{question}
+My best guess is that they're incomparable.  I have a proof strategy that \emph{might} work --- see \textbf{4-22-24-satisfying-hebbian-reduction-axioms.tex} for the idea and beginnings of this approach.  But to avoid getting stuck on this proof, I think it's really important that I try to get a good intuition for which case we're in.  This means I should think about how to simulate randomly generated update policies on a computer, generate billions of explicit examples, and check how probable these cases are.
+
+\section*{Todo List}
+\begin{todolist}
+    \item Prove that $\Satisfy{\Plaus} \subseteq \Satisfy{\NetModels}$ by construction.
+    \item Prove that $\Satisfy{\NetModels} \subseteq \Satisfy{\Plaus}$ by construction.
+    \item Prove Lemma 6.
+    \item Try to prove Propositions 7--10 (keeping in mind I may be wrong about any of them)
+    \item Write out my best attempt to prove that $\Satisfy{\Plaus^\star}$ and $\Satisfy{\NetModels^\star}$ are incomparable.
+    \item Write a program to generate possible model updates \& check inclusions (this is going to be hard!  But I expect that the proof itself will be harder.)
+\end{todolist}
+% \color[HTML]{9D0006}
+\textbf{Text for slides:}
+\begin{itemize}[]
+    \item $\Satisfy{\Relrefl} \subset \Satisfy{\NetModels}$
+    \item $\Satisfy{\SocialNet} \subseteq \Satisfy{\NetModels}$
+    \item $\Satisfy{\NetModels} \subset \Satisfy{\Nbhdrefl}$
+    \item $\Satisfy{\NetModels} = \Satisfy{\Plaus}$
+    
+    % In red
+    \item {\color[HTML]{9D0006} $\Satisfy{\Relrefl} \subset \Satisfy{\NetModels}$}
+    \item {\color[HTML]{9D0006} $\Satisfy{\SocialNet} \subseteq \Satisfy{\NetModels}$}
+    \item {\color[HTML]{9D0006} $\Satisfy{\NetModels} \subset \Satisfy{\Nbhdrefl}$}
+    \item {\color[HTML]{9D0006} $\Satisfy{\NetModels} = \Satisfy{\Plaus}$}
+    
+    \item $\varphi \in \Satisfy{\Relrefl}$
+    \item $\in \Satisfy{\NetModels}$
+    \item $\not \in \Satisfy{\Relrefl}$
+    \item $\Satisfy{\SocialNet} \subseteq \Satisfy{\NetModels}$
+    \item $\Closure_i(S) = \set{w \mid \exists \mbox{an } E\mbox{-path from } w \mbox{ to some } u \in S}$
+    \item $u{E_i}w$ iff $u{R_i}w$
+\end{itemize}
+
+\begin{enumerate}
+    \item To show inclusion: Given $\Model = \langle W, \set{R_i}_{i\in\textbf{I}}, V \rangle \in \Relrefl$, construct
+    \[
+        \Net = \langle N, \bias, \set{E_i}_{i\in\textbf{I}}, \set{W_i}_{i\in\textbf{I}}, \set{A_i}_{i\in\textbf{I}}, V \rangle 
+    \]
+    as follows:
+    \begin{itemize}
+        \item $N = W$ and keep $V$ the same ($\bias$ doesn't matter)
+        \item \textbf{Edges:} $E_i$ is just $R_i$
+        \item \textbf{Weights:} 
+    \end{itemize}
+\end{enumerate}
+
+\[
+\begin{tikzcd}
+    & \Satisfy{\Nbhdrefl} \arrow[symbol=\supset]{ld} \arrow[symbol=\supset]{rd} & \\
+    \Satisfy{\Plaus} \arrow[symbol=\supset]{rd} \arrow[dash,dotted]{r} & = & \Satisfy{\NetModels} \arrow[symbol=\supset]{ld} \arrow[dash,dotted]{l} \\
+    & \Satisfy{\Relrefl} & 
+\end{tikzcd}
+\]
+
+% \subsection*{Neural Networks and the Complexity Hierarchy}
+
+% [Include big picture relating Chomsky hierarchy, neural networks as automata (Will Merill's work), and descriptive complexity, done in Inkscape]
+
+% \subsubsection*{The Dynamic Case.}
+
+% [All of this suggests a whole research program --- identify important classes of \emph{dynamic updates} and explore the \emph{dynamic} complexity hierarchy! Say what this means for automata, neural networks, and logic expressivity.  Open problems abound, this is very unexplored territory!]
+
+\printbibliography
+\end{document}
+

@@ -1,0 +1,158 @@
+\documentclass[letterpaper]{article}
+\usepackage{notes}
+\title{Neighborhood Models \& Descriptive Complexity}
+\begin{document}
+\maketitle
+
+\section*{Problem Statement}
+Descriptive complexity aims to organize complexity classes by the expressive power of the languages that are able to describe problems in them.  But the field often overlooks the role that the class of models has to play in characterizing this expressive power.  Within the field, a popular narrative is that expressivity in a logical language is machine-, resource-, or model-independent, and therefore classes such as $\Poly, \NP$, and $\PSPACE$ are made more robust by having this kind of resource-independent characterization (emphasis mine):
+
+\begin{quote}{\quotecite{immerman1998descriptive}}
+    In the beginning, there were two measures of computational complexity: time and space. From an engineering standpoint, these were very natural measures, quantifying the amount of physical resources needed to perform a computation. From a mathematical viewpoint, time and space were somewhat less satisfying, since neither appeared to be tied to the inherent mathematical complexity of the computational problem \ldots [Fagin's Theorem] was a remarkable insight, for it demonstrated that the computational complexity of a problem can be understood as the richness of a language needed to specify the problem. \textbf{Time and space are not model-dependent engineering concepts, they are more fundamental.}
+\end{quote}
+
+\begin{quote}{\quotecite{libkin2004elements}}
+    The technique of the proof \ldots was reused by Fagin almost a quarter century later to prove his celebrated result that put the equality sign between the class NP and existential second-order logic, thereby providing a \textbf{machine-independent characterization} of an important complexity class.
+\end{quote}
+
+
+\begin{quote}{\quotecite{sep-computational-complexity} (SEP)}
+    This result provided one of the first \textbf{machine independent characterizations} of an important complexity class – i.e. \textbf{one whose formulation does not make reference to a specific model of computation} \ldots The availability of such characterizations is often taken to provide additional evidence for the mathematical robustness of classes like NP.
+\end{quote}
+
+
+But descriptive complexity classes \emph{are} model-dependent --- they depend just as much on the choice of model as they do the choice of language.  Historically, these classes have been defined using graph models, i.e. classical models for first- and second-order logics.  But this choice was somewhat arbitrary.  For example, the theory could have been developed instead using more general \emph{neighborhood space models}.
+
+The purpose of these notes is to explore this possibility --- to develop descriptive complexity using neighborhood models rather than graph models.  What I have in mind is a set of alternative logical classes that parallel the classes $\SOex, \FOLFP, \FODTC$, and so on.  These in turn will give rise to a set of previously undiscovered computational complexity classes that likewise parallel the classes $\NP, \Poly, \Log$, and so on.  I posit that these new classes are in many ways more natural than their counterparts, in a sense that I will make more precise in writing these notes.  
+
+In concrete terms, I would like to answer the questions:
+
+\begin{question}
+    What are the ``neighborhood descriptive complexity'' classes like? Are they actually distinct from their counterparts?  (For instance, is $\SOex \subset \SOexnbhd$?  Try to give a \emph{specific} problem in $\SOexnbhd$ but not in $\SOex$.)
+\end{question}
+
+
+\begin{question}
+    What \emph{computational} complexity classes correspond to the neighborhood classes?  What are these classes like?  (For instance, what class $\NP^\dagger$ is equivalent to $\SOexnbhd$? Try to give a specific problem in $\NP^\dagger$ but not in $\NP$.  Additionally, try to give a specific problem that is $\NP^\dagger$-complete.)
+\end{question}
+
+
+\begin{question}
+    Neighborhood models are in many ways more natural than relational models --- for example, in modal logic, relational models carry with them the normal modal axioms, whereas neighborhood models are complete with respect to no axioms at all.  In what ways does this sense of ``natural'' carry over in the complexity context?  How are these neighborhood classes more natural than their counterparts?
+\end{question}
+
+\begin{wrapfigure}{r}[3cm]{0.52\linewidth}
+    \adjustbox{scale=0.7,center}{
+    \begin{tikzcd}
+    & ? 
+        \arrow[rrr, no head, mygreen] 
+    & & & \SOLFPnbhd & \\
+    \EXPTIME
+        \arrow[ru, no head, mygreen] 
+        \arrow[rrr, no head] 
+    & & & \SOLFP 
+        \arrow[ru, no head, mygreen] & \\
+    & ? 
+        \arrow[uu, no head, mygreen] 
+        \arrow[rrr, no head, mygreen] 
+    & & & \SOTCnbhd
+        \arrow[uu, no head, mygreen] \\
+    \PSPACE 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] 
+        \arrow[rrr, no head] 
+    & & & \SOTC 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] & \\
+    & ? 
+        \arrow[uu, no head, mygreen] 
+        \arrow[rrr, no head, mygreen] 
+    & & & \SOexnbhd
+        \arrow[uu, no head, mygreen] \\
+    \NP 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] 
+        \arrow[rrr, no head] 
+    & & & \SOex 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] & \\
+    & ? 
+        \arrow[uu, no head, mygreen] \arrow[rrr, no head, mygreen] 
+    & & & \FOLFPnbhd
+        \arrow[uu, no head, mygreen] \\
+    \Poly 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] 
+        \arrow[rrr, no head] 
+    & & & \FOLFP 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] & \\
+    & ? 
+        \arrow[uu, no head, mygreen] 
+        \arrow[rrr, no head, mygreen] 
+    & & & \FODTCnbhd
+        \arrow[uu, no head, mygreen] \\
+    \Log 
+        \arrow[ru, no head, mygreen] 
+        \arrow[uu, no head] 
+        \arrow[rrr, no head] 
+    & & & \FODTC 
+        \arrow[ru, no head, mygreen] 
+        \arrow[uu, no head] & \\
+    & ? 
+        \arrow[uu, no head, mygreen] 
+        \arrow[rrr, no head, mygreen] 
+    & & & \FOnbhd
+        \arrow[uu, no head, mygreen] \\
+    \AC 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] 
+        \arrow[rrr, no head] 
+    & & & \FO 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] & \\
+    & ? 
+        \arrow[uu, no head, mygreen] 
+        \arrow[rrr, no head, mygreen] 
+    & & & \Modalnbhd
+        \arrow[uu, no head, mygreen] \\
+    ? 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] 
+        \arrow[rrr, no head] 
+    & & & \Modal 
+        \arrow[uu, no head] 
+        \arrow[ru, no head, mygreen] &
+    \end{tikzcd}
+    }
+    \vspace*{-11em}
+\end{wrapfigure}
+
+The inclusion diagram to the right is a roadmap for what's ahead.  The black lines show the classical complexity hierarchy alongside the descriptive complexity hierarchy.  Classes below are contained in classes above, and horizontal lines indicate equality.  The green lines extend the hierarchy to include the neighborhood classes and their computational counterparts.  Note that the green inclusions \textbf{haven't been proven yet} --- they illustrate the conjecture I'm chasing after in these notes.
+
+\section*{Basic Setup \& Definitions}
+
+\subsection*{Computational Complexity Classes}
+[define, as brief as possible, the basic complexity classes \& (will need to define machines too!).  I will also need to define reductions and completeness (give examples of complete problems for each!!)]
+
+\subsection*{Descriptive Complexity Classes}
+[first, define traditional models for modal logic, then in Johan's style define FOL and SOL semantics as dynamic generalizations.]
+
+\subsection*{Descriptive Complexity Classes using Neighborhood Models}
+[define neighborhood models for modal logic; we can generalize this idea straightforwardly to FOL and SOL; then define the descriptive complexity classes we get by using neighborhood models instead]
+
+\subsection*{Why Consider Neighborhood Models?}
+[state some classical/already-known theorems that explain why neighborhood models are more general / more natural. Start with the very easy example of modal logic: Neighborhood models are able to express non-monotonicity in a way that relational models cannot.  The interesting thing later will be to see how these results translate into insights for complexity theory.]
+
+\section*{Progress So Far}
+[The very first results should focus on NP (SO$\exists$).  First, show that the class for SO$\exists$ with neighborhood models is \emph{distinct} from SO$\exists$ --- by finding a problem expressible in the former that is not expressible in the latter! (I expect this will be a generalization of the non-monotonicity example from earlier)] [Prove that this new class is closed under FO-reductions (the plan is to essentially do Fagin's proof)] [Identify the class that corresponds to NP on the other side; as a sanity check, prove that it is distinct from NP (includes a problem that NP does not)] [Identify a problem that is complete for this new NP class] [Show that this problem is expressible in SO$\exists$ with neighborhood models] [Prove that the SO$\exists$ neighborhood class is $\subseteq$ this new NP class] [Put it all together to show that the new classes are equal]
+
+[So we would have: A neighborhood model alternative to SO$\exists$ that is distinct from it; an alternative to NP that corresponds to it; example problems in each; an example \emph{complete} problem; and a proof that they're equal] [I will accept this as a proof of concept that I can actually do all this.]
+
+\section*{Todo List}
+\begin{todolist}
+    \item sorry
+\end{todolist}
+
+\printbibliography
+\end{document}
