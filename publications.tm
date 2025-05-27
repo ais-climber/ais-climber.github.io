@@ -15,7 +15,7 @@
     Iterated Hebbian Learning<hlink||https://ojs.aaai.org/index.php/AAAI/article/view/29409/30660>.
     <with|font-series|bold|AAAI> 2024.
 
-    <boxed-button-row|<boxed-button|paper|https://ojs.aaai.org/index.php/AAAI/article/view/29409/30660>|<boxed-button|slides|Research_Papers/2024-AAAI/presentations/AAAI-talk.pdf>|<boxed-button|poster|Research/2024-AAAI/presentations/AAAI-poster.pdf>|<boxed-button|code|https://github.com/ais-climber/AAAI2024>>
+    <boxed-button-row|<boxed-button|paper|https://ojs.aaai.org/index.php/AAAI/article/view/29409/30660>|<boxed-button|slides|Research_Papers/2024-AAAI/presentations/AAAI-talk.pdf>|<boxed-button|poster|Research_Papers/2024-AAAI/presentations/AAAI-poster.pdf>|<boxed-button|code|https://github.com/ais-climber/AAAI2024>>
 
     <item><with|font-series|bold|Caleb Kisby>, S.<nbsp>Blanco, and
     L.<nbsp>Moss. The Logic of Hebbian Learning<hlink||https://journals.flvc.org/FLAIRS/article/view/130735>.
