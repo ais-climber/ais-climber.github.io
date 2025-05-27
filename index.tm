@@ -22,9 +22,10 @@
     also a member of the <hlink|IU logic group|https://iulg.sitehost.iu.edu/>
     and <hlink|plwonks|https://wonks.github.io/>.
 
-    <paragraph|Updates:>I am finishing up my dissertation at last! Click here
-    for an in-progress draft. I'm also on the research job market this year
-    (Fall 2025).
+    <paragraph|Updates:>I am finishing up my dissertation at last!
+    <hlink|Click here|Research_Papers/Dissertation/dissertation.pdf> for an
+    in-progress draft. I'm also on the research job market this year (Fall
+    2025).
 
     <paragraph|Contact:>cckisby (at) gmail.com
   </cell>|<cell|<image|file:///home/cckisby/Desktop/Website/resources/images/me.jpg|11fn|||>>>|<row|<cell|>|<cell|>>>>>
