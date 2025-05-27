@@ -7,7 +7,8 @@
 
   <section*|Teaching>
 
-  \;
+  <notes-link|Here is a practice notes link. It leads to
+  Publications.|publications.tm>
 </body>
 
 <\initial>
@@ -22,7 +23,7 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|1|publications.tm>>
+    <associate|auto-1|<tuple|?|1>>
   </collection>
 </references>
 

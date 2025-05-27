@@ -348,6 +348,77 @@
 
     reflects the difference)!
   </idea|<with|color|#EA4335|<aw|comment|1fn>>>
+
+  <\idea>
+    Shoummo told me about a very good example of a constraint that we would
+    want a neural
+
+    network to have. I believe my language + semantics are able to express
+    this.
+
+    \;
+
+    Say you're training a neural network to solve the travelling salesman
+    problem (TSP). Inputs\ 
+
+    are instances (cities along with their edges and edge costs). Outputs are
+    the cities to visit, in\ 
+
+    order. A neural network trained normally will often output cities with
+    repeated nodes. i.e. a\ 
+
+    neural network will often <with|font-shape|italic|not> learn the rule
+    \Pall of the output nodes must be distinct.\Q The\ 
+
+    normal solution to this problem is to add a masking layer (ask about the
+    implementation\ 
+
+    details of this). But the net + masking layer will not necessarily
+    preserve the other behaviors\ 
+
+    of the net.
+
+    \;
+
+    Here's how I might express this in my constraint language. Let
+    <math|D=P<rsub|1>,\<ldots\>,P<rsub|k>> be the training set,
+
+    let <math|p> encode any instance of TSP, and let
+    <math|q<rsub|1>,\<ldots\>,q<rsub|n>> encode any answer (each
+    <math|q<rsub|i>> is a city, and
+
+    the sequence gives the order). Then:
+
+    <\equation*>
+      <around*|(|<around*|[|P<rsub|1>|]>\<ldots\><around*|[|P<rsub|k>|]><around*|(|<value|closop>p\<rightarrow\>q<rsub|1>\<wedge\>q<rsub|2>\<wedge\>\<ldots\>\<wedge\>q<rsub|n>|)>|)>\<rightarrow\><around*|(|q<rsub|1>\<neq\>q<rsub|2>|)>\<wedge\><around*|(|q<rsub|1>\<neq\>q<rsub|3>|)>\<wedge\>\<ldots\>\<wedge\><around*|(|q<rsub|n-1>\<neq\>q<rsub|n>|)>
+    </equation*>
+
+    says \Pif <math|q<rsub|1>\<wedge\>q<rsub|2>\<wedge\>\<ldots\>\<wedge\>q<rsub|n>>
+    are the cities that answer the TSP instance <math|p>, then all of the
+    cities are
+
+    distinct.\Q Moreover, the constraint:
+
+    <\equation*>
+      <around*|(|q<rsub|1>\<neq\>q<rsub|2>|)>\<wedge\><around*|(|q<rsub|1>\<neq\>q<rsub|3>|)>\<wedge\>\<ldots\>\<wedge\><around*|(|q<rsub|n-1>\<neq\>q<rsub|n>|)>\<rightarrow\><around*|(|<around*|(|<value|closop>p\<rightarrow\>q<rsub|1>\<wedge\>q<rsub|2>\<wedge\>\<ldots\>\<wedge\>q<rsub|n>|)>\<leftrightarrow\><around*|[|P<rsub|1>|]>\<ldots\><around*|[|P<rsub|k>|]><around*|(|<value|closop>p\<rightarrow\>q<rsub|1>\<wedge\>q<rsub|2>\<wedge\>\<ldots\>\<wedge\>q<rsub|n>|)>|)>
+    </equation*>
+
+    says \Pwhenever the cities <with|font-shape|italic|are already> distinct,
+    the neural net answers with <math|q<rsub|1>,\<ldots\>,q<rsub|n>> in
+    exactly
+
+    the same scenarios before and after training.\Q
+
+    \;
+
+    I do need to be careful about how <math|p> and
+    <math|q<rsub|1>\<wedge\>q<rsub|2>\<wedge\>\<ldots\>\<wedge\>q<rsub|n>>
+    are encoded. I also need to be careful
+
+    about how I express this inequality <math|q<rsub|i>\<neq\>q<rsub|j>> (is
+    it just <math|\<neg\><around*|(|q<rsub|i>\<leftrightarrow\>q<rsub|j>|)>>,
+    or is it something different?)
+  </idea|<with|color|#EA4335|<aw|comment|1fn>>>
 </body>
 
 <\initial>

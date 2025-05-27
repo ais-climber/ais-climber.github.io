@@ -3,6 +3,7 @@
 * MODULE     : notes-extra.css
 * DESCRIPTION: CSS style sheet for TeXmacs blog/wiki
 * COPYRIGHT  : (C) 2020  Massimiliano Gubinelli
+* Modified by Caleb Schultz Kisby, 2025
 *******************************************************************************
 * This software falls under the GNU general public license version 3 or later.
 * It comes WITHOUT ANY WARRANTY WHATSOEVER. For details, see the file LICENSE
@@ -37,19 +38,19 @@
     --main-family: 'Source Serif Pro', serif;
     --title-family: 'Source Sans Pro', sans-serif;
     --tt-family: 'Source Code Pro', monospace;
-    --color-title: rgb(154, 39, 39);
+    --color-title: #282828; /* #8f3f71;*/
     --color-text: rgb(41, 34, 34);
 }
 
 html {
-    yy-background-color: rgb(79, 98, 105);
-    background-color: #f9f9f9;
-    xx-background-color: rgb(232, 231, 219);
+    /* yy-background-color: rgb(79, 98, 105); */
+    background-color: #fffbeb;
+    /* xx-background-color: rgb(232, 231, 219); */
     font-size: 18px;
 }
 
 body {
-    background-color:  #f9f9f9;
+    background-color:  #fffbeb;
     color: var(--color-text);
     font-family: var(--main-family);
     text-align: left;
@@ -62,7 +63,7 @@ body {
     margin: auto;
     margin-bottom: 0em;
     margin-top: 0em;
-    width: 650px; 
+    width: 800px; 
 }
 
 .tmdoc-body {
@@ -156,6 +157,7 @@ li p {
 }
 
 table {
+    /* border: 1px solid black; */
     border-collapse: collapse;
 }
 
@@ -170,7 +172,7 @@ td {
 }
 
 a:link, a:visited {
-    color: #5b7077;
+    color: #8f3f71;
     text-decoration: none;
 }
 
@@ -225,7 +227,7 @@ a:active, a:focus, a:hover {
 }
 
 .tmweb-header a:active, .tmweb-header a:focus, .tmweb-header a:hover {
-    color: #D0343F;
+    color: #8f3f71;
     text-decoration: underline;
 }
 
@@ -342,7 +344,7 @@ a:active, a:focus, a:hover {
 }
 
 .tmweb-footer a:active, .tmweb-footer a:focus, .tmweb-footer a:hover {
-    color: #D0343F;
+    color: #8f3f71;
     text-decoration: underline;
 }
 
