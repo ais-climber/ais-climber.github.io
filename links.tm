@@ -57,8 +57,45 @@
 
   <subsection*|Webcomics I like>
 
+  Comics have been a big part of my life since I was little. I started out on
+  American superhero comics and Japanese manga, and eventually got hooked on
+  webcomics. Here are some of my favorites\VI hope you enjoy reading these as
+  much as I do!
+
   <\itemize>
-    <item>
+    <item><hlink|xkcd|https://xkcd.com/> and
+    <hlink|smbc|https://www.smbc-comics.com/> (the classic science nerd
+    comics)
+
+    <item><hlink|Dumbing of Age|https://www.dumbingofage.com/> (takes place
+    at Indiana University!)
+
+    <item><hlink|Questionable Content|https://questionablecontent.net/>
+    (peaceful slice-of-life to drink morning tea to)
+
+    <item><hlink|Nine Planets Without Intelligent
+    Life|https://www.bohemiandrive.com/npwil> (philosophy disguised as a
+    webcomic about robots)
+
+    <item><hlink|Rock and Riot|https://rockandriotcomic.com/> (super cute
+    exploration of gender expectations)
+
+    <item><hlink|The Property of Hate|https://jolleycomics.com/TPoH/Dissolve/409>
+    (hard to summarize, but it's a masterpiece)
+
+    <item><hlink|Missing Monday|https://www.missingmondaycomic.com/> (a very
+    sweet romance with an <with|font-shape|italic|Alice in Wonderland> vibe)
+
+    <item><hlink|Alice and the Nightmare|https://www.aliceandthenightmare.com/>
+    (the comparison with <with|font-shape|italic|Alice in Wonderland> is more
+    on the nose<text-dots>)
+
+    <item><hlink|My Obsession with Chess|https://scottmccloud.com/1-webcomics/chess/chess.html>
+    (a memoir about obsession and escapism)
+
+    <item><hlink|Broodhollow|https://broodhollow.krisstraub.com/> \U
+    (<with|font-shape|italic|Twin Peaks>-esque supernatural horror, on hiatus
+    <aw|frown|0.9fn>)
   </itemize>
 
   <subsection*|My favorite places on the web>
@@ -82,32 +119,41 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|1|publications.tm>>
-    <associate|auto-2|<tuple|?|1|publications.tm>>
-    <associate|auto-3|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1|publications.tm>>
-    <associate|auto-4|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1|publications.tm>>
-    <associate|auto-5|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|?|publications.tm>>
-    <associate|auto-6|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|?|publications.tm>>
+    <associate|auto-1|<tuple|?|1>>
+    <associate|auto-2|<tuple|?|1>>
+    <associate|auto-3|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1>>
+    <associate|auto-4|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1>>
+    <associate|auto-5|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1>>
+    <associate|auto-6|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|Writing>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|Links>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-1><vspace|0.5fn>
 
-      <with|par-left|<quote|1tab>|Essays <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <with|par-left|<quote|1tab>|Useful Resources
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>>
 
-      <with|par-left|<quote|1tab>|Tutorials and how-to's
+      <with|par-left|<quote|1tab>|Advice that I've found helpful
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>>
 
-      <with|par-left|<quote|1tab>|Personal research notes
+      <with|par-left|<quote|1tab>|Blogs I like
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>>
+
+      <with|par-left|<quote|1tab>|Webcomics I like
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5>>
+
+      <with|par-left|<quote|1tab>|My favorite places on the web
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-6>>
     </associate>
   </collection>
 </auxiliary>

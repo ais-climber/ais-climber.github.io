@@ -17,20 +17,6 @@
   writing, please see <hlink|this page|https://caleb.schultzkisby.me/publications>
   instead.
 
-  <subsection*|Essays>
-
-  <\itemize>
-    <item>
-  </itemize>
-
-  <subsection*|Tutorials and how-to's>
-
-  <\itemize>
-    <item>
-  </itemize>
-
-  <subsection*|Personal research notes>
-
   <\itemize>
     <item>
   </itemize>
