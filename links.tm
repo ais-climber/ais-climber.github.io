@@ -95,7 +95,7 @@
 
     <item><hlink|Broodhollow|https://broodhollow.krisstraub.com/> \U
     (<with|font-shape|italic|Twin Peaks>-esque supernatural horror, on hiatus
-    <aw|frown|0.9fn>)
+    :( )
   </itemize>
 
   <subsection*|My favorite places on the web>
