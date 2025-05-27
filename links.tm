@@ -31,7 +31,7 @@
 
   Here are some links to various helpful resources and fun reads!
 
-  <subsection*|Useful Resources>
+  <subsection*|Fun and Interesting Resources>
 
   <\itemize>
     <item>
@@ -44,6 +44,12 @@
   </itemize>
 
   <subsection*|Blogs I like>
+
+  <\itemize>
+    <item>
+  </itemize>
+
+  <subsection*|Books I like>
 
   <\itemize>
     <item>
@@ -90,12 +96,6 @@
     <item><hlink|Broodhollow|https://broodhollow.krisstraub.com/> \U
     (<with|font-shape|italic|Twin Peaks>-esque supernatural horror, on hiatus
     :( )
-  </itemize>
-
-  <subsection*|My favorite places on the web>
-
-  <\itemize>
-    <item>
   </itemize>
 
   \;

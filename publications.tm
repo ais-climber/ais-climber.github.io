@@ -15,27 +15,27 @@
     Iterated Hebbian Learning<hlink||https://ojs.aaai.org/index.php/AAAI/article/view/29409/30660>.
     <with|font-series|bold|AAAI> 2024.
 
-    <boxed-button-row|<boxed-button|paper|https://ojs.aaai.org/index.php/AAAI/article/view/29409/30660>|<boxed-button|slides|>|<boxed-button|poster|>|<boxed-button|code|>>
+    <boxed-button-row|<boxed-button|paper|https://ojs.aaai.org/index.php/AAAI/article/view/29409/30660>|<boxed-button|slides|Research_Papers/2024-AAAI/presentations/AAAI-talk.pdf>|<boxed-button|poster|Research/2024-AAAI/presentations/AAAI-poster.pdf>|<boxed-button|code|https://github.com/ais-climber/AAAI2024>>
 
     <item><with|font-series|bold|Caleb Kisby>, S.<nbsp>Blanco, and
     L.<nbsp>Moss. The Logic of Hebbian Learning<hlink||https://journals.flvc.org/FLAIRS/article/view/130735>.
     <with|font-series|bold|FLAIRS> 2022.
 
-    <boxed-button-row|<boxed-button|paper|https://journals.flvc.org/FLAIRS/article/view/130735>|<boxed-button|slides|>|<boxed-button|code|>|>
+    <boxed-button-row|<boxed-button|paper|https://journals.flvc.org/FLAIRS/article/view/130735>|<boxed-button|slides|Research_Papers/2022-FLAIRS/presentations/flairs-talk.pdf>|<boxed-button|code|https://github.com/ais-climber/a-la-mode>|>
 
     <item><with|font-series|bold|Caleb Kisby>, S.<nbsp>Blanco,
     A.<nbsp>Kruckman, and L.<nbsp>Moss. Logics for Sizes with Union or
     Intersection<hlink||https://ojs.aaai.org/index.php/AAAI/article/download/5677/5533>.
     <with|font-series|bold|AAAI> 2020.
 
-    <boxed-button-row|<boxed-button|paper|https://ojs.aaai.org/index.php/AAAI/article/download/5677/5533>|<boxed-button|slides|>|<boxed-button|code|>|>
+    <boxed-button-row|<boxed-button|paper|https://ojs.aaai.org/index.php/AAAI/article/download/5677/5533>|<boxed-button|slides|Research_Papers/2020-AAAI/presentations/AAAI-talk.pdf>|<boxed-button|code|https://github.com/ais-climber/syllogistic-sizes>|>
 
     <item>L.<nbsp>Gates, <with|font-series|bold|Caleb Kisby>, and
     D.<nbsp>Leake. CBR Confidence as a Basis for Confidence in Black Box
     Systems<hlink||https://ais-climber.github.io/assets/pdf/Gates_CBR_Confidence.pdf>.
     <with|font-series|bold|ICCBR> 2019.
 
-    <boxed-button-row|<boxed-button|paper|>|<boxed-button|slides|>|<boxed-button|code|>|>
+    <boxed-button-row|<boxed-button|paper|>|||>
   </enumerate>
 
   \;
