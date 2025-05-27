@@ -5,10 +5,6 @@
 <\body>
   <\hide-preamble>
     \;
-
-    <assign|news-line|<\macro|body|date>
-      <tabular|<tformat|<cwith|1|1|1|1|cell-rsep|>|<cwith|1|1|1|1|cell-lsep|0>|<cwith|1|1|2|2|cell-width|>|<cwith|1|1|2|2|cell-hmode|auto>|<cwith|1|1|1|1|cell-width|8fn>|<cwith|1|1|1|1|cell-hmode|exact>|<cwith|1|1|1|1|cell-halign|l>|<table|<row|<cell|<arg|date><space|0.4em>>|<cell|<arg|body>>>>>>
-    </macro>>
   </hide-preamble>
 
   <my-page-header>
@@ -60,7 +56,7 @@
   <\news-line>
     I'm going to be teaching a course with <hlink|Nina
     Gierasimczuk|https://ninagierasimczuk.com/> at <hlink|NASSLLI
-    2025|https://nasslli25.shane.st/>
+    2025|https://nasslli25.shane.st/>\ 
 
     on dynamic logics and learning! Here is the <hlink|course
     homepage|https://sites.google.com/view/nasslli25-learning-in-del/home>.
