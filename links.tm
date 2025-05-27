@@ -25,7 +25,7 @@
     </cell>>>>>>|<cell|<tformat|<tformat|<table|<row|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-1E7E7520-11BCEC4E>|<link|hyperlink|<id|%2256C888-1E7E7520-11BCEC4E>|<url|https://caleb.schultzkisby.me/>>|<with|font-size|1.189|About>><assign|locus-color|global><assign|visited-color|global>>|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-231C6638-2F4D73A5>|<link|hyperlink|<id|%2256C888-231C6638-2F4D73A5>|<url|https://caleb.schultzkisby.me/publications>>|<with|font-size|1.189|Publications>><assign|locus-color|global><assign|visited-color|global>>|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-1E0550B0-5AF1007D>|<link|hyperlink|<id|%2256C888-1E0550B0-5AF1007D>|<url|https://caleb.schultzkisby.me/teaching>>|<with|font-size|1.189|Teaching>><assign|locus-color|global><assign|visited-color|global>>|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-1D7C3EE8--5090DFCD>|<link|hyperlink|<id|%2256C888-1D7C3EE8--5090DFCD>|<url|https://caleb.schultzkisby.me/writing>>|<with|font-size|1.189|Writing>><assign|locus-color|global><assign|visited-color|global>>|<cell|<button|<large|Links>|https://caleb.schultzkisby.me/links>>>>>>>>|<row|<cell|>|<cell|>>>>>>|<cell|>>>>><vspace|5em>>
   </hide-preamble>
 
-  <value|my-page-header>
+  <my-page-header>
 
   <section*|Links>
 

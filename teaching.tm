@@ -3,7 +3,7 @@
 <style|<tuple|mgubi_webpage|compact-list>>
 
 <\body>
-  <value|my-page-header>
+  <my-page-header>
 
   <section*|Teaching>
 

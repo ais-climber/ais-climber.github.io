@@ -7,7 +7,7 @@
     \;
   </hide-preamble>
 
-  <value|my-page-header>
+  <my-page-header>
 
   <section*|Writing>
 
@@ -37,9 +37,6 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|1>>
-    <associate|auto-2|<tuple|?|1>>
-    <associate|auto-3|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1>>
-    <associate|auto-4|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|1>>
   </collection>
 </references>
 
@@ -49,17 +46,6 @@
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|Writing>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-1><vspace|0.5fn>
-
-      <with|par-left|<quote|1tab>|Essays <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2>>
-
-      <with|par-left|<quote|1tab>|Tutorials and how-to's
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-3>>
-
-      <with|par-left|<quote|1tab>|Personal research notes
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4>>
     </associate>
   </collection>
 </auxiliary>
