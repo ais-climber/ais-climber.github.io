@@ -1,0 +1,961 @@
+ 
+\documentclass[letterpaper]{article}
+\usepackage{arxiv}
+\usepackage{natbib}
+\setcitestyle{authoryear,square,comma}
+
+%═══════════════════════════════════════════
+% Uncomment for debugging and proofreading
+%═══════════════════════════════════════════
+% \usepackage{lineno}
+% \linenumbers
+
+%═══════════════════════════════════════════
+% Fonts and math packages
+%═══════════════════════════════════════════
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{bbm}
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools}
+\usepackage{proof}
+\usepackage{bussproofs}
+
+%═══════════════════════════════════════════
+% Formatting, margins, and spacing packages
+%═══════════════════════════════════════════
+\usepackage{microtype}
+%\frenchspacing
+% \usepackage{lscape}
+\usepackage{setspace}
+%\usepackage{fullpage}
+
+%═══════════════════════════════════════════
+% Graphics packages
+%═══════════════════════════════════════════
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit}
+
+%═══════════════════════════════════════════
+% Environments
+%═══════════════════════════════════════════
+\usepackage{paralist}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\AtBeginEnvironment{quote}{\par\singlespacing\small}
+\setcounter{secnumdepth}{0}
+\usepackage{float}
+\setlist[description]{leftmargin=1cm,labelindent=1cm}
+% \setlist[compactdesc]{leftmargin=1cm,labelindent=1cm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+%═══════════════════════════════════════════
+% References, Links, and Color
+%═══════════════════════════════════════════
+\usepackage{hyperref}
+\definecolor{myblue}{rgb}{0.03, 0.27, 0.65}
+\definecolor{myred}{rgb}{0.82, 0.1, 0.26}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=myblue,
+    urlcolor=myblue,
+    citecolor=myblue,
+}
+\urlstyle{same}
+
+\usepackage{xcolor}
+\definecolor{myblue1}{RGB}{158,202,225}
+\definecolor{myblue2}{RGB}{49,130,189}
+
+%═══════════════════════════════════════════
+% Custom Commands, General Use
+%═══════════════════════════════════════════
+\newcommand{\State}{\mbox{\sf State}} 
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\proves}{\vdash}
+\renewcommand{\o}{\cdot}
+\newcommand{\orr}{\vee}
+\newcommand{\andd}{\wedge}
+\newcommand{\nott}{\neg}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\rem}[1]{\relax}
+ \newcommand{\NP}{\mbox{\sc np}}
+\newcommand{\axiom}{\textsc}
+\newcommand*{\bigchi}{\mbox{\Large$\chi$}}% big chi
+\newcommand{\degree}[1]{\mathrm{deg}(#1)}
+
+%═══════════════════════════════════════════
+% Custom Commands, Hebbian Learning
+%═══════════════════════════════════════════
+\newcommand{\layer}[1]{\mathsf{layer}(#1)}
+\newcommand{\layerNoArgs}{\mathsf{layer}}
+
+\newcommand{\Typ}{\textrm{\textup{\textbf{T}}}}
+\newcommand{\Prop}{\textsf{Prop}}
+\newcommand{\Update}{\textsf{Update}}
+\newcommand{\Hebb}{\textsf{Hebb}}
+\newcommand{\AllNets}{\mathsf{Net}}
+\newcommand{\Net}{\mathcal{N}}
+
+%═══════════════════════════════════════════
+% Title, Author, Pdfinfo
+%═══════════════════════════════════════════
+\hypersetup{pdfinfo={
+Title={The Logic of Hebbian Learning},
+Author={Caleb Kisby, Sa\'{u}l A. Blanco, Lawrence S. Moss},
+Keywords={Neurosymbolic AI, Hebbian Learning,
+Dynamic Logics, Knowledge Representation and Reasoning, Nonmonotonic Reasoning, Preference Upgrade}
+}}
+
+\renewcommand{\headeright}{}
+\renewcommand{\undertitle}{}
+
+\title{The Logic of Hebbian Learning}
+\author{\textbf{Caleb Kisby$^1$, Sa\'{u}l A. Blanco$^1$, Lawrence S. Moss$^2$}\\
+\normalsize $^1$Department of Computer Science, Indiana University\\ 
+\normalsize $^2$Department of Mathematics, Indiana University\\
+\normalsize Bloomington, IN 47408, USA\\
+\normalsize \{cckisby, sblancor, lmoss\}@indiana.edu}
+% \and
+% Lawrence S. Moss \\
+% Department of Mathematics, Indiana University,\\ Bloomington, IN 47405, USA\\
+% lmoss@indiana.edu}
+\date{}
+
+%═══════════════════════════════════════════
+% Beginning of Paper
+%═══════════════════════════════════════════
+ \begin{document}
+\maketitle
+
+\vspace*{-2\baselineskip}
+\setlength{\fboxrule}{0.8pt}
+\setlength{\fboxsep}{1em}
+\begin{center}
+\fbox{\parbox{\linewidth-(\linewidth/3)}{
+
+\textbf{Note:} This arXiv print is a fuller version of our FLAIRS paper \citep{kisby2022logic}, complete with proofs we could not include in the conference format.  We have also corrected some errors, as well as certain aesthetic choices that made the proofs and logic somewhat awkward.  The original paper is available \href{https://journals.flvc.org/FLAIRS/article/view/130735}{here}.
+
+}}
+\end{center}
+\vspace*{2\baselineskip}
+
+\begin{abstract}
+We present the logic of Hebbian learning, a dynamic logic whose semantics\footnote{A Python implementation of our semantics, using Tensorflow \& Keras \citep{tensorflow2015-whitepaper}), is available at
+\center{\url{https://github.com/ais-climber/neural-semantics}}}
+are expressed in terms of a layered neural network learning via Hebb's associative learning rule.  Its language consists of modality $\Typ \varphi$ (read ``typically $\varphi$,'' formalized as forward propagation), conditionals $\varphi \Rightarrow \psi$ (read ``typically $\varphi$ are $\psi$''), as well as dynamic modalities $[\varphi^+] \psi$ (read ``evaluate $\psi$ after performing Hebbian update on $\varphi$'').  We give axioms and inference rules that are sound with respect to the neural semantics; these axioms characterize Hebbian learning and its interaction with propagation.  The upshot is that this logic describes a neuro-symbolic agent that both learns from experience and also reasons about what it has learned.
+\end{abstract}
+
+%═══════════════════════════════════════════
+\section{Introduction}
+%═══════════════════════════════════════════
+
+Artificial intelligence  has  long  been  marked  by  a  schism between two of its major paradigms: symbolic reasoning and connectionist learning.  Neural systems have had wild success with learning from unstructured data, whereas symbolic reasoners are notorious for their rigidity.  On the other hand, symbolic systems excel at sophisticated (static) reasoning tasks that neural systems cannot readily learn.  Symbolic systems also tend to have more explainable reasoning, thanks to their use of explicit inferences in an intuitive language.  Moreover, due to their connection with logic, it is straightforward to compare the relative power and complexity of different symbolic reasoners.
+
+But as Valiant famously put it, intelligent cognitive agents must have \emph{both} ``the ability to learn from experience, and the ability to reason from what has been learned'' \citep{valiant2003three}.  \emph{Neuro-symbolic artificial intelligence} has emerged in the last few decades to address this challenge --- a monumental effort to integrate neural and symbolic systems, while retaining the advantages of both (see \citep{bader2005dimensions} and \citep{sarker2021neuro}, two surveys that span the decades).  Despite the cornucopia of neuro-symbolic proposals, the field has not yet agreed on an interface between the two that satisfyingly preserves both flexible learning and expressive reasoning.
+
+Following the path set out by \citep{balkenius1991nonmonotonic} and \citep{leitgeb2001nonmonotonic,leitgeb2003nonmonotonic}, we advance the following proposal for the neuro-symbolic interface.  Rather than viewing the neural and symbolic as two different systems to be combined, we view them as two ways of interpreting the same agent.  More precisely, we view the dynamics of neural networks as the semantics to a formal logic.  This logic serves as a bridge between the neural network model and formal inference.
+
+Previous work, particularly \citep{leitgeb2001nonmonotonic}, has considered how forward propagation in binary feed-forward nets forms a sound and complete semantics for the (static) conditional logic \textbf{CL} (\emph{loop-cumulative}).  The novelty of our paper is that we extend this logic by viewing a simple learning policy --- Hebbian update (``neurons that fire together wire together'') --- as a dynamic modality.  By doing so, we demonstrate that the dynamics of Hebbian learning (in binary feed-forward nets) directly corresponds to a particular dynamic multimodal logic that we call \emph{the logic of Hebbian learning}.
+This logic meets Valiant's challenge:  It characterizes a cognitive agent that can learn from experience and also reason about what it has learned.
+
+Our main result is the soundness of axioms and inference rules that characterize Hebbian learning.  The most interesting axioms involve the interaction between Hebbian update and forward propagation.  We also demonstrate how our logic models the learning of a concrete neural network. And although we leave the question of completeness open, we close by considering the importance of completeness for logics of this kind.
+
+%═══════════════════════════════════════════
+\section{Related Work}
+%═══════════════════════════════════════════
+
+\subsubsection{Logics with Neural Semantics.}
+%═══════════════════════════════════════════
+The idea that we can view neural networks as the semantics for symbolic reasoning dates back to \citep{mcculloch1943logical}.  Our work builds on a recent reimagining of this \`a la \citep{balkenius1991nonmonotonic}, \citep{leitgeb2001nonmonotonic,leitgeb2003nonmonotonic,leitgeb2018neural}, which formally characterize the dynamics of inhibitory neural networks as conditional logics.  Similarly, \citep{blutner2004nonmonotonic} demonstrates that Hopfield networks correspond to the logic of what he calls ``weight-annotated Poole systems.''  More recently, \citep{giordano2021} describe multilayer perceptrons and self-organizing maps in terms of defeasible description logics.  Yet no neural semantics to date has tackled the issue of learning --- doing this for Hebbian learning is precisely the contribution of our paper.
+
+\subsubsection{Neuro-Symbolic AI.}
+%═══════════════════════════════════════════
+Across the neuro-symbolic literature, an ubiquitous premise is that integration involves combining or composing otherwise distinct neural and symbolic modules.  In contrast, this paper presents the neural and symbolic as two perspectives we can have about the same agent.
+
+To our knowledge, the combined work of \citep{garcez2001symbolic} and \citep{garcez2008neural} is the only neuro-symbolic proposal (besides neural semantics, see above) that exhibits this intimate interface between the two.  The former gives a formally sound method for extracting conditionals from a network and the latter gives a method for build neural network models from rules (in a variety of different logics).  When combined, we can freely translate between a neural network and its beliefs.  But unlike our work, this framework does not offer a logical account of the neural network's learning.
+
+% SAVE FOR JOURNAL VERSION
+%Consider Henry Kautz' recent taxonomy of neuro-symbolic systems \citep{kautz-2020future}: All five of his categories involve combining or composing otherwise distinct neural and symbolic modules.
+
+\subsubsection{Dynamic Logics for Learning.}
+%═══════════════════════════════════════════
+Two recent papers, \citep{baltag2019dynamic} and \citep{baltag2019right}, also present dynamic multimodal logics that characterize learning.  The former models an individual's learning in the limit, whereas the latter models supervised learning as a game played between student and teacher.  But it is unclear how learning policies expressed in these logics might relate to specific neural implementations of learning such as Hebbian update and backpropagation.
+
+Furthermore, the syntax and inferences of our logic do not resemble either of these in a meaningful way. Perhaps the closest logics to ours are dynamic logics of \emph{preference upgrade}, in the sense of \citep{van2007prefupgrade}.  In particular, consider the modalities $[{\Uparrow} \varphi]$ (lexicographic upgrade) and $[{\uparrow} \varphi]$ (elite change) \citep{van2007beliefrevision}.  Both of these operators implement policies for modifying an agent's preference relation $<$ over possible worlds.  As with our logic, the key axioms characterizing these policies deal with their interaction with conditionals $\varphi \Rightarrow \psi$.  But the semantics of our logic are very different; we leave the issue of how our neural semantics relate to classical preference relations to future work.  In addition, both $[{\Uparrow} \varphi]$ and $[{\uparrow} \varphi]$ are reducible to the static language of conditionals, whereas it is presently unclear how our $[\varphi^+]$ might reduce to its base language.
+
+
+%═══════════════════════════════════════════
+\section{Background}
+%═══════════════════════════════════════════
+
+\subsection{Neural Network Models}
+%═══════════════════════════════════════════
+
+A model of the logic of Hebbian learning is just a special type of artificial neural network that we call a \emph{binary feedforward neural network} (BFNN).
+
+\begin{definition} A BFNN is a pointed directed graph ${\Net = \langle N, E, W, A, O, \eta \rangle}$, where
+\begin{compactitem}
+    \item $N$ is a finite nonempty set (the set of neurons)
+    \item $E \subseteq N \times N$ (the set of excitatory connections)
+    \item $W : N \times N \to \mathbb{R}$ (the weight of a given connection)
+    
+    \item $A : \mathbb{Q} \to \mathbb{Q}$ (the activation function)
+    \item $\eta \in \mathbb{R}, \eta \geq 0$ (the learning rate)
+\end{compactitem}
+\end{definition}
+Moreover, BFNNs are \emph{feed-forward}, i.e.\ they do not contain cycles of edges with all nonzero weights. This allows us to partition a BFNN's nodes into layers as follows.  For every neuron $n \in N$, $\layer{n}$ is the maximal length of a path from any node $m$ to $n$, where $m$ has no predecessors.
+
+BFNNs are also \emph{binary}, i.e.\ $A : \mathbb{Q} \to \{0, 1\}$ is a binary step function.  This binary assumption is clearly unrealistic in practice.  Letting it go is a matter of extending our two-valued logic towards a fuzzy-valued logic, which we leave to future work.
+
+We further require that the activation function $A$ is strictly increasing, i.e.\ for all $\vec{x}, \vec{y} \in \mathbb{R}^k$ if $\vec{x} < \vec{y}$ then $A(\vec{x}) < A(\vec{y})$.  We will more often refer to the equivalent condition:  $\vec{x} \leq \vec{y}$ iff $A(\vec{x}) \leq A(\vec{y})$.  Note that this increasing assumption holds for sigmoid activation functions commonly used for neural networks in practice.
+
+We write $W_{m n}$ to mean $W(m,n)$, for ${(m, n) \in E}$.  We also write $\degree{n}$ to indicate the degree (number of predecessors) of $n$.
+
+\subsection{The Dynamics of Propagation}
+%═══════════════════════════════════════════
+
+Of course, BFNNs are not merely static directed graphs, but are dynamic in nature.  When a BFNN receives a signal (which we model as the initial state), it propagates that signal forward until the state of the net stabilizes.  This stable state of the net is considered to contain the net's response (answer) to the given signal (question).  We model forward propagation as follows, drawing heavily from the approach proposed by \citep{leitgeb2001nonmonotonic}.  
+
+We consider a neuron $n$ active if its activation $A^{(n)}$ is high enough to trigger an output $O^{(n)}$ of $1$ (intuitively, if the neuron fires).  Since our BFNNs are binary, either a given neuron is active ($1$) or it is not ($0$).  So we can identify the state of $\Net$ with the set of neurons that are active.  For a given BFNN $\Net$, let its set of states be
+\[
+    \State = \set{S \mid S \subseteq N}
+\]
+
+We can get the activation value of a particular neuron $n$ in a state $S$ using the following characteristic function.
+\begin{definition}
+    For $S \in \State$, let 
+    $\bigchi_S : N \to \set{0, 1}$ be given by $\bigchi_S(n) = 1$ iff $n \in S$
+\end{definition}
+
+Neurons in a state $S \in \State$ can subsequently activate new neurons, which activate yet more neurons, until eventually the state of $\Net$ stablizes.  We call this final state of affairs $\Prop(S)$, the \emph{propagation} of $S$.
+
+\begin{definition}
+    Let $\Net$ be a BFNN, $n \in N$, and let $\vec{m} = m_1, \ldots, m_{\degree{n}}$ list the predecessors of $n$.  We define $\Prop_\Net : \State \to \State$ recursively on $l = \layer{n}$ as follows.
+\begin{compactdesc}
+    \item[Base Case ($l = 0$).] $n \in \Prop_\Net(S)$ iff $n \in S$
+    \item[Constructor ($l \geq 0$).] $n \in \Prop_\Net(S)$ iff either $n \in S$ or $n$ is activated by its predecessors $m_i \in \Prop_\Net(S)$, i.e.
+    \[
+    A(\sum_{i=1}^{\degree{n}} W_{m_i n} \cdot \bigchi_{\Prop_\Net(S)}(m_i)) = 1
+    \]
+\end{compactdesc}
+\end{definition}
+
+% INCLUDE IN JOURNAL VERSION:
+% (not extremely relevant here, unless I have more to say about it...)
+Alternatively, consider a finite automaton with state space $\State$ and transition function $F_{S^\ast} : \State \to \State$ tracking the propagation of an initial state $S^\ast$ through $\Net$.  We can view $\Prop(S^\ast)$ as a fixed point of $F_{S^\ast}$ \citep{leitgeb2001nonmonotonic}.
+% Leitgeb claims that Prop(S*) is *the unique* fixed point.  I'd like to be able to say this, but I should prove it myself for BFNNs.
+The key insight of \citep{leitgeb2001nonmonotonic} is that we can neatly characterize the algebraic structure of $\Prop$ as a closure operator.
+
+\begin{theorem}
+\label{thm:prop-props}
+Let $\Net \in \AllNets$.  For all $S, S_1, S_2 \in \State$, $\Prop$ satisfies
+\begin{compactdesc}
+    \item[Inclusion.] $S \subseteq \Prop(S)$
+    
+    \item[Idempotence.] $\Prop(S) = \Prop(\Prop(S))$
+    
+    \item[Cumulative.] If ${S_1 \subseteq S_2 \subseteq \Prop(S_1)}$ then ${\Prop(S_1) = \Prop(S_2)}$
+    
+    \item[Loop.] If ${S_1 \subseteq \Prop(S_0)}, \ldots, {S_k \subseteq \Prop(S_{k-1})}$ and ${S_0 \subseteq \Prop(S_k)}$,\\ then ${\Prop(S_i) = \Prop(S_j)}$
+    for all $i, j \in \set{0, \ldots, k}$
+\end{compactdesc}
+\end{theorem}
+\begin{proof} For the full proof, we refer the reader to \cite{leitgeb2001nonmonotonic}.  Note that this paper actually defines $\Prop$ for \emph{inhibition nets}, i.e. weightless BFNNs with both excitatory and inhibitory connections.  But the paper later shows that inhibition nets and BFNNs are equivalent with respect to their propagation structure, and so we can import the results here.  Regardless, we will walk through the proof of the (Loop) property using our weighted BFNNs to help the reader get a feel for how these arguments typically go.
+
+Let $k \geq 0$ and suppose the hypothesis.  Our goal is to show that for each $i$, $\Prop(S_i) \subseteq \Prop(S_{i-1})$, and additionally $\Prop(S_0) \subseteq \Prop(S_k)$.  This will show that all $\Prop(S_i)$ contain each other, and so are equal.  Let $i \in \set{0, \ldots, k}$ (if $i = 0$ then $i-1$ refers to $k$), and let $n \in \Prop(S_i)$.  We proceed by induction on $\layer{n}$.
+
+\begin{compactdesc}
+\item[Base Step.] At layer $0$, $\Prop(S_i) = S_i$. And so $n \in S_i$. But since $S_i \subseteq \Prop(S_{i-1})$, we have $n \in \Prop(S_{i-1})$.
+
+\item[Inductive Step.] Let $\layer{n} \geq 0$. Since $n \in \Prop(S_i)$, we have two cases: Either $n \in S_i$ or $n$ is activated by its predecessors.  The first case is similar to the base step.  As for the second case, for those $\vec{m} = m_1, \ldots, m_k$ such that $(m_h, n) \in E$ we have
+\[
+    A(\sum_{i=1}^{\degree{n}} W_{m_h n} \cdot \bigchi_{\Prop(S_i)}(m_h)) = 1
+\]
+Our inductive hypothesis says that for all predecessors $m_h$, $m_h \in \Prop(S_i) \leftrightarrow m_h \in \Prop(S_j)$.  In particular, this is true for $S_i$ and $S_{i-1}$.  So we can substitute $\bigchi_{\Prop(S_{i-1})}(m_h)$ for $\bigchi_{\Prop(S_i)}(m_h)$ in the inner expression, which immediately gives us $n \in \Prop(S_{i-1})$ by definition.\qedhere
+\end{compactdesc}
+\end{proof}
+
+% \begin{compactdesc}
+%     %═══════════════════════════════════════════
+%     \item[Inclusion.] If $n \in S$, then $n \in \Prop(S)$ by the base case of $\Prop$.
+    
+    
+%     %═══════════════════════════════════════════
+%     \item[Idempotence.] The $(\subseteq)$ direction is just Inclusion.  As for $(\supseteq)$, let $n \in \Prop(\Prop(S))$, and proceed by induction on $\Prop(\Prop(S))$.
+    
+%     \begin{compactdesc}
+%     \item[Base Step.] $n \in \Prop(S)$, and so we are done.
+    
+%     \item[Inductive Step.] For those $m_1, \ldots, m_k$ such that $(m_i, n) \in E$,
+%     \[
+%         A(\sum_{i=1}^{\degree{n}} W_{m_i n} \cdot \bigchi_{\Prop(\Prop(S))}(m_i)) = 1
+%     \]
+%     By our inductive hypothesis, $m_i \in \Prop(\Prop(S))$ iff $m_i \in \Prop(S)$.  And so each $\bigchi_{\Prop(\Prop(S))}(m_i) = \bigchi_{\Prop(S)}(m_i)$. By definition, this gives us $n \in \Prop(S)$.
+    
+%     % $m_1, \ldots, m_k \in \Prop(S)$.  By definition, $n \in \Prop(S)$.
+%     \end{compactdesc}
+    
+    
+%     %═══════════════════════════════════════════
+%     \item[Cumulative.] For the $(\subseteq)$ direction, let $n \in \Prop(S_1)$.  We proceed by induction on $\Prop(S_1)$.
+    
+%     \begin{compactdesc}
+%     \item[Base Step.] $n \in S_1$.  Well, $S_1 \subseteq S_2 \subseteq \Prop(S_2)$, so $n \in \Prop(S_2)$.
+    
+%     \item[Inductive Step.] For those $m_1, \ldots, m_k \in \Prop(S_1)$ such that $(m_i, n) \in E$,
+%     \[
+%     O^{(n)}(A^{(n)}(\overrightarrow{W}(m_i, n))) = 1
+%     \]
+%     By inductive hypothesis, $m_1, \ldots, m_k \in \Prop(S_2)$.  By definition, $n \in \Prop(S_2)$.
+%     \end{compactdesc}
+    
+%     Now consider the $(\supseteq)$ direction.  The Inductive Step holds similarly (just swap $S_1$ and $S_2$).  As for the Base Step, if $n \in S_2$ then since $S_2 \subseteq \Prop(S_1)$, $n \in S_1$.
+    
+    
+%     %═══════════════════════════════════════════
+%     \item[Loop.] Let $n \geq 0$ and suppose the hypothesis.  Our goal is to show that for each $i$, $\Prop(S_i) \subseteq \Prop(S_{i-1})$, and additionally $\Prop(S_0) \subseteq \Prop(S_n)$.  This will show that all $\Prop(S_i)$ contain each other, and so are equal.  Let $i \in \set{0, \ldots, n}$ (if $i = 0$ then $i-1$ refers to $n$), and let $e \in \Prop(S_i)$.  We proceed by induction on $\Prop(S_i)$.
+    
+%     \begin{compactdesc}
+%     \item[Base Step.] $e \in S_i$, and since $S_i \subseteq \Prop(S_{i-1})$ by assumption, $e \in \Prop(S_{i-1})$.
+    
+%     \item[Inductive Step.] For those $m_1, \ldots, m_k \in \Prop(S_i)$ such that $(m_i, n) \in E$,
+%     \[
+%     O^{(n)}(A^{(n)}(\overrightarrow{W}(m_i, n))) = 1
+%     \]
+%     By inductive hypothesis, $m_1, \ldots, m_k \in \Prop(S_{i-1})$.  By definition, $n \in \Prop(S_{i-1})$.
+    
+%     \end{compactdesc}
+    
+% \end{compactdesc}
+
+
+%-------------------------------------------------------
+%-------------------------------------------------------
+\begin{figure}
+\centering{
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+% nodes
+\node[circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a){$a$};
+\node[below=0.5 of a,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b){$b$};
+
+\node[right=2.2 of $(a)!0.5!(b)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](c){$c$};
+
+% sets
+\node[fill=myblue,color=myblue, opacity=0.5,oval,fit=(a),inner sep=-1pt]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(a) (b)]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(c)]{};
+
+% set labels
+\node [color=myblue,opacity=1,left=0.3 of $(a)$]{bird};
+\node [color=myblue,opacity=0.75,left=0.3 of $(b)$]{penguin};
+\node [color=myblue,opacity=0.75,above=0.3 of $(c)$]{flies};
+
+\draw[edge, color=myblue] (a) -- (c) node [near start, above] {\small{\textbf{$2$}}};
+\draw[edge, color=myblue] (b) -- (c) node [near start, above] {\small{\textbf{$-2$}}};
+\end{tikzpicture}
+%-------------------------------------------------------
+\hspace{2 cm}
+%-------------------------------------------------------
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+% nodes
+\node[circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a){$a$};
+\node[below=0.5 of a,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b){$b$};
+
+\node[right=2.2 of $(a)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](c){$c$};
+\node[right=2.2 of $(b)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](d){$d$};
+
+\node[right=2.2 of $(c)!0.5!(d)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](e){$e$};
+
+% sets
+\node[fill=myblue,color=myblue, opacity=0.5,oval,fit=(a),inner sep=-1pt]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(a) (b)]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(c) (d)]{};
+
+% set labels
+\node [color=myblue,opacity=1,left=0.3 of $(a)$]{bird};
+\node [color=myblue,opacity=0.75,left=0.3 of $(b)$]{penguin};
+\node [color=myblue,opacity=0.75,above=0.3 of $(c)$]{???};
+
+\draw[edge, color=myblue] (a) -- (c) node [near start, above] {\small{\textbf{$2$}}};
+\draw[edge, color=myblue] (b) -- (c) node [near end, left=0.10] {\small{\textbf{$-2$}}};
+\draw[edge, color=myblue] (a) -- (d) node [near end, left=0.15] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (b) -- (d) node [near start, below] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (c) -- (e) node [near start, above] {\small{\textbf{$2$}}};
+\draw[edge, color=myblue] (d) -- (e) node [near start, below] {\small{\textbf{$-2$}}};
+\end{tikzpicture}
+}
+\caption{(Left) The BFNN $\Net_1$ illustrates how BFNNs leverage negative weights to perform nonmonotonic inferences.
+(Right) TODO }
+\label{fig:monotonicity-counterexamples}
+\end{figure}
+%-------------------------------------------------------
+%-------------------------------------------------------
+
+Crucially, $\Prop$ is not monotonic; it is not the case that for all $S_1, S_2 \in \State$, if $S_1 \subseteq S_2$, then $\Prop(S_1) \subseteq \Prop(S_2)$.  This is because the net's weights can be negative, and so $\Prop(S_2)$ can inhibit the activation of new neurons that would otherwise be activated by $\Prop(S_1)$.  In place of monotonicity, $\Prop$ is \emph{loop-cumulative} (in the terminology of \citep{kraus1990nonmonotonic}).
+
+The BFNN $\Net_1$ in Figure~\ref{fig:monotonicity-counterexamples} illustrates how BFNNs encode nonmonotonic conditionals using negative weights.  $\Net_1$ has three basic states: $\text{`bird'} = \{a\}$, $\text{`penguin'} = \{a, b\}$, and $\text{`flies'} = \{c\}$. Each state contains the set of neurons that detect a feature of the input.  Note that `penguin' \emph{contains} `bird'.  This models the fact that that all penguins are birds; equivalently, all bird-features are penguin-features.
+
+For concreteness, say our activation function is a step function with a threshold of $0$.  Observe that when the input is a bird, the resulting activated state $\Prop(\text{bird}) = \{a, c\}$ contains `flies'.  But when the input is a penguin, the negative weight inhibits the `flies' node from activating.  In this way, $\Net_1$ classifies birds as flying, yet also successfully classifies penguins as non-flying.
+
+
+%OLD, we have a proof now.
+%The reason for this is that a BFNN's weights $W_{ij}$ can be negative, which allows $S_2$ to inhibit the activation of new neurons that were otherwise activated by $S_1$.
+
+%═══════════════════════════════════════════
+\section{From Hebbian Learning to Logic}
+%═══════════════════════════════════════════
+
+\subsection{The Dynamics of Hebbian Learning}
+%═══════════════════════════════════════════
+
+The plan from here is to extend this logic of propagation by providing an account of Hebbian learning.  Our goal is to cast Hebbian update as a dynamic modality, so that we can explore its interactions with $\Prop$ in symbolic language.  As with $\Prop$, we start by outlining the algebraic structure of Hebbian update.
+
+Hebb's classic learning rule \citep{hebb-organization-of-behavior-1949} states that when two adjacent neurons are simultaneously and persistently active, the connection between them strengthens.  In contrast with, e.g. backpropagation, Hebbian learning is errorless and unsupervised.  Another key difference is that Hebbian update is local --- the change in a weight $\Delta W_{ij}$ depends only on the activation of the immediately adjacent neurons.  For this reason, the Hebbian family of learning policies has traditionally been considered more biologically plausible than backpropagation.  There are many variations of Hebbian learning, but we only consider the most basic (unstable, no weight decay) form of Hebb's rule:  $\Delta W_{ij} = \eta x_i x_j$, where $\eta$ is the learning rate and $x_i, x_j$ are the outputs of adjacent neurons $i$ and $j$, respectively.
+
+In order to incorporate Hebb's rule into our framework, we introduce a function $\Hebb$ (``perform one step of Hebbian update'') to strengthen those edges in a BFNN $\Net$ whose neurons are active when we feed $\Net$ a signal $S \in \State$.  
+% SAVE EXPOSITION FOR THE JOURNAL
+% ALSO needs to be rephrased, technically incorrect
+%We can get the output of a neuron $n$ via the following characteristic function.
+
+% SAVE EXPOSITION FOR THE JOURNAL
+% $\Hebb$ can now be defined as follows.
+\begin{definition}
+\label{def:inc}
+Let ${\Hebb : \AllNets \times \State \to \AllNets}$ be given by $\Hebb(\langle N, E, W, A, O, \eta \rangle, S) = \langle N, E, W^\ast, A, O, \eta \rangle$, where for all neurons $i, j \in N$,
+\[
+    W_{ij}^\ast = W_{ij} + \eta \cdot \bigchi_{\Prop(S)}(i) \cdot  \bigchi_{\Prop(S)}(j)
+\]
+\end{definition}
+Notice that we strengthen edges within $\Prop(S)$ rather than just $S$.  This is because otherwise we would never strengthen connections beyond the input layer.  We were able to formulate the algebraic properties of $\Prop$ in terms of $\State$ containment.  Similarly, we express the properties of $\Hebb$ in terms of $\AllNets$ containment.  
+% SAVE EXPOSITION FOR JOURNAL VERSION
+%We define the notion of \emph{subnet} ($\preceq$) as follows.
+
+\begin{definition}
+Let $\Net_1, \Net_2 \in \AllNets$ differ only in their weights.  We write $\Net_1 \preceq \Net_2$
+to mean that for all $S \in \State$, $\Prop_{\Net_1}(S) \subseteq \Prop_{\Net_2}(S)$.  We use $\cong$ to express that $\Net_1 \preceq \Net_2$ and $\Net_2 \preceq \Net_1$.
+\end{definition}
+
+For example, $\Hebb(\Net, S)$ is a supernet of $\Net$ because strengthening weights via the $\Hebb$ operation only has the potential to \emph{expand} future propagations.  To further cement this intuition, consider the least upper bound $\mathcal{N}^{lub}$ of $\preceq$.  $\mathcal{N}^{lub}$ is that net whose weights have been ``maximally'' strengthened, and so every propagation $\Prop(S)$ results in the entire set $N$.
+
+% We have the following test to determine if $\Net_1 \preceq \Net_2$.
+% \begin{lemma}
+% \label{lemma:subnet->leq}
+% Suppose $\Net_1$ and $\Net_2$ are the same except for their weights.  Then $\Net_1 \preceq \Net_2$ iff for all $S \in \State$, $n \in N$, and for those $m_1, \ldots, m_k$ such that $(m_i, n) \in E$,
+% \begin{equation*} %\tag{$\ast\ast$}
+% % \label{eqn:weight-condition}
+% % \begin{gathered}
+% A(\sum_{i=1}^{\degree{n}} W_{\Net_1}(m_i, n) \cdot \bigchi_{\Prop_{\Net_1}(S)}(m_h)) = 1
+% \quad \quad \mbox{implies} \quad \quad
+% A(\sum_{i=1}^{\degree{n}} W_{\Net_2}(m_i, n) \cdot \bigchi_{\Prop_{\Net_2}(S)}(m_h)) = 1
+% % \end{gathered}
+% \end{equation*}
+% \end{lemma}
+% \begin{proof}
+% ($\rightarrow$) Consider the contrapositive.  Suppose there is some $S \in \State$ and some $n \in N$ such that for those $m_1, \ldots, m_k$ such that $(m_i, n) \in E$, we have
+% \[
+%     A(\sum_{i=1}^{\degree{n}} W_{\Net_1}(m_i, n) \cdot \bigchi_{\Prop_{\Net_1}(S)}(m_h)) = 1
+% \]
+% and yet
+% \[
+%     A(\sum_{i=1}^{\degree{n}} W_{\Net_2}(m_i, n) \cdot \bigchi_{\Prop_{\Net_2}(S)}(m_h)) = 0
+% \]
+% Then by definition, $n \in \Prop_{\Net_1}(S)$, but $n \not \in \Prop_{\Net_2}(S)$.  So we have some $S$ such that $\Prop_{\Net_1}(S) \not \subseteq \Prop_{\Net_2}(S)$.
+
+% ($\leftarrow$) Let $S \in \State$.  Our goal is to show that $\Prop_{\Net_1}(S) \subseteq \Prop_{\Net_2}(S)$.  Let $n \in \Prop_{\Net_1}(S)$.  By induction on $\layer{n}$:
+% \begin{compactdesc}
+% \item[Base Step.] At layer $0$, $\Prop_{\Net_1}(S) = S = \Prop_{\Net_2}(S)$, and so $n \in \Prop_{\Net_2}(S)$.
+
+% \item[Inductive Step.]  Let $\layer{n} \geq 0$.  Again, we have two cases: Either $n \in S$ or $n$ is activated by its predecessors.  The first case is similar to the base case.  For the second case we have, for those $m_1, \ldots, m_k \in \Prop_{\Net_1}(S)$ such that $(m_i, n) \in E$,
+% \[
+%     A(\sum_{i=1}^{\degree{n}} W_{\Net_1}(m_i, n) \cdot \bigchi_{\Prop_{\Net_1}(S)}(m_h)) = 1
+% \]
+% By assumption,
+% \[
+%     A(\sum_{i=1}^{\degree{n}} W_{\Net_2}(m_i, n) \cdot \bigchi_{\Prop_{\Net_2}(S)}(m_h)) = 1
+% \]
+% By definition we have $n \in \Prop_{\Net_2}(S)$. \qedhere
+% \end{compactdesc}
+% \end{proof}
+
+We can now prove a sound algebraic characterization of $\Hebb$.
+
+\begin{theorem}
+For all $\Net, \Net_1, \Net_2 \in \AllNets$ and $S, S_1, S_2 \in \State$, $\Hebb$ satisfies
+\begin{compactdesc}
+    \item[Inclusion.]
+    $\Prop_\Net(S_1) \cup \Prop_\Net(S_2) \subseteq \Prop_{\Hebb(\Net, S_2)}(S_1)$
+    
+    \item[Absorption.]
+    $\Hebb(\Net, \Prop(S)) \cong \Hebb(\Net, S)$
+    
+    \item[Monotonicity in $\Net$.] If ${\Net_1 \preceq \Net_2}$
+    then ${\Hebb(\Net_1, S) \preceq \Hebb(\Net_2, S)}$
+    
+    \item[Local.]
+    $\Prop_{\Hebb(\Net, S_2)}(S_1) \subseteq \Prop_\Net(S_1) \cup \Prop_\Net(S_2)$
+    
+    \item[Cumulative.] If ${\Prop_\Net(S_1) \subseteq \Prop_\Net(S_2)}$ and ${\Prop_\Net(S_2) \subseteq \Prop_{\Hebb(\Net, S)}(S_1)}$,\\
+    then $\Prop_{\Hebb(\Net, S)}(S_1) = \Prop_{\Hebb(\Net, S)}(S_2)$
+    
+    \item[Loop.] If ${\Prop_\Net(S_1) \subseteq \Prop_{\Hebb(\Net, S)}(S_0)}$,
+    $\ldots, {\Prop_\Net(S_n) \subseteq \Prop_{\Hebb(\Net, S)}(S_{n-1})}$,\\
+    and 
+    ${\Prop_\Net(S_0) \subseteq \Prop_{\Hebb(\Net, S)}(S_n)}$,\\
+    then ${\Prop_{\Hebb(\Net, S)}(S_i) = \Prop_{\Hebb(\Net, S)}(S_j)}$
+    for all $i, j \in \set{0, \ldots, n}$
+\end{compactdesc}
+\label{thm:inc-props}
+\end{theorem}
+\begin{proof} TODO
+
+\begin{compactdesc}
+    %═══════════════════════════════════════════%%%%%%%%%%
+    \item[Inclusion.]
+    Suppose $n \in \Prop_\Net(S_1) \cup \Prop_\Net(S_2)$.  By induction on $\layer{n}$:
+    \begin{compactdesc}
+        \item[Base Step.] At layer $0$, $\Prop_\Net(S_2) = S_2$.  But then by inclusion, $n \in \Prop_{\Hebb(\Net, S_2)}(S_1)$.
+        \item[Inductive Step.] Let $\layer{n} \geq 0$.  Since $n \in \Prop_\Net(S_2)$, we have two cases: Either $n \in S_2$ or $n$ is activated by its predecessors.  The first case is similar to the base step.  As for the second case, for those $\vec{m} = m_1, \ldots, m_k$ such that $(m_i, n) \in E$ we have
+        \[
+            A(\sum_{i=1}^{\degree{n}} W_{\Hebb(\Net, S_2)}(m_i, n) \cdot \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i)) = 1
+        \]
+    \end{compactdesc}
+    
+    %═══════════════════════════════════════════%%%%%%%%%%
+    \item[Absorption.] 
+    \[
+    \begin{array}{llr}
+    
+    &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Hebb(\Net, \Prop_{\Net}(S))}(m_i, n))) & 
+    \\
+    
+    = &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Net}(m_i, n) + \eta \overrightarrow{\bigchi}_{\Prop(\Prop(S))}(m_i, n))) &
+    \mbox{(by Definition~\ref{def:inc})}\\
+    
+    = &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Net}(m_i, n) + \eta \overrightarrow{\bigchi}_{\Prop(S)}(m_i, n))) &
+    \mbox{(by Idempotence)}\\
+    
+    = &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Hebb(\Net, S)}(m_i, n))) & 
+    \mbox{(by Definition~\ref{def:inc})}
+    \end{array}
+    \]
+    Since $O^{(n)}$ is binary, (\ref{eqn:weight-condition}) and its converse hold.
+    
+    %═══════════════════════════════════════════%%%%%%%%%%
+    \item[Monotonicity in $\Net$.] 
+    \[
+    \begin{array}{llr}
+    
+    &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Hebb(\Net_1, S)}(m_i, n))) & 
+    \\
+    
+    \leq &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Net_1}(m_i, n) + \eta \overrightarrow{\bigchi}_{\Prop_{\Net_1}(S)}(m_i, n))) & 
+    \mbox{(by Definition~\ref{def:inc})}\\
+    
+    \leq &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Net_2}(m_i, n) + \eta \overrightarrow{\bigchi}_{\Prop_{\Net_2}(S)}(m_i, n))) & 
+    (\dagger)\\
+    
+    \leq &
+    O^{(n)}(A^{(n)}(\overrightarrow{W}_{\Hebb(\Net_2, S)}(m_i, n))) & 
+    \mbox{(by Definition~\ref{def:inc})}
+    \end{array}
+    \]
+    which again shows that (\ref{eqn:weight-condition}) holds.  To see $(\dagger)$, notice that from $\Net_1 \preceq \Net_2$ and (\ref{eqn:weight-condition}) we have that each
+    \[
+    O^{(n)}(A^{(n)}(W_{\Net_1}(m_i, n))) \leq O^{(n)}(A^{(n)}(W_{\Net_2}(m_i, n)))
+    \]
+    The backwards direction of (\ref{eqn:increasing}) gives
+    \[
+    W_{\Net_1}(m_i, n) \leq W_{\Net_2}(m_i, n)
+    \]
+    In addition, $\Net_1 \preceq \Net_2$ by definition means that for all $S$, $\Prop_{\Net_1}(S) \subseteq \Prop_{\Net_2}(S)$.  This in turn implies that each
+    \[
+    \bigchi_{\Prop_{\Net_1}(S)}(m_i, n) \leq \bigchi_{\Prop_{\Net_2}(S)}(m_i, n)
+    \]
+    And so the inner sum for $\Net_1$ is component-wise $\leq$ the inner sum for $\Net_2$.  Since ${O^{(n)} \circ A^{(n)}}$ is increasing (\ref{eqn:increasing}), we get $(\dagger)$.
+    
+    %═══════════════════════════════════════════%%%%%%%%%%
+    \item[Local.]
+    Suppose $n \in \Prop_{\Hebb(\Net, S_2)}(S_1)$.  By induction on $\layer{n}$:
+    \begin{compactdesc}
+        \item[Base Step.] At layer $0$, $\Prop_{\Hebb(\Net, S_2)}(S_1) = S_1$.  But then by inclusion, $n \in \Prop_{\Net}(S_1)$. And so $n \in \Prop_{\Net}(S_1) \cup \Prop_{\Net}(S_2)$.
+        
+        \item[Inductive Step.] Let $\layer{n} \geq 0$.  Since $n \in \Prop_{\Hebb(\Net, S_2)}(S_1)$, we have two cases: Either $n \in S_1$ or $n$ is activated by its predecessors.  The first case is similar to the base step.  As for the second case, for those $\vec{m} = m_1, \ldots, m_k$ such that $(m_i, n) \in E$ we have
+        \[
+            A(\sum_{i=1}^{\degree{n}} W_{\Hebb(\Net, S_2)}(m_i, n) \cdot \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i)) = 1
+        \]
+        Expanding out the $W_{\Hebb(\Net, S_2)}$, we get
+        \[
+            A(\sum_{i=1}^{\degree{n}} (W_{\Net}(m_i, n) + \eta \cdot \bigchi_{\Prop_{\Net}(S_2)}(m_i) \cdot \bigchi_{\Prop_{\Net}(S_2)}(n)) \cdot \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i)) = 1
+            \]
+        Now suppose for contradiction that $n \not \in \Prop_{\Net}(S_1) \cup \Prop_{\Net}(S_2)$.  In particular, $n \not \in \Prop_{\Net}(S_2)$, and so $\bigchi_{\Prop_{\Net}(S_2)}(m_i) = \bigchi_{\Prop_{\Net}(S_2)}(n) = 0$.  So we have
+        \[
+            A(\sum_{i=1}^{\degree{n}} W_{\Net}(m_i, n) \cdot \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i)) = 1
+        \]
+        By our inductive hypothesis, for all $m_i$, if $m_i \in \Prop_{\Hebb(\Net, S_2)}(S_1)$ then $m_i \in \Prop_{\Net}(S_1) \cup \Prop_{\Net}(S_2)$.  So
+        \[
+        \begin{array}{lcll}
+            \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i) 
+            & \leq & \bigchi_{\Prop_{\Net}(S_1) \cup \Prop_{\Net}(S_2)}(m_i)\\
+            & = & \max(\bigchi_{\Prop_{\Net}(S_1)}(m_i), \bigchi_{\Prop_{\Net}(S_2)}(m_i))
+        \end{array}
+        \]
+        Note that either $\bigchi_{\Prop_{\Net}(S_1)}(m_i) \leq \bigchi_{\Prop_{\Net}(S_2)}(m_i)$ or $\bigchi_{\Prop_{\Net}(S_2)}(m_i) < \bigchi_{\Prop_{\Net}(S_1)}(m_i)$.  Consider the first case (the second is similar).  The above inequality simplifies to
+        \[
+            \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i) \leq
+            \bigchi_{\Prop_{\Net}(S_2)}(m_i)
+        \]
+        \textbf{ERROR!!!} The following has a mistake --- the sum of zero terms isn't necessarily zero!!!
+
+        Additionally --- and crucially --- $\bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i) > 0$; since otherwise, we would have
+        \[
+            A(\sum_{i=1}^{\degree{n}} W_{\Net}(m_i, n) \cdot 0) = A(0) = 1
+        \]
+        which would contradict the fact that $A$ is zero at zero.  Since this term is positive, we can apply the multiplication property for inequalities to get
+        \[
+            W_\Net(m_i, n) \cdot \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i) \leq
+            W_\Net(m_i, n) \cdot \bigchi_{\Prop_{\Net}(S_2)}(m_i)
+        \]
+        At last, applying the fact that $A$ is nondecreasing,
+        \[
+            A(\sum_{i=1}^{\degree{n}} W_{\Net}(m_i, n) \cdot \bigchi_{\Prop_{\Hebb(\Net, S_2)}(S_1)}(m_i)) \leq
+            A(\sum_{i=1}^{\degree{n}} W_{\Net}(m_i, n) \cdot \bigchi_{\Prop_{\Net}(S_2)}(m_i))
+        \]
+        So this latter term is equal to $1$, which by definition of $\Prop$ means that $n \in \Prop_{\Net}(S_2)$.  But this contradicts our assumption that $n \not \in \Prop_{\Net}(S_1) \cup \Prop_{\Net}(S_2)$!
+
+        
+    \end{compactdesc}
+    
+    %═══════════════════════════════════════════%%%%%%%%%%
+    \item[Cumulative \& Loop.] Finally, the Cumulative and Loop properties follow from the same properties for $\Prop$ in Theorem~\ref{thm:prop-props} by substituting, for each $i \in \set{0, \ldots, n}$,
+    \[
+    \begin{array}{lcl}
+    \Net & \rightsquigarrow & \Hebb(\Net, S)\\
+    S_i & \rightsquigarrow & \Prop_\Net(S_i)
+    \end{array}
+    \] \qedhere
+\end{compactdesc}
+\end{proof}
+
+\begin{proposition}
+$\Hebb$ is not monotonic in $S$.
+\end{proposition}  
+\begin{proof}
+\textbf{\textcolor{myred}{FILL IN}}
+\end{proof}
+
+\subsection{Syntax and Semantics}
+%═══════════════════════════════════════════
+
+We can now introduce the logic of Hebbian learning.  Let $p, q, \ldots$ be finitely many propositional variables.  These represent fixed, `ontic' states, i.e. established choices of neurons that correspond to features in the external world.  For example, $p$ might be the set of neurons that encapsulates the color \emph{pink}.  We presume that we already agree on these states, although we acknowledge that this is a major unresolved empirical issue.  As for more complex formulas:
+
+\begin{definition}  Formulas of our language $\lang$ are given by
+\[
+\varphi \Coloneqq p \mid \neg \varphi \mid \varphi \land \varphi \mid \varphi \Rightarrow \varphi \mid \Typ \varphi \mid [\varphi^+] \varphi
+\]
+where $p$ is any propositional variable.  We define $\top$, $\bot$, $\lor$, $\to$, $\leftrightarrow$, $\Leftrightarrow$, and the dual modalities $\langle \Typ \rangle, \langle \varphi^+ \rangle$ in the usual way.
+\end{definition}
+
+The modalities $\Typ$ and $[\varphi^+]$ reflect our two operations $\Prop$ and $\Hebb$, respectively.  We intend for $\Typ \varphi$ to denote ``the propagation of signal $\varphi$,'' and for $[\varphi^+] \psi$ to denote ``after performing Hebbian update on $\varphi$, evaluate $\psi$.''  We import ${\varphi \Rightarrow \psi}$ from \citep{leitgeb2001nonmonotonic}, read ``the propagation of signal $\varphi$ contains $\psi$''.  Note that ${\varphi \Rightarrow \psi}$ is redundant (equivalent to $\Typ \varphi \to \psi$ using the semantics below), though we keep it in our syntax because it conveniently expresses ``the net \emph{classifies} $\varphi$ as $\psi$'' (if $\varphi$ is interpreted as an input and $\psi$ as a classification).
+
+Our formulas also have more classical alternative readings, divorced from the dynamics of neural networks.  Following \citep{leitgeb2001nonmonotonic}, we will define $\varphi \Rightarrow \psi$ such that it has the conditional reading ``typically $\varphi$ are $\psi$'' (where $\varphi$ and $\psi$ are read as generics, e.g. ``typically birds fly'').  This gives us a natural preferential reading for $\Typ \varphi$ as ``typically $\varphi$'' or ``the typical $\varphi$.''\footnote{Our notation takes inspiration from \citep{giordano2021}, which formalizes the dynamics of a net via a concept constructor $\Typ$ in the description logic $\mathcal{ALC}$.  Note the subtle difference between their typicality inclusions $\Typ(\varphi) \sqsubseteq \psi$ and our $\Typ \varphi \to \psi$: Ours flips the direction of containment.} 
+Finally, Hebbian learning $[\varphi^+] \psi$ has a dual reading as \emph{preference upgrade}  \citep{van2007prefupgrade}.  As mentioned in the Related Work section, we leave the question concerning how $[\varphi^+]$ can be viewed classically as updating a preference relation to future work.
+
+A model of our logic is just a BFNN $\Net$ equipped with an interpretation function $\semantics{\cdot} : \lang \to \State_\Net$.
+
+\begin{definition}
+Let $\Net \in \AllNets$.  Our semantics are defined recursively as follows:
+\begin{equation*}
+\boxed{
+\begin{array}{lcl}
+\semantics{p} & & \in \State \mbox{ is fixed, nonempty} \\
+\semantics{\top} & = & \emptyset\\
+\semantics{\neg \varphi} & = & \overline{\semantics{\varphi}}\\
+\semantics{\varphi \land \psi} & = & \semantics{\varphi} \cup \semantics{\psi}\\
+\semantics{\varphi \Rightarrow \psi} & = & \semantics{\Typ \varphi \to \psi}\\
+\semantics{\Typ \varphi} & = & \Prop(\semantics{\varphi}) \\
+\semantics{[\varphi^+] \psi} & = & \semantics{\psi}_{\Hebb(\Net, \semantics{\varphi})} \\
+\end{array}
+}
+\end{equation*}
+\end{definition}
+
+Notice that these semantics are ``flipped'' in the sense that $\land$ is interpreted as union (instead of intersection), and consequently $\to$ is interpreted as superset (instead of subset).  This choice may seem odd, but it  reflects the intuition that neurons act as ``elementary-feature-detectors'' \citep{leitgeb2001nonmonotonic}.  
+% possible thing to remove:
+For example, say $\semantics{\varphi}$ represents those neurons that are \textit{necessary} for detecting an apple, and $\semantics{\psi}$ represents those neurons that are \textit{necessary} for detecting the color red. 
+% add 'for instance,'
+If the net observes a red apple ($\varphi \land \psi$), both the neurons detecting red-features $\semantics{\varphi}$ and the neurons detecting apple-features $\semantics{\psi}$ necessarily activate, i.e. $\semantics{\varphi} \cup \semantics{\psi}$ activates.  As for implication, ``every apple is red'' (${\varphi \to \psi}$) holds for a net iff whenever the neurons detecting apple-features $\semantics{\varphi}$ necessarily activate, so do the neurons detecting red-features $\semantics{\psi}$.  But this is only true if ${\semantics{\varphi} \supseteq \semantics{\psi}}$.  This justifies us reading propositional connectives classically, despite the backwards flavor of the semantics.
+
+
+Our interpretation of formulas is completely algebraic, in the sense that formulas denote sets rather than truth-values.  But we can consider formulas to have truth-values as follows.
+
+\begin{definition}
+$\Net \models \varphi$ iff $\semantics{\varphi}_\Net = \emptyset$.
+\end{definition}
+
+This choice also appears to be strange at its surface.  But it is a natural one in light of the fact that we defined $\semantics{\top} \coloneqq \emptyset$.  For example, consider implication: $\Net \models \varphi \to \psi$ holds iff $\semantics{\varphi \to \psi} = \emptyset = \semantics{\top}$, which holds iff $\semantics{\varphi} \supseteq \semantics{\psi}$ by our semantics.
+
+A curious consequence is that if $\Net \models \varphi$ and $\varphi$ cannot be written to contain an implication $\to$, then $\varphi$ must be a tautology.  But we do not consider this troubling, since it only makes sense to consider a neural network's judgment of $\varphi$ when given a state $\semantics{\psi}$ the net is in.
+
+
+\subsection{Inference and Axioms}
+%═══════════════════════════════════════════
+
+\begin{figure}[ht!]
+\begin{equation*}
+\boxed{
+\begin{array}{ll}
+    %----------------------------------
+    % Basic Axioms and Inference Rules
+    \textbf{Basic Axioms and Inference Rules} &
+    \Typ \textbf{ Axioms} \\
+    
+    \begin{array}{ll}
+         \axiom{(PC)} & \mbox{All propositional tautologies}\\
+    
+        \axiom{(MP)} & \frac{\varphi \quad \varphi \to \psi}{\psi} \\
+        
+        (\axiom{Nec}_\Typ) & \frac{\varphi}{\Typ \varphi}\\
+        
+        (\axiom{Nec}_+) & \frac{\psi}{[\varphi^+] \psi}\\
+    \end{array} &
+    
+    \begin{array}{ll}
+        (\axiom{Loop}) & 
+        (\Typ \varphi_0 \to \varphi_1)
+        \land \cdots \land 
+        (\Typ \varphi_k \to \varphi_0) 
+        \\
+        & \quad \to (\Typ \varphi_0 \leftrightarrow \Typ \varphi_k) \\
+         
+        \axiom{(Dual)} & \langle \Typ \rangle \varphi \leftrightarrow \neg \Typ \neg \varphi\\
+    
+        \axiom{(T)} & \Typ \varphi \to \varphi\\
+        
+        \axiom{(4)} & \Typ \varphi \to \Typ \Typ \varphi\\
+    \end{array}
+    
+    \\ \\
+    %----------------------------------
+    % Reduction Axioms
+    \textbf{Reduction Axioms} & \textbf{Interaction Axioms}\\
+    
+    \begin{array}{ll}
+         (\axiom{R}_p) & [\varphi^+] p \leftrightarrow p \\
+    
+        (\axiom{R}_\neg) & [\varphi^+] \neg \psi \leftrightarrow \neg [\varphi^+] \psi \\
+        
+        (\axiom{R}_\land) & [\varphi^+] (\psi \land \rho) \leftrightarrow ([\varphi^+] \psi \land [\varphi^+] \rho)\\
+    \end{array}
+    &
+    \begin{array}{ll}
+        (\axiom{Nest}_\Typ) & [\Typ \varphi^+] \psi \leftrightarrow [\varphi^+] \psi \\
+    
+         % Agent prefers the result of update in advance
+        % "No Disappointment"
+        \axiom{(NS)} & [\varphi^+] \Typ \psi \to \Typ [\varphi^+] \psi\\
+        
+        % "Preference Persistence"
+        % (one of the four major effects under the umbrella of "confirmation bias"
+        \axiom{(TP)} & \Typ [\varphi^+] \psi \land \Typ \varphi \to [\varphi^+] \Typ \psi\\
+    \end{array}
+    \\
+\end{array}
+}
+\end{equation*}
+\caption{A list of sound rules and axioms of the logic of Hebbian learning.  We leave the question of completeness to future work.}
+\label{fig:proof-system}
+\end{figure}
+
+The proof system for our logic is as follows.  We have $\proves \varphi$ iff either $\varphi$ is an axiom, or $\varphi$ follows from previously obtained formulas by one of the inference rules.  If $\Gamma \subseteq \lang$ is a set of formulas, we consider $\Gamma \proves \varphi$ to hold whenever there exist finitely many $\psi_1, \ldots, \psi_k \in \Gamma$ such that $\proves \psi_1 \land \ldots \land \psi_k \to \varphi$.
+
+We list the axioms and inference rules for our logic in Figure~\ref{fig:proof-system}.  Our main result is the soundness of these axioms and rules --- we do not claim that this list forms a complete axiomatization (we revisit the question of completeness in the Conclusion).
+
+The static base of our logic is the modal logic characterized by $\Typ$.  If we translate $\varphi \Rightarrow \psi$ via $\Typ \varphi \to \psi$ as before, we see that this modal logic contains the conditional logic \textbf{CL} (loop-cumulative).  As a modality, $\Typ$ is neither normal, regular, nor monotonic, but it is classical.  Note for instance that the normal modal property \axiom{(K)} (expressed in terms of $\Typ$) is equivalent to
+\[
+\axiom{(K)} \quad \Typ (\varphi \land \psi) \leftrightarrow (\Typ \varphi \land \Typ \psi)
+\]
+neither direction of which is sound in our logic.  Instead, we have the $\axiom{(Loop)}$ axiom expressing the loop-cumulativity of $\Prop$.  In fact, $\axiom{(Loop)}$ is all that is needed for this weakening of monotonicity --- note that we have dropped cumulativity $(\axiom{C}_\Rightarrow)$, as well as $(\axiom{Loop}_+)$ and $(\axiom{C}_+)$ for $[\varphi^+]$, since they all follow from the present axioms (compare against \citep{kisby2022logic}).
+
+Since Hebbian update only affects the propagation of states, we have reduction axioms $(\axiom{R}_p), (\axiom{R}_\neg), (\axiom{R}_\land)$, as well as the axiom $(\axiom{Nest}_\Typ)$ for terms that nest $\Typ$ within $[\varphi^+]$.
+
+In lieu of a full reduction for $[\varphi^+] \Typ \psi$, we instead have the weaker axioms $\axiom{(NS)}$ and $\axiom{(TP)}$.  These two axioms capture key cognitive biases of a Hebbian agent.  Consider the axiom $\axiom{(TP)}$, i.e. (Typicality Preservation)
+\[
+\axiom{(TP)} \quad \Typ [\varphi^+] \psi \land \Typ \varphi \to [\varphi^+] \Typ \psi
+\]
+This says that if our agent expects $\psi$ is normally true after learning $\varphi$, but she also happens to expect $\varphi$, then after learning $\varphi$ the typicality of $\psi$ will be preserved.  This is a peculiar kind of cognitive bias whereby a Hebbian agent maintains her prior attitudes when presented with news she already expects.
+
+The axiom $\axiom{(NS)}$, i.e. (No Surprises)
+\[
+\axiom{(NS)} \quad [\varphi^+] \Typ \psi \to \Typ [\varphi^+] \psi
+\]
+says that if after learning $\varphi$, our agent thinks normally $\psi$, then she would have expected $\psi$ to be true after learning $\varphi$ in the first place.  Loosely: She will never be surprised.
+
+
+% COMMENT TO MAKE ON THE JOURNAL VERSION:
+% Notes: we give reductions in terms of \neg and \land (which covers implication, top, and bot), primarily because of the lemma that makes nested implications useless (so we have to rephrase (K) for [\varphi^+], for instance)
+
+% COMMENT TO MAKE ON THE JOURNAL VERSION:
+% To check the validity of each of these axioms and rules, we make use of the following technical fact.  Notice that it follows that antecedents in right-associated implications get absorbed, e.g. $\varphi \to (\psi \to \rho)$ reduces to $\psi \to \rho$.
+% \begin{lemma}
+% Suppose $S \ne N$.  Then $\Net, S \models \varphi \to \psi$ iff $\Net, \semantics{\varphi}_\Net \models \psi$ (iff $\semantics{\psi}_\Net \subseteq \semantics{\varphi}_\Net$).
+% \end{lemma}
+
+Soundness of these axioms is just a matter of matching each axiom with its corresponding property of $\Hebb$.
+
+\begin{theorem}
+The rules and axioms above are sound, i.e. hold for all $\Net \in \AllNets$.
+\end{theorem}
+\begin{proof}
+\textbf{\textcolor{myred}{FILL IN}}
+\end{proof}
+
+%═══════════════════════════════════════════
+\section{Applying the Logic: A Concrete Example}
+%═══════════════════════════════════════════
+\label{sec:concrete}
+
+\begin{figure}
+\centering{
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+% nodes
+\node[circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a){$a$};
+\node[below=0.5 of a,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b){$b$};
+\node[below=0.5 of b,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](c){$c$};
+\node[below=0.5 of c,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](d){$d$};
+\node[below=0.5 of d,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](e){$e$};
+
+\node[right=2.2 of $(a)!0.5!(c)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](f){$f$};
+\node[right=2.2 of $(c)!0.5!(e)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](g){$g$};
+
+\node[right=2.2 of $(f)!0.5!(g)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](h){$h$};
+
+% Hidden nodes
+\node (bpivot) [left=0.3 of b] {\phantom{p}};
+\node (dpivot) [left=0.3 of d] {\phantom{p}};
+\node (bpivot2) [right=0.3 of b] {\phantom{p}};
+\node (epivot) [right=0.3 of e] {\phantom{p}};
+
+% sets
+\node[fill=myblue,color=myblue, opacity=0.5,oval,fit=(a),inner sep=-1pt]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(a) (b)]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(h)]{};
+
+
+% set labels
+\node [color=myblue,opacity=1,left=0.3 of $(a)$]{bird};
+\node [color=myblue,opacity=0.75,left=0.3 of $(b)$]{penguin};
+\node [color=myblue,opacity=0.75,below=0.3 of $(h)$]{flies};
+
+\draw[edge, color=myblue, opacity=0.6] (a) -- (f) node [near start, above] {\small{\textbf{$1$}}};
+\draw[edge, color=myblue, opacity=0.6] (a) -- (g) node [near start, above] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (b) -- (f) node [below=-0.1, near start] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (b) -- (g) node [near start, above=-0.15] {\small{\textbf{$-2$}}};
+\draw[edge, color=myblue, opacity=0.6] (c) -- (f) node [near start, below=-0.1] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue, opacity=0.6] (c) -- (g) node [near start, above=-0.1] {\small{\textbf{$3$}}};
+\draw[edge, color=myblue] (d) -- (f) node [near start, below=-0.1] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (d) -- (g) node [near start, above=-0.1] {\small{\textbf{$3$}}};
+\draw[edge, color=myblue, opacity=0.6] (e) -- (f) node [near start, below] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue, opacity=0.6] (e) -- (g) node [near start, below] {\small{\textbf{$3$}}};
+\draw[edge, color=myblue] (f) -- (h) node [near start, below] {\small{\textbf{$2$}}};
+\draw[edge, color=myblue] (g) -- (h) node [near start, above] {\small{\textbf{$-2$}}};
+
+% KEY
+\node[draw, color=myblue, text width=0.14\linewidth,inner sep=1mm,align=left,
+      above left] at (current bounding box.south east)
+    {\small $\semantics{\textup{orca}} = \set{b, c}$\\
+    $\semantics{\textup{zebra}} = \set{b, d}$\\
+    $\semantics{\textup{panda}} = \set{b, e}$\\};
+
+\end{tikzpicture}
+}
+\caption{A BFNN $\Net$, equipped with the ReLU activation function, $T = 1$, and $\eta = 1$.  After observing the dataset $\langle \textrm{orca}, \textrm{zebra}, \textrm{panda} \rangle$, $\Net$ learns that penguins do not fly, while preserving the fact that birds typically fly. \textcolor{myred}{TODO}}
+\label{fig:full-example}
+\end{figure}
+
+We now demonstrate our neuro-symbolic interface by way of an example neural network in a machine learning context.  The task: Given an image of an animal, classify it as flying or non-flying.  Suppose we have the partially pre-trained BFNN $\Net$ in  Figure~\ref{fig:full-example}.  
+
+For simplification's sake, let's suppose that our animal images can be reduced to $5$-dimensional vectors in order to be fed into the input layer of $\Net$.  Say:
+\[
+\begin{array}{llcll}
+\textrm{penguin} & \langle 1 1 0 0 0 \rangle & \quad & 
+\textrm{orca} & \langle 0 1 1 0 0 \rangle \\
+\textrm{zebra} & \langle 0 1 0 1 0 \rangle & \quad & 
+\textrm{panda} & \langle 0 1 0 0 1 \rangle \\
+\end{array}
+\]
+In addition, suppose an image activates the first node if and only if it depicts a bird.
+
+We can identify each animal with the set of nodes it activates in the input layer.  This gives us the sets shown in Figure~\ref{fig:full-example}.  We can also identify the class of things that fly with the output node, i.e. $\semantics{\textup{flies}} = \set{h}$.  In principle we can identify propositions with sets containing hidden nodes as well, although in practice the meaning of hidden nodes is often unclear.
+
+With this interpretation in mind, we see that $\Net \models \textrm{bird} \Rightarrow \textrm{flies}$, but also $\Net \models \textrm{penguin} \Rightarrow \textrm{flies}$ (which is incorrect).  Our hope is that $\Net$ corrects this mistake via Hebbian learning.
+
+Say we expose $\Net$ to non-flying animals that share the black-and-white color of penguins, e.g. we train $\Net$ on the dataset $\langle \textrm{orca}, \textrm{zebra}, \textrm{panda} \rangle$.  The propagations of each instance will increase $W_{bg}$.  Once we have given $\Net$ the entire dataset ($W_{bg} = 1$), $\Prop(\semantics{\textup{penguin}})$ will contain $g$, which will cancel the signal given by ${f \to h}$.  Our logic successfully models this behavior:
+\[
+\begin{array}{l}
+\Net \models [\textrm{orca}^+] [\textrm{zebra}^+] [\textrm{panda}^+] (\textrm{bird} \Rightarrow \textrm{flies}) \textrm{, yet}\\
+\Net \not \models [\textrm{orca}^+] [\textrm{zebra}^+] [\textrm{panda}^+] (\textrm{penguin} \Rightarrow \textrm{flies})
+\end{array}
+\]
+i.e. $\Net$ learns that penguins do not fly while preserving the fact that birds typically fly. 
+
+% UPDATE: We actually give a counterexample to monotonicity in the right spot.
+%---------------------------------------
+% As it happens, if we modify $\Net$ such that $W_{bg} = 0$ then this serves as a counterexample to monotonicity in $S$ (see the discussion following Theorem~\ref{thm:inc-props}).  In particular, we have $\Net \models \Typ(\textrm{penguin}) \to \textrm{flies}$, yet $\Net \not \models [\textrm{orca}^+] \Typ(\textrm{penguin}) \to [\textrm{orca}^+] \textrm{flies}$. 
+
+%═══════════════════════════════════════════
+\section{Conclusion and Future Work}
+%═══════════════════════════════════════════
+
+In this paper, we gave sound axioms and rules characterizing the logic of Hebbian learning.  This logic interfaces the neuro-symbolic divide by characterizing conditionals $\Rightarrow$ and modalities $\Typ$, $[\varphi^+]$ in terms of the propagation and Hebbian update of signals in a neural network.  The upshot of all this is that this logic describes a neuro-symbolic agent that learns associatively and also reasons about what it has learned.
+
+We leave open the question of whether the axioms and rules we list are complete.  But we take this opportunity to stress the importance of having strong completeness for logics of this kind.  Strong completeness for a \emph{static} neural semantics provides a bridge across which we can extract a set of rules $\Gamma$ from an interpreted network, and also build an interpreted neural network implementing $\Gamma$.  But once the neural network updates, we lose the interpretations of neurons that allow for these translations.  If we had strong completeness for the \emph{dynamic} logic, we could fully track the interpretations while the net learns and preserve this neuro-symbolic correspondence.
+
+Beyond the logic of Hebbian learning, we believe that this framework will be a fruitful way to explore the neuro-symbolic interface for a variety of neural networks and learning policies.  Exciting future directions include:
+\begin{enumerate}[itemsep=-1pt, topsep=2pt]
+    \item Mapping more expressive syntax to neural activity
+    \item Generalizing to a broader class of neural networks
+    \item Generalizing to a broader class of activation functions
+    \item Characterizing other learning policies in logical terms
+\end{enumerate}
+The holy grail of this line of work is to completely axiomatize the (1) first-order logic of (2) nonbinary (fuzzy-valued) neural networks with (3) more varied (e.g. ReLU and GELU) activation functions that (4) learn via backpropagation.
+
+%═══════════════════════════════════════════
+\section{Acknowledgements}
+%═══════════════════════════════════════════
+We thank the anonymous reviewers for their careful reviews and helpful comments.  C.~Kisby was supported in part by the US Department of Defense [Contract No. W52P1J2093009].
+
+\bibliographystyle{plainnat}
+\bibliography{neurosymbolic}
+
+\end{document}

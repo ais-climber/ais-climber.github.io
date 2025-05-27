@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: plainnat.bst
+Database file #1: neurosymbolic.bib
+You've used 20 entries,
+            2773 wiz_defined-function locations,
+            717 strings with 8022 characters,
+and the built_in function-call counts, 9006 in all, are:
+= -- 820
+> -- 441
+< -- 17
++ -- 153
+- -- 132
+* -- 686
+:= -- 1361
+add.period$ -- 65
+call.type$ -- 20
+change.case$ -- 101
+chr.to.int$ -- 19
+cite$ -- 40
+duplicate$ -- 447
+empty$ -- 795
+format.name$ -- 161
+if$ -- 1917
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 21
+newline$ -- 110
+num.names$ -- 80
+pop$ -- 216
+preamble$ -- 1
+purify$ -- 83
+quote$ -- 0
+skip$ -- 328
+stack$ -- 0
+substring$ -- 359
+swap$ -- 56
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 210
+warning$ -- 0
+while$ -- 89
+width$ -- 0
+write$ -- 270

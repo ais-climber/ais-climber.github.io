@@ -1,0 +1,623 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{lscape}
+
+\usepackage{bigstrut}
+%\usepackage{MnSymbol}
+\usepackage{bbm}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{tikz}
+\usepackage{lingmacros}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+\newcommand{\existsgeq}{\mbox{\sf AtLeast}}
+\newcommand{\Pol}{\mbox{\emph{Pol}}}
+  \newcommand{\nonered}{\textcolor{red}{=}}
+  \newcommand{\equalsred}{\nonered}
+  \newcommand{\redstar}{\textcolor{red}{\star}}
+    \newcommand{\dred}{\textcolor{red}{d}}
+    \newcommand{\dmark}{\dred}
+    \newcommand{\redflip}{\textcolor{red}{flip}}
+        \newcommand{\flipdred}{\textcolor{red}{\mbox{\scriptsize \em flip}\ d}}
+        \newcommand{\mdred}{\textcolor{blue}{m}\textcolor{red}{d}}
+        \newcommand{\ndred}{\textcolor{blue}{n}\textcolor{red}{d}}
+\newcommand{\arrowm}{\overset{\textcolor{blue}{m}}{\rightarrow} }
+\newcommand{\arrown}{\overset{\textcolor{blue}{n}}{\rightarrow} }
+\newcommand{\arrowmn}{\overset{\textcolor{blue}{mn}}{\longrightarrow} }
+\newcommand{\arrowmonemtwo}{\overset{\textcolor{blue}{m_1 m_2}}{\longrightarrow} }
+\newcommand{\bluen}{\textcolor{blue}{n}}
+\newcommand{\bluem}{\textcolor{blue}{m}}
+\newcommand{\bluemone}{\textcolor{blue}{m_1}}
+\newcommand{\bluemtwo}{\textcolor{blue}{m_2}}
+\newcommand{\blueminus}{\textcolor{blue}{-}}
+
+\newcommand{\bluedot}{\textcolor{blue}{\cdot}}
+\newcommand{\bluepm}{\textcolor{blue}{\pm}}
+\newcommand{\blueplus}{\textcolor{blue}{+ }}
+\newcommand{\translate}[1]{{#1}^{tr}}
+\newcommand{\Caba}{\mbox{\sf Caba}} 
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\Pre}{\mbox{\sf Pre}} 
+\newcommand{\wmarkpolarity}{\scriptsize{\mbox{\sf W}}}
+\newcommand{\wmarkmarking}{\scriptsize{\mbox{\sf Mon}}}
+\newcommand{\smark}{\scriptsize{\mbox{\sf S}}}
+\newcommand{\bmark}{\scriptsize{\mbox{\sf B}}}
+\newcommand{\mmark}{\scriptsize{\mbox{\sf M}}}
+\newcommand{\jmark}{\scriptsize{\mbox{\sf J}}}
+\newcommand{\kmark}{\scriptsize{\mbox{\sf K}}}
+\newcommand{\tmark}{\scriptsize{\mbox{\sf T}}}
+\newcommand{\greatermark}{\mbox{\tiny $>$}}
+\newcommand{\lessermark}{\mbox{\tiny $<$}}
+%%{\mbox{\ensuremath{>}}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\upred}{\textcolor{red}{\uparrow}}
+\newcommand{\downred}{\textcolor{red}{\downarrow}}
+\usepackage[all,cmtip]{xy}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{multicol}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.14in}\raiseonebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.13in}}
+\newcommand{\toplus}{\abovearrow{r}}
+\newcommand{\tominus}{\abovearrow{i}} 
+\newcommand{\todestroy}{\abovearrow{d}}
+\newcommand{\tom}{\abovearrow{m}}
+\newcommand{\tomprime}{\abovearrow{m'}}
+\newcommand{\A}{\textsf{App}}
+\newcommand{\At}{\textsf{At}}
+\newcommand{\Emb}{\textsf{Emb}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\usepackage{verbatim}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\Marking}{\mbox{Mar}}
+\newcommand{\Markings}{\Marking}
+\newcommand{\Mar}{\Marking}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TTM}{\TT_{\Markings}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\erase}{\mbox{\textsf{erase}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\arrowplus}{\overset{\blueplus}{\rightarrow} }
+\newcommand{\arrowminus}{\overset{\blueminus}{\rightarrow} }
+\newcommand{\arrowdot}{\overset{\bluedot}{\rightarrow} }
+\newcommand{\arrowboth}{\overset{\bluepm}{\rightarrow} }
+\newcommand{\arrowpm}{\arrowboth}
+\newcommand{\arrowplusminus}{\arrowboth}
+\newcommand{\arrowmone}{\overset{m_1}{\rightarrow} }
+\newcommand{\arrowmtwo}{\overset{m_2}{\rightarrow} }
+\newcommand{\arrowmthree}{\overset{m_3}{\rightarrow} }
+\newcommand{\arrowmcomplex}{\overset{m_1 \orr m_2}{\longrightarrow} }
+\newcommand{\arrowmproduct}{\overset{m_1 \cdot m_2}{\longrightarrow} }
+\newcommand{\proves}{\vdash}
+\newcommand{\Dual}{\mbox{\sc dual}}
+\newcommand{\orr}{\vee}
+\newcommand{\uar}{\uparrow}
+\newcommand{\dar}{\downarrow}
+\newcommand{\andd}{\wedge}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\arrowmprime}{\overset{m'}{\rightarrow} }
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\Con}{\mbox{\sf Con}}
+\newcommand{\type}{\mbox{\sf type}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\necc}{\Box}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\Types}{\mathcal{T}_\mathcal{M}}
+\newcommand{\mon}{\mbox{\sf mon}}
+\newcommand{\anti}{\mbox{\sf anti}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\rem}[1]{\relax}
+
+
+\newcommand{\raiseone}{\mbox{raise}^1}
+\newcommand{\raisetwo}{\mbox{raise}^2}
+\newcommand{\wrapper}[1]{{#1}}
+\newcommand{\sfa}{\wrapper{\mbox{\sf a}}}
+\newcommand{\sfb}{\wrapper{\mbox{\sf b}}}
+\newcommand{\sfv}{\wrapper{\mbox{\sf v}}}
+\newcommand{\sfw}{\wrapper{\mbox{\sf w}}}
+\newcommand{\sfx}{\wrapper{\mbox{\sf x}}}
+\newcommand{\sfy}{\wrapper{\mbox{\sf y}}}
+\newcommand{\sfz}{\wrapper{\mbox{\sf z}}}
+  \newcommand{\sff}{\wrapper{\mbox{\sf f}}}
+    \newcommand{\sft}{\wrapper{\mbox{\sf t}}}
+      \newcommand{\sfc}{\wrapper{\mbox{\sf c}}}
+      \newcommand{\sfu}{\wrapper{\mbox{\sf u}}}
+            \newcommand{\sfs}{\wrapper{\mbox{\sf s}}}
+  \newcommand{\sfg}{\wrapper{\mbox{\sf g}}}
+
+\newcommand{\sfvomits}{\wrapper{\mbox{\sf vomits}}}
+\newlength{\mathfrwidth}
+  \setlength{\mathfrwidth}{\textwidth}
+  \addtolength{\mathfrwidth}{-2\fboxrule}
+  \addtolength{\mathfrwidth}{-2\fboxsep}
+\newsavebox{\mathfrbox}
+\newenvironment{mathframe}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}\begin{center}}
+    {\end{center}\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}}
+    \newenvironment{mathframenocenter}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}}
+    {\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}} 
+ \renewcommand{\hat}{\widehat}
+ \newcommand{\nott}{\neg}
+  \newcommand{\preorderO}{\mathbb{O}}
+ \newcommand{\PreorderP}{\mathbb{P}}
+  \newcommand{\preorderE}{\mathbb{E}}
+\newcommand{\preorderP}{\mathbb{P}}
+\newcommand{\preorderN}{\mathbb{N}}
+\newcommand{\preorderQ}{\mathbb{Q}}
+\newcommand{\preorderX}{\mathbb{X}}
+\newcommand{\preorderA}{\mathbb{A}}
+\newcommand{\preorderR}{\mathbb{R}}
+\newcommand{\preorderOm}{\mathbb{O}^{\bluem}}
+\newcommand{\preorderPm}{\mathbb{P}^{\bluem}}
+\newcommand{\preorderQm}{\mathbb{Q}^{\bluem}}
+\newcommand{\preorderOn}{\mathbb{O}^{\bluen}}
+\newcommand{\preorderPn}{\mathbb{P}^{\bluen}}
+\newcommand{\preorderQn}{\mathbb{Q}^{\bluen}}
+ \newcommand{\PreorderPop}{\mathbb{P}^{\blueminus}}
+  \newcommand{\preorderEop}{\mathbb{E}^{\blueminus}}
+\newcommand{\preorderPop}{\mathbb{P}^{\blueminus}}
+\newcommand{\preorderNop}{\mathbb{N}^{\blueminus}}
+\newcommand{\preorderQop}{\mathbb{Q}^{\blueminus}}
+\newcommand{\preorderXop}{\mathbb{X}^{\blueminus}}
+\newcommand{\preorderAop}{\mathbb{A}^{\blueminus}}
+\newcommand{\preorderRop}{\mathbb{R}^{\blueminus}}
+ \newcommand{\PreorderPflat}{\mathbb{P}^{\flat}}
+  \newcommand{\preorderEflat}{\mathbb{E}^{\flat}}
+\newcommand{\preorderPflat}{\mathbb{P}^{\flat}}
+\newcommand{\preorderNflat}{\mathbb{N}^{\flat}}
+\newcommand{\preorderQflat}{\mathbb{Q}^{\flat}}
+\newcommand{\preorderXflat}{\mathbb{X}^{\flat}}
+\newcommand{\preorderAflat}{\mathbb{A}^{\flat}}
+\newcommand{\preorderRflat}{\mathbb{R}^{\flat}}
+\newcommand{\pstar}{\preorderBool^{\preorderBool^{E}}}
+\newcommand{\pstarplus}{(\pstar)^{\blueplus}}
+\newcommand{\pstarminus}{(\pstar)^{\blueminus}}
+\newcommand{\pstarm}{(\pstar)^{\bluem}}
+\newcommand{\Reals}{\preorderR}
+\newcommand{\preorderS}{\mathbb{S}}
+\newcommand{\preorderBool}{\mathbbm{2}}
+ \renewcommand{\o}{\cdot}
+ \newcommand{\NP}{\mbox{\sc np}}
+ \newcommand{\NPplus}{\NP^{\blueplus}}
+  \newcommand{\NPminus}{\NP^{\blueminus}}
+   \newcommand{\NPplain}{\NP}
+    \newcommand{\npplus}{np^{\blueplus}}
+  \newcommand{\npminus}{np^{\blueminus}}
+   \newcommand{\npplain}{np}
+   \newcommand{\np}{np}
+   \newcommand{\Term}{\mbox{\sc t}}
+  \newcommand{\N}{\mbox{\sc n}}
+   \newcommand{\X}{\mbox{\sc x}}
+      \newcommand{\Y}{\mbox{\sc y}}
+            \newcommand{\V}{\mbox{\sc v}}
+    \newcommand{\Nbar}{\overline{\mbox{\sc n}}}
+    \newcommand{\Pow}{\mathcal{P}}
+    \newcommand{\powcontravariant}{\mathcal{Q}}
+    \newcommand{\Id}{\mbox{Id}}
+    \newcommand{\pow}{\Pow}
+   \newcommand{\Sent}{\mbox{\sc s}}
+   \newcommand{\lookright}{\slash}
+   \newcommand{\lookleft}{\backslash}
+   \newcommand{\dettype}{(e \to t)\arrowminus ((e\to t)\arrowplus t)}
+\newcommand{\ntype}{e \to t}
+\newcommand{\etttype}{(e\to t)\arrowplus t}
+\newcommand{\nptype}{(e\to t)\arrowplus t}
+\newcommand{\verbtype}{TV}
+\newcommand{\who}{\infer{(\nptype)\arrowplus ((\ntype)\arrowplus (\ntype))}{\mbox{who}}}
+\newcommand{\iverbtype}{IV}
+\newcommand{\Nprop}{\N_{\mbox{prop}}}
+\newcommand{\VP}{{\mbox{\sc vp}}}
+\newcommand{\CN}{{\mbox{\sc cn}}}
+\newcommand{\Vintrans}{\mbox{\sc iv}}
+\newcommand{\Vtrans}{\mbox{\sc tv}}
+\newcommand{\Num}{\mbox{\sc num}}
+%\newcommand{\S}{\mathbb{A}}
+\newcommand{\Det}{\mbox{\sc det}}
+\newcommand{\preorderB}{\mathbb{B}}
+\newcommand{\simA}{\sim_A}
+\newcommand{\simB}{\sim_B}
+\newcommand{\polarizedtype}{\mbox{\sf poltype}}
+
+
+\begin{document}
+%\tableofcontents
+
+
+\section{The logic of {\sf All} and set unions}
+
+Here's the syntax.   We start with \emph{basic nouns} and from these we construct \emph{union terms}
+We
+use letters $x$, $y$, $z$, for basic nouns.  The union terms are terms $x\cup y$, where $x$ and $y$ are basic nouns.
+We use letters like $t$ for terms which are either basic nouns  or union terms.
+
+In the semantics, we interpret the basic noun $x$ by $\semantics{x}\subseteq M$, and then we always interpret a union term $x\cup y$ by 
+$\semantics{x}\cup\semantics{y}$.
+
+\begin{figure}[t]
+\begin{mathframe}
+\[
+\begin{array}{l@{\qquad}l@{\qquad}l}
+\infer{\mbox{\sf All $t$ $t$}}{}
+&
+\infer{\mbox{\sf All $t$ $v$}}{\mbox{\sf All $t$ $u$} & \mbox{\sf All $u$ $v$}}
+&
+\infer{\mbox{\sf All ($x\cup x$) $x$}}{}  \\  \\
+\infer{\mbox{\sf All $x$ ($x\cup y$) }}{} &
+\infer{\mbox{\sf All ($y \cup x$) ($x\cup y$) }}{} &
+\infer{\mbox{\sf All ($x\cup y$) $t$}}{\mbox{\sf All $x$ $t$} & \mbox{\sf All $y$ $t$}}
+\end{array}
+\]
+\caption{The logic of {\sf All} and set unions.\label{fig-all-unions}}
+\end{mathframe}
+\end{figure}
+
+For a fixed set $\Gamma$, we write $t\leq u$ to mean that $\Gamma\proves \mbox{\sf All $t$ $u$}$.
+(We do this to lighten the notation.)    We also write $x \equiv y$ to mean $x\leq y \leq x$.
+
+\begin{example}
+For any set $\Gamma$, if $x\leq y$ and $z\leq w$, then $x\cup z \leq y\cup w$.
+\label{ex-1}
+\end{example}
+
+\begin{example}
+For any set $\Gamma$, if $a\equiv x\cup y$, $b\equiv a\cup z$, 
+$c \equiv y \cup z$, and $d \equiv x \cup c$, then $b \equiv d$.
+\label{ex-2}
+\end{example}
+
+\begin{definition} 
+A set $S$ of terms is an \emph{up-set (for $\Gamma$)} if whenever $t\in S$ and $t\leq u$, then also $u\in S$.
+$S$ is \emph{prime} if whenever $x\cup y \in S$, then either $x\in S$ or $y\in S$.
+\end{definition}
+
+Note that the notion of an up-set is relative to a set $\Gamma$, but the notion of a prime set does not refer to any set at all.
+
+When $\Gamma$ is clear from the context, we just speak of a set $S$ being an up-set (without referencing $\Gamma$).
+
+\begin{example}
+If $\Model$ is any model, then for all $m\in M$, $S_m = \set{t : m \in \semantics{t}}$
+is   prime.  If $\Model\models\Gamma$, then $S_m$ is an up-set for $\Gamma$.
+\label{ex-3}
+\end{example}
+
+\begin{lemma}  Fix a set $\Gamma$.
+Let $t$ be any term, and assume that $t \not\leq y\cup z$.
+Then there is a prime up-set containing $t$ but not containing either $y$ or $z$.
+\label{lemma-zorn}
+\end{lemma}
+
+\begin{proof}
+
+Let $\SS$ be the family of sets $T$ which contains $t$, is closed upwards, and contains neither  $y$ nor $z$.
+One such set in $\SS$ is $\uparrow t$.  Note first that $\uparrow t$ does not contain either $y$ or $z$.  (For if $t\leq y$, then since $y\leq y \cup z$, we would have a contradiction.)
+
+By Zorn's Lemma, let $S$ be a maximal element of $\SS$ with respect to inclusion.
+We claim that 
+$S$ is  prime.   To see this, suppose that $a \cup b\in S$.  Suppose towards a contradiction that neither $a$ nor $b$ were in $S$.
+By maximality, $S\cup\uparrow a$ and $S\cup\uparrow b$  would not belong to $\SS$. 
+So they each contain $y$ or $z$.   Without loss of generality, $a\leq y$ and $b\leq z$.  
+By Example~\ref{ex-1},  $a\cup b \leq y\cup z$.   Since $S$ is an up-set, $y\cup z$ belongs to $S$.    And this is a contradiction.
+\end{proof}
+
+\begin{theorem}[Completeness]
+The logic of {\sf all} and unions in Figure~\ref{fig-all-unions} is complete.
+\label{theorem-first-completeness-union}
+\end{theorem}
+
+\begin{proof}
+We need to show that if $\Gamma\models \mbox{\sf All $t$ $u$}$,
+$\Gamma\proves \mbox{\sf All $t$ $u$}$.
+We may assume that $u$ is a union term.  (If $u$ were a basic noun $x$, replace $x$ with $x\cup x$.)
+We also may assume that $t$ is a basic noun.   Here is the reason.   Suppose that our original assumption were
+$\Gamma\models \mbox{\sf All ($x\cup y$) $u$}$.   It follows that both $\Gamma\models \mbox{\sf All $x$ $u$}$
+and $\Gamma\models \mbox{\sf All $y$ $u$}$.   If we were to prove that $x \leq u$ and $y\leq u$, then by the logic,
+we would have our desired conclusion:
+$x\cup y \leq y$.
+
+Thus, we reduce to showing that if  $\Gamma\models x\leq y \cup z$, then also  $\Gamma \proves x\leq y \cup z$.
+We show the contrapositive.   Assume
+ that $\Gamma\not\proves x\leq y \cup z$.   We shall find a model of $\Gamma$ where
+$ \semantics{x} \not\subseteq (\semantics{y}\cup\semantics{z})$.
+By Lemma~\ref{lemma-zorn}, let $S$ be a prime up-set containing $x$ but not containing either $y$ or $z$.
+
+We use $S$ to make a model $\Model$ with one point, say $*$.   We put $*\in \semantics{u}$ iff $u\in S$.
+Let us check that $\Model\models \Gamma$.  
+Suppose that $\Gamma$ contains the sentence {\sf All $ a$ $(b\cup c)$.}    We may assume that $\semantics{a} = \set{*}$, 
+since otherwise $\semantics{a} = \emptyset$, and trivially $\semantics{a}\subseteq \semantics{b}\cup\semantics{c}$.
+So $a \in S$.  As $S$ is closed upwards and $a\leq b\cup c$, $b\cup c\in S$ also.   Since $S$ is prime, either $b\in S$ or $c\in S$.
+So either $*\in\semantics{b}$ or $*\in \semantics{c}$.  Either way, $\semantics{b}\cup\semantics{c} = \set{*}$.  And again we have 
+$\semantics{a}\subseteq \semantics{b}\cup\semantics{c}$.
+Thus, $\Model\models \Gamma$.  
+
+By the defining property of $S$, $*\in \semantics{x} \setminus (\semantics{y}\cup\semantics{z})$ in our model.   Thus, 
+$ \semantics{x} \not\subseteq (\semantics{y}\cup\semantics{z})$.
+So we are done.
+\end{proof}
+
+\subsection{Constructing models from prime up-sets}
+
+{\bf skip this section; it's probably not needed for anything.}
+
+Here is a more general result than what we saw in Theorem~\ref{theorem-first-completeness-union}.
+
+\begin{lemma} 
+Fix $\Gamma$.
+Let $M$ be any set, and suppose that for each $m\in M$ we have a prime up-set of terms $T_m$. 
+Equip $M$ with the structure of a model by  interpreting 
+basic nouns on $M$ thus:
+ \[
+ \semantics{x} = \set{m\in M : x \in T_m }.
+ \]
+ Then $\Model\models\Gamma$.   Moreover, for all terms $t$, 
+  \begin{equation}
+  \semantics{t} = \set{m\in M : t \in T_m }.
+  \label{mono}
+    \end{equation}
+ \end{lemma}
+ 
+ \begin{proof}
+Since each $T_m$ is prime, 
+ \[
+ \semantics{x\cup y} =  \set{m\in M : x \in T_m }\cup\set{m\in M : y \in T_m } = \set{m\in M : x\cup y  \in T_m }.
+ \]
+ (\ref{mono}) follows, for all terms $t$.
+ We are left with the verification that $\Model\models\Gamma$.
+ Suppose that $\Gamma$ contains the sentence {\sf All $u$ $t$}.  
+ Then $u \leq t$.
+ Let $m\in \semantics{u}$, so by (\ref{mono}), $u\in T_m$.
+ Since $T_m$ is an up-set, $t\in T_m$.    By (\ref{mono}) again, $m\in \semantics{t}$.  This shows that 
+$\semantics{u} \subseteq \semantics{t}$; that is, our sentence  {\sf All $u$ $t$}  is true in $\Model$. 
+ \end{proof}
+ 
+ Another fact worth knowing: the union of two prime up-sets is again a prime up-set.
+ 
+ \section{Adding \mbox{\sf Some $t$ $u$}}
+ 
+ \begin{figure}[t]
+\begin{mathframe}
+\[
+\begin{array}{l@{\qquad}l@{\qquad}l}
+\infer[\mbox{\sc exists}]{\mbox{\sf Some $t$ $t$}}{\mbox{\sf Some $t$ $u$}}
+&
+\infer[\mbox{\sc conv}]{\mbox{\sf Some $u$ $t$}}{\mbox{\sf Some $t$ $u$}}
+&
+\infer[\mbox{\sc darii}]{\mbox{\sf Some $t$ $u$}}{\mbox{\sf Some $t$ $v$} & \mbox{\sf All $v$ $u$}}
+\end{array}
+\]
+\caption{Additions for sentences of the form {\sf Some $t$ $u$}.\label{fig-adding-some}}
+\end{mathframe}
+\end{figure}
+
+ We add sentence of the form  {\sf Some $t$ $u$}, where $t$ and $u$
+ are union terms.  (That is, $t$ and $u$ might be basic terms like $x$ or $y$, or they
+ might be union terms like $x\cup y$.)
+ The semantics is the obvious one: a model $\Model$ had $\Model\models\mbox{\sf Some $t$ $u$}$
+ iff $\semantics{t} \cap \semantics{u} \neq \emptyset$ in $\Model$.
+ 
+ For the logic, we take our previous rules from Figure~\ref{fig-all-unions} and add the
+ rules in Figure~\ref{fig-adding-some}.
+ The name {\sf conv} is short for the traditional name of the rule,
+ [\mbox{\sc conversion}].  The name {\sf darii} is traditional from medieval logic.
+
+ 
+ 
+ \begin{theorem}
+ \label{theorem-completeness-all-some-unions}
+ If $\Gamma\models\phi$, then $\Gamma\proves\phi$.
+  \end{theorem}
+ 
+ The rest of this section is devoted to the proof.
+ 
+  \begin{lemma}\label{lemma-1-all-some-unions}
+ If $\Gamma\not\proves \mbox{\sf All $t$ $u$}$, then there is a model of $\Gamma$
+ where $\semantics{t}\not\subseteq\semantics{u}$.
+\end{lemma}
+
+\begin{proof}
+Let $\Gamma_{\scriptsize all}$ be the {\sf All}-sentences in $\Gamma$.
+Note that $\Gamma_{\scriptsize all}\not\proves \mbox{\sf All $t$ $u$}$.
+By Theorem~\ref{theorem-first-completeness-union}, let $\Model$
+be a model of $\Gamma_{\scriptsize all}$ where $\mbox{\sf All $t$ $u$}$ is false.
+Then add a fresh point $*$ to $\semantics{x}$ for all basic nouns $x$.
+The very same point  $*$  is added to the interpretation of all basic nouns.
+Call the resulting model $\Nodel$.
+For all $x$, $\semantics{x}_{\Nodel} = \semantics{x}_{\Model}\cup\set{*}$.
+This has the effect of making $\Nodel$ satisfy every sentence $\mbox{\sf Some $a$ $b$}$,
+no matter whether this sentence is in $\Gamma$ or not.
+And the addition of the fresh point to the interpretation of every term
+has no effect on the {\sf All}-sentences, as a moment's thought shows.
+That is, $\Model\models\mbox{\sf All $c$ $d$}$ iff  $\Nodel\models\mbox{\sf All $c$ $d$}$.
+So $\Nodel\models\Gamma$, and $\Nodel\not\models\mbox{\sf All $t$ $u$}$.
+\end{proof}
+
+ \begin{lemma} \label{lemma-2-all-some-unions}
+ If $\Gamma\not\proves \mbox{\sf Some $t$ $u$}$, then there is a model of $\Gamma$
+ where $\semantics{t}\cap\semantics{u} = \emptyset$.
+\end{lemma}
+
+ 
+Before we prove this, we need a lemma.
+ 
+ \begin{lemma}
+ Suppose that $\Gamma\not\proves \mbox{\sf Some $t$ $u$}$.
+ Suppose also that $\Gamma$ contains the sentence $\mbox{\sf Some $a$ $b$}$, where $a$ and $b$
+ are set terms.
+ Then there is a prime up-set $S$ containing both $a$ and $b$ such that
+ $S$
+ does not contain both $t$ and $u$.
+ \end{lemma}
+ 
+
+\begin{proof}
+Let $\SS$ be the family of sets $T$ such that (1) $T$ contains both $a$ and $b$;
+(2) $T$ is closed upwards;
+(3) $T$  does not contain both $t$ and $u$.
+One such set in $\SS$ is $(\uparrow a)\cup (\uparrow b)$.  
+  This set obviously has (1) and (2).
+Here is the argument for (3):
+ If $a\leq t$
+and $b\leq u$, using ({\sc darii})
+and 
+ the fact that $\Gamma$ contains the sentence $\mbox{\sf Some $a$ $b$}$,
+ we have
+ $\Gamma\proves  \mbox{\sf Some $t$ $u$}$, a contradiction.)
+The same would happen in other cases such as $a\leq t$ and $b\leq u$.
+The other two rules of the logic are needed in the other cases of this lemma.
+
+By Zorn's Lemma, let $S$ be a maximal element of $\SS$ with respect to inclusion.
+We claim that 
+$S$ is  prime.   To see this, suppose that $x \cup y\in S$,
+where $x$ and $y$ are basic.
+Suppose towards a contradiction that neither $x$ nor $y$ were in $S$.
+By maximality, $S\cup(\uparrow x)$ and $S\cup(\uparrow y)$  do not belong to $\SS$. 
+The only problems could come from condition (3).
+Then $x\leq t$, $x\leq u$, $y\leq t$, and $y\leq u$.
+But then $x\cup y \leq t$ and $x\cup y\leq u$.
+So $S$, being closed upwards, contains both $t$ and $u$, and this is a contradiction.
+ \end{proof}
+ 
+ Now we turn to the proof of 
+ Lemma~\ref{lemma-2-all-some-unions}.
+ 
+ \begin{proof}
+ For each sentence $\mbox{\sf Some $p$ $q$}$ in $\Gamma$,
+ choose a prime upset $S_{p,q}$ containing both $p$ and $q$
+ but not containing both $t$ and $u$.
+ Let 
+ \[ M = \set{S_{p,q}: \Gamma \mbox{ contains \mbox{\sf Some $p$ $q$}}}.\]
+ For a basic noun $x$, let 
+ \[\semantics{x} = \set{S_{p,q}
+\in M: p\leq x \mbox{ or } q \leq x}.\]
+ This equips $M$ with the structure of a model which we call $\Model$.
+ Of course, for a binary union term $x\cup y$, 
+ we automatically have $\semantics{x\cup y} = \semantics{x} \cup\semantics{y}$.
+ Then the fact that each $S_{p,q}$ is closed upwards implies that $\Model$
+satisfies the {\sf All} sentences in $\Gamma$.
+For a {\sf Some} sentence in $\Gamma$, say $\mbox{\sf Some $p$ $q$}$,
+note that $S_{p,q}\in \semantics{p}\cap\semantics{q}$.  
+Thus, $\Model\models\Gamma$.   
+
+We conclude this proof with the claim that $\semantics{t}\cap\semantics{u} = \emptyset$
+in $\Model$.   To see this, suppose towards a contradiction that $S_{p,q} \in\semantics{t}\cap\semantics{u} $.
+Now $S_{p,q}\in M$, so $\Gamma$ contains
+the sentence {\sf Some $p$ $q$}.
+We have a number of cases, one representative one is when
+$S_{p,q} \in\semantics{t}$ due to $p \leq t$,
+and $S_{p,q} \in\semantics{u}$ due to $q \leq u$.
+But then using the logic, $\Gamma\proves\mbox{\sf Some $t$ $u$}$.
+This is a contradiction.
+ \end{proof}
+ 
+This completes the proof of Theorem~\ref{theorem-completeness-all-some-unions}. 
+ 
+ 
+\end{document}
+      
+      
+      
+ \begin{figure}[t]
+\begin{mathframe}
+ \[
+ \infer{\mbox{\sf Some} (a, c)}{\mbox{\sf More}(a,b) & \mbox{\sf AtLeast}(c,d) & \mbox{\sf{AtLeast}}(b \cup d, a \cup c)}
+\] 
+ 
+
+   
+   
+   
+\caption{The Friday rule.\label{fig-friday}}
+\end{mathframe}
+\end{figure}
+  
+  
+  
+ \section{Adding {\sf More $t$ $u$} and $\existsgeq(x,y)$}
+ 
+ 
+ \begin{figure}[t]
+\begin{mathframe}
+ \[
+ \infer{\mbox{\sf Some} (a, c)}{\mbox{\sf More}(a,b) & \mbox{\sf AtLeast}(c,d) & \mbox{\sf{AtLeast}}(b \cup d, a \cup c)}
+\] 
+ 
+ 
+\caption{The Friday rule.\label{fig-friday}}
+\end{mathframe}
+\end{figure}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+\end{document}

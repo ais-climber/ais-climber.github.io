@@ -1,0 +1,298 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{balkenius1991nonmonotonic}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=c279b4147c3e8db2619ddcd761994d35}{%
+           family={Balkenius},
+           familyi={B\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d6a506642e1aa9c82ce1ca23630c1140}{%
+           family={Gärdenfors},
+           familyi={G\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann}%
+      }
+      \strng{namehash}{68fe554d9226311ca22b2ce1fcd1e4d2}
+      \strng{fullhash}{68fe554d9226311ca22b2ce1fcd1e4d2}
+      \strng{bibnamehash}{68fe554d9226311ca22b2ce1fcd1e4d2}
+      \strng{authorbibnamehash}{68fe554d9226311ca22b2ce1fcd1e4d2}
+      \strng{authornamehash}{68fe554d9226311ca22b2ce1fcd1e4d2}
+      \strng{authorfullhash}{68fe554d9226311ca22b2ce1fcd1e4d2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{KR}
+      \field{title}{Nonmonotonic inferences in neural networks}
+      \field{year}{1991}
+      \field{pages}{32\bibrangedash 39}
+      \range{pages}{8}
+    \endentry
+    \entry{giordano2022conditional}{article}{}
+      \name{author}{3}{}{%
+        {{hash=46bc51a236c33fe81f376a8908123903}{%
+           family={Giordano},
+           familyi={G\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=ec9738bb3613f20ba45be22740ad96c3}{%
+           family={Gliozzi},
+           familyi={G\bibinitperiod},
+           given={Valentina},
+           giveni={V\bibinitperiod}}}%
+        {{hash=b591fb7a02038d02c8774a4c62b451f8}{%
+           family={Theseider\bibnamedelima Dupré},
+           familyi={T\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Daniele},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{521efb470ae5656e1e6af058d0c4a433}
+      \strng{fullhash}{521efb470ae5656e1e6af058d0c4a433}
+      \strng{bibnamehash}{521efb470ae5656e1e6af058d0c4a433}
+      \strng{authorbibnamehash}{521efb470ae5656e1e6af058d0c4a433}
+      \strng{authornamehash}{521efb470ae5656e1e6af058d0c4a433}
+      \strng{authorfullhash}{521efb470ae5656e1e6af058d0c4a433}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Logic and Computation}
+      \field{number}{2}
+      \field{title}{A conditional, a fuzzy and a probabilistic interpretation of self-organizing maps}
+      \field{volume}{32}
+      \field{year}{2022}
+      \field{pages}{178\bibrangedash 205}
+      \range{pages}{28}
+    \endentry
+    \entry{vanHarmelen}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=ee480b6d2fd2c627ffb033d94c9691af}{%
+           family={Harmelen},
+           familyi={H\bibinitperiod},
+           given={Frankvan},
+           giveni={F\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=6c91a433a7cc7ab507b9bd279fa64cac}{%
+           family={Hitzler},
+           familyi={H\bibinitperiod},
+           given={Pascal},
+           giveni={P\bibinitperiod}}}%
+        {{hash=8058d6e1f797c6dfb26ccc11667983bf}{%
+           family={Sarker},
+           familyi={S\bibinitperiod},
+           given={{Md Kamruzzaman}},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOS Press BV}%
+      }
+      \strng{namehash}{ee480b6d2fd2c627ffb033d94c9691af}
+      \strng{fullhash}{ee480b6d2fd2c627ffb033d94c9691af}
+      \strng{bibnamehash}{ee480b6d2fd2c627ffb033d94c9691af}
+      \strng{authorbibnamehash}{ee480b6d2fd2c627ffb033d94c9691af}
+      \strng{authornamehash}{ee480b6d2fd2c627ffb033d94c9691af}
+      \strng{authorfullhash}{ee480b6d2fd2c627ffb033d94c9691af}
+      \strng{editorbibnamehash}{5c1391cd02e0ce6b486a7c4dbe76331e}
+      \strng{editornamehash}{5c1391cd02e0ce6b486a7c4dbe76331e}
+      \strng{editorfullhash}{5c1391cd02e0ce6b486a7c4dbe76331e}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Neuro-Symbolic Artificial Intelligence}
+      \field{title}{Preface: The 3rd AI Wave Is Coming, and It Needs a Theory}
+      \field{year}{2022}
+    \endentry
+    \entry{kisby2022logic}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=0600ff50bbe0b41d46ab9429f6909681}{%
+           family={Kisby},
+           familyi={K\bibinitperiod},
+           given={Caleb},
+           giveni={C\bibinitperiod}}}%
+        {{hash=502c0a413f28c8ceddc948c523f090a0}{%
+           family={Blanco},
+           familyi={B\bibinitperiod},
+           given={Saúl},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6ab1200ad347ea9092348d9d95b3b344}{%
+           family={Moss},
+           familyi={M\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{8fb71ba30aee2b110426631a78e8f226}
+      \strng{fullhash}{8fb71ba30aee2b110426631a78e8f226}
+      \strng{bibnamehash}{8fb71ba30aee2b110426631a78e8f226}
+      \strng{authorbibnamehash}{8fb71ba30aee2b110426631a78e8f226}
+      \strng{authornamehash}{8fb71ba30aee2b110426631a78e8f226}
+      \strng{authorfullhash}{8fb71ba30aee2b110426631a78e8f226}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The International FLAIRS Conference Proceedings}
+      \field{title}{The Logic of Hebbian Learning}
+      \field{volume}{35}
+      \field{year}{2022}
+    \endentry
+    \entry{kraus1990nonmonotonic}{article}{}
+      \name{author}{3}{}{%
+        {{hash=de674f6370185bbdaef21079761fcd7f}{%
+           family={Kraus},
+           familyi={K\bibinitperiod},
+           given={Sarit},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a95679da7af53ed3c69c4b4f946f9da7}{%
+           family={Lehmann},
+           familyi={L\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=555a2a74b7fb36f7e5a08b35065e3946}{%
+           family={Magidor},
+           familyi={M\bibinitperiod},
+           given={Menachem},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{8221bd20fde9d629638aecef100857c9}
+      \strng{fullhash}{8221bd20fde9d629638aecef100857c9}
+      \strng{bibnamehash}{8221bd20fde9d629638aecef100857c9}
+      \strng{authorbibnamehash}{8221bd20fde9d629638aecef100857c9}
+      \strng{authornamehash}{8221bd20fde9d629638aecef100857c9}
+      \strng{authorfullhash}{8221bd20fde9d629638aecef100857c9}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial intelligence}
+      \field{number}{1-2}
+      \field{title}{Nonmonotonic reasoning, preferential models and cumulative logics}
+      \field{volume}{44}
+      \field{year}{1990}
+      \field{pages}{167\bibrangedash 207}
+      \range{pages}{41}
+    \endentry
+    \entry{leitgeb2001nonmonotonic}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2f1f803844a43487689ac1ae912da8c1}{%
+           family={Leitgeb},
+           familyi={L\bibinitperiod},
+           given={Hannes},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{fullhash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{bibnamehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{authorbibnamehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{authornamehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{authorfullhash}{2f1f803844a43487689ac1ae912da8c1}
+      \field{extraname}{1}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence}
+      \field{number}{1-2}
+      \field{title}{Nonmonotonic reasoning by inhibition nets}
+      \field{volume}{128}
+      \field{year}{2001}
+      \field{pages}{161\bibrangedash 201}
+      \range{pages}{41}
+    \endentry
+    \entry{leitgeb2003nonmonotonic}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2f1f803844a43487689ac1ae912da8c1}{%
+           family={Leitgeb},
+           familyi={L\bibinitperiod},
+           given={Hannes},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {World Scientific}%
+      }
+      \strng{namehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{fullhash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{bibnamehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{authorbibnamehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{authornamehash}{2f1f803844a43487689ac1ae912da8c1}
+      \strng{authorfullhash}{2f1f803844a43487689ac1ae912da8c1}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems}
+      \field{number}{supp02}
+      \field{title}{Nonmonotonic reasoning by inhibition nets II}
+      \field{volume}{11}
+      \field{year}{2003}
+      \field{pages}{105\bibrangedash 135}
+      \range{pages}{31}
+    \endentry
+    \entry{Odense2022ASF}{article}{}
+      \name{author}{2}{}{%
+        {{hash=c8ceea202cfac98e601fc28bfc2d5c5e}{%
+           family={Odense},
+           familyi={O\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b46d088fcebd8eb99a5066ba10111447}{%
+           family={Garcez},
+           familyi={G\bibinitperiod},
+           given={Artur\bibnamedelima S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           prefix={d'Avila},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{d7c92e371282f7b9116dbee2cd34754f}
+      \strng{fullhash}{d7c92e371282f7b9116dbee2cd34754f}
+      \strng{bibnamehash}{d7c92e371282f7b9116dbee2cd34754f}
+      \strng{authorbibnamehash}{d7c92e371282f7b9116dbee2cd34754f}
+      \strng{authornamehash}{d7c92e371282f7b9116dbee2cd34754f}
+      \strng{authorfullhash}{d7c92e371282f7b9116dbee2cd34754f}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ArXiv}
+      \field{title}{A Semantic Framework for Neural-Symbolic Computing}
+      \field{volume}{abs/2212.12050}
+      \field{year}{2022}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

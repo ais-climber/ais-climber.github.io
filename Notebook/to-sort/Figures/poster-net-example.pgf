@@ -1,0 +1,84 @@
+﻿\definecolor{myred}{rgb}{0.5, 0, 0}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\set}[1]{\{ #1 \}}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit}
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+% nodes
+\node[circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a){$a$};
+\node[below=0.6 of a,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b){$b$};
+\node[below=0.6 of b,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](c){$c$};
+\node[below=0.6 of c,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](d){$d$};
+
+\node[right=2.2 of $(a)!0.5!(b)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](e){$e$};
+\node[right=2.2 of $(b)!0.5!(c)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](f){$f$};
+\node[right=2.2 of $(c)!0.5!(d)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](g){$g$};
+
+\node[right=2.2 of f,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](h){$h$};
+
+% Hidden nodes
+\node (bpivot) [left=0.3 of b] {\phantom{p}};
+\node (dpivot) [left=0.3 of d] {\phantom{p}};
+\node (bpivot2) [right=0.3 of b] {\phantom{p}};
+\node (epivot) [right=0.3 of e] {\phantom{p}};
+
+% sets
+%\node[fill=myred,color=myred, opacity=0.4,rectangle,rounded corners=2ex,fit=(a) (e)]{};
+%\node[fill=myred, opacity=0.25,rectangle,rounded corners=2ex,fit=(a) (b)]{};
+%\node[right triangle, fill=myred, opacity=0.25,rounded corners=2ex,fit=(e) (f) (h)]{};
+
+% penguin
+\draw[fill=myred,color=myred,opacity=0.4,rounded corners=2ex] 
+([xshift=-0.2cm,yshift=0.4cm]b.north west) -- ([xshift=-0.2cm,yshift=-0.2cm]b.south west) -- ([xshift=0.4cm,yshift=-0.5cm]g.south east) -- ([xshift=0.3cm,yshift=0.1cm]g.north east) -- cycle;
+
+% bird
+\draw[fill=myred,color=myred,opacity=0.25,rounded corners=2ex] 
+([xshift=-0.4cm,yshift=0.4cm]a.north west) -- ([xshift=-0.4cm,yshift=-0.4cm]d.south west) -- ([xshift=0.4cm,yshift=-0.2cm]g.south east) -- ([xshift=0.3cm,yshift=0.1cm]g.north east) --
+([xshift=0.1cm,yshift=0.1cm]a.north east) -- cycle;
+
+% flies
+\draw[fill=myred,color=myred,opacity=0.25,rounded corners=2ex] 
+([xshift=-0.2cm,yshift=0.3cm]e.north west) --
+([xshift=-0.2cm,yshift=0.3cm]f.north) -- 
+([xshift=-0.2cm,yshift=-0.2cm]h.west) --
+([xshift=-0.2cm,yshift=0cm]g.north west) --
+([xshift=-0.2cm,yshift=-0.5cm]g.south west) -- 
+([xshift=0.4cm,yshift=-0.2cm]h.south east) -- 
+([xshift=0.3cm,yshift=0.1cm]h.north east) -- cycle;
+
+% \draw[dotted,rounded corners=20pt] ([yshift=0.9cm]ab.north west) -- ([xshift=-0.15cm,yshift=-0.1cm]a.south west) -- ([xshift=0.7cm,yshift=-0.1cm]b.south east) -- cycle;
+
+% \node[isosceles triangle,fit = (7) (8) (9),draw=red,thick] {};
+
+
+% set labels
+\node [color=myred,opacity=0.75,right=0.5 of $(a)$][yshift=0.2cm]{bird};
+\node [color=myred,opacity=1,right=0.5 of $(f)$][yshift=-1cm](penguin){penguin};
+\node [color=myred,opacity=0.75,below=0.3 of $(h)$]{flies};
+\draw[edge, thick, color=myred, opacity=0.75] ([xshift=-0.2cm, yshift=-0.1cm]penguin.north) -- (f.south east);
+
+\draw[edge] (a) -- (e);
+\draw[edge] (a) -- (f);
+\draw[edge] (a) -- (g);
+\draw[edge] (a) -- (h);
+
+\draw[edge] (b) -- (e);
+\draw[edge] (b) -- (f);
+\draw[edge] (b) -- (g);
+\draw[edge] (b) -- (h);
+
+\draw[edge] (c) -- (e);
+\draw[edge] (c) -- (f);
+\draw[edge] (c) -- (g);
+
+\draw[edge] (d) -- (e);
+\draw[edge] (d) -- (f);
+\draw[edge] (d) -- (g);
+\draw[edge] (d) -- (h);
+
+\draw[edge] (e) -- (h);
+\draw[edge] (f) -- (h);
+\draw[edge] (g) -- (h);
+
+\end{tikzpicture}

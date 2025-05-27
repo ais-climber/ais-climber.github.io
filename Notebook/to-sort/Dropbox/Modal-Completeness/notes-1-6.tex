@@ -1,0 +1,1259 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{geometry,amsmath,amssymb,stmaryrd,hyperref,xcolor,latexsym}
+\geometry{letterpaper}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\colons}{\,:\,}
+\newcommand{\infixand}{\text{ and }}
+\newcommand{\infixiff}{\text{ iff }}
+\newcommand{\key}[1]{\fcolorbox{black}{gray!25!white}{\raisebox{0pt}[5pt][0pt]{\texttt{#1}}}\hspace{0.5pt}}
+\newcommand{\nin}{\not\in}
+\newcommand{\op}[1]{#1}
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmstrong}[1]{\textbf{#1}}
+\newcommand{\tmtextbf}[1]{\text{{\bfseries{#1}}}}
+\newcommand{\tmtextit}[1]{\text{{\itshape{#1}}}}
+\newcommand{\tmtextsc}[1]{\text{{\scshape{#1}}}}
+\newcommand{\tmtextsf}[1]{\text{{\sffamily{#1}}}}
+\newcommand{\todo}[1]{{\color{red!75!black}[To do: #1]}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newenvironment{tmparmod}[3]{\begin{list}{}{\setlength{\topsep}{0pt}\setlength{\leftmargin}{#1}\setlength{\rightmargin}{#2}\setlength{\parindent}{#3}\setlength{\listparindent}{\parindent}\setlength{\itemindent}{\parindent}\setlength{\parsep}{\parskip}} \item[]}{\end{list}}
+\newenvironment{tmparsep}[1]{\begingroup\setlength{\parskip}{#1}}{\endgroup}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\tableofcontentstext}{}
+\newcommand{\definitiontext}{Definition}
+\newcommand{\rendertheorem}[2]{{\renderenunciation{{\theoremname{#1{\theoremsep}}}}{#2}}}
+%
+
+\providecommand{\infixiff}{\mathbin{\text{ iff }}}
+%
+
+\newcommand{\garnet}[1]{{\color[HTML]{990002}#1}}
+\newcommand{\myblue}[1]{{\color[HTML]{0749AC}#1}}
+\newcommand{\Model}{\ensuremath{\mathcal{M}}}
+\newcommand{\Net}{\ensuremath{\mathcal{N}}}
+\newcommand{\Set}{\textsf{\tmop{Set}}}
+\newcommand{\Primes}{\mathsf{P}}
+\newcommand{\semantics}[1]{\left\llbracket #1 \right\rrbracket}
+\newcommand{\Lang}{\mathcal{L}}
+\newcommand{\vocab}{V}
+\newcommand{\wocab}{W}
+\newcommand{\proves}{{\vdash}}
+\newcommand{\orr}{{\vee}}
+\providecommand{\land}{{\wedge}}
+\newcommand{\NP}{\tmtextsc{NP}}
+\newcommand{\bigchi}{\Large{\chi}}
+\newcommand{\powerset}{\mathcal{P}}
+%
+
+\newcommand{\hash}{\textsf{\tmop{hash}}}
+\newcommand{\unique}{\tmtextsf{unique}}
+\newcommand{\Know}{\tmmathbf{\text{K}}}
+\newcommand{\Knownby}{\tmmathbf{\text{K}^{\leftarrow}}}
+\newcommand{\diaKnow}{\langle \tmmathbf{\text{K}} \rangle}
+\newcommand{\diaKnownby}{\langle \tmmathbf{\text{K}^{\leftarrow}} \rangle}
+\newcommand{\Typ}{\tmmathbf{\text{T}}}
+\newcommand{\diaTyp}{\langle \tmmathbf{\text{T}} \rangle}
+\newcommand{\Reach}{\textsf{\tmop{Reach}}}
+\newcommand{\Prop}{\textsf{\tmop{Prop}}}
+\newcommand{\Hebb}{\tmtextsf{Update}}
+\newcommand{\Inc}{\tmtextsf{Inc}}
+\newcommand{\AllNets}{\textsf{\tmop{Net}}}
+\newcommand{\AllModels}{\tmtextsf{Model}}
+\newcommand{\bibliographytext}{}
+\newcommand{\renderbibliography}[2]{{\principalsectionstar{#1}}
+
+\begin{tmparmod}{0pt}{0pt}{0em}%
+  \begin{tmparsep}{0em}%
+    {\small #2}
+  \end{tmparsep}
+\end{tmparmod}}
+\newcommand{\sectionalsep}{{\hspace{2em}}}
+\newcommand{\sectionalpostsep}{{\hspace{2em}}}
+\newcommand{\propositiontext}{Proposition}
+%
+
+\newtheorem{claim}{Claim}
+\newtheorem{goal}{Goal}
+\newcommand{\questiontext}{}
+
+\begin{document}
+
+\title{
+  Notes on the Completeness of Neural Net Models\\
+  in a Modal Language
+}
+
+\maketitle
+
+\begin{quoteenv}
+  \tmtextbf{Step 0. Find a paper I enjoy, and read it. Try to understand its
+  ideas, with an eye towards extending it/altering it.}
+\end{quoteenv}
+
+This paper is inspired by Hannes Leitgeb's
+\href{https://pdf.sciencedirectassets.com/271585/1-s2.0-S0004370200X00768/1-s2.0-S000437020100073X/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBUaCXVzLWVhc3QtMSJIMEYCIQCYhHMlIPhIq3vO4rnf4y1swIkWc00HT6vtGY5twAuAygIhALXtW5sZJGGEIevyH%2B%2BXjijmgXy2ShEjSWoS6hA4ztVkKswECF0QBRoMMDU5MDAzNTQ2ODY1IgykI5CgK9WVME8ZMBoqqQSpliScdX5JGooz6vazOYjdbL08lgSWnU5bZfWtvxkwOvS%2BWi7FEeFc6OlKllF8GyahFm6htvFFreqTmdsfk2x3ffNWukRYgJEtp9xsxREbCyTdZs2p1zzHybDyrzqtqfOA0E6pShx5olx1jp%2BJl7hIG1Zvf%2FvfVISL44d4NVzpJJvBiGMzVl2UYdk%2BYW%2FVO7axQWxAoS28Vy1EEySDihEOHJYRyexTqt82XAZxAoRizFoCGScG1FMe5d5BWcmxfnPT5WrPT4zVRe6HhMHlF8X8wuw5IfMJ9F74ZJd2aS1kv09b8dJ4VZXvLTGOqx22WSxRBS%2FiG%2BFUp%2Fms89HO0WkUCguddmdyE%2BsQDVSx%2FfPLntqCa2fD%2FbWQzdIuhGBHP6K4AAWWUABK8UVU1Z%2Fu40Z8htWwqEloqV7S55QIDH%2BJI6N9JHaS6P5BnIaHvLzlYrJnJ%2FR8AyhJ%2FHp0g2sb%2FYyAL13xVEjYZGetubAD1P9TXrnlXsEiJpFeH5P4rUy%2F%2FXLerG2z69r250Pbhh8JoPH6uusYtzyha0fZalhu%2BA1pP3GfEVrikEDpxvx6tgExgNZHDE9UAfWF1NH%2F7X%2Fz46gAuT%2FnjvRZ9KcfpkOX6zzQtkkGyUiNdm3CBZ4Z6pSssQu8sTdv0w7htnFOWNwZnH8zSkcC9MjDMvfT%2FZNV3HN2XTVjLy9n4VWmTKO7m0zjZqVqn6B8CsaPRosze2qr3om4hxpCpSG6YpQPMPSGtp0GOqgB8IETl9v2KqQGOJQJO3CRaT1rkgXy%2BuWRY6WTp8ROr0I23070icKEf4ssWAwxSXneXGKkU6HQh7mvdLhjD0fOqjOebZmAg2Vvojm87UBddPvAC9s01O2byEjQ0xH3MMq2BvLfB%2FGlT%2BOnk4o0Aj7K%2BkA20dnf2h9ekSRmpr6QyuQ7GUPxYteMtRPntOwOwxshishUGWXynnZWGcbtUOJ%2BTU7AgDcdZrcX&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221229T131449Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYTRHAT5NH%2F20221229%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6883ba7f9b34aebf025254e28f320fadb7efb3b1f4abd990fd3198cf2308a56e&hash=df607e446c88459bfb2a3e3b7078f82cd7eef5c00ba4d6a84ba2732a687200ef&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S000437020100073X&tid=spdf-ffe2d701-58e9-4ee8-8716-53020a0b2676&sid=61edbba4786fd54fdd6949c8028454f460e6gxrqa&type=client&ua=515a52510501565e0007&rr=7812cd08cdd7e127}{Nonmonotonic
+Reasoning by Inhibition Nets}, which proves completeness for the
+neuro-symbolic interface suggested by Balkenius and
+G{\"a}rdenfors'\href{https://scholar.google.com/citations?user=ZW8RWdAAAAAJ&hl=en&oi=sra}{}
+\href{https://books.google.com/books?hl=en&lr=&id=1wwZAQAAIAAJ&oi=fnd&pg=PA32&dq=Nonmonotonic+inferences+in+neural+networks&ots=VsdxiIdpzf&sig=wC9oAbA8HUcIPI5gqmLNTDcc8tM}{Nonmonotonic
+Inferences in Neural Networks}.
+
+\tmtextbf{\begin{quoteenv}
+  Step 1. Look for an extension/open problem that makes me think ``What the
+  fuck? That's still open? No way, this shit is low-hanging fruit, free paper
+  here I come.'' i.e. something \tmtextit{easy} and
+  \tmtextit{straightforward}, \tmtextit{without complications}.
+\end{quoteenv}}
+
+Hannes Leitgeb showed that feed-forward neural networks are complete with
+respect to certain conditional laws of $\Rightarrow$. But $\varphi \Rightarrow
+\psi$ just reads ``$\psi \subseteq \Prop (\varphi)$'' (i.e. $\psi$ is in the
+propagation of the signal $\varphi$), which we can re-write in modal language
+as $\Typ \varphi \rightarrow \psi$. In the same way that Hannes shows that
+feed-forward nets and preferential-conditional models are equivalent, it
+shouldn't be too hard at all to show that feed-forwards nets and neighborhood
+models are equivalent. (Note that it is well-known that neighborhood models
+are a generalization of preferential models.)
+
+I also think I should be able to throw in a $\Know$ modality
+(graph-reachability) in there, almost for free.
+
+\tmtextbf{\begin{quoteenv}
+  Step 2. Follow-up question (only answer after Step 1): Is the extension
+  \tmtextit{interesting} or \tmtextit{surprising}? What do we learn by
+  extending the result?
+\end{quoteenv}}
+
+{\renderenunciation{{\tmstrong{Why bother with completeness?. }}}{In formal
+specifications (of AI agents, or otherwise), we're often content with just
+listing some sound rules or behaviors that the agent will always follow. And
+it's definitely cool to see that neural networks satisfy some sound logical
+axioms. But if we want to fundamentally bridge the gap between logic and
+neural networks, we should set our aim higher: Towards \tmtextit{complete}
+logical characterizations of neural networks.
+
+A more practical reason: Completeness gives us model-building, i.e. given a
+specification $\Gamma$, we can \tmtextit{build} a neural network $\Net$
+satisfying $\Gamma$.}}
+
+{\renderenunciation{{\tmstrong{Why bother with this modal language?.
+}}}{Almost all of the previous work bridging logic and neural networks has
+focused on neural net models of \tmtextit{conditionals}. In some sense, doing
+this in modal language is just a re-write of this old work. But this previous
+work hasn't addressed how \tmtextit{learning} or \tmtextit{update} in neural
+networks can be cast in logical terms. This is not merely due to circumstance
+--- integrating conditionals with update is a long-standing controversial
+issue. So instead, we believe that it is more natural to work with modalities
+(instead of conditionals), because
+
+{\center{\tmtextit{Modal language natively supports update.}}}
+
+In other words, our modal setting sets us up to easily cast update operators
+(e.g. neural network learning) as modal operators in our logic.}}
+
+Also this gives me an excuse to title a paper \tmtextit{Neural Network Models
+{\`a} la Mode} :-) (This is a play on both modal logic and also bringing some
+old work back in style!)
+
+And LOL I can name a section ``Learning: The Cherry on Top''
+
+\begin{quoteenv}
+  \tmtextbf{Step 3. Two things to do at this point:
+  \begin{itemize}
+    \item Make a new Texmacs file named ``PAPERNAME-master-notes.tm''.
+    Transcribe the key definitions, examples, lemmas, and results from the
+    paper. This makes it easier to later copy-paste parts of proofs, and also
+    ensures that I don't reinvent the wheel later (it's tempting to redefine
+    everything yourself!)
+    
+    \item Go to \url{https://www.connectedpapers.com/} and download any major
+    nearby papers. Upload the papers to \tmtextbf{paperless-ngx} and make a
+    point to read them (understanding context helps a lot!).
+  \end{itemize}}
+\end{quoteenv}
+
+\section*{Related Papers:}
+
+{\todo{}}
+
+\begin{quoteenv}
+  \tmtextbf{Step 4. Write up my new definitions \& proof in the Texmacs file.
+  Again, should be a \tmtextit{very} straightforward extension, and the proof
+  (proofs are just unit-tests for definitions) shouldn't take up too much room
+  at all (1-2 pages, including defs)}
+\end{quoteenv}
+
+\section{Interpreted Neural Nets}
+
+\subsection{Basic Definitions}
+
+\begin{definition}
+  An \key{interpreted}\key{ANN} (Artificial Neural Network) is a pointed
+  directed graph $\Net = \langle N, E, W, T, A, V \rangle$, where
+  \begin{itemize}
+    \item $N$ is a finite nonempty set (the set of \key{neurons})
+    
+    \item $E \subseteq N \times N$ (the set of \key{excitatory}\key{neurons})
+    
+    \item $W : E \rightarrow \mathbb{R}$ (the \key{weight} of a given
+    connection)
+    
+    \item $A$ is a function which maps each $n \in N$ to $A^{(n)} :
+    \mathbb{R^k \times R^k \rightarrow R }$ (the
+    \key{activation}\key{function} for $n$, where $k$ is the indegree of $n$)
+    
+    \item $O$ is a function which maps each $n \in N$ to $O^{(n)} : \mathbb{R}
+    \rightarrow \{ 0, 1 \}$ (the \key{output}\key{function} for $n$)
+    
+    \item $V : \tmop{propositions} \cup \tmop{nominals} \rightarrow \powerset
+    (N)$ is an assignment of nominals to individual neurons (the
+    \key{valuation}\key{function}). If $i$ is a nominal, we require $| V (i) |
+    = 1$, i.e. a singleton.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A \key{BFNN} (Binary Feedforward Neural Network) is an interpreted ANN
+  $\Net = \langle N, E, W, T, A, V \rangle$ that is
+  \begin{itemize}
+    \item \key{Feed-forward}, i.e. $E$ does not contain any cycles
+    
+    \item \key{Binary}, i.e. the output of each neuron is in \{0, 1\}
+    
+    \item $O^{(n)} \circ A^{(n)}$ is \key{zero}\key{at}\key{zero} in the first
+    parameter, i.e.
+    \[ O^{(n)} (A^{(n)} (\vec{0}, \vec{w})) = 0 \]
+    \item $O^{(n)} \circ A^{(n)}$ is
+    \key{strictly}\key{monotonically}\key{increasing} in the second parameter,
+    i.e. for all $\vec{x}, \overrightarrow{w }_1, \vec{w}_2 \in \mathbb{R}^k$,
+    if $\overrightarrow{w }_1 < \vec{w}_2$ then $O^{(n)} (A^{(n)} (\vec{x},
+    \vec{w}_1)) < O^{(n)} (A^{(n)} (\vec{x}, \vec{w}_2))$. We will more often
+    refer to the equivalent condition:
+    \[ \overrightarrow{w }_1 \leqslant \vec{w}_2 \infixiff O^{(n)} (A^{(n)}
+       (\vec{x}, \vec{w}_1)) \leqslant O^{(n)} (A^{(n)} (\vec{x}, \vec{w}_2))
+    \]
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Given a BFNN {\Net}, $\Set = \powerset (N) = \{ S \mid S \subseteq N \}$
+\end{definition}
+
+\begin{definition}
+  For $S \in \Set$, let $\bigchi_S : N \rightarrow \{ 0, 1 \}$ be given by
+  $\bigchi_S = 1$ iff $n \in S$
+\end{definition}
+
+\subsection{$\Prop$ and $\Reach$}
+
+\begin{definition}
+  Let $\Prop : \Set \rightarrow \Set$ be defined recursively as follows: $n
+  \in \Prop (S)$ iff either
+  \begin{description}
+    \item[Base Case] $n \in S$, or
+    
+    \item[Constructor] For those $m_1, \ldots, m_k$ such that $(m_i, n) \in E$
+    we have
+    \[ O^{(n)} \left( A^{(n)} \left( \overrightarrow{\bigchi}_{\Prop (S)}
+       (m_i), \vec{W} (m_i, n) \right) \right) = 1 \]
+  \end{description}
+\end{definition}
+
+\begin{proposition}[Leitgeb]
+  \label{thm:prop-props}Let $\Net \in \AllNets$. For all $S, S_1, S_2 \in
+  \Set$, $\Prop$ satisfies
+  \begin{description}
+    \item[\key{(Inclusion)}] $S \subseteq \Prop (S)$
+    
+    \item[\key{(Idempotence)}] $\Prop (S) = \Prop (\Prop (S))$
+    
+    \item[\key{(Cumulative)}] If $S_1 \subseteq S_2 \subseteq \Prop (S_1)$
+    then $\Prop (S_1) \subseteq \Prop (S_2)$
+    
+    \item[\key{(Loop)}] If $S_1 \subseteq \Prop (S_0), \ldots, S_n \subseteq
+    \Prop (S_{n - 1})$ and $S_0 \subseteq \Prop (S_n)$,
+    
+    then $\Prop (S_i) = \Prop (S_j)$ for all $i, j \in \{ 0, \ldots, n \}$
+  \end{description}
+\end{proposition}
+
+\begin{definition}
+  Let $\Reach : \Set \rightarrow \Set$ be defined recursively as follows: $n
+  \in \Reach (S)$ iff either
+  \begin{description}
+    \item[Base Case] $n \in S$, or
+    
+    \item[Constructor] There is an $m \in \Reach (S)$ such that $(m, n) \in
+    E$.
+  \end{description}
+\end{definition}
+
+\begin{proposition}
+  \label{thm:reach-props}Let $\Net \in \AllNets$. For all $S, S_1, S_2 \in
+  \Set$, $n, m \in N$, $\Reach$ satisfies
+  \begin{description}
+    \item[\key{(Inclusion)}] $S \subseteq \Reach (S)$
+    
+    \item[\key{(Idempotence)}] $\Reach (S) = \Reach (\Reach (S))$
+    
+    \item[\key{(Monotonicity)}] If $S_1 \subseteq S_2$ then $\Reach (S_1)
+    \subseteq \Reach (S_2)$
+    
+    \item[\key{(Containment)}] $\Prop (S) \subseteq \Reach (S)$
+  \end{description}
+\end{proposition}
+
+\begin{definition}
+  For all $n \in N$, $\Reach^{- 1} (n) = \bigcap_{n \not{\in} \Reach (X)}
+  X^{\complement}$
+\end{definition}
+
+\begin{proposition}
+  \label{prop-reach-inverse}For all $n \in N$, $\Reach^{- 1} (n) = \{ m \mid
+  \tmop{there} \tmop{is} \tmop{an} E \textrm{-} \tmop{path} \tmop{from} m
+  \tmop{to} n \}$
+\end{proposition}
+
+\begin{proposition}
+  \label{prop-reach-acyclic}$\Reach^{- 1}$ is acyclic in the following sense:
+  For $n_1, \ldots, n_k \in N$, if
+  \[ n_1 \in \Reach^{- 1} (n_2), \ldots, n_{k - 1} \in \Reach^{- 1} (n_k), n_k
+     \in \Reach^{- 1} (n_1) \]
+  Then each $n_i = n_j$.
+\end{proposition}
+
+\begin{proposition}
+  \label{minimal-cause}\key{(Minimal}\key{Cause)} For all $n \in N$, if $n \in
+  \Prop (S)$ then $n \in \Prop \left( S \cap \Reach^{- 1} (n) \right)$
+\end{proposition}
+
+\subsection{Neural Network Semantics}
+
+\begin{definition}
+  Formulas of our language $\Lang$ are given by
+  \[ \varphi \colons = i \mid p \mid \neg \varphi \mid \varphi \wedge \varphi
+     \mid \Know \varphi \mid \Knownby i \mid \Typ \varphi \mid \]
+  where $p$ is any propositional variable, and $i$ is any nominal (denoting a
+  neuron). Material implication $\varphi \rightarrow \psi$ is defined as $\neg
+  \varphi \vee \psi$. We define $\bot, \vee, \leftrightarrow,
+  \Leftrightarrow,$and the dual operators $\diaKnow, \diaKnownby, \diaTyp$ in
+  the usual way.
+\end{definition}
+
+\begin{definition}
+  Let $\Net \in \AllNets$. The semantics $\semantics{\cdot} : \Lang
+  \rightarrow \Set$ for $\Lang$ are defined recursively as follows:
+  \[ \begin{array}{|lll|}
+       \hline
+       \semantics{i} & = & V (i) \in \Set\\
+       \semantics{p} & = & V (p) \in \Set\\
+       \semantics{\neg \varphi} & = & \semantics{\varphi}^{\complement}\\
+       \semantics{\varphi \wedge \psi} & = & \semantics{\varphi} \cap
+       \semantics{\psi}\\
+       \semantics{\diaKnow \varphi} & = & \Reach \left( \semantics{\varphi}
+       \right)\\
+       \semantics{\diaKnownby \varphi} & = & \left\{ n \mid \exists m \in
+       \semantics{\varphi}^{\complement} \text{ such that } n \in \Reach^{- 1}
+       (m) \right\}\\
+       \semantics{\diaTyp \varphi} & = & \Prop \left( \semantics{\varphi}
+       \right)\\
+       \hline
+     \end{array} \]
+\end{definition}
+
+\begin{definition}
+  \tmtextbf{(Truth at a neuron)} $\Net, n \Vdash \varphi$ iff $n \in
+  \semantics{\varphi}_{\Net}$.
+\end{definition}
+
+\begin{definition}
+  \tmtextbf{(Truth in a net)} $\Net \models \varphi$ iff $\Net, n \Vdash
+  \varphi$ for all $n \in N$.
+\end{definition}
+
+\section{Neighborhood Models}
+
+\subsection{Basic Definitions}
+
+\begin{definition}
+  A \key{neighborhood}\key{frame} is a pair $\mathcal{F} = \langle W, f
+  \rangle$, where $W$ is a non-empty set of \key{worlds} and $f : W \to
+  \powerset (\powerset (W))$ is a \key{neighborhood}\key{function}.
+\end{definition}
+
+\begin{definition}
+  A \key{multi-frame} is $\mathfrak{F} = \langle W, f, g \rangle$, where $f$
+  and $g$ are neighborhood functions.
+\end{definition}
+
+\begin{definition}
+  Let $\mathfrak{\mathcal{F}} = \langle W, f \rangle$ be a neighborhood frame,
+  and let $w \in W$. The set $\bigcap_{X \in f (w)} X$ is called the
+  \key{core} of $f (w)$. We often abbreviate this by $\cap f (w)$.
+\end{definition}
+
+\begin{definition}
+  Let $\mathfrak{\mathcal{F}} = \langle W, f \rangle, \mathfrak{\mathcal{G}} =
+  \langle W, g \rangle$ be neighborhood frames with $W$ nonempty.
+  \begin{itemize}
+    \item $\mathfrak{\mathcal{F}}$ is
+    \key{closed}\key{under}\key{finite}\key{intersections} iff for all $w \in
+    W$, if $X_1, \ldots, X_n \in f (w)$ then their intersection $\bigcap^k_{i
+    = 1} X_i \in f (w)$.
+    
+    \item $\mathfrak{\mathcal{F}}$ is \key{closed}\key{under}\key{supersets}
+    iff for all $w \in W$, if $X \in f (w)$ and $X \subseteq Y \subseteq W$,
+    then $Y \in f (w)$.
+    
+    \item $\mathfrak{\mathcal{F}}$ \key{contains}\key{the}\key{unit} iff $W
+    \in f (w)$.
+    
+    \item $\mathcal{F}$ \key{contains}\key{the}\key{empty}\key{set} iff
+    $\emptyset \in f (w)$.
+    
+    \item $\mathcal{F}$ is \key{reflexive} iff for all $w \in W$, $w \in \cap
+    f (w)$
+    
+    \item $\mathcal{F}$ is \key{transitive} iff for all $w \in W$, if $X \in f
+    (w)$ then $\{ u \mid X \in f (u) \} \in f (w)$.
+    
+    \item $\mathcal{F}$ is \key{acyclic} iff for all $u_1, \ldots, u_n \in W$,
+    if $u_1 \in \cap f (u_2), \ldots, u_{n - 1} \in \cap f (u_n), u_n \in \cap
+    f (u_1)$ then all $u_i = u_j$.
+    
+    \item $\mathcal{F}$ \key{guides} $\mathcal{G}$ iff for all $w \in W$, if
+    $X \cup {(\cap f (w))^{\complement}}  \in g (w)$ then $X \in g (w)$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $\mathcal{F} = \langle W, f \rangle$ be a frame, and $\mathfrak{F} =
+  \langle W, f, g \rangle$ be a multi-frame extending $\mathcal{F}$. We will
+  focus on the following special classes of frames:
+  \begin{itemize}
+    \item $\mathcal{F}$ is a \key{proper}\key{filter} iff for all $w \in W$,
+    $f (w)$ is closed under finite intersections, closed under supersets,
+    contains the unit, and does not contain the empty set.
+    
+    \item $\mathfrak{F}$ is a \key{preferential}\key{multi-frame} iff
+    \begin{itemize}
+      \item $W$ is finite,
+      
+      \item $\mathcal{F} = \langle W, f \rangle$ forms a reflexive,
+      transitive, acyclic, proper filter,
+      
+      \item $\mathcal{G} = \langle W, g \rangle$ is reflexive, transitive, and
+      $\mathcal{F}$ guides $\mathcal{G}$.
+    \end{itemize}
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}[Pacuit]
+  If $\mathcal{F} = \langle W, f \rangle$ is a filter, and $W$ is finite, then
+  $\mathcal{F}$ contains its core.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop-filter-consistency}If $\mathcal{F} = \langle W, f \rangle$ is a
+  proper filter, then for all $w \in W$, $Y^{\complement} \in f (w)$ iff $Y
+  \not{\in} f (w)$.
+\end{proposition}
+
+\subsection{Neighborhood Semantics}
+
+\begin{definition}
+  Let $\mathcal{F} = \langle W, f \rangle$, $\mathcal{G} = \langle W, g
+  \rangle$ be a neighborhood frame. A \key{neighborhood}\key{model} based on
+  $\mathcal{F}$ and $\mathcal{G}$ is $\Model = \langle W, f, g, V \rangle$,
+  where $V : \Lang \to \powerset (W)$ is a valuation function.
+\end{definition}
+
+\begin{definition}
+  Let $\Model = \langle W, f, g, V \rangle$ be a model based on two frames
+  $\mathcal{F} = \langle W, f \rangle, \mathcal{G} = \langle W, g \rangle$.
+  The (neighborhood) semantics for $\Lang$ are defined recursively as follows:
+  \[ \begin{array}{|lll|}
+       \hline
+       \Model, w \Vdash i & \tmop{iff} & V (i) = \{ w \}\\
+       \Model, w \Vdash p & \tmop{iff} & w \in V (p)\\
+       \Model, w \Vdash \neg \varphi & \tmop{iff} & \Model, w \not{\Vdash}
+       \varphi\\
+       \Model, w \Vdash \varphi \wedge \psi & \tmop{iff} & \Model, w \Vdash
+       \varphi \infixand \Model, w \Vdash \psi\\
+       \Model, w \Vdash \Know \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+       \Vdash \varphi \right\} \in f (w)\\
+       \Model, w \Vdash \Knownby \varphi & \tmop{iff} & \forall u \in W,
+       \text{ if } w \in \cap f (u) \text{ then } \Model, u \Vdash \varphi\\
+       \Model, w \Vdash \Typ \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+       \Vdash \varphi \right\} \in g (w)\\
+       \hline
+     \end{array} \]
+\end{definition}
+
+In neighborhood semantics, the operators $\Know$, $\Knownby$, and $\Typ$ are
+more natural to interpret. But when we gave our neural semantics, we instead
+interpreted the \tmtextit{duals} $\diaKnow$, $\diaKnownby$, and $\diaTyp$.
+Since we need to relate the two, I'll write the explicit neighborhood
+semantics for the duals here:
+\[ \begin{array}{lll}
+     \Model, w \Vdash \diaKnow \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+     \not{\Vdash} \varphi \right\} \not{\in} f (w)\\
+     \Model, w \Vdash \diaKnownby \varphi & \tmop{iff} & \exists u \in W
+     \text{ such that } w \in \cap f (u) \text{ and } \Model, u \not{\Vdash}
+     \varphi\\
+     \Model, w \Vdash \diaTyp \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+     \not{\Vdash} \varphi \right\} \not{\in} g (w)
+   \end{array} \]
+\begin{definition}
+  \tmtextbf{(Truth in a model)} $\Model \models \varphi$ iff $\Model, w \Vdash
+  \varphi$ for all $w \in W$.
+\end{definition}
+
+\section{From Nets to Frames}
+
+\tmtextbf{{\center{This is the easy (``soundness'') direction!}}}
+
+\begin{definition}
+  Given a BFNN $\Net$, its \key{simulation}\key{frame} $\mathfrak{F}^{\bullet}
+  = \langle W, f, g \rangle$ is given by:
+  \begin{itemize}
+    \item $W = N$
+    
+    \item $f (w) = \left\{ S \subseteq W \mid w \not{\in} \Reach
+    (S^{\complement}) \right\}$
+    
+    \item $g (w) = \left\{ S \subseteq W \mid w \not{\in} \Prop
+    (S^{\complement}) \right\}$
+  \end{itemize}
+  Moreover, the \key{simulation}\key{model} $\Model^{\bullet} = \langle W, f,
+  g, V \rangle$ based on $\mathfrak{F}^{\bullet}$ has:
+  \begin{itemize}
+    \item $V_{\Model^{\bullet}} (p) = V_{\Net} (p)$;
+    
+    \item $V_{\Model^{\bullet}} (i) = V_{\Net} (i)$
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  \label{thm-net-to-frame}Let $\Net$ be a BFNN, and let $\Model^{\bullet}$ be
+  the simulation model based on $\mathfrak{F}^{\bullet}$. Then for all $w \in
+  W$,
+  \[ \Model^{\bullet}, w \Vdash \varphi \infixiff \Net, w \Vdash \varphi \]
+\end{theorem}
+
+\begin{proof}
+  By induction on $\varphi$. The nominal, propositional, $\neg \varphi$, and
+  $\varphi \wedge \psi$ cases are trivial.
+  \begin{description}
+    \tmtextbf{$\diaKnow \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model^{\bullet}, w \Vdash \diaKnow \varphi & \text{iff } & \left\{ u
+         \mid \Model^{\bullet}, w \not{\Vdash} \varphi \right\} \nin f (w) &
+         \text{(by definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in} \semantics{\varphi}
+         \right\} \nin f (w) & \text{(IH)}\\
+         & \text{iff } & \semantics{\varphi}^{\complement} \nin f (w) & \\
+         & \text{iff } & w \in \Reach
+         (\semantics{(\varphi^{\complement})^{\complement}}) & \text{(by
+         choice of } f)\\
+         & \text{iff } & w \in \Reach (\semantics{\varphi}) & \\
+         & \text{iff } & w \in \semantics{\diaKnow \varphi} & \text{(by
+         definition)}\\
+         & \tmop{iff} & \Net, w \Vdash \diaKnow \varphi & \text{(by
+         definition)}
+       \end{array} \]
+    \tmtextbf{$\diaKnownby \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model^{\bullet}, w \Vdash \diaKnownby \varphi & \text{iff } &
+         \exists u \text{ such that } w \in \cap f (u) \text{ and }
+         \Model^{\bullet}, u \not{\Vdash} \varphi & \text{(by definition)}\\
+         & \tmop{iff} & \exists u \text{ such that } w \in \cap f (u) \text{
+         and } u \not{\in} \semantics{\varphi} & \text{(IH)}\\
+         & \text{iff } & \exists u \in \semantics{\varphi}^{\complement}
+         \text{ such that } w \in \bigcap_{X \in f (u)} X & \\
+         & \text{iff } & \exists u \in \semantics{\varphi}^{\complement}
+         \text{ such that } w \in \bigcap_{u \not{\in} \Reach
+         (X^{\complement})} X & \text{(by choice of $f$)}\\
+         & \text{iff } & \exists u \in \semantics{\varphi}^{\complement}
+         \text{ such that } w \in \Reach^{- 1} (u) & \text{}\\
+         & \tmop{iff} & \Net, w \Vdash \diaKnownby \varphi & \text{(by
+         definition)}
+       \end{array} \]
+    \tmtextbf{$\diaTyp \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model^{\bullet}, w \Vdash \diaTyp \varphi & \text{iff } & \left\{ u
+         \mid \Model^{\bullet}, w \not{\Vdash} \varphi \right\} \nin g (w) &
+         \text{(by definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in} \semantics{\varphi}
+         \right\} \nin g (w) & \text{(IH)}\\
+         & \text{iff } & \semantics{\varphi}^{\complement} \nin g (w) & \\
+         & \text{iff } & w \in \Prop
+         (\semantics{(\varphi^{\complement})^{\complement}}) & \text{(by
+         choice of } g)\\
+         & \text{iff } & w \in \Prop (\semantics{\varphi}) & \\
+         & \text{iff } & w \in \semantics{\diaTyp \varphi} & \text{(by
+         definition)}\\
+         & \tmop{iff} & \Net, w \Vdash \diaTyp \varphi & \text{(by
+         definition)}
+       \end{array} \]
+  \end{description}
+  
+\end{proof}
+
+\begin{corollary}
+  $\Model^{\bullet} \models \varphi$ iff $\Net \models \varphi$.
+\end{corollary}
+
+\begin{theorem}
+  \label{simulation-is-preferential}$\mathfrak{F}^{\bullet}$ is a preferential
+  multi-frame.
+\end{theorem}
+
+\begin{proof}
+  We show each in turn:
+  \begin{itemize}
+    \item \tmtextbf{$\tmmathbf{} W$ is finite:} This holds because our BFNN is
+    finite.
+    
+    \item \tmtextbf{$\mathcal{F}$ is closed under finite
+    intersection}\tmtextbf{:} Suppose $X_1, \ldots, X_n \in f (w)$. By
+    definition of $f$, $w \nin \bigcup_i \Reach (X_i^{\complement})$ for all
+    $i$. Since $\Reach$ is monotonic, {\todo{Make this a lemma!}} we have
+    $\bigcup_i \Reach (X_i^{\complement}) = \Reach (\bigcup_i
+    X_i^{\complement}) = \Reach ((\bigcap_i X_i)^{\complement})$. So $w
+    \not{\in} \Reach ((\bigcap_i X_i)^{\complement})$. But this means that
+    $\bigcap_i X_i \in f (w)$.
+    
+    \item \tmtextbf{$\mathcal{F}$ is closed under superset}\tmtextbf{:}
+    Suppose $X \in f (w), X \subseteq Y$. By definition of $f$, $w \nin \Reach
+    (X^{\complement})$. Note that $Y^{\complement} \subseteq X^{\complement}$,
+    and so by monotonicity of $\Reach$ we have $w \nin \Reach
+    (Y^{\complement})$. But this means $Y \in f (w)$, so we are done.
+    
+    \item \tmtextbf{$\mathcal{F}$ contains the unit}\tmtextbf{:} Note that for
+    all $w \in W$, $w \nin \Reach (\emptyset) = \Reach (W^{\complement})$. So
+    $W \in f (w)$.
+    
+    \item \tmtextbf{$\mathcal{F}$ is reflexive}\tmtextbf{:} We want to show
+    that $w \in \cap f (w)$. Well, suppose $X \in f (w)$, i.e. $w \nin \Reach
+    (X^{\complement})$ (by definition of $f$). Since for all $S$, $S \subseteq
+    \Reach (S)$, we have $w \nin X^{\complement}$. But this means $w \in X$,
+    and we are done.
+    
+    \item \tmtextbf{$\mathcal{F}$ is transitive}\tmtextbf{:} Suppose $X \in f
+    (w)$, i.e. $w \nin \Reach (X^{\complement})$. Well,
+    \[ \begin{array}{lcll}
+         \Reach (X^{\complement}) & = & \Reach (\Reach (X^{\complement})) &
+         \textrm{\text{(by Idempotence of }} \Reach)\\
+         & = & \Reach (\left\{ u \mid u \in \Reach (X^{\complement})
+         \right\}) & \\
+         & = & \Reach (\left\{ u \mid u \not{\in} \Reach (X^{\complement})
+         \right\}^{\complement}) & \\
+         & = & \Reach (\{ u \mid X \in f (u) \}^{\complement}) &
+         \textrm{\text{(by definition of }} f)
+       \end{array} \]
+    So by definition of $f$, $\{ u \mid X \in f (u) \} \in f (w)$.
+    
+    \item \tmtextbf{F  is acyclic}\tmtextbf{:} Suppose $u_1, \ldots, u_n \in
+    W$, with $u_1 \in \cap f (u_2), \ldots, u_{n - 1} \in \cap f (u_n), u_n
+    \in \cap f (u_1)$. That is, each $u_i \in \bigcap_{X \in f (u_{i + 1})}
+    X$. By choice of $f$, each $u_i \in \bigcap_{u_{i + 1} \not{\in} \Reach
+    (X^{\complement})} X$. Substituting $X^{\complement}$ for $X$ we get $u_i
+    \in \bigcap_{u_{i + 1} \not{\in} \Reach (X)} X^{\complement}$. In other
+    words, $u_1 \in \Reach^{- 1} (u_2), \ldots, u_{n - 1} \in \Reach^{- 1}
+    (n), u_n \in \Reach^{- 1} (u_1)$. By Proposition \ref{prop-reach-acyclic},
+    each $u_i = u_j$.
+    
+    \item \tmtextbf{G  is reflexive}\tmtextbf{:} Follows similarly, since $X
+    \subseteq \Prop (X)$ by (Inclusion).
+    
+    \item \tmtextbf{G  is transitive}\tmtextbf{:} Follows similarly, since
+    $\Prop (X) = \Prop (\Prop (X))$ by (Idempotence).
+    
+    \item \tmtextbf{$\mathcal{F}$ guides $\mathcal{G}$:} Suppose $X \cup (\cap
+    f (w))^{\complement} \in g (w)$. By choice of $g$, $w \not{\in} \Prop ([X
+    \cup (\cap f (w))^{\complement}]^{\complement})$. Distributing the outer
+    complement, we have $w \not{\in} \Prop (X^{\complement} \cap (\cap f
+    (w)))$, i.e. $w \not{\in} \Prop \left( X^{\complement} \cap \left(
+    \bigcap_{Y \in f (w)} Y \right) \right)$. By choice of $f$, $w \not{\in}
+    \Prop \left( X^{\complement} \cap \left( \bigcap_{w \not{\in} \Reach
+    (Y^{\complement})} Y \right) \right)$. Substituting $Y^{\complement}$ for
+    $Y$, we get $w \not{\in} \Prop \left( X^{\complement} \cap \left(
+    \bigcap_{w \not{\in} \Reach (Y)} Y^{\complement} \right) \right)$. By
+    definition of $\Reach^{- 1}$, $w \not{\in} \Prop \left( X^{\complement}
+    \cap \Reach^{- 1} (w) \right)$. From (Minimal Cause), we conclude that $w
+    \not{\in} \Prop (X^{\complement})$, i.e. $X \in g (w)$.
+  \end{itemize}
+  
+\end{proof}
+
+\section{From Frames to Nets}
+
+\tmtextbf{{\center{This is the harder (``completeness'') direction!}}}
+
+\begin{definition}
+  Suppose we have net $\Net$ and node $n \in N$ with incoming nodes $m_1,
+  \ldots, m_k, (m_i, n) \in E$. Let $\hash : \powerset (\{ m_1, \ldots, m_k
+  \}) \times \mathbb{N}^k \to \mathbb{N}$ be defined by
+  \[ \hash (S, \vec{w}) = \prod_{m_i \in S} w_i \]
+\end{definition}
+
+\begin{proposition}
+  \label{hash-well-defined}$\hash (S, \smash{\overrightarrow{W}} (m_i, n)) :
+  \powerset (\{ m_1, \ldots, m_k \}) \to \Primes_k$, where
+  \[ \Primes_k = \{ n \in \mathbb{N} \mid n \tmop{is} \tmop{the}
+     \tmop{product} \tmop{of} \tmop{some} \tmop{subset} \tmop{of}
+     \tmop{primes} \{ p_1, \ldots, p_k \} \} \]
+  is bijective (and so has a well-defined inverse $\hash^{- 1}$).
+\end{proposition}
+
+\begin{definition}
+  Let $\Model$ be a model based on preferential multi-frame $\mathfrak{F} =
+  \langle W, f, g \rangle$. Its \key{simulation}\key{net} $\Net^{\bullet} =
+  \langle N, E, W, A, O, V \rangle$ is the BFNN given by:
+  \begin{itemize}
+    \item $N = W$
+    
+    \item $(u, v) \in E$ iff $u \in \cap f (v)$
+  \end{itemize}
+  Now let $m_1, \ldots, m_k$ list those nodes such that $(m_i, n) \in E$.
+  \begin{itemize}
+    \item $W (m_i, n) = p_i$, the $i$th prime number.
+    
+    \item $A^{(n)} (\vec{x}, \vec{w}) = \hash (\left\{ m_i \mid (m_i, n) \in E
+    \infixand x_i = 1 \right\}, \vec{w})$
+    
+    \item $O^{(w)} (x) = 1$ iff $\left( \hash^{- 1} (x) [0]
+    \right)^{\complement} \not{\in} g (n)$
+    
+    \item $V_{\Net^{\bullet}} (p) = V_{\Model} (p)$
+  \end{itemize}
+\end{definition}
+
+\begin{claim}
+  \label{simulation-is-a-BFNN}$\Net^{\bullet}$ is a BFNN.
+\end{claim}
+
+\begin{proof}
+  Clearly $\Net^{\bullet}$ is a binary ANN. We check the rest of the
+  conditions:
+  \begin{description}
+    \item[$\Net^{\bullet}$ is feed-forward] Suppose for contradiction that $E$
+    contains a cycle, i.e. distinct $u_1, \ldots, u_n \in N$ such that $u_1
+    \op{E} u_2, \ldots, u_{n - 1} \op{E} u_n, u_n \op{E} u_1$. Then we have
+    $u_1 \in \cap f (u_2), \ldots, u_{n - 1} \in \cap f (u_{n - 1}), u_n \in
+    \cap f (u_1)$, which contradicts the fact that $\mathcal{F}$ is acyclic.
+    
+    \item[$O^{(n)} \circ A^{(n)}$ is zero at zero] Suppose for contradiction
+    that $O^{(v)} (A^{(v)} (\vec{0}, \vec{w})) = 1$. Then $\left( \hash^{- 1}
+    (\hash (\emptyset)) \right)^{\complement} = \emptyset^{\complement} = W
+    \not{\in} g (v)$, which contradicts the fact that $\mathcal{F}$ contains
+    the unit.
+    
+    \item[$O^{(n)} \circ A^{(n)}$ is monotonically increasing] Let $\vec{w}_1,
+    \vec{w}_2$ be such that $O$ is well-defined (i.e. are vectors of prime
+    numbers), and suppose $\vec{w}_1 < \vec{w}_2$. If $O^{(v)} (A^{(v)}
+    (\vec{x}, \overrightarrow{w_1})) = 1$, then $\left( \hash^{- 1} (\hash
+    (\vec{x}, \overrightarrow{w_1})) [0] \right)^{\complement} \not{\in} g
+    (v)$. But this just means $\{ m_i \mid x_i = 1 \}^{\complement} \not{\in}
+    g (v)$. And so $\left( \hash^{- 1} (\hash (\vec{x}, \overrightarrow{w_2}))
+    [0] \right)^{\complement} \not{\in} g (v)$. But then $O^{(n)} (A^{(n)}
+    (\vec{x}, \overrightarrow{w_2})) = 1$.
+    
+    The main point here is just that $\overrightarrow{w_1}$ and
+    $\overrightarrow{w_2}$ are just indexing the set in question, and their
+    actual values don't affect the final output (we don't need the $\vec{w}_1
+    < \vec{w}_2$ hypothesis!). The real work happens within $g (v)$.
+  \end{description}
+\end{proof}
+
+\begin{lemma}
+  \label{lemma-Reach-and-R*}$\Reach_{\Net^{\bullet}} (S) = \left\{ v \mid
+  S^{\complement} \not{\in} f (v) \right\}$
+\end{lemma}
+
+\begin{proof}
+  For the $(\supseteq)$ direction, let $v$ be such that $S^{\complement}
+  \not{\in} f (v)$. By Proposition \ref{prop-filter-consistency} and the fact
+  that $\mathcal{F}$ is a proper filter, $S \in f (v)$. By definition of core,
+  $\cap f (v) \subseteq S$. $\mathcal{F}$ is reflexive, which means in
+  particular that $v \in \cap f (v) \subseteq S$. By the base case of
+  $\Reach$, we have $v \in \Reach_{\Net^{\bullet}} (S)$.
+  
+  Now for the $(\subseteq)$ direction. Suppose $v \in \Reach (S)$, and proceed
+  by induction on $\Reach$.
+  \begin{description}
+    \item[Base step] $v \in S$. Suppose for contradiction that
+    $S^{\complement} \in f (v)$. By definition of core, $\cap f (v) \subseteq
+    S^{\complement}$. But since $\mathcal{F}$ is reflexive, $v \in \cap f
+    (v)$. So $v \in S^{\complement}$, which contradicts $v \in S$.
+    
+    \item[Inductive step] There is $u \in \Reach_{\Net^{\bullet}} (S)$ such
+    that $(u, v) \in E$ (and so $u \in \cap f (v)$). By inductive hypothesis,
+    $S^{\complement} \not{\in} f (u)$. Now suppose for contradiction that
+    $S^{\complement} \in f (v)$. Since $\mathcal{F}$ is transitive, $\{ t \mid
+    S^{\complement} \in f (t) \} \in f (v)$. By definition of core, $\cap f
+    (v) \subseteq \{ t \mid S^{\complement} \in f (t) \}$. Since $u \in \cap f
+    (v)$, $S^{\complement} \in f (u)$. But this contradicts $S^{\complement}
+    \not{\in} f (u)$!
+  \end{description}
+\end{proof}
+
+\begin{lemma}
+  \label{lemma-Prop-and-H*}$\Prop_{\Net^{\bullet}} (S) = \left\{ v \mid
+  S^{\complement}  \not{\in} g (v) \right\}$
+\end{lemma}
+
+\begin{proof}
+  For the $(\supseteq)$ direction, suppose $S^{\complement} \not{\in} g (v)$.
+  Since $\mathcal{F}$ guides $\mathcal{G}$, we have $S^{\complement} \cup
+  {(\cap f (v))^{\complement}}  \not{\in} g (v)$, i.e. $[S \cap (\cap f
+  (v))]^{\complement} \not{\in} g (v)$. But $S \cap (\cap f (v)) = \left\{ u
+  \mid u \in S \infixand (u , v) \in E \right\} = \hash^{- 1} (\hash \left(
+  \smash{\overrightarrow{\bigchi}}_{\Prop_{\Net^{\bullet}} (S)} (u),
+  \smash{\vec{W}} (u, v) \right)) [0]$, and so
+  \[ \left( \hash^{- 1} (\hash
+     (\smash{\overrightarrow{\bigchi}}_{\Prop_{\Net^{\bullet}} (S)} (u),
+     \smash{\vec{W}} (u, v))) [0] \right)^{\complement} \not{\in} g (v) \]
+  i.e. $O^{(v)} (A^{(v)}
+  (\smash{\overrightarrow{\bigchi}}_{\Prop_{\Net^{\bullet}} (S)} (u),
+  \smash{\overrightarrow{W}} (u, v))) = 1$, and we conclude that $v \in
+  \Prop_{\Net^{\bullet}} (S)$.
+  
+  As for the $(\subseteq)$ direction, suppose $v \in \Prop_{\Net^{\bullet}}
+  (S)$, and proceed by induction on $\Prop$.
+  \begin{description}
+    \item[Base step] $v \in S$. Suppose for contradiction that
+    $S^{\complement} \in g (v)$. Since $\mathcal{G}$ is reflexive, $v \in \cap
+    g (v)$. By definition of core, we have $\cap g (v) \subseteq
+    S^{\complement}$. But then $v \in \cap g (v) \subseteq S^{\complement}$,
+    i.e. $v \in S^{\complement}$, which contradicts $v \in S$.
+    
+    \item[Inductive step] Let $u_1, \ldots, u_k$ list those nodes such that
+    $(u_i, v) \in E$. We have
+    \[ O^{(v)} (A^{(v)}
+       (\smash{\overrightarrow{\bigchi}}_{\Prop_{\Net^{\bullet}} (S)} (u_i),
+       \smash{\overrightarrow{W}} (u_i, v))) = 1 \]
+    Let $T = \left\{ u_i \mid S^{\complement}  \not{\in} g (u_i) \right\}$. By
+    our inductive hypothesis,
+    \[ O^{(v)} (A^{(v)} (\smash{\overrightarrow{\bigchi}}_T (u_i),
+       \smash{\overrightarrow{W}} (u_i, v))) = 1 \]
+    By choice of $O$ and $A$,
+    \[ \left( \hash^{- 1} (\hash (\smash{\overrightarrow{\bigchi}}_T (u_i),
+       \smash{\vec{W}} (u_i, v))) [0] \right)^{\complement} \not{\in} g (v) \]
+    i.e. $T^{\complement} \not{\in} g (v)$. We would like to show that
+    $S^{\complement} \not{\in} g (v)$. Suppose for contradiction that
+    $S^{\complement} \in g (v)$. Recall that $T = \left\{ u_i \mid
+    S^{\complement}  \not{\in} g (u_i) \right\}$, i.e. $T^{\complement} = \{
+    u_i \mid S^{\complement} \in g (u_i) \}$. Since $S^{\complement} \in g
+    (v)$ and $\mathcal{G}$ is transitive, $T^{\complement} \in g (v)$, which
+    contradicts $T^{\complement} \not{\in} g (v)$.
+  \end{description}
+  
+\end{proof}
+
+\begin{theorem}
+  \label{frame-to-net}Let $\Model$ be a model based on a preferential
+  multi-frame $\mathfrak{F}$, and let $\Net^{\bullet}$ be the corresponding
+  simulation net. We have, for all $w \in W$,
+  \[ \Model, w \Vdash \varphi \infixiff \Net^{\bullet}, w \Vdash \varphi \]
+\end{theorem}
+
+\begin{proof}
+  By induction on $\varphi$. Again, the nominal, propositional, $\neg
+  \varphi$, and $\varphi \wedge \psi$ cases are trivial.
+  \begin{description}
+    \tmtextbf{}\tmtextbf{$\diaKnow \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model, w \Vdash \diaKnow \varphi & \text{iff } & \left\{ u \mid
+         \Model, w \not{\Vdash} \varphi \right\} \nin f (w) & \text{(by
+         definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in}
+         \semantics{\varphi}_{\Net^{\bullet}} \right\}  \nin f (w) &
+         \text{(Inductive Hypothesis)}\\
+         & \tmop{iff} & \semantics{\varphi}_{\Net^{\bullet}}^{\complement}
+         \nin g (w) & \\
+         & \tmop{iff} & w \in \Reach_{\Net^{\bullet}} (\semantics{\varphi}) &
+         \text{(by Lemma \ref{lemma-Reach-and-R*})}\\
+         & \text{iff } & w \in \semantics{\diaKnow \varphi}_{\Net^{\bullet}}
+         & \text{(by definition)}\\
+         & \tmop{iff} & \Net^{\bullet}, w \Vdash \diaKnow \varphi & \text{(by
+         definition)}
+       \end{array} \]
+    \tmtextbf{$\diaKnownby \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model, w \Vdash \diaKnownby \varphi & \text{iff } & \exists u \text{
+         such that } w \in \cap f (u) \text{ and } \Model, u \not{\Vdash}
+         \varphi & \text{(by definition)}\\
+         & \tmop{iff} & \exists u \text{ such that } w \in \cap f (u) \text{
+         and } u \not{\in} \semantics{\varphi}_{\Net^{\bullet}} &
+         \text{(IH)}\\
+         & \tmop{iff} & \exists u \in
+         \semantics{\varphi}_{\Net^{\bullet}}^{\complement} \text{ such that }
+         w \in \bigcap_{X \in f (u)} X & \\
+         &  & \exists u \in
+         \semantics{\varphi}_{\Net^{\bullet}}^{\complement} \text{ such that }
+         w \in \bigcap_{u \not{\in} \Reach_{\Net^{\bullet}} (X^{\complement})}
+         X & \text{(by Lemma \ref{lemma-Reach-and-R*})}\\
+         &  & \exists u \in
+         \semantics{\varphi}_{\Net^{\bullet}}^{\complement} \text{ such that }
+         w \in \Reach_{\Net^{\bullet}}^{- 1} (u) & \\
+         & \tmop{iff} & \Net^{\bullet}, w \Vdash \diaKnownby \varphi &
+         \text{(by definition)}
+       \end{array} \]
+    \tmtextbf{$\diaTyp \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model, w \Vdash \diaTyp \varphi & \text{iff } & \left\{ u \mid
+         \Model, u \not{\Vdash} \varphi \right\} \nin g (w) & \text{(by
+         definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in}
+         \semantics{\varphi}_{\Net^{\bullet}} \right\} \nin g (w) &
+         \text{(Inductive Hypothesis)}\\
+         & \text{iff } & \semantics{\varphi}_{\Net^{\bullet}}^{\complement}
+         \nin g (w) & \\
+         & \text{iff } & w \in \Prop_{\Net^{\bullet}} (\semantics{\varphi}) &
+         \text{(by Lemma \ref{lemma-Prop-and-H*})}\\
+         & \text{iff } & w \in \semantics{\diaTyp \varphi}_{\Net^{\bullet}} &
+         \text{(by definition)}\\
+         & \tmop{iff} & \Net^{\bullet}, w \Vdash \diaTyp \varphi & \text{(by
+         definition)}
+       \end{array} \]
+  \end{description}
+  
+\end{proof}
+
+\begin{corollary}
+  {\Model}$\models \varphi$ iff $\Net^{\bullet} \models \varphi$.
+\end{corollary}
+
+\section{Completeness}
+
+Axioms:
+\begin{description}
+  \item[(K)] $\Know (\varphi \rightarrow \psi) \rightarrow \left( \Know
+  \varphi \rightarrow \Know \psi \right)$
+  
+  \item[(K$\leftarrow$)] $\Knownby (\varphi \rightarrow \psi) \rightarrow
+  \left( \Knownby \varphi \rightarrow \Knownby \psi \right)$
+  
+  \item[(Back)] $\varphi \rightarrow \Know \diaKnownby \varphi$
+  
+  \item[(Forth)] $\varphi \rightarrow \Knownby \diaKnow \varphi$
+  
+  ---------------------------------------------------
+  
+  \
+  
+  \item[(T)] $\Know \varphi \rightarrow \varphi$
+  
+  \item[(4)] $\Know \varphi \rightarrow \Know \Know \varphi$
+  
+  \item[(Grz)] $\Know \left( \Know \left( \varphi \rightarrow \Know \varphi
+  \right) \rightarrow \varphi \right) \rightarrow \varphi$
+  
+  \
+  
+  \item[(Incl)] $\Know \varphi \rightarrow \Typ \varphi$
+  
+  \item[(Skel)] $i \wedge \Typ \left( \diaKnownby i \rightarrow \varphi
+  \right) \rightarrow \Typ \varphi$
+\end{description}
+
+
+The first group of axioms say that $\Know$ characterizes a monotonic,
+reflexive, transitive, acyclic graph. The second group are axioms relating
+$\Know$ and $\Knownby$ --- these are from the minimal Tense Logic in temporal
+logic ($\Know$ is ``looking into the future'', $\Knownby$ is ``looking into
+the past''). See the
+\href{https://plato.stanford.edu/entries/logic-temporal/}{SEoP page} for more
+details.
+
+The third group characterize $\Typ$ in terms of how it interacts with $\Know$
+and $\Knownby$.
+
+\
+
+\
+
+\begin{proposition}
+  Let $\Model^{\min}$ be the minimal canonical model based on frames
+  $\mathcal{F} = \langle W, f \rangle, \mathcal{G} = \langle W, g \rangle$.
+  Then $\mathcal{F}$ is a reflexive, transitive, acyclic, proper filter,
+  $\mathcal{G}$ contains $\mathcal{F}$, and $\mathcal{F}$ guides
+  $\mathcal{G}$.
+\end{proposition}
+
+\begin{proof}
+  {\todo{}}
+\end{proof}
+
+\begin{lemma}
+  Our logic is complete w.r.t. preferential multi-frames. {\todo{State
+  precisely!}}
+\end{lemma}
+
+\begin{theorem}
+  Our logic is complete w.r.t BFNNs. {\todo{State precisely!}}
+\end{theorem}
+
+\appendix\section*{}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{thm:prop-props})} We prove each in turn:
+  \begin{description}
+    \item[(Inclusion)] If $n \in S$, then $n \in \Prop (S)$ by the base case
+    of $\Prop$.
+    
+    \item[(Idempotence)] The ($\subseteq$) direction is just Inclusion. As for
+    ($\supseteq$), let $n \in \Prop (\Prop (S))$, and proceed by induction on
+    $\Prop (\Prop (S))$.
+    \begin{description}
+      \item[Base Step] $n \in \Prop (S)$, and so we are done.
+      
+      \item[Inductive Step] For those $m_1, \ldots, m_k$ such that $(m_i, n)
+      \in E$,
+      \[ O^{(n)} (A^{(n)} (\smash{\overrightarrow{\bigchi}}_{\Prop (\Prop
+         (S))} (m_i), \smash{\overrightarrow{W}} (m_i, n))) = 1 \]
+      By inductive hypothesis, $\smash{\bigchi}_{\Prop (\Prop (S))} (m_i) =
+      \smash{\bigchi}_{\Prop (S)} (m_i)$. By definition, $n \in \Prop (S)$.
+    \end{description}
+    \item[(Cumulative)] For the ($\subseteq$) direction, let $n \in \Prop
+    (S_1)$. We proceed by induction on $\Prop (S_1)$.
+    \begin{description}
+      \item[Base Step] Suppose $n \in S_1$. Well, $S_1 \subseteq S_2 \subseteq
+      \Prop (S_2)$, so $n \in \Prop (S_2)$.
+      
+      \item[Inductive Step] For those $m_1, \ldots, m_k$ such that $(m_i, n)
+      \in E$,
+      \[ O^{(n)} (A^{(n)} (\smash{\overrightarrow{\bigchi}}_{\Prop (S_1)}
+         (m_i), \smash{\overrightarrow{W}} (m_i, n))) = 1 \]
+      By inductive hypothesis, $\smash{\bigchi}_{\Prop (S_1)} (m_i) =
+      \smash{\bigchi}_{\Prop (S_2)} (m_i)$. By definition, $n \in \Prop
+      (S_2)$.
+    \end{description}
+    Now consider the ($\supseteq$) direction. The Inductive Step holds
+    similarly (just swap $S_1$ and $S_2$). As for the Base Step, if $n \in
+    S_2$ then since $S_2 \subseteq \Prop (S_1)$, $n \in S_1$.
+    
+    \item[(Loop)] Let $n \geq 0$ and suppose the hypothesis. Our goal is to
+    show that for each $i$, $\Prop (S_i) \subseteq \Prop (S_{i - 1})$, and
+    additionally $\Prop (S_0) \subseteq \Prop (S_n)$. This will show that all
+    $\Prop (S_i)$ contain each other, and so are equal. Let $i \in \{ 0,
+    \ldots, n \}$ (if $i = 0$ then $i - 1$ refers to $n$), and let $e \in
+    \Prop (S_i)$. We proceed by induction on $\Prop (S_i)$.
+    \begin{description}
+      \item[Base Step] $e \in S_i$, and since $S_i \subseteq \Prop (S_{i -
+      1})$ by assumption, $e \in \Prop (S_{i - 1})$.
+      
+      \item[Inductive Step] For those $m_1, \ldots, m_k$ such that $(m_i, n)
+      \in E$,
+      \[ O^{(e)} (A^{(e)} (\smash{\overrightarrow{\bigchi}}_{\Prop (S_i)}
+         (m_i), \smash{\overrightarrow{W}} (m_i, e))) = 1 \]
+      By inductive hypothesis, $\smash{\bigchi}_{\Prop (S_i)} (m_j) =
+      \smash{\bigchi}_{\Prop (S_{i - 1})} (m_j)$. By definition, $n \in \Prop
+      (S_{i - 1})$.
+    \end{description}
+  \end{description}
+\end{proof}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{thm:reach-props})} We check each in turn:
+  \begin{description}
+    \item[(Inclusion)] Similar to the proof of Inclusion for $\Prop$.
+    
+    \item[(Idempotence)] Similar to the proof of Idempotence for $\Prop$.
+    
+    \item[(Monotonicity)] Let $n \in \Reach (S_1)$. We proceed by induction on
+    $\Reach (S_1)$.
+    \begin{description}
+      \item[Base Step] $n \in S_1$. So $n \in S_2 \subseteq \Reach (S_2)$.
+      
+      \item[Inductive Step] There is an $m \in \Reach (S_1)$ such that $(m, n)
+      \in E$. By inductive hypothesis, $m \in \Reach (S_2)$. And so by
+      definition, $n \in \Reach (S_2)$.
+    \end{description}
+    \item[(Containment)] Let $n \in \Prop (S)$. We proceed by induction on
+    $\Prop (S)$.
+    
+    \item[base step] $n \in S$. So $n \in \Reach (S)$.
+    
+    \item[inductive step] For those $m_1, \ldots, m_k$ such that $(m_i, n) \in
+    E$,
+    \[ O^{(n)} (A^{(n)} (\smash{\overrightarrow{\bigchi}}_{\Prop (S)} (m_i),
+       \smash{\overrightarrow{W}} (m_i, n))) = 1 \]
+    Note that one of these $m_i$ must be in $\Prop (S)$, i.e.
+    $\smash{\bigchi}_{\Prop (S)} (m_i) = 1$, since otherwise
+    \[ O^{(n)} (A^{(n)} (\smash{\overrightarrow{\bigchi}}_{\Prop (S)} (m_i),
+       \smash{\overrightarrow{W}} (m_i, n))) = O^{(n)} (A^{(n)} (\vec{0},
+       \smash{\overrightarrow{W}} (m_i, n))) = 0 \]
+    For this $m_i$, our inductive hypothesis gives us $\smash{\bigchi}_{\Reach
+    (S)} (m_i) = 1$. So $m_i \in \Reach (S)$, and $(m_i, n) \in E$, so by
+    definition $n \in \Reach (S)$.
+  \end{description}
+\end{proof}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{prop-reach-inverse})} $(\rightarrow)$ Suppose
+  $u \in \Reach^{- 1} (n)$, i.e. for all $X$ such that $n \not{\in} \Reach
+  (X)$, $u \in X^{\complement}$. Consider in particular
+  \[ X = \{ m \mid \tmop{there} \tmop{is} \tmop{an} E \textrm{-} \tmop{path}
+     \tmop{from} m \tmop{to} n \}^{\complement} \]
+  Notice that $n \not{\in} \Reach (X)$. And so $u \in X^{\complement}$, i.e.
+  there \tmtextit{is} an $E$-path from $u$ to $n$.
+  
+  $(\leftarrow)$ Suppose there is an $E$-path from $u$ to $n$, and let $X$ be
+  such that $n \not{\in} \Reach (X)$. By definition of $\Reach$, there is no
+  $m \in X$ with an $E$-path from $m$ to $n$. So in particular, $u \not{\in}
+  X$, i.e. $u \in X^{\complement}$. So $u \in \bigcap_{n \not{\in} \Reach (X)}
+  X^{\complement} = \Reach^{- 1} (n)$.
+\end{proof}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{prop-reach-acyclic})} Suppose $n_1 \in
+  \Reach^{- 1} (n_2), \ldots, n_{k - 1} \in \Reach^{- 1} (n_k), n_k \in
+  \Reach^{- 1} (n_1)$. By Proposition \ref{prop-reach-inverse}, there is an
+  $E$-path from each $n_i$ to $n_{i + 1}$, and an $E$-path from $n_k$ to
+  $n_1$. But since $E$ is acyclic, each $n_i = n_j$.
+\end{proof}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{minimal-cause})} Let $n \in \Prop (S)$. We
+  proceed by induction on $\Prop (S)$.
+  \begin{description}
+    \item[Base Step] $n \in S$. Our plan is to show $n \in \bigcap_{n
+    \not{\in} \Reach (X)} X^{\complement} = \Reach^{- 1} (n)$ (so $n \in S
+    \cap \Reach^{- 1} (n)$), which will give us our conclusion by the base
+    case of $\Prop$. Let $X$ be any set where $n \not{\in} \Reach (X)$. So $n
+    \not{\in} X$ (since $X \subseteq \Reach (X)$), i.e. $n \in
+    X^{\complement}$. But this is what we needed to show.
+    
+    \item[Inductive Step] Suppose $n \in \Prop (S)$ via its constructor, i.e.
+    for those $m_1, \ldots, m_k$ such that $(m_i, n) \in E$,
+    \[ O^{(n)} (A^{(n)} (\smash{\overrightarrow{\bigchi}}_{\Prop (S)} (m_i),
+       \smash{\overrightarrow{W}} (m_i, n))) = 1 \]
+    By inductive hypothesis,
+    \[ \smash{\bigchi}_{\Prop (S)} (m_i) = \smash{\bigchi}_{\Prop \left( S
+       \cap \left( \bigcap_{n \not{\in} \Reach (X)} X^{\complement} \right)
+       \right)} (m_i) \]
+    So we can substitute the latter for the former. By definition, $n \in
+    \Prop \left( S \cap \left( \bigcap_{n \not{\in} \Reach (X)}
+    X^{\complement} \right) \right)$.
+  \end{description}
+\end{proof}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{prop-filter-consistency})} $(\rightarrow)$
+  Suppose for contradiction that $Y^{\complement} \in f (w)$ and $Y \in f
+  (w)$. Since $\mathcal{F}$ is closed under intersection, $Y^{\complement}
+  \cap Y = \emptyset \in f (w)$, which contradicts the fact that $\mathcal{F}$
+  is proper.
+  
+  $(\leftarrow)$ Suppose for contradiction that $Y \not{\in} f (w)$, yet
+  $Y^{\complement} \not{\in} f (w)$. Since $\mathcal{F}$ is closed under
+  intersection, $\cap f (w) \in f (w)$. Moreover, since $\mathcal{F}$ is
+  closed under superset we must have $\cap f (w) \not{\subseteq} Y$ and $\cap
+  f (w) \not{\subseteq} Y^{\complement}$. But this means $\cap f (w)
+  \not{\subseteq} Y \cap Y^{\complement} = \emptyset$, i.e. there is some $x
+  \in \cap f (w)$ such that $x \in \emptyset$. This contradicts the definition
+  of the empty set.
+\end{proof}
+
+\begin{proof}
+  \tmtextbf{(of Proposition \ref{hash-well-defined})} To show that $\hash$ is
+  injective, suppose $\hash (S_1) = \hash (S_2)$. So $\prod_{m_i \in S_1} p_i
+  = \prod_{m_i \in S_2} p_i$, and since products of primes are unique, $\{ p_i
+  \mid m_i \in S_1 \} = \{ p_i \mid m_i \in S_2 \}$. And so $S_1 = S_2$.
+  
+  To show that $\hash$ is surjective, let $x \in \Primes_k$. Now let $S =
+  \left\{ m_i \mid p_i \text{ divides } x \right\}$. Then $\hash (S) =
+  \prod_{m_i \in S} p_i = \prod_{(p_i \text{ divides } x {\small \text{})}}
+  p_i = x$.
+\end{proof}
+
+\tmtextbf{\begin{quoteenv}
+  Step 5. Step away (for a few days). Come back and check the proof
+  \tmtextit{slowly} to make sure there aren't any missing edge cases or
+  conditions.
+  \begin{itemize}
+    \item If it's all good --- \tmtextbf{congratulations}, you got a free
+    paper!
+    
+    \item Usually there will be some idiotic mistake in the proof. It may seem
+    like \tmtextit{you're} the idiot for trying it --- but in fact, it's now
+    your job to figure out \tmtextit{what conditions will make this naive
+    proof work}!
+  \end{itemize}
+\end{quoteenv}}
+
+\
+
+\begin{quoteenv}
+  \tmtextbf{Step 6. Write a computer program/simulation to collect statistics
+  on the objects/models. Ask: \tmtextit{How unusual} is it for the models to
+  fail the proof scenario? What about this lemma? This other lemma? Am I
+  looking for a weird exception here, or is it very common? Make the
+  simulation as \tmtextit{visual} as possible so that I can \tmtextit{picture}
+  the condition/failure.}
+\end{quoteenv}
+
+\
+
+\begin{quoteenv}
+  \tmtextbf{Step 7. If the condition is rare, try to modify the proof to
+  account for the exceptions (they may satisfy the theorem but fail just this
+  proof). Think: ``is there a simple thing I can add to the system that will
+  help the proof go through?''
+  
+  Otherwise, sit down and try to define \tmtextit{exactly} that condition the
+  proof doesn't fuck up at that step. Use the generated examples for help.
+  Prove the claim for models satisfying Condition.}
+\end{quoteenv}
+
+\
+
+\begin{quoteenv}
+  \tmtextbf{Step 8. Prove (i.e. unit-test/sanity-check) general properties of
+  models satisfying Condition. Build up a theory of how Condition behaves ---
+  what is it like? What algebra does it follow? What is it similar to? What
+  does it mean?}
+\end{quoteenv}
+
+\
+
+\begin{quoteenv}
+  \tmtextbf{Step 9. Consider whether this \tmtextbf{partial} result is still
+  \tmtextit{interesting} enough to be published.
+  
+  Is it meaningful to everyone in the field? $\longrightarrow$ Submit it to a
+  top-tier conference
+  
+  Is it meaningful to this niche sub-field? $\longrightarrow$ Submit it to the
+  main conference for the sub-field
+  
+  Is it meaningful as a technical lemma? $\longrightarrow$ Submit it to a
+  conference specifically for technical results
+  
+  None of the above? $\longrightarrow$ It's okay to not publish for now, and
+  wait until you see the whole proof.}
+\end{quoteenv}
+
+\
+
+\begin{quoteenv}
+  \tmtextbf{Step 10. Move on to the write-up stage. But otherwise, step away
+  from the problem --- there are too many other interesting things to spend
+  all of your time on this one. Trust that one day a different solution will
+  come to you.}
+\end{quoteenv}
+
+\end{document}

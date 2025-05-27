@@ -1,0 +1,222 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai24}
+% \usepackage[submission]{aaai24}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{natbib}
+\usepackage{caption}
+
+%═══════════════════════════════════════════
+% Math packages
+%═══════════════════════════════════════════
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{marvosym}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+%═══════════════════════════════════════════
+% Formatting, margins, and spacing packages
+%═══════════════════════════════════════════
+\usepackage{microtype}
+\usepackage{enumitem}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+\setlist[enumerate]{itemsep=0mm}
+\setlist[itemize]{itemsep=0mm}
+\setlist[description]{itemsep=0mm}
+
+%═══════════════════════════════════════════
+% Graphics packages
+%═══════════════════════════════════════════
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit, backgrounds}
+
+%═══════════════════════════════════════════
+% Environments
+%═══════════════════════════════════════════
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{sketch}{\begin{proof}[Proof Sketch]}{\end{proof}}
+
+%═══════════════════════════════════════════
+% References, Links, and Color
+%═══════════════════════════════════════════
+% AAAI requires that color is never used in text
+% (can be used in diagrams carefully though!)
+\usepackage{xcolor}
+\definecolor{mygreen}{RGB}{107,203,119}
+\definecolor{myblue}{RGB}{77, 150, 255}
+
+%═══════════════════════════════════════════
+% Custom Commands, General Use
+%═══════════════════════════════════════════
+\newcommand{\key}[1]{\emph{#1}}
+\newcommand{\Rat}{\mathbb{Q}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\State}{\mbox{\sf State}} 
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\uplang}{\mathcal{L}^\ast}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\proves}{\vdash}
+\renewcommand{\o}{\cdot}
+\newcommand{\orr}{\vee}
+\newcommand{\andd}{\wedge}
+\newcommand{\nott}{\neg}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\rem}[1]{\relax}
+ \newcommand{\NP}{\mbox{\sc np}}
+\newcommand{\axiom}{\textsc}
+\newcommand*{\bigchi}{\mbox{\Large$\chi$}}% big chi
+\newcommand{\indegree}[1]{\mathrm{deg}(#1)}
+\newcommand{\preds}[1]{\mbox{preds}(#1)}
+\newcommand{\layer}[1]{\mathsf{layer}(#1)}
+\newcommand{\activ}[2]{\mathsf{activ}_{#1}(#2)}
+\newcommand{\layerNoArgs}{\mathsf{layer}}
+
+\newcommand{\negweightscore}[1]{\mathsf{nws}(#1)}
+\newcommand{\minscore}{\mathsf{mnws}}
+\newcommand{\numiterations}{\mathsf{iter}}
+
+%═══════════════════════════════════════════
+% Custom Commands, Hebbian Learning
+%═══════════════════════════════════════════
+\newcommand{\AllNets}{\mathsf{Net}}
+\newcommand{\Net}{\mathcal{N}}
+\newcommand{\op}{\textsf{op}}
+\newcommand{\Prop}{\textsf{Prop}}
+\newcommand{\Reach}{\textsf{Reach}}
+\newcommand{\Hebb}[2]{\textsf{Hebb}(#1, #2)}
+\newcommand{\HebbNoArgs}{\textsf{Hebb}}
+\newcommand{\Hebbstar}[2]{\textsf{Hebb}^*(#1, #2)}
+\newcommand{\HebbstarNoArgs}{\textsf{Hebb}^*}
+\newcommand{\hebbweight}{W_\textsf{Hebb}}
+\newcommand{\hebbstarweight}{W_{\textsf{Hebb}^*}}
+
+\newcommand{\Believe}[1]{[\textrm{\textup{\textbf{B}}}] #1}
+\newcommand{\Know}[2]{\textrm{\textup{\textbf{K}}}(#1, #2)}
+\newcommand{\KnowNoArgs}{\textrm{\textup{\textbf{K}}}}
+% \newcommand{\Hebbop}[1]{[#1]_\textrm{\textup{hebb}\:}}
+% \newcommand{\Hebbop}[1]{[#1]_{\HebbstarNoArgs}\:}
+\newcommand{\Hebbop}[1]{[#1]}
+
+\newcommand{\diaBelieve}[1]{\langle \textrm{\textup{\textbf{B}}} \rangle #1}
+\newcommand{\diaKnow}[2]{\langle \textrm{\textup{\textbf{K}}} \rangle(#1, #2)}
+\newcommand{\diaBelieveNoArgs}{\langle \textrm{\textup{\textbf{B}}} \rangle}
+\newcommand{\diaKnowNoArgs}{\langle \textrm{\textup{\textbf{K}}} \rangle}
+% \newcommand{\diaHebbop}[1]{\langle #1\rangle_\textrm{\textup{hebb}}}
+\newcommand{\diaHebbop}[1]{\langle #1\rangle}
+
+
+%═══════════════════════════════════════════
+% Title, Author, Pdfinfo
+%═══════════════════════════════════════════
+% \pdfinfo{
+% /TemplateVersion (2024.1)
+% }
+
+\setcounter{secnumdepth}{1}
+
+% Your title must be in mixed case, not sentence case.
+% That means all verbs (including short verbs like be, is, using,and go),
+% nouns, adverbs, adjectives should be capitalized, including both words in hyphenated terms, while
+% articles, conjunctions, and prepositions are lower case unless they
+% directly follow a colon or long dash
+\title{}
+\author{}
+\affiliations{}
+
+%═══════════════════════════════════════════
+% Beginning of actual rebuttal
+%═══════════════════════════════════════════
+\begin{document}
+
+First, we thank the reviewers for their time and careful reviews and for the opportunity to address their concerns. We include detailed responses below.
+
+\paragraph{Reviewer \#3.}
+Yes, this paper is a sort of sequel to that FLAIRS 2022 paper, and we didn’t mention it in our original submission in order to remain anonymous.  But we will of course mention the FLAIRS paper in the final paper.  Just to be clear about the difference:  The FLAIRS paper introduced the logic for single-step $\HebbNoArgs$ and proved soundness for a few axioms.  The focus of our current paper is completeness, which (as expected) turned out to be much harder.
+
+We agree that the paper is a bit dry and dense.  We have intuitions in mind, but after taking some distance away from the draft we realized that we forgot to say them!  For the final draft, we will state our intuitions cleary for the key definitions, including $\Prop$ and $\HebbstarNoArgs$, $\diaBelieveNoArgs$, and $\diaHebbop{\varphi} \psi$.
+
+You mention that the impact of our results are limited because they are for Hebbian learning rather than gradient descent.  This is a fair criticism --- in fact, a completeness theorem for gradient descent is one of our long-term goals.  But we chose to start with Hebbian learning because it’s much simpler than gradient descent, so it serves as a proof-of-concept that a completeness theorem for neural net learning can be proved at all.
+
+Finally, we will cite the recent survey (Odense and d’Avila Garcez 2022) when introducing neural network semantics.
+
+
+\paragraph{Reviewer \#4.}
+That’s a great question!  The setting in our paper is fairly restricted --- our nets are fully-connected, feed-forward, use binary activation functions, and learn by a naive Hebbian learning algorithm.  The simpler setting allowed us to show that a completeness theorem for neural learning is possible at all.  But we are very interested in applying the approach to more complex nets and learning algorithms.
+
+The nets in our paper can be thought of as performing classification: $\Prop(A) \supseteq B$ tells us whether, given input $A$, the net’s activation includes $B$.  Since $A, B$ are binary sets, our inputs and output can be any $1$-hot encoded datatype.  But we conjecture that our results can be lifted to continuous datatypes.  The idea is to lift our binary operators to fuzzy ones, then prove completeness for the resulting fuzzy logic.
+
+% fuzzy sets; the idea is that we lift our binary operators to fuzzy ones, and prove soundness and completeness for the corresponding fuzzy logic.  This would allow our inputs and output to be any discrete or continuous datatype whatsoever, and would let our nets perform meaningful regression.
+
+We also conjecture that this approach can be applied to more useful learning policies.  We have some ideas for generalizing to supervised and stable (convergent) learning policies (gradient descent has both), though we believe that both of these directions would take considerable work.  Our approach is potentially not applicable to reinforcement learning, since our logic doesn't model any kind of environment or reward.
+
+We have given some thought to other net architectures (e.g.~ recurrent nets, attention), but they seem to require brand new ideas to get started.  We can't apply proofs by induction on the layers of the net, which our paper heavily relies on.
+
+
+\paragraph{Reviewer \#6.}
+To address each of your points:
+\begin{enumerate}
+    \item We agree.  We will state clearly why completeness is important in the abstract of the final paper.
+
+    \item We decided to add a ``Contributions'' paragraph in the Introduction that should clear this up.  Our key contribution is the first ever completeness theorem for any neural network learning policy; we can in principle build nets that satisfy logical constraints, no matter what they learn.
+    
+    % We will include the fact that this is the first ever completeness theorem for any neural network learning policy,
+    
+    % To our knowledge, our main result is the first ever completeness theorem for any neural network learning policy whatsoever.  This means that, in principle, we can build nets that satisfy certain logical constraints no matter what they learn.  You’re of course right, and in the final draft we will emphasize this in the introduction (e.g.~ in a ``Contributions'' paragraph).
+
+    \item We believe that this is based on a misunderstanding --- we don't have any experimental results comparing our method's performance.  Rather, our contribution is theoretical, and the completeness theorem we prove for Hebbian learning is the first of its kind.
+
+    \item This is a fair point.  We intended for those diagrams to help cement a basic intuition for what $\Reach$, $\Prop$, and $\HebbNoArgs$ are doing, but we now realize that we didn’t give clear intuitions in writing.  We will fix this.
+    % , and we will do our best to make the complex proofs easier to understand.
+
+    \item Agreed, we will make the change.
+
+    \item We don't think we have room for a full table, but we can try to mitigate this by writing, e.g.~, ``let $\varphi, \psi$ be formulas.''
+\end{enumerate}
+
+\paragraph{Reviewer \#7.}
+We totally agree that we phrased this ambiguously. We will rephrase things to be more precise about the fact that our results are conditional on the base logic.  Thanks as well for catching the typos!  As for your questions:
+\begin{enumerate}
+    \item Our main takeaway is that neural networks are equivalent to corresponding classical (e.g. possible-worlds) models, \emph{even} when we consider the learning of the net.  Soundness says that neural networks have \textit{at least} the same properties as the classical model, whereas completeness says that they have \textit{exactly} the same properties.  This is the sense in which we unify the two: We provide a technique for proving neural nets and classical models equivalent.
+    
+    \item This is a great question!  If we repeat the original Hebbian learning rule on a single input $\semantics{\varphi}$, we will ``max out'' the weights within all the nodes activated by $\Prop(\semantics{\varphi})$.  Any future propagation $\Prop(\semantics{\psi})$ will now ``rip through'' $\Prop(\semantics{\varphi})$.  This is the intuition at the heart of our reduction (and we will try to include it in the final draft).
+    
+    \item Neural networks in practice have finitely many nodes.  As for the atomic variables:  Each atomic variable corresponds to a state of the net that we know in advance (usually input and output states).  
+    Having only finitely many of these states means our net can only do discrete tasks (e.g.~ classification) on discrete inputs.
+    
+    \item You're correct, thanks for catching this!  Our point here is that our conditionals line up with (Leitgeb 2001).  But after careful consideration, we decided to remove that part of the paragraph; it’s a very technical point that most readers wouldn't be interested in.
+\end{enumerate}
+
+\paragraph{A point about the base logic.}
+While writing this draft, the completeness of the base logic bothered us.  We were tempted to dismiss it as a straightforward technical detail.  But the fact that $\diaKnow{\varphi}{\psi}$ is conditional (rather than the usual $\diaKnowNoArgs \varphi$) muddies up the picture --- it’s not clear what the axioms for conditional $\diaKnow{\varphi}{\psi}$ should be.
+
+After submitting this paper, we re-did the proofs using the usual, unary $\diaKnowNoArgs$ (using ordinary graph-reachability instead of conditional graph reachability).  All of our lemmas hold (checked in Lean), replacing $\Reach(A, B)$ with $A \cap \Reach(A \cap B)$.  (Since our nets are fully-connected, any path from $B$ with all nodes within $A$ gives an edge from $A \cap B$ to $A$.)  We are much more comfortable conjecturing that \textit{this} base system, with $\diaBelieveNoArgs$ and the usual $\diaKnowNoArgs$, is complete.
+
+
+% Since unary $\diaKnowNoArgs$ has a straightforward dual, this also means we can rewrite our reduction laws in terms of $[\KnowNoArgs]$ and $[\KnowNoArgs]$.  Our explanation of the rules in the Discussion section is somewhat awkward, and we believe that reading the equivalent rule using [K] and [T] (instead of <K> and <T>) would make it much clearer.
+
+
+% \bibliography{neurosymbolic}
+\end{document}

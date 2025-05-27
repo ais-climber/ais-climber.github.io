@@ -1,0 +1,3210 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.1.1">
+  <meta name="generator" content="Hugo 0.51" />
+  <meta name="author" content="Mae Milano">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="PhD, Programming Languages and Systems">
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://languagesforsyste.ms/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-130045632-2', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="http://languagesforsyste.ms/index.xml" type="application/rss+xml" title="Mae Milano">
+  <link rel="feed" href="http://languagesforsyste.ms/index.xml" type="application/rss+xml" title="Mae Milano">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="http://languagesforsyste.ms/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@mbpmilano">
+  <meta property="twitter:creator" content="@mbpmilano">
+  
+  <meta property="og:site_name" content="Mae Milano">
+  <meta property="og:url" content="http://languagesforsyste.ms/">
+  <meta property="og:title" content="Mae Milano">
+  <meta property="og:description" content="PhD, Programming Languages and Systems">
+  
+  
+    
+  <meta property="og:image" content="http://languagesforsyste.ms/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="og:updated_time" content="2017-10-15T00:00:00-07:00">
+  
+
+  
+
+  
+
+  <title>Mae Milano</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header fixed-top">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mae Milano</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about" data-target="#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/milano-cv.pdf" data-target="files/milano-cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications_selected" data-target="#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#awards" data-target="#awards">
+            
+            <span>Awards</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects" data-target="#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications" data-target="#publications">
+            
+            <span>Reports</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#talks" data-target="#talks">
+            
+            <span>Talks</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts" data-target="#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#teaching" data-target="#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#service" data-target="#service">
+            
+            <span>Service</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+
+<span id="homepage" style="display: none"></span>
+
+
+  
+
+
+
+
+
+  
+  
+  
+  <section id="about" class="home-section">
+    <div class="container">
+      
+
+
+
+<div class="row" itemprop="author" itemscope itemtype="http://schema.org/Person" itemref="person-email person-telephone person-address">
+  <div class="col-12 col-lg-4">
+    <div id="profile">
+
+      
+      <img class="portrait" src="/img/pride-face-nobackground.png" itemprop="image" alt="Avatar">
+      
+
+      <div class="portrait-title">
+        <h2 itemprop="name">Mae Milano</h2>
+        <h3 itemprop="jobTitle">PhD, Programming Languages and Systems</h3>
+
+        
+        
+
+        
+        <h3 itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+          <a href="https://cs.cornell.edu/" target="_blank" itemprop="url" rel="noopener">
+          <span itemprop="name">Cornell University</span>
+          </a>
+        </h3>
+        
+        <h3 itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+          <a href="https://cs.berkeley.edu/" target="_blank" itemprop="url" rel="noopener">
+          <span itemprop="name">University of California, Berkeley</span>
+          </a>
+        </h3>
+        
+      </div>
+
+      <link itemprop="url" href="http://languagesforsyste.ms/">
+
+      <ul class="network-icon" aria-hidden="true">
+        
+        
+        
+        
+          
+        
+        
+        
+        
+        
+		
+        <li>
+		<a itemprop="sameAs"  href="#"
+		   data-contact="bWFpbHRvOm1wbWlsYW5vQGNzLmJlcmtlbGV5LmVkdQ=="
+		   onmouseover="this.href = atob(this.dataset.contact)"
+		   onfocus="this.href = atob(this.dataset.contact)"
+		   target="_blank" rel="noopener">
+            <i class="fas fa-envelope big-icon"></i>
+          </a>
+        </li>
+        
+        
+        
+        
+          
+        
+        
+        
+        
+        
+          
+        
+		
+        <li>
+		<a itemprop="sameAs"  href="#"
+		   data-contact="aHR0cHM6Ly90d2l0dGVyLmNvbS9tYnBtaWxhbm8="
+		   onmouseover="this.href = atob(this.dataset.contact)"
+		   onfocus="this.href = atob(this.dataset.contact)"
+		   target="_blank" rel="noopener">
+            <i class="fab fa-twitter big-icon"></i>
+          </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+		
+        <li>
+		<a itemprop="sameAs"  href="#"
+		   data-contact="aHR0cHM6Ly9zY2hvbGFyLmdvb2dsZS5jb20vY2l0YXRpb25zP3VzZXI9MVhQOFhjQUFBQUFK"
+		   onmouseover="this.href = atob(this.dataset.contact)"
+		   onfocus="this.href = atob(this.dataset.contact)"
+		   target="_blank" rel="noopener">
+            <i class="ai ai-google-scholar big-icon"></i>
+          </a>
+        </li>
+        
+        
+        
+        
+          
+        
+        
+        
+        
+        
+          
+        
+		
+        <li>
+		<a itemprop="sameAs"  href="#"
+		   data-contact="aHR0cHM6Ly9naXRodWIuY29tL21wbWlsYW5v"
+		   onmouseover="this.href = atob(this.dataset.contact)"
+		   onfocus="this.href = atob(this.dataset.contact)"
+		   target="_blank" rel="noopener">
+            <i class="fab fa-github big-icon"></i>
+          </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+          
+        
+		
+        <li>
+		<a itemprop="sameAs"  href="#"
+		   data-contact="ZmlsZXMvbWlsYW5vLWN2LnBkZg=="
+		   onmouseover="this.href = atob(this.dataset.contact)"
+		   onfocus="this.href = atob(this.dataset.contact)"
+		   target="_blank" rel="noopener">
+            <i class="ai ai-cv big-icon"></i>
+          </a>
+        </li>
+        
+      </ul>
+
+    </div>
+  </div>
+  <div class="col-12 col-lg-8" itemprop="description">
+
+    <p>Hi! I&rsquo;m Mae! I&rsquo;m a postdoc at <a href="https://berkeley.edu" target="_blank">University of California, Berkeley</a> <a href="https://sky.cs.berkeley.edu" target="_blank">Sky</a>, working under Joe Hellerstein.</p>
+
+<p><strong><a href="files/faculty-applications/mae-milano-application-materials.pdf" target="_blank">I&rsquo;m on the tenure-track faculty job market this year</a>: here&rsquo;s my <a href="files/faculty-applications/CV%20(new).pdf" target="_blank">CV</a>, <a href="files/faculty-applications/teaching%20statement%20(new).pdf" target="_blank">teaching statement</a>, <a href="files/faculty-applications/research%20statement%20(new).pdf" target="_blank">research statement</a>, and <a href="files/faculty-applications/dei%20(new).pdf" target="_blank">diversity statement</a>.</strong></p>
+
+<p>In 2020 I graduated with a PhD in programming languages and systems from Cornell University, advised by <a href="http://www.cs.cornell.edu/andru" target="_blank">Andrew Myers</a>.  My work focuses on programming languages and abstractions for wide-area or large-scale distributed systems; really anything where the round-trip latency for communication is way too long, or the cost of coordination is way too high.  I&rsquo;m working on programming the <a href="https://hydro.run" target="_blank">Hydro project</a> with Joe Hellerstein, and leading an initiative to design <a href="https://dl.acm.org/doi/10.1145/3519939.3523443" target="_blank">new languages</a> for fearless concurrency.  During my PhD, I worked on <a href="project/languages-for-distribution/" target="_blank">programming replicated, distributed systems</a> with Andrew Myers, and have also worked extensively with <a href="http://www.cs.cornell.edu/ken/" target="_blank">Ken Birman</a> and the <a href="https://derecho-project.github.io/" target="_blank">Derecho group</a>.
+<!-- I also have a (significantly) out-of-date [website](http://cs.brown.edu/people/mpmilano/) at [Brown](http://cs.brown.edu/) --></p>
+
+
+    <div class="row">
+
+      
+      <div class="col-md-5">
+        <h3>Interests</h3>
+        <ul class="ul-interests">
+          
+          <li>Programming Languages</li>
+          
+          <li>Runtime Systems</li>
+          
+          <li>Distributed Systems</li>
+          
+          <li>Consistency</li>
+          
+        </ul>
+      </div>
+      
+
+      
+      <div class="col-md-7">
+        <h3>Education</h3>
+        <ul class="ul-edu fa-ul">
+          
+          <li>
+            <i class="fa-li fas fa-graduation-cap"></i>
+            <div class="description">
+              <p class="course">PhD in Programming Languages and Systems, 2020</p>
+			  
+			  <p class="advisor">Advised by: Andrew C. Myers</p>
+			  
+              <p class="institution">Cornell University</p>
+            </div>
+          </li>
+          
+          <li>
+            <i class="fa-li fas fa-graduation-cap"></i>
+            <div class="description">
+              <p class="course">MS in Computer Science, 2017</p>
+			  
+              <p class="institution">Cornell University</p>
+            </div>
+          </li>
+          
+          <li>
+            <i class="fa-li fas fa-graduation-cap"></i>
+            <div class="description">
+              <p class="course">ScB in Computer Science and Music, 2013</p>
+			  
+              <p class="institution">Brown University</p>
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="publications_selected" class="home-section">
+    <div class="container">
+      
+
+
+
+<div class="row">
+  <div class="col-12 col-lg-4 section-heading">
+    <h1>Recent Publications</h1>
+    
+  </div>
+  <div class="col-12 col-lg-8">
+    
+
+    
+      
+    
+
+    
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/keep-calm-and-crdt-on/" itemprop="url">Keep CALM and CRDT On</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Despite decades of research and practical experience, developers have few tools for programming reliable distributed applications …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Shadaj Laddad, Conor Power, Mae Milano, Alvin Cheung, Joseph M. Hellerstein</div>
+	  
+	  <a href="https://www.vldb.org/pvldb/volumes/16/" style="color:#3F51B5; font-weight: bold ">
+	  
+	  PVLDB 16.4
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.vldb.org/pvldb/vol16/p856-power.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/hydro/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.14778/3574245.3574268" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/katara/" itemprop="url">Katara: Synthesizing CRDTs with Verified Lifting</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Conflict-free replicated data types (CRDTs) are a promising tool for designing scalable, coordination-free distributed systems. …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Shadaj Laddad, Conor Power, Mae Milano, Alvin Cheung, Joseph M. Hellerstein</div>
+	  
+	  <a href="https://2022.splashcon.org/track/splash-2022-oopsla" style="color:#3F51B5; font-weight: bold ">
+	  
+	  OOPSLA 2022
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://dl.acm.org/doi/pdf/10.1145/3563336" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/hydro/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.1145/3563336" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/fearless-concurrency/" itemprop="url">A flexible type system for fearless concurrency</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      This paper proposes a new type system for concurrent programs, allowing threads to exchange complex object graphs without risking …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Mae Milano, Joshua Turcotti, Andrew Myers</div>
+	  
+	  <a href="https://pldi22.sigplan.org/" style="color:#3F51B5; font-weight: bold ">
+	  
+	  PLDI 2022
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://dl.acm.org/doi/pdf/10.1145/3519939.3523443" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/fearless-concurrency/fearless-concurrency.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/fearless-concurrency/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.1145/3519939.3523443" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/pact/" itemprop="url">New Directions in Cloud Programming</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Nearly twenty years after the launch of AWS, it remains difficult for most developers to harness the enormous potential of the cloud. …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Alvin Cheung, Natacha Crooks, Joseph M. Hellerstein, Mae Milano</div>
+	  
+	  <a href="https://www.cidrdb.org/cidr2021" style="color:#3F51B5; font-weight: bold ">
+	  
+	  CIDR 2021
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.cidrdb.org/cidr2021/papers/cidr2021_paper16.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/hydro/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/gallifrey/" itemprop="url">A Tour of Gallifrey, a Language for Geodistributed Programming</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Programming efficient distributed, concurrent systems requires new abstractions that go beyond traditional sequential programming. But …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Mae Milano, Rolph Recto, Tom Magrino, Andrew Myers</div>
+	  
+	  <a href="https://snapl.org/2019/" style="color:#3F51B5; font-weight: bold ">
+	  
+	  SNAPL 2019
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://drops.dagstuhl.de/opus/volltexte/2019/10554/pdf/LIPIcs-SNAPL-2019-11.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/gallifrey/gallifrey.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.4230/LIPIcs.SNAPL.2019.11" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/derecho/" itemprop="url">Derecho: Fast State Machine Replication for Cloud Services</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Cloud computing services often replicate data and may require ways to coordinate distributed actions. Here we present Derecho, a …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Sagar Jha, Jonathan Behrens, Theo Gkountouvas, Mae Milano, Weijia Song, Edward Tremel, Sydney Zink, Kenneth P. Birman, Robbert Van Renesse</div>
+	  
+	  <a href="https://tocs.acm.org/" style="color:#3F51B5; font-weight: bold ">
+	  
+	  TOCS May 2019
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://doi.acm.org/10.1145/3302258" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/derecho/derecho.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/derecho/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.1145/3302258" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/mixt/" itemprop="url">MixT: A Language for Mixing Consistency in Geodistributed Transactions</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Programming concurrent, distributed systems is hard&mdash;especially when these systems mutate shared, persistent state replicated at …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Mae Milano, Andrew C. Myers</div>
+	  
+	  <a href="https://conf.researchr.org/home/pldi-2018" style="color:#3F51B5; font-weight: bold ">
+	  
+	  PLDI 2018
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://doi.acm.org/10.1145/3192366.3192375" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/mixt/mixt.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.1145/3192366.3192375" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/netkat/" itemprop="url">A Coalgebraic Decision Procedure for NetKAT</a>
+    </h3>
+
+    
+    
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Nate Foster, Dexter Kozen, Mae Milano, Alexandra Silva, Laure Thompson</div>
+	  
+	  <a href="https://popl.mpi-sws.org/2015/" style="color:#3F51B5; font-weight: bold ">
+	  
+	  POPL 2015
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://doi.acm.org/10.1145/2676726.2677011" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/netkat/netkat.bib">
+  Cite
+</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.1145/2676726.2677011" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/python/" itemprop="url">Python: The Full Monty</a>
+    </h3>
+
+    
+    
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Joe Gibbs Politz, Alejandro Martinez, Mae Milano, Sumner Warren, Daniel Patterson, Junsong Li, Anand Chitipothu, Shriram Krishnamurthi</div>
+	  
+	  <a href="https://2013.splashcon.org/track/splash-2013/oopsla-2013-papers" style="color:#3F51B5; font-weight: bold ">
+	  
+	  OOPSLA 2013
+	  
+	  </a>
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://doi.acm.org/10.1145/2509136.2509536" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/python/python.bib">
+  Cite
+</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://doi.org/10.1145/2509136.2509536" target="_blank" rel="noopener">
+  DOI
+</a>
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="awards" class="home-section">
+    <div class="container">
+      
+
+
+<div class="row">
+  
+  <div class="col-12 col-lg-4 section-heading">
+    <h1>Awards</h1>
+    <p>Awards and fellowships</p>
+  </div>
+  <div class="col-12 col-lg-8">
+    <ul>
+<li><a href="https://ndseg.asee.org/ndseg_fellows/2015_awardees" target="_blank">NDSEG</a> Fellowship (2015)</li>
+<li><a href="https://www.fastlane.nsf.gov/grfp/AwardeeList.do?method=loadAwardeeList&amp;year=2015" target="_blank">NSF GRFP</a> Honorable Mention (2015)</li>
+<li>Cornell CS Department Service Award (multiple, latest 2020)</li>
+<li>Senior Prize in Computer Science (2013)</li>
+<li>Rose Rosengard Subotnik Prize (2012)</li>
+</ul>
+
+  </div>
+  
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="projects" class="home-section">
+    <div class="container">
+      
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-4 section-heading">
+
+    <h1>Projects</h1>
+    
+
+  </div>
+  <div class="col-xs-12 col-md-8">
+
+
+
+    
+
+    
+
+      
+
+      
+      
+      
+      
+        
+      
+
+      <span class="d-none default-project-filter">*</span>
+
+      
+      
+    
+
+    <div class="row isotope projects-container js-layout-row ">
+      
+        
+        
+        
+        
+          
+
+
+
+
+
+<div class="col-lg-12 project-item isotope-item js-id-Linear-Types js-id-Ownership js-id-Programming-Languages js-id-Concurrency" itemscope itemtype="http://schema.org/CreativeWork">
+
+  <span class="project-title">
+    <a href="/project/fearless-concurrency/"  itemprop="url">Bringing Fearless Concurrency to the Masses</a>
+  </span>
+
+  <p class="project-summary">We&rsquo;re building new languages for safely programming with shared mutable objects.  In our work, threads can freely exchange mutable objects and manipulate state concurrently&mdash;with no possibility of a destructive data race.</p>
+</div>
+
+        
+      
+        
+        
+        
+        
+          
+
+
+
+
+
+<div class="col-lg-12 project-item isotope-item js-id-Programming-Languages js-id-Distributed-Systems" itemscope itemtype="http://schema.org/CreativeWork">
+
+  <span class="project-title">
+    <a href="/project/hydro/"  itemprop="url">Hydro: Software that Runs at Every Scale</a>
+  </span>
+
+  <p class="project-summary">The Hydro Project at UC Berkeley is developing cloud-native programming models that allow anyone to develop scalable and reslilient distributed applications that take full advantage of the elasticity of cloud infrastructure. Our research spans across databases, distributed systems, and programming languages to deliver a modern, end-to-end stack for cloud programming.</p>
+</div>
+
+        
+      
+        
+        
+        
+        
+          
+
+
+
+
+
+<div class="col-lg-12 project-item isotope-item js-id-Transactions js-id-Consistency js-id-Programming-Languages js-id-Distributed-Systems" itemscope itemtype="http://schema.org/CreativeWork">
+
+  <span class="project-title">
+    <a href="/project/gallifrey/"  itemprop="url">Gallifrey: a New Language for Distributed Programming</a>
+  </span>
+
+  <p class="project-summary">Gallifrey is a new programming language for distributed wide-area applications.  Gallifrey programs share state via replication, granting fast access to data without introducing mandatory synchronization points, all while maintaining sequential consistency by default.  Gallifrey aims to be easy-to-use, requiring a minimal annotation overhead atop an otherwise Java-like language.</p>
+</div>
+
+        
+      
+        
+        
+        
+        
+          
+
+
+
+
+
+<div class="col-lg-12 project-item isotope-item js-id-Transactions js-id-Consistency js-id-Programming-Languages js-id-Distributed-Systems" itemscope itemtype="http://schema.org/CreativeWork">
+
+  <span class="project-title">
+    <a href="/project/languages-for-distribution/"  itemprop="url">Programming Replicated, Distributed Systems</a>
+  </span>
+
+  <p class="project-summary">Distributed Languages frequently either fail to capture replication, or insist in high-latency lockstep state machine replication.  Storage systems which avoid both pitfalls often do so by weakening consistency. We try to rein in weak consistency and capture replication and concurrency, all while constructively avoiding races and allowing safe, loosely-synchronized replication.</p>
+</div>
+
+        
+      
+        
+        
+        
+        
+          
+
+
+
+
+
+<div class="col-lg-12 project-item isotope-item js-id-Transactions js-id-Consistency js-id-Programming-Languages js-id-Distributed-Systems" itemscope itemtype="http://schema.org/CreativeWork">
+
+  <span class="project-title">
+    <a href="/project/derecho/"  itemprop="url">Derecho: Programming the Datacenter</a>
+  </span>
+
+  <p class="project-summary">Derecho is a new framework for building replicated, fault-tolerant distributed systems within a datacenter.  It provides a best-in-class consistent multicast abstraction, and is easy to use via user-defined replicated objects and RPC.</p>
+</div>
+
+        
+      
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="publications" class="home-section">
+    <div class="container">
+      
+
+
+
+
+<div class="row">
+  <div class="col-12 col-lg-4 section-heading">
+    <h1>Technical Reports</h1>
+    
+    
+    <p class="view-all">
+      <a href="/publication/">
+        More Publications
+        <i class="fas fa-angle-double-right"></i>
+      </a>
+    </p>
+    
+  </div>
+  <div class="col-12 col-lg-8">
+    
+
+    
+      
+    
+
+    
+      
+    
+
+    
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/mixt-tr/" itemprop="url">A Language for Mixing Consistency in Geodistributed Transactions: Technical Report</a>
+    </h3>
+
+    
+    
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Mae P. Milano, Andrew C. Myers</div>
+	  
+	  
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/files/mixt-tr.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/mixt-tr/mixt-tr.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/derecho-tr/" itemprop="url">Building Smart Memories and Cloud Services with Derecho</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      The coming generation of Internet-of-Things (IoT) applications will process massive amounts of incoming data while supporting data …
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Sagar Jha, Jonathan Behrens, Theo Gkountouvas, Mae Milano, Weijia Song, Edward Tremel, Sydney Zink, Kenneth P. Birman, Robbert Van Renesse</div>
+	  
+	  
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://www.cs.cornell.edu/projects/Quicksilver/public_pdfs/derecho.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/derecho-tr/derecho-tr.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/derecho/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/publication/mm-16-tr/" itemprop="url">Mixing Consistency in Geodistributed Transactions: Technical Report (old)</a>
+    </h3>
+
+    
+    
+    
+
+    <div class="stream-meta article-metadata">
+      <div itemprop="author">
+        Mae P. Milano, Andrew C. Myers</div>
+	  
+	  
+	  
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://hdl.handle.net/1813/44710" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 btn-sm js-cite-modal"
+        data-filename="/publication/mm-16-tr/mm-16-tr.bib">
+  Cite
+</button>
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="talks" class="home-section">
+    <div class="container">
+      
+
+
+
+
+<div class="row">
+  <div class="col-12 col-lg-4 section-heading">
+    <h1>Recent Talks</h1>
+    
+    
+  </div>
+  <div class="col-12 col-lg-8">
+    
+
+    
+
+    
+    
+
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/researching-with-undergraduates/" itemprop="url">Researching with Undergraduates: a Curricular Approach</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Building a syllabus for a semester of undergraduate research.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        Dec 6, 2022
+        
+          9:05 AM
+          
+        
+
+        
+          <span class="middot-divider"></span> Doctoral Symposium at SPLASH 2022
+        
+      </div>
+      <div itemprop="author">
+        Mae Milano</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/fearless-apple/" itemprop="url">A developer-centric approach to Fearless Concurrency</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Presenting a new type system for Fearless Concurrency
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        Aug 25, 2022
+        
+          11:00 AM
+          
+            &mdash; 12:00 PM
+          
+        
+
+        
+          <span class="middot-divider"></span> Apple Computer, Swift Team
+        
+      </div>
+      <div itemprop="author">
+        Mae Milano, Joshua Turcotti</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/fearless-concurrency/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/fearless-pldi/" itemprop="url">Fearless Concurrency PLDI Talk</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Presenting a new type system for Fearless Concurrency
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        Jun 16, 2022
+        
+          1:30 PM
+          
+            &mdash; 1:50 PM
+          
+        
+
+        
+          <span class="middot-divider"></span> PLDI 2022
+        
+      </div>
+      <div itemprop="author">
+        Mae Milano</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/fearless-concurrency/">
+    Project
+  </a>
+  
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.youtube.com/watch?v=yUtZwdGhxhw" target="_blank" rel="noopener">
+  Video
+</a>
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/derecho-tutorial/" itemprop="url">Derecho Tutorial</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Learn about Derecho, and build a sample ML application with it!
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        Oct 27, 2019
+        
+          2:00 PM
+          
+            &mdash; 6:00 PM
+          
+        
+
+        
+          <span class="middot-divider"></span> SOSP 2019
+        
+      </div>
+      <div itemprop="author">
+        Ken Birman, Mae Milano, Edward Tremel</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://www.cs.cornell.edu/ken/Slides/SOSP%20slides.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/derecho-project/sospdemo" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/derecho/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://derecho.cs.cornell.edu" target="_blank" rel="noopener">
+  Slides
+</a>
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/derecho-poster-aisys/" itemprop="url">Derecho&#39;s Intelligent Object Store</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      An intelligent object store built in Derecho, optimized for AI at the IoT Edge
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        Oct 27, 2019
+        
+          10:00 AM
+          
+            &mdash; 11:30 AM
+          
+        
+
+        
+          <span class="middot-divider"></span> AI Systems 2019
+        
+      </div>
+      <div itemprop="author">
+        Weijia Song, Mae Milano, Sagar Jha, Edward Tremel, Xinzhe Yang, Ken Birman</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/derecho-project/" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/derecho/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/gallifrey-conference-talk/" itemprop="url">Gallifrey SNAPL Talk</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Presenting Gallifrey, a new Java-like language for wide-area distributed programming
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        May 20, 2019
+        
+          11:00 AM
+          
+            &mdash; 11:30 AM
+          
+        
+
+        
+          <span class="middot-divider"></span> SNAPL 2019
+        
+      </div>
+      <div itemprop="author">
+        Mae Milano</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/gallifrey-eglpls-talk/" itemprop="url">Gallifrey EGLPLS Talk</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Presenting Gallifrey, a new Java-like language for wide-area distributed programming
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        May 10, 2019
+        
+          3:00 PM
+          
+            &mdash; 3:30 PM
+          
+        
+
+        
+          <span class="middot-divider"></span> EGLPLS 2019
+        
+      </div>
+      <div itemprop="author">
+        Mae Milano</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/gallifrey/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+      
+        <div class="media stream-item" itemscope itemtype="http://schema.org/Event">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="name">
+      <a href="/talk/mixt/" itemprop="url">MixT PLDI Talk</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Presenting MixT, a domain-specific programming language for mixed-consistency transactions
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+      <div>
+        
+        Jun 20, 2018
+        
+          4:35 PM
+          
+            &mdash; 5:00 PM
+          
+        
+
+        
+          <span class="middot-divider"></span> PLDI 2018
+        
+      </div>
+      <div itemprop="author">
+        Mae Milano</div>
+    </div>
+
+    <div class="btn-links">
+      
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/languages-for-distribution/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.youtube.com/watch?v=DE0aBd4W-kA" target="_blank" rel="noopener">
+  Video
+</a>
+
+
+
+
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+      
+    
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="posts" class="home-section">
+    <div class="container">
+      
+
+
+
+
+<div class="row">
+  <div class="col-12 col-lg-4 section-heading">
+
+    <h1>Recent Posts</h1>
+    
+    
+
+  </div>
+  <div class="col-12 col-lg-8">
+
+    
+
+    
+      
+
+      
+      
+
+        
+
+        
+        
+
+        
+        
+          
+      
+          
+      
+          
+      
+          
+      
+
+      
+      
+        
+          
+
+<div class="media stream-item" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="headline">
+      <a href="/post/dissertation/" itemprop="url">My Dissertation is Now Available!</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      My dissertation is now available <a href="/files/thesis.pdf">here</a>
+    </div>
+    
+
+    <div class="stream-meta">
+    
+
+<div class="article-metadata">
+
+  
+  
+  
+  <div>
+    <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+      <span itemprop="name">Mae Milano</span>
+    </span>
+    
+  </div>
+  
+
+  <span class="article-date">
+    
+        Last updated on
+    
+    <meta content="2020-10-31 00:00:00 -0700 PDT" itemprop="datePublished">
+    <time datetime="2021-12-31 09:57:18 -0800 PST" itemprop="dateModified">
+      Dec 31, 2021
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Mae Milano">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/dissertation/#disqus_thread"></a>
+  
+
+  
+
+  
+
+</div>
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+        
+      
+
+      
+
+        
+
+        
+        
+
+        
+        
+          
+      
+          
+      
+          
+      
+          
+      
+
+      
+      
+        
+          
+
+<div class="media stream-item" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0" itemprop="headline">
+      <a href="/post/mixt-tr/" itemprop="url">Mixing Consistency with MixT: Technical Report Available!</a>
+    </h3>
+
+    
+    
+      
+    
+    
+    <div class="article-style" itemprop="articleBody">
+      Presenting MixT, our language for sanely mixing distinct consistency levels within a single transaction. Now in Tech Report form!
+    </div>
+    
+
+    <div class="stream-meta">
+    
+
+<div class="article-metadata">
+
+  
+  
+  
+  <div>
+    <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+      <span itemprop="name">Mae Milano</span>
+    </span>
+    
+  </div>
+  
+
+  <span class="article-date">
+    
+        Last updated on
+    
+    <meta content="2018-06-20 00:00:00 -0700 PDT" itemprop="datePublished">
+    <time datetime="2021-12-31 09:57:18 -0800 PST" itemprop="dateModified">
+      Dec 31, 2021
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Mae Milano">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/mixt-tr/#disqus_thread"></a>
+  
+
+  
+
+  
+
+</div>
+
+    </div>
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/post/mixt-tr/">
+      <img src="/post/mixt-tr/featured_hubd900b35ac426f44a111d4eea6e9233b_454844_150x0_resize_box_2.png" itemprop="image">
+    </a>
+    
+  </div>
+</div>
+
+        
+      
+
+      
+    
+
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="teaching" class="home-section">
+    <div class="container">
+      
+
+
+<div class="row">
+  
+  <div class="col-12 col-lg-4 section-heading">
+    <h1>Teaching</h1>
+    
+  </div>
+  <div class="col-12 col-lg-8">
+    
+
+<h2 id="cs-294-170-graduate-seminar-programming-the-cloud-https-sites-google-com-berkeley-edu-cs294-170-home-authuser-1"><a href="https://sites.google.com/berkeley.edu/cs294-170/home?authuser=1" target="_blank">CS 294-170: Graduate Seminar: Programming the Cloud</a></h2>
+
+<p>The public clouds are the most powerful general-purpose computers ever
+assembled, allowing individuals to rent their power at unlimited
+scale, on demand. This makes &ldquo;the cloud&rdquo; the biggest game-changer in
+computing access since the adoption of the PDP-11 minicomputer in the
+early 1970s. However, unlike the advent of UNIX and C for PDP-11, an
+organic programming model has yet to emerge for the cloud. History
+suggests that the real innovation on new platforms comes when the
+right programming model is introduced.</p>
+
+<p>The challenge of helping developers program the cloud spans areas:
+Programming Languages, Distributed Systems, Databases, and Operating
+Systems, to name a few. In this seminar we will read research papers
+together, and bootstrap new efforts in this area.</p>
+
+<h2 id="cs-2043-unix-tools-and-systems-http-www-cs-cornell-edu-courses-cs2043-2019sp"><a href="http://www.cs.cornell.edu/courses/cs2043/2019sp/" target="_blank">CS 2043: Unix Tools and Systems</a></h2>
+
+<p>UNIX and UNIX-like systems are increasingly being used on personal
+computers, mobile phones, web servers, and many other systems. They
+represent a wonderful family of programming environments useful both
+to computer scientists and to people in many other fields, such as
+computational biology and computational linguistics, in which data is
+naturally represented by strings. This course takes students from
+shell basics and piping, to regular-expression processing tools, to
+shell scripting and Python. Other topics to be covered include
+handling concurrent and remote resources, manipulating streams and
+files, and managing software installations.</p>
+
+<h2 id="cs195r-compilers-https-web-archive-org-web-20130129140631-http-cs-brown-edu-courses-cs195r"><a href="https://web.archive.org/web/20130129140631/http://cs.brown.edu/courses/cs195r/" target="_blank">CS195r: Compilers</a></h2>
+
+<p>Compilers are a subject fundamental to Computer Science, helping
+bridge the gap between a program&rsquo;s abstract semantics and the target
+machine&rsquo;s capabilities.  In this course, we follow <a href="https://www.cs.princeton.edu/~appel/modern/" target="_blank">Andrew
+Appel&rsquo;s</a> curriculum to
+design and build a compiler from scratch, in a radically collaborative
+and open-ended environment.</p>
+
+  </div>
+  
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="service" class="home-section">
+    <div class="container">
+      
+
+
+<div class="row">
+  
+  <div class="col-12 col-lg-4 section-heading">
+    <h1>Service</h1>
+    
+  </div>
+  <div class="col-12 col-lg-8">
+    
+
+<h3 id="professional-service">Professional Service</h3>
+
+<ul>
+<li><p><em>Artifact Evaluation Committee: <a href="https://2015.splashcon.org/track/splash2015-artifacts" target="_blank">OOPSLA &lsquo;15</a>, <a href="https://conf.researchr.org/track/POPL-2017/ArtifactEvaluation" target="_blank">POPL &lsquo;17</a>, <a href="https://pldi19.sigplan.org/committee/pldi-2019-pldi-research-artifacts-artifact-evaluation-committee" target="_blank">PLDI &lsquo;19</a>, <a href="https://2023.splashcon.org/track/splash-2023-oopsla" target="_blank">OOPSLA &lsquo;23</a></em></p></li>
+
+<li><p><em>Program Committee: <a href="https://github.com/papoc-workshop/2022" target="_blank">PaPoC &lsquo;22</a>, EuroDW <a href="https://eurodw21.github.io/" target="_blank">&lsquo;21</a>, &lsquo;22</em></p></li>
+
+<li><p><em>External Review Committee: <a href="https://2023.splashcon.org/track/splash-2023-oopsla" target="_blank">OOPSLA &lsquo;23</a></em></p></li>
+</ul>
+
+<h3 id="outreach">Outreach</h3>
+
+<ul>
+<li><em><a href="https://computingconnections.org/" target="_blank">CCF</a></em>: Member of the <a href="https://computingconnections.org/people" target="_blank">selection committee</a></li>
+<li>*<a href="https://www.sigplan.org/LongTermMentoring/" target="_blank">SIGPLAN-M</a>: Mentor since 2020</li>
+
+<li><p><em><a href="https://cornell.learningu.org/" target="_blank">SPLASH</a></em> (2013,15-16): Instructor
+at SPLASH Cornell and MIT, lecturing on video game music</p></li>
+
+<li><p><em><a href="https://www.eyh.cornell.edu/" target="_blank">EYH</a> (2014-19)</em>: Workshop leader
+and designer at Expanding Your Horizons, a one-day workshop aimed
+at encouraging middle school girls to embrace STEM topics.</p></li>
+
+<li><p><em><a href="https://www.ithacacityschools.org/bellesherman" target="_blank">Elementary School
+Instructor</a></em>
+(2014): Instructor of a day-a-week course following the
+CodeAcademy curriculum in Belle Sherman Elementary School in
+Ithaca.</p></li>
+</ul>
+
+  </div>
+  
+</div>
+
+    </div>
+  </section>
+  
+
+
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2020 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/c&#43;&#43;.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//languagesforsystems.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.14cafafda844d960749b7551524d1c3a.js"></script>
+
+    
+
+  </body>
+</html>
+
+

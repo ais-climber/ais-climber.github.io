@@ -1,0 +1,1952 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{geometry,amsmath,amssymb,stmaryrd,hyperref,xcolor,latexsym,theorem}
+\geometry{letterpaper}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\colons}{\,:\,}
+\newcommand{\infixand}{\text{ and }}
+\newcommand{\infixiff}{\text{ iff }}
+\newcommand{\key}[1]{\fcolorbox{black}{gray!25!white}{\raisebox{0pt}[5pt][0pt]{\texttt{#1}}}\hspace{0.5pt}}
+\newcommand{\nin}{\not\in}
+\newcommand{\op}[1]{#1}
+\newcommand{\tmcolor}[2]{{\color{#1}{#2}}}
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmstrong}[1]{\textbf{#1}}
+\newcommand{\tmtextbf}[1]{\text{{\bfseries{#1}}}}
+\newcommand{\tmtextit}[1]{\text{{\itshape{#1}}}}
+\newcommand{\tmtextmd}[1]{\text{{\mdseries{#1}}}}
+\newcommand{\tmtextsc}[1]{\text{{\scshape{#1}}}}
+\newcommand{\tmtextsf}[1]{\text{{\sffamily{#1}}}}
+\newcommand{\tmtextup}[1]{\text{{\upshape{#1}}}}
+\newcommand{\todo}[1]{{\color{red!75!black}[To do: #1]}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{tmparmod}[3]{\begin{list}{}{\setlength{\topsep}{0pt}\setlength{\leftmargin}{#1}\setlength{\rightmargin}{#2}\setlength{\parindent}{#3}\setlength{\listparindent}{\parindent}\setlength{\itemindent}{\parindent}\setlength{\parsep}{\parskip}} \item[]}{\end{list}}
+\newenvironment{tmparsep}[1]{\begingroup\setlength{\parskip}{#1}}{\endgroup}
+\newtheorem{axiom}{Axiom}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newcounter{nnnote}
+\def\thennnote{\unskip}
+{\theorembodyfont{\rmfamily}\newtheorem{note*}[nnnote]{Note}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\tableofcontentstext}{}
+\newcommand{\definitiontext}{Definition}
+\newcommand{\rendertheorem}[2]{{\renderenunciation{{\theoremname{#1{\theoremsep}}}}{#2}}}
+%
+
+\providecommand{\infixiff}{\mathbin{\text{ iff }}}
+%
+
+\newcommand{\garnet}[1]{{\color[HTML]{990002}#1}}
+\newcommand{\myblue}[1]{{\color[HTML]{0749AC}#1}}
+\newcommand{\Model}{\ensuremath{\mathcal{M}}}
+\newcommand{\Net}{\ensuremath{\mathcal{N}}}
+\newcommand{\Set}{\textsf{\tmop{Set}}}
+\newcommand{\Primes}{\tmtextsf{P}}
+\newcommand{\semantics}[1]{\left\llbracket #1 \right\rrbracket}
+\newcommand{\Lang}{\mathcal{L}}
+\newcommand{\Logic}{\ensuremath{\tmmathbf{\text{L}}}}
+\newcommand{\vocab}{V}
+\newcommand{\wocab}{W}
+\newcommand{\proves}{\vdash}
+\newcommand{\orr}{{\vee}}
+\providecommand{\land}{{\wedge}}
+\newcommand{\NP}{\tmtextsc{NP}}
+\newcommand{\bigchi}{\Large{\chi}}
+\newcommand{\powerset}{\mathcal{P}}
+%
+
+\newcommand{\hash}{\tmtextsf{hash}}
+\newcommand{\unique}{\tmtextsf{unique}}
+\newcommand{\Know}{\tmmathbf{\text{K}}}
+\newcommand{\Knownby}{\tmmathbf{\text{K}^{\downarrow}}}
+\newcommand{\diaKnow}{\langle \tmmathbf{\text{K}} \rangle}
+\newcommand{\diaKnownby}{\langle \tmmathbf{\text{K}^{\downarrow}} \rangle}
+\newcommand{\Typ}{\ensuremath{\tmmathbf{\text{T}}}}
+\newcommand{\diaTyp}{\langle \tmmathbf{\text{T}} \rangle}
+\newcommand{\Reach}{\textsf{\tmop{Reach}}}
+\newcommand{\Reachedby}{\textsf{\tmop{Reach}}^{\downarrow}}
+\newcommand{\Prop}{\textsf{\tmop{Prop}}}
+\newcommand{\Hebb}{\tmtextsf{Update}}
+\newcommand{\Activ}{\textsf{\tmop{Act}}}
+\newcommand{\Inc}{\tmtextsf{Inc}}
+\newcommand{\AllNets}{\textsf{\tmop{Net}}}
+\newcommand{\AllModels}{\tmtextsf{Model}}
+\newcommand{\precede}{\tmtextsf{prec}}
+\newcommand{\bibliographytext}{}
+\newcommand{\renderbibliography}[2]{{\principalsectionstar{#1}}
+
+\begin{tmparmod}{0pt}{0pt}{0em}%
+  \begin{tmparsep}{0em}%
+    {\small #2}
+  \end{tmparsep}
+\end{tmparmod}}
+\newcommand{\sectionalsep}{{\hspace{2em}}}
+\newcommand{\sectionalpostsep}{{\hspace{2em}}}
+\newcommand{\propositiontext}{Proposition}
+%
+
+\newtheorem{claim}{Claim}
+\newtheorem{goal}{Goal}
+\newcommand{\questiontext}{}
+\newcommand{\appendixtext}{appendix}
+\providecommand{\parsep}{0.1fn}
+\newcommand{\parparsep}{0.3fns}
+
+\begin{document}
+
+\title{Neural Net Semantics with Modal Operators}
+
+\maketitle
+
+This paper is inspired by Hannes Leitgeb's
+\href{https://pdf.sciencedirectassets.com/271585/1-s2.0-S0004370200X00768/1-s2.0-S000437020100073X/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBUaCXVzLWVhc3QtMSJIMEYCIQCYhHMlIPhIq3vO4rnf4y1swIkWc00HT6vtGY5twAuAygIhALXtW5sZJGGEIevyH%2B%2BXjijmgXy2ShEjSWoS6hA4ztVkKswECF0QBRoMMDU5MDAzNTQ2ODY1IgykI5CgK9WVME8ZMBoqqQSpliScdX5JGooz6vazOYjdbL08lgSWnU5bZfWtvxkwOvS%2BWi7FEeFc6OlKllF8GyahFm6htvFFreqTmdsfk2x3ffNWukRYgJEtp9xsxREbCyTdZs2p1zzHybDyrzqtqfOA0E6pShx5olx1jp%2BJl7hIG1Zvf%2FvfVISL44d4NVzpJJvBiGMzVl2UYdk%2BYW%2FVO7axQWxAoS28Vy1EEySDihEOHJYRyexTqt82XAZxAoRizFoCGScG1FMe5d5BWcmxfnPT5WrPT4zVRe6HhMHlF8X8wuw5IfMJ9F74ZJd2aS1kv09b8dJ4VZXvLTGOqx22WSxRBS%2FiG%2BFUp%2Fms89HO0WkUCguddmdyE%2BsQDVSx%2FfPLntqCa2fD%2FbWQzdIuhGBHP6K4AAWWUABK8UVU1Z%2Fu40Z8htWwqEloqV7S55QIDH%2BJI6N9JHaS6P5BnIaHvLzlYrJnJ%2FR8AyhJ%2FHp0g2sb%2FYyAL13xVEjYZGetubAD1P9TXrnlXsEiJpFeH5P4rUy%2F%2FXLerG2z69r250Pbhh8JoPH6uusYtzyha0fZalhu%2BA1pP3GfEVrikEDpxvx6tgExgNZHDE9UAfWF1NH%2F7X%2Fz46gAuT%2FnjvRZ9KcfpkOX6zzQtkkGyUiNdm3CBZ4Z6pSssQu8sTdv0w7htnFOWNwZnH8zSkcC9MjDMvfT%2FZNV3HN2XTVjLy9n4VWmTKO7m0zjZqVqn6B8CsaPRosze2qr3om4hxpCpSG6YpQPMPSGtp0GOqgB8IETl9v2KqQGOJQJO3CRaT1rkgXy%2BuWRY6WTp8ROr0I23070icKEf4ssWAwxSXneXGKkU6HQh7mvdLhjD0fOqjOebZmAg2Vvojm87UBddPvAC9s01O2byEjQ0xH3MMq2BvLfB%2FGlT%2BOnk4o0Aj7K%2BkA20dnf2h9ekSRmpr6QyuQ7GUPxYteMtRPntOwOwxshishUGWXynnZWGcbtUOJ%2BTU7AgDcdZrcX&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221229T131449Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYTRHAT5NH%2F20221229%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6883ba7f9b34aebf025254e28f320fadb7efb3b1f4abd990fd3198cf2308a56e&hash=df607e446c88459bfb2a3e3b7078f82cd7eef5c00ba4d6a84ba2732a687200ef&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S000437020100073X&tid=spdf-ffe2d701-58e9-4ee8-8716-53020a0b2676&sid=61edbba4786fd54fdd6949c8028454f460e6gxrqa&type=client&ua=515a52510501565e0007&rr=7812cd08cdd7e127}{Nonmonotonic
+Reasoning by Inhibition Nets}, which proves completeness for the
+neuro-symbolic interface suggested by Balkenius and
+G{\"a}rdenfors'\href{https://scholar.google.com/citations?user=ZW8RWdAAAAAJ&hl=en&oi=sra}{}
+\href{https://books.google.com/books?hl=en&lr=&id=1wwZAQAAIAAJ&oi=fnd&pg=PA32&dq=Nonmonotonic+inferences+in+neural+networks&ots=VsdxiIdpzf&sig=wC9oAbA8HUcIPI5gqmLNTDcc8tM}{Nonmonotonic
+Inferences in Neural Networks}.
+
+Hannes Leitgeb showed that feed-forward neural networks are complete with
+respect to certain conditional laws of $\Rightarrow$. But $\varphi \Rightarrow
+\psi$ just reads ``$\psi \subseteq \Prop (\varphi)$'' (i.e. $\psi$ is in the
+propagation of the signal $\varphi$), which we can re-write in modal language
+as $\Typ \varphi \rightarrow \psi$. In the same way that Hannes shows that
+feed-forward nets and preferential-conditional models are equivalent, it
+shouldn't be too hard at all to show that feed-forwards nets and neighborhood
+models are equivalent. (Note that it is well-known that neighborhood models
+are a generalization of preferential models.)
+
+I also think I should be able to throw in a $\Know$ modality
+(graph-reachability) in there, almost for free.
+
+{\renderenunciation{{\tmstrong{Why bother with completeness?. }}}{In formal
+specifications (of AI agents, or otherwise), we're often content with just
+listing some sound rules or behaviors that the agent will always follow. And
+it's definitely cool to see that neural networks satisfy some sound logical
+axioms. But if we want to fundamentally bridge the gap between logic and
+neural networks, we should set our aim higher: Towards \tmtextit{complete}
+logical characterizations of neural networks.
+
+A more practical reason: Completeness gives us model-building, i.e. given a
+specification $\Gamma$, we can \tmtextit{build} a neural network $\Net$
+satisfying $\Gamma$.}}
+
+{\renderenunciation{{\tmstrong{Why bother with this modal language?.
+}}}{Almost all of the previous work bridging logic and neural networks has
+focused on neural net models of \tmtextit{conditionals}. In some sense, doing
+this in modal language is just a re-write of this old work. But this previous
+work hasn't addressed how \tmtextit{learning} or \tmtextit{update} in neural
+networks can be cast in logical terms. This is not merely due to circumstance
+--- integrating conditionals with update is a long-standing controversial
+issue. So instead, we believe that it is more natural to work with modalities
+(instead of conditionals), because
+
+{\center{\tmtextit{Modal language natively supports update.}}}
+
+In other words, our modal setting sets us up to easily cast update operators
+(e.g. neural network learning) as modal operators in our logic.}}
+
+Also this gives me an excuse to title a paper \tmtextit{Neural Network Models
+{\`a} la Mode} :-) (This is a play on both modal logic and also bringing some
+old work back in style!)
+
+And LOL I can name a section ``Learning: The Cherry on Top''
+
+\section*{Related Papers:}
+
+\begin{description}
+  \item[Neural Network Semantics / Semantic Encodings]
+  \begin{description}
+    \item[Classic Papers] {\cite{mcculloch1943logical}}
+    {\cite{hebb-organization-of-behavior-1949}}
+    
+    \item[Conditional Logic (Feedforward Net)]
+    {\cite{balkenius1991nonmonotonic}}, {\cite{leitgeb2001nonmonotonic}},
+    {\cite{leitgeb2003nonmonotonic}}, {\cite{garcez2001symbolic}} (soundness),
+    {\cite{garcez2008neural}} (model-building) {\todo{Any other relevant work
+    by the Garcez lab?}}
+    
+    \item[Description Logic w. Typicality] {\cite{giordano2021}},
+    {\cite{giordano2022conditional}} {\todo{Any other relevant work by the
+    Giordano lab?}}
+    
+    \item[Modal Logic w. Typicality] {\cite{kisby2022logic}}
+    
+    {\todo{Any other big trends I'm missing? See the new survey by Odense +
+    Garcez!}}
+    
+    \item[Miscellaneous] {\cite{blutner2004nonmonotonic}},
+    {\cite{browne2001connectionist}}
+    
+    \item[Surveys] {\cite{odense2022semantic}} {\cite{bader2005dimensions}},
+    {\cite{sarker2021neuro}}, {\cite{kautz-2020future}},
+    {\cite{leitgeb2018neural}}, {\cite{belle2021logic}}, {\cite{yu2021survey}}
+    (the first few sections are a great introduction to Neural Network
+    Semantics)
+  \end{description}
+  \item[Help with Technical Details]
+  \begin{description}
+    \item[Neighborhood Models] {\cite{pacuit2017neighborhood}}
+    
+    \item[Temporal Logic Rules] {\cite{gabbay1994temporal}}
+  \end{description}
+\end{description}
+
+\section{Interpreted Neural Nets}
+
+\subsection{Basic Definitions}
+
+\begin{definition}
+  An \key{interpreted}\key{ANN} (Artificial Neural Network) is a pointed
+  directed graph $\Net = \langle N, E, W, A, I \rangle$, where
+  \begin{itemize}
+    \item $N$ is a finite nonempty set (the set of \key{neurons})
+    
+    \item $E \subseteq N \times N$ (the set of \key{excitatory}\key{neurons})
+    
+    \item $W : E \rightarrow \mathbb{R}$ (the \key{weight} of a given
+    connection)
+    
+    \item $A$ is a function which maps each $n \in N$ to $A^{(n)} :
+    \mathbb{R^k {\times R^k} } \rightarrow \mathbb{R}$ (the
+    \key{activation}\key{function} for $n$, where $k$ is the indegree of $n$)
+    
+    \item $I : \tmop{propositions} \rightarrow \powerset (N)$ is an assignment
+    of propositions to sets of neurons (the
+    \key{interpretation}\key{function}).
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A \key{BFNN} (Binary Feedforward Neural Network) is an interpreted ANN
+  $\Net = \langle N, E, W, A, I \rangle$ that is
+  \begin{itemize}
+    \item \key{Feed-forward}: $E$ does not contain any cycles
+    
+    \item \key{Binary}: the output of each neuron is in \{0, 1\}
+    
+    \item $A^{(n)}$ is \key{zero}\key{at}\key{zero} in the first parameter:
+    $A^{(n)} (\vec{0}, \vec{w}) = 0$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Given a BFNN {\Net}, $\Set = \powerset (N) = \{ S \mid S \subseteq N \}$
+\end{definition}
+
+\begin{definition}
+  For $S \in \Set$, let $\bigchi_S : N \rightarrow \{ 0, 1 \}$ be given by
+  $\bigchi_S = 1$ iff $n \in S$
+\end{definition}
+
+We write $W_{\tmop{ij}}$ to mean $W (i, j)$ for $(i, j) \in E$. To keep the
+notation from getting really messy, I'll also define:
+
+\begin{definition}
+  Let $S \in \Set$, $\vec{m} = m_1, \ldots, m_k$ be a sequence where each $m_i
+  \in N$, and let $n \in N$. Then:
+  \[ \Activ_S (\vec{m}, n) = A^{(n)} \left( \left( \bigchi_S (m_1), \ldots,
+     \bigchi_S (m_k) \right) ; (W (m_1, n), \ldots, W (m_k, n)) \right) \]
+\end{definition}
+
+i.e. the $m_i \in S$ subsequently ``activate'' $n$.
+
+\begin{proposition}
+  \label{activation-agrees}Let $S_1, S_2 \in \Set$, $\vec{m} = m_1, \ldots,
+  m_k$ be a sequence where each $m_i \in N$, and let $n \in N$. Suppose that
+  $S_1$ and $S_2$ agree on all $m_i$, i.e. for all $1 \leq i \leq k$, $m_i \in
+  S_1$ iff $m_i \in S_2$. Then
+  \[ \Activ_{S_1} (\vec{m}, n) = \Activ_{S_2} (\vec{m}, n) \]
+\end{proposition}
+
+\begin{proof}
+  We have:
+  \[ \begin{array}{lll}
+       \Activ_{S_1} (\vec{m}, n) & = & A^{(n)} \left( \left( \bigchi_{S_1}
+       (m_1), \ldots, \bigchi_{S_1} (m_k) \right) ; (W (m_1, n), \ldots, W
+       (m_k, n)) \right)\\
+       & = & A^{(n)} \left( \left( \bigchi_{S_2} (m_1), \ldots, \bigchi_{S_2}
+       (m_k) \right) ; (W (m_1, n), \ldots, W (m_k, n)) \right)\\
+       & = & \Activ_{S_2} (\vec{m}, n)
+     \end{array} \]
+  
+\end{proof}
+
+\subsection{$\Prop$ and $\Reach$}
+
+\begin{definition}
+  (Adapted from {\cite[Definition 3.4]{leitgeb2001nonmonotonic}}) Let $\Prop :
+  \Set \rightarrow \Set$ be defined recursively as follows: $n \in \Prop (S)$
+  iff either
+  \begin{description}
+    \item[Base Case] $n \in S$, or
+    
+    \item[Constructor] For those $\vec{m} = m_1, \ldots, m_k$ such that $(m_i,
+    n) \in E$, $\Activ_{\Prop (S)} (\vec{m}, n) = 1$.
+  \end{description}
+\end{definition}
+
+\begin{definition}
+  Let $\Reach : \Set \rightarrow \Set$ be given by $\Reach (S) = \left\{ n
+  \mid \exists m \in S \text{ with } E \text{-path from } m \text{ to } n
+  \right\}$
+\end{definition}
+
+\begin{definition}
+  Let $\Reachedby : \Set \rightarrow \Set$ be given by $\Reachedby (S) =
+  \left\{ m \mid \text{} \exists n \in S \text{with} E \textrm{-} \tmop{path}
+  \tmop{from} m \tmop{to} n \right\}$
+\end{definition}
+
+\begin{proposition}
+  \label{reach-closed-under-intersection}For all $S_1, \ldots, S_k \in \Set$,
+  $\bigcup_i \Reach (S_i) = \Reach \left( \bigcup_i S_i \right)$
+\end{proposition}
+
+\begin{proof}
+  
+  \[ \begin{array}{llll}
+       n \in \bigcup_i \Reach (S_i) & \infixiff & \exists S_i \text{ with } n
+       \in \Reach (S_i) & \text{} \text{(by definition of union)}\\
+       & \infixiff & \exists S_i, \exists m \in S_i \text{ with $E$-path from
+       } m \text{ to } n & \text{(by definition of {\Reach})}\\
+       & \infixiff & \exists m \in \bigcup_i S_i \text{ with $E$-path from }
+       m \text{ to } n & \text{(by definition of union)}\\
+       & \infixiff & n \in \Reach \left( \bigcup_i S_i \right) & \text{(by
+       definition of {\Reach})}
+     \end{array} \]
+  
+\end{proof}
+
+\begin{proposition}
+  \label{alternative-reachedby}For all $S \in \Set$, $\Reachedby (S) =
+  {\bigcup_{n \in S}}  \bigcap_{n \not{\in} \Reach (X)} X^{\complement}$
+\end{proposition}
+
+\begin{proof}
+  $(\rightarrow)$ Suppose $u \in \Reachedby (S)$. So $\exists n \in S$ with
+  $E$-path from $u$ to $n$. Let $X$ be such that $n \not{\in} \Reach (X)$. By
+  definition of $\Reach$, there is no $m \in X$ with an $E$-path from $m$ to
+  $n$. But since there \tmtextit{is} such a path from $u$, we must have $u
+  \not{\in} X$, i.e. $u \in X^{\complement}$. Since $X$ was arbitrary, $u \in
+  \bigcap_{n \not{\in} \Reach (X)} X^{\complement}$. So $u \in \bigcup_{n \in
+  S} \bigcap_{n \not{\in} \Reach (X)} X^{\complement}$.
+  
+  $(\leftarrow)$ Suppose $u \in {\bigcup_{n \in S}}  \bigcap_{n \not{\in}
+  \Reach (X)} X^{\complement}$. Let $n \in S$ be such that for all $X$, if $n
+  \not{\in} \Reach (X)$ then $u \in X^{\complement}$. Consider in particular
+  \[ X = \{ m \mid \tmop{there} \tmop{is} \tmop{an} E \textrm{-} \tmop{path}
+     \tmop{from} m \tmop{to} n \}^{\complement} \]
+  Notice that $n \not{\in} \Reach (X)$ (since $X$ is the set of nodes where
+  there is \tmtextit{not} a path to $n$). And so $u \in X^{\complement}$, i.e.
+  there \tmtextit{is} an $E$-path from $u$ to $n$.
+\end{proof}
+
+\begin{proposition}
+  \label{thm:reach-props}Let $\Net \in \AllNets$. For all $S, S_1, S_2 \in
+  \Set$, $n, m \in N$, $\Reach$ is
+  \begin{description}
+    \item[\key{(Inclusive)}] $S \subseteq \Reach (S)$
+    
+    \item[\key{(Idempotent)}] $\Reach (S) = \Reach (\Reach (S))$
+    
+    \item[\key{(Antisymmetric)}] If $m \in \Reach (\{ n \})$ and $n \in \Reach
+    (\{ m \})$ then $n = m$.
+    
+    \item[\key{(Monotonic)}] If $S_1 \subseteq S_2$ then $\Reach (S_1)
+    \subseteq \Reach (S_2)$
+  \end{description}
+\end{proposition}
+
+\begin{proof}
+  We check each in turn:
+  \begin{description}
+    \item[(Inclusive)] If $n \in S$, then there is a trivial path from $n \in
+    S$ to itself. So $n \in \Reach (S)$.
+    
+    \item[(Idempotent)] The ($\subseteq$) direction is just Inclusion. As for
+    ($\supseteq$), let $n \in \Reach \left( \Reach (S) \right)$. So there is a
+    path from some $m \in \Reach (S)$ to $n$. But since $m \in \Reach (S)$,
+    there is a path from some $u \in S$ to $m$. But then we have a path from
+    $u \in S$ to $n$, and so $n \in \Reach (S)$.
+    
+    \item[(Acyclic)] Suppose $m \in \Reach (\{ n \})$ and $n \in \Reach (\{ m
+    \})$. By definition of $\Reach$, there is an $E$-path from $m$ to $n$, and
+    another path from $n$ to $m$. But $\Net$ is feed-forward, i.e. $E$
+    contains no cycles! So we must have $n = m$.
+    
+    \item[(Monotonic)] Let $n \in \Reach (S_1)$. So there is a path from some
+    $m \in S_1$ to $n$. Since $S_1 \subseteq S_2$, $m \in S_2$. But then we
+    have a path from $m \in S_2$ to $n$. And so $n \in \Reach (S_2)$.
+  \end{description}
+\end{proof}
+
+\begin{proposition}
+  (Adapted from {\cite[Remark 4]{leitgeb2001nonmonotonic}})
+  \label{thm:prop-props}Let $\Net \in \AllNets$. For all $S, S_1, S_2 \in
+  \Set$, $\Prop$ is
+  \begin{description}
+    \item[\key{(Extensive)}] $S \subseteq \Prop (S)$
+    
+    \item[\key{(Idempotent)}] $\Prop (S) = \Prop (\Prop (S))$
+    
+    \item[\key{\tmcolor{red}{?}}] $\Prop (S) \subseteq \Reach (S)$
+  \end{description}
+\end{proposition}
+
+\begin{proof}
+  We check each in turn:
+  \begin{description}
+    \item[(Inclusive)] Similar to the proof of Inclusion for {\Reach}.
+    
+    \item[(Idempotent)] The ($\subseteq$) direction is just Inclusion. As for
+    ($\supseteq$), let $n \in \Prop (\Prop (S))$, and proceed by induction on
+    $\Prop (\Prop (S))$.
+    \begin{description}
+      \item[Base Step] $n \in \Prop (S)$, and so we are done.
+      
+      \item[Inductive Step] For those $\vec{m} = m_1, \ldots, m_k$ such that
+      $(m_i, n) \in E$,
+      \[ \Activ_{\Prop \left( \Prop (S) \right)} (\vec{m}, n) = 1 \]
+      By inductive hypothesis, $m_i \in \Prop \left( \Prop (S) \right)$ iff
+      $m_i \in \Prop (S)$. By Proposition \ref{activation-agrees},
+      $\Activ_{\Prop (S)} (\vec{m}, n) = 1$, and so $n \in \Prop (S)$.
+    \end{description}
+    \item[(Contained in $\Reach$)] Let $n \in \Prop (S)$, and proceed by
+    induction on $\Prop$.
+    \begin{description}
+      \item[Base Step] $n \in S$. So $n \in \Reach (S)$.
+      
+      \item[Inductive Step] For those $\vec{m} = m_1, \ldots, m_k$ such that
+      $(m_i, n) \in E$,
+      \[ \Activ_{\Prop (S)} (\vec{m}, n) = 1 \]
+      Since $A^{(n)}$ is zero at zero, we have $m_i \in \Prop (S)$ for
+      \tmtextit{some} $m = m_i$. By inductive hypothesis, $m \in \Reach (S)$.
+      And since $(m, n) \in E$, by definition of $\Reach$, $n \in \Reach (S)$.
+    \end{description}
+  \end{description}
+\end{proof}
+
+\begin{proposition}
+  \label{minimal-cause}\key{(Minimal}\key{Cause)} For all $n \in N$, if $n \in
+  \Reachedby (T)$ then the following are equivalent:
+  \begin{enumerate}
+    \item $n \in \Prop (S)$
+    
+    \item $n \in \Prop \left( \Prop (S) \cap \Reachedby (T) \right)$
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Suppose $n \in \Reachedby (T)$. To show $(1 \rightarrow 2)$, let $n \in
+  \Prop (S)$ and proceed by induction on $\Prop$.
+  \begin{description}
+    \item[Base Step] $n \in S$. By the base step of $\Prop$, $n \in \Prop
+    (S)$. But we also have $n \in \Reachedby (T)$, and so $n \in \Prop (S)
+    \cap \Reachedby (T)$. By the base step of $\Prop$, $n \in \Prop \left(
+    \Prop (S) \cap \Reachedby (T) \right)$.
+    
+    \item[Inductive Step] For those $\vec{m} = m_1, \ldots, m_k$ such that
+    $(m_i, n) \in E$,
+    \[ \Activ_{\Prop (S)} (\vec{m}, n) = 1 \]
+    Since each $(m_i, n) \in E$, and $n \in \Reachedby (T)$, by the
+    constructor case of $\Reachedby$ each $m_i \in \Reachedby (T)$. So we can
+    apply our inductive hypothesis to each $m_i$: $m_i \in \Prop (S)$ iff $m_i
+    \in \Prop \left( \Prop (S) \cap \Reachedby (T) \right)$. By Proposition
+    \ref{activation-agrees}, $\Activ_{\Prop \left( \Prop (S) \cap \Reachedby
+    (T) \right)} (\vec{m}, n) = 1$, and so $n \in \Prop \left( \Prop (S) \cap
+    \Reachedby (T) \right)$.
+  \end{description}
+  As for $(2 \rightarrow 1)$, let $n \in \Prop \left( \Prop (S) \cap
+  \Reachedby (T) \right)$, and proceed by induction on the outer $\Prop$.
+  \begin{description}
+    \item[Base Step] $n \in \Prop (S) \cap \Reachedby (T)$. So in particular,
+    $n \in \Prop (S)$
+    
+    \item[Inductive Step] For that $\vec{m} = m_1, \ldots, m_k$ such that
+    $(m_i, n) \in E$,
+    \[ \Activ_{\Prop \left( \Prop (S) \cap \Reachedby (T) \right)} (\vec{m},
+       n) = 1 \]
+    Since each $(m_i, n) \in E$, and $n \in \Reachedby (T)$, by the
+    constructor case of $\Reachedby$ each $m_i \in \Reachedby (T)$. So we can
+    apply our inductive hypothesis to each $m_i$: $m_i \in \Prop \left( \Prop
+    (S) \cap \Reachedby (T) \right)$ iff $m_i \in \Prop (S)$. By Proposition
+    \ref{activation-agrees}, $\Activ_{\Prop (S)} (\vec{m}, n) = 1$, and so $n
+    \in \Prop (S)$.
+  \end{description}
+\end{proof}
+
+\begin{proposition}
+  The KLM Cumulative and Loop properties from
+  $\cite{leitgeb2001nonmonotonic}$, i.e.
+  \begin{description}
+    \item[(Cumulative)] If $S_1 \subseteq S_2 \subseteq \Prop (S_1)$ then
+    $\Prop (S_1) \subseteq \Prop (S_2)$
+    
+    \item[(Loop)] If $S_1 \subseteq \Prop (S_0), \ldots, S_n \subseteq \Prop
+    (S_{n - 1})$ and $S_0 \subseteq \Prop (S_n)$,
+    
+    then $\Prop (S_i) = \Prop (S_j)$ for all $i, j \in \{ 0, \ldots, n \}$
+  \end{description}
+  follow from our properties of $\Reach$, $\Reachedby$, and $\Prop$.
+\end{proposition}
+
+\begin{proof}
+  Suppose $S_1 \subseteq \Prop (S_0), \ldots, S_n \subseteq \Prop (S_{n - 1})$
+  and $S_0 \subseteq \Prop (S_n)$. Since $\Prop$ is contained in $\Reach$, we
+  have $S_1 \subseteq \Reach (S_0), \ldots, S_n \subseteq \Reach (S_{n - 1})$
+  and $S_0 \subseteq \Reach (S_n)$. Suppose for contradiction that $\Prop
+  (S_i) \neq \Prop (S_j)$, for some $i, j \in \{ 0, \ldots, n \}$, $i < j$.
+  Without loss of generality, there is some $m_0 \in \Prop (S_i)$ such that
+  $m_0 \not{\in} \Prop (S_j)$. Since $m_0 \in \Prop (S_i) \subseteq \Reach
+  (S_i)$, we have:
+  \[ \exists \text{ a path from some } m_1 \in S_i \text{ to } m_0 \]
+  Following our chain $S_1 \subseteq \Reach (S_0), \ldots, S_n \subseteq
+  \Reach (S_{n - 1})$, $S_0 \subseteq \Reach (S_n)$, we get:
+  \[ \begin{array}{c}
+       \exists \text{ a path from some } m_2 \in S_{i - 1} \text{ to } m_0\\
+       \exists \text{ a path from some } m_3 \in S_{i - 2} \text{ to } m_1\\
+       \cdots\\
+       \exists \text{ a path from some } m_{i + 1} \in S_0 \text{ to } m_i\\
+       \exists \text{ a path from some } m_{i + 2} \in S_n \text{ to } m_{i +
+       1}\\
+       \exists \text{ a path from some } m_{i + 3} \in S_{n - 1} \text{ to }
+       m_{i + 2}\\
+       \cdots
+     \end{array} \]
+  {\todo{Include picture}} Since $N$ is finite, eventually this sequence
+  repeats, say at $m_a = m_b$ with $a \leqslant b$. {\todo{Where do we use the
+  fact that $m_0 \not{\in} \Prop (S_j)$?}}
+\end{proof}
+
+\subsection{Neural Network Semantics}
+
+\begin{definition}
+  Formulas of our language $\Lang$ are given by
+  \[ \varphi \colons = p \mid \neg \varphi \mid \varphi \wedge \varphi \mid
+     \Know \varphi \mid \Typ \varphi \]
+  where $p$ is any propositional variable, and $i$ is any nominal (denoting a
+  neuron). Material implication $\varphi \rightarrow \psi$ is defined as $\neg
+  \varphi \vee \psi$. We define $\bot, \vee, \leftrightarrow,
+  \Leftrightarrow,$and the dual operators $\diaKnow, \diaTyp$ in the usual
+  way.
+\end{definition}
+
+\begin{definition}
+  Let $\Net \in \AllNets$. The semantics $\semantics{\cdot} : \Lang
+  \rightarrow \Set$ for $\Lang$ are defined recursively as follows:
+  \[ \begin{array}{|lll|}
+       \hline
+       \semantics{p} & = & I (p) \in \Set\\
+       \semantics{\neg \varphi} & = & \semantics{\varphi}^{\complement}\\
+       \semantics{\varphi \wedge \psi} & = & \semantics{\varphi} \cap
+       \semantics{\psi}\\
+       \semantics{\diaKnow \varphi} & = & \Reach \left( \semantics{\varphi}
+       \right)\\
+       \semantics{\diaKnownby \varphi} & = & \Reachedby \left( 
+       \semantics{\varphi} \right)\\
+       \semantics{\diaTyp \varphi} & = & \Prop \left( \semantics{\varphi}
+       \right)\\
+       \hline
+     \end{array} \]
+\end{definition}
+
+\begin{definition}
+  \tmtextmd{\key{(Truth}\key{at}\key{A}\key{neuron)}} $\Net, n \Vdash \varphi$
+  iff $n \in \semantics{\varphi}_{\Net}$.
+\end{definition}
+
+\begin{definition}
+  \key{(Truth}\key{in}\key{A}\key{net)} $\Net \models \varphi$ iff $\Net, n
+  \Vdash \varphi$ for all $n \in N$.
+\end{definition}
+
+\begin{definition}
+  \key{(Entailment)} $\Gamma \models_{\text{BFNN}} \varphi$ if for all BFNNs
+  $\Net$ for all neurons $n \in N$, if $\Net, n \models \Gamma$ then $\Net, n
+  \models \varphi$.
+\end{definition}
+
+\section{Neighborhood Models}
+
+\subsection{Basic Definitions}
+
+\begin{definition}
+  {\cite[Definition 1.9]{pacuit2017neighborhood}} A
+  \key{neighborhood}\key{frame} is a pair $\mathcal{F} = \langle W, f
+  \rangle$, where $W$ is a non-empty set of \key{worlds} and $f : W \to
+  \powerset (\powerset (W))$ is a \key{neighborhood}\key{function}. A
+  \key{multi-frame} may have more than one neighborhood function, but to keep
+  things simple I won't distinguish between frames and multi-frames.
+\end{definition}
+
+\begin{definition}
+  {\cite[Section 1.1]{pacuit2017neighborhood}} Let $\mathfrak{\mathcal{F}} =
+  \langle W, f \rangle$ be a neighborhood frame, and let $w \in W$. The set
+  $\bigcap_{X \in f (w)} X$ is called the \key{\tmcolor{red}{?}}, abbreviated
+  $\cap f (w)$. If $X \subseteq W$, the set $\bigcup_{w \in X} \cap f (w)$ is
+  called the \key{\tmcolor{red}{?}}, abbreviated $\cap f (X)$.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 1.4]{pacuit2017neighborhood}} Let $\mathcal{F} = \langle
+  W, f \rangle$ be a frame. $\mathcal{F}$ is a \key{proper}\key{filter} iff:
+  \begin{itemize}
+    \item $f$ is \key{closed}\key{under}\key{finite}\key{intersections}: for
+    all $w \in W$, if $X_1, \ldots, X_n \in f (w)$ then their intersection
+    $\bigcap^k_{i = 1} X_i \in f (w)$
+    
+    \item $f$ is \key{closed}\key{under}\key{supersets}: for all $w \in W$, if
+    $X \in f (w)$ and $X \subseteq Y \subseteq W$, then $Y \in f (w)$
+    
+    \item $f$ \key{contains}\key{the}\key{unit}: iff $W \in f (w)$
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  {\cite[Corollary 1.1]{pacuit2017neighborhood}}
+  \label{filter-contains-core}If $\mathcal{F} = \langle W, f \rangle$ is a
+  filter, and $W$ is finite, then $\mathcal{F}$ contains its core.
+\end{proposition}
+
+\begin{definition}
+  $\mathcal{F} = \langle W, f, g \rangle$ is a \key{preferential}\key{filter}
+  iff:
+  \begin{itemize}
+    \item W is finite
+    
+    \item $\langle W, f \rangle$ forms a proper filter, and $g$ contains the
+    unit
+    
+    \item $f$ is \key{antisymmetric}: for all $u, v \in W$, if $u \in \cap f
+    (v)$ and $v \in \cap f (u)$ then $u = v$.
+    
+    \item $f, g$ are \key{reflexive}: for all $w \in W$, $w \in \cap f (w)$
+    (similarly for $g$)
+    
+    \item $f, g$ are \key{transitive}: for all $w \in W$, if $X \in f (w)$
+    then $\{ u \mid X \in f (u) \} \in f (w)$ (similarly for $g$)
+    
+    \item $g$ \key{contains} $f$: for all $w \in W$, if $X \in f (w)$ then $X
+    \in g (w)$
+    
+    \item $f$ is a \key{skeleton} of $g$: for all $w \in W$ and $Y \subseteq
+    W$ such that $w \in \cap f (Y)$,
+    \[ X \in g (w) \infixiff \{ u \mid X \in g (u) \} \cup (\cap f
+       (Y))^{\complement} \in g (w) \]
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  \label{instance-of-skeleton}Let $\mathcal{F} = \langle W, f, g \rangle$ be a
+  preferential filter. For all $w \in W$, we have in particular:
+  \[ X \in g (w) \infixiff \{ u \mid X \in g (u) \} \cup (\cap f
+     (w))^{\complement} \in g (w) \]
+\end{proposition}
+
+\begin{proof}
+  This is just the $Y = \{ w \}$ instance of the `skeleton' property. Note
+  that for $Y = \{ w \}$,
+  \[ \cap f (Y) = \bigcup_{u \in \{ w \}} f (u) = \cap f (w) \]
+  Since $f$ is reflexive, $w \in \cap f (w)$. Since $f$ is the skeleton of
+  $g$, we have our conclusion.
+\end{proof}
+
+\subsection{Neighborhood Semantics}
+
+\begin{definition}
+  {\cite[Definition 1.11]{pacuit2017neighborhood}} Let $\mathcal{F} = \langle
+  W, f, g \rangle$ be a neighborhood frame. A \key{neighborhood}\key{model}
+  based on $\mathcal{F}$ is $\Model = \langle W, f, g, V \rangle$, where $V :
+  \Lang \to \powerset (W)$ is a valuation function.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 1.12]{pacuit2017neighborhood}} Let $\Model = \langle W, f,
+  g, V \rangle$ be a model based on $\mathcal{F} = \langle W, f, g \rangle$
+  The (neighborhood) semantics for $\Lang$ are defined recursively as follows:
+  \[ \begin{array}{|lll|}
+       \hline
+       \Model, w \Vdash p & \tmop{iff} & w \in V (p)\\
+       \Model, w \Vdash \neg \varphi & \tmop{iff} & \Model, w \not{\Vdash}
+       \varphi\\
+       \Model, w \Vdash \varphi \wedge \psi & \tmop{iff} & \Model, w \Vdash
+       \varphi \infixand \Model, w \Vdash \psi\\
+       \Model, w \Vdash \Know \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+       \Vdash \varphi \right\} \in f (w)\\
+       \Model, w \Vdash \Knownby \varphi & \tmop{iff} & \forall u \in W,
+       \text{ if } w \in \cap f (u) \text{ then } \Model, u \Vdash \varphi\\
+       \Model, w \Vdash \Typ \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+       \Vdash \varphi \right\} \in g (w)\\
+       \hline
+     \end{array} \]
+\end{definition}
+
+In neighborhood semantics, the operators $\Know$, and $\Typ$ are more natural
+to interpret. But when we gave our neural semantics, we instead interpreted
+the \tmtextit{duals} $\diaKnow$, and $\diaTyp$. Since we need to relate the
+two, I'll write the explicit neighborhood semantics for the duals here:
+\[ \begin{array}{lll}
+     \Model, w \Vdash \diaKnow \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+     \not{\Vdash} \varphi \right\} \not{\in} f (w)\\
+     \Model, w \Vdash \diaKnownby \varphi & \tmop{iff} & \exists u \in W
+     \text{ such that } w \in \cap f (u) \text{ and } \Model, u \Vdash
+     \varphi\\
+     \Model, w \Vdash \diaTyp \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+     \not{\Vdash} \varphi \right\} \not{\in} g (w)
+   \end{array} \]
+\begin{definition}
+  {\cite[Definition 1.13]{pacuit2017neighborhood}}
+  \tmtextmd{\key{(Truth}\key{in}\key{A}\key{model)}} $\Model \models \varphi$
+  iff $\Model, w \Vdash \varphi$ for all $w \in W$.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 2.32]{pacuit2017neighborhood}} \key{(Entailment)} Let
+  $\mathsf{F}$ be a collection of neighborhood frames. $\Gamma
+  \models_{\mathsf{F}} \varphi$ if for all models $\Model$ based on a frame
+  $\mathcal{F} \in \mathsf{F}$ and for all worlds $w \in W$, if $\Model, w
+  \Vdash \Gamma$ then $\Model, w \Vdash \varphi$.
+\end{definition}
+
+\begin{note*}
+  This is the \tmtextit{local} consequence relation in modal logic.
+\end{note*}
+
+\section{From Nets to Frames}
+
+\tmtextbf{{\center{This is the easy (``soundness'') direction!}}}
+
+\begin{definition}
+  Given a BFNN $\Net$, its \key{simulation}\key{frame} $\mathcal{F}^{\bullet}
+  = \langle W, f, g \rangle$ is given by:
+  \begin{itemize}
+    \item $W = N$
+    
+    \item $f (w) = \left\{ S \subseteq W \mid w \not{\in} \Reach
+    (S^{\complement}) \right\}$
+    
+    \item $g (w) = \left\{ S \subseteq W \mid w \not{\in} \Prop
+    (S^{\complement}) \right\}$
+  \end{itemize}
+  Moreover, the \key{simulation}\key{model} $\Model^{\bullet} = \langle W, f,
+  g, V \rangle$ based on $\mathcal{F}^{\bullet}$ has:
+  \begin{itemize}
+    \item $V (p) = I (p)$
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  \label{thm-net-to-frame}Let $\Net$ be a BFNN, and let $\Model^{\bullet}$ be
+  the simulation model based on $\mathcal{F}^{\bullet}$. Then for all $w \in
+  W$,
+  \[ \Model^{\bullet}, w \Vdash \varphi \infixiff \Net, w \Vdash \varphi \]
+\end{theorem}
+
+\begin{proof}
+  By induction on $\varphi$. The propositional, $\neg \varphi$, and $\varphi
+  \wedge \psi$ cases are trivial.
+  \begin{description}
+    \tmtextbf{$\diaKnow \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model^{\bullet}, w \Vdash \diaKnow \varphi & \text{iff } & \left\{ u
+         \mid \Model^{\bullet}, w \not{\Vdash} \varphi \right\} \nin f (w) &
+         \text{(by definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in} \semantics{\varphi}
+         \right\} \nin f (w) & \text{(IH)}\\
+         & \text{iff } & \semantics{\varphi}^{\complement} \nin f (w) & \\
+         & \text{iff } & w \in \Reach
+         (\semantics{(\varphi^{\complement})^{\complement}}) & \text{(by
+         choice of } f)\\
+         & \text{iff } & w \in \Reach (\semantics{\varphi}) & \\
+         & \text{iff } & w \in \semantics{\diaKnow \varphi} & \text{(by
+         definition)}\\
+         & \tmop{iff} & \Net, w \Vdash \diaKnow \varphi & \text{(by
+         definition)}
+       \end{array} \]
+    \tmtextbf{$\diaKnownby \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model^{\bullet}, w \Vdash \diaKnownby \varphi & \text{iff } &
+         \exists u \text{ such that } w \in \cap f (u) \text{ and }
+         \Model^{\bullet}, u \Vdash \varphi & \text{(by definition)}\\
+         & \tmop{iff} & \exists u \text{ such that } w \in \cap f (u) \text{
+         and } u \in \semantics{\varphi} & \text{(IH)}\\
+         & \text{iff } & \exists u \in \semantics{\varphi} \text{ such that }
+         w \in \bigcap_{X \in f (u)} X & \\
+         & \text{iff } & \exists u \in \semantics{\varphi} \text{ such that }
+         w \in \bigcap_{u \not{\in} \Reach (X^{\complement})} X & \text{(by
+         choice of $f$)}\\
+         & \text{iff } & w \in \Reachedby \left( \semantics{\varphi} \right)
+         & \text{(by definition)}\\
+         & \tmop{iff} & \Net, w \Vdash \diaKnownby \varphi & \text{(by
+         definition)}
+       \end{array} \]
+    \tmtextbf{$\diaTyp \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model^{\bullet}, w \Vdash \diaTyp \varphi & \text{iff } & \left\{ u
+         \mid \Model^{\bullet}, w \not{\Vdash} \varphi \right\} \nin g (w) &
+         \text{(by definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in} \semantics{\varphi}
+         \right\} \nin g (w) & \text{(IH)}\\
+         & \text{iff } & \semantics{\varphi}^{\complement} \nin g (w) & \\
+         & \text{iff } & w \in \Prop
+         (\semantics{(\varphi^{\complement})^{\complement}}) & \text{(by
+         choice of } g)\\
+         & \text{iff } & w \in \Prop (\semantics{\varphi}) & \\
+         & \text{iff } & w \in \semantics{\diaTyp \varphi} & \text{(by
+         definition)}\\
+         & \tmop{iff} & \Net, w \Vdash \diaTyp \varphi & \text{(by
+         definition)}
+       \end{array} \]
+  \end{description}
+  
+\end{proof}
+
+\begin{corollary}
+  $\Model^{\bullet} \models \varphi$ iff $\Net \models \varphi$.
+\end{corollary}
+
+\begin{theorem}
+  \label{simulation-is-preferential}$\mathcal{F}^{\bullet}$ is a preferential
+  filter.
+\end{theorem}
+
+\begin{proof}
+  We show each in turn:
+  \begin{description}
+    \item[$W$ is finite] This holds because our BFNN is finite.
+    
+    \item[$f$ is closed under finite intersection] Suppose $X_1, \ldots, X_n
+    \in f (w)$. By definition of $f$, $w \nin \bigcup_i \Reach
+    (X_i^{\complement})$ for all $i$. By Proposition
+    \ref{reach-closed-under-intersection} we have $\bigcup_i \Reach
+    (X_i^{\complement}) = \Reach (\bigcup_i X_i^{\complement}) = \Reach
+    ((\bigcap_i X_i)^{\complement})$ (note that this is where we use the fact
+    that $\Reach$ is monotonic). So $w \not{\in} \Reach ((\bigcap_i
+    X_i)^{\complement})$. But this means that $\bigcap_i X_i \in f (w)$.
+    
+    \item[$f$ is closed under superset] Suppose $X \in f (w), X \subseteq Y$.
+    By definition of $f$, $w \nin \Reach (X^{\complement})$. Note that
+    $Y^{\complement} \subseteq X^{\complement}$, and so by monotonicity of
+    $\Reach$ we have $w \nin \Reach (Y^{\complement})$. But this means $Y \in
+    f (w)$, so we are done.
+    
+    \item[$f$ contains the unit] Note that for all $w \in W$, $w \nin \Reach
+    (\emptyset) = \Reach (W^{\complement})$. So $W \in f (w)$.
+    
+    \item[$g$ contains the unit] Same as the proof for $f$, except that we use
+    the fact that for all $w$, $w \not{\in} \Prop (\emptyset)$
+    
+    \item[$f$ is antisymmetric] Suppose $u \in \cap f (v)$ and $v \in \cap f
+    (u)$. Expanding the definition of core, $u \in \bigcap_{X \in f (v)} X$,
+    and $v \in \bigcap_{X \in f (u)} X$. By definition of $f$, $u \in
+    \bigcap_{v \not{\in} \Reach (X^{\complement})} X$ and $v \in \bigcap_{u
+    \not{\in} \Reach (X^{\complement})} X$. Substituting $X^{\complement}$ for
+    $X$ we get $u \in \bigcap_{v \not{\in} \Reach (X)} X^{\complement}$ and $v
+    \in \bigcap_{u \not{\in} \Reach (X)} X^{\complement}$. By Proposition
+    \ref{alternative-reachedby}, $u \in \Reachedby (\{ v \})$ and $v \in
+    \Reachedby (\{ u \})$. But by the definition of $\Reachedby$, this just
+    means there is a path from $u$ to $v$ and a path from $v$ to $u$ in $E$,
+    i.e. $v \in \Reach (\{ u \})$ and $u \in \Reach (\{ v \})$ by Proposition
+    \ref{graph-reach}. So $u = v$ by Antisymmetry of $\Reach$.
+    
+    \item[$f$ is reflexive] We want to show that $w \in \cap f (w)$. Well,
+    suppose $X \in f (w)$, i.e. $w \nin \Reach (X^{\complement})$ (by
+    definition of $f$). Since for all $S$, $S \subseteq \Reach (S)$, we have
+    $w \nin X^{\complement}$. But this means $w \in X$, and we are done.
+    
+    \item[$g$ is reflexive] Same as the proof for $f$, except we use the fact
+    that for all $S$, $S \subseteq \Prop (S)$.
+    
+    \item[$f$ is transitive] Suppose $X \in f (w)$, i.e. $w \nin \Reach
+    (X^{\complement})$. Well,
+    \[ \begin{array}{lcll}
+         \Reach (X^{\complement}) & = & \Reach (\Reach (X^{\complement})) &
+         \textrm{\text{(by Idempotence of }} \Reach)\\
+         & = & \Reach (\left\{ u \mid u \in \Reach (X^{\complement})
+         \right\}) & \\
+         & = & \Reach (\left\{ u \mid u \not{\in} \Reach (X^{\complement})
+         \right\}^{\complement}) & \\
+         & = & \Reach (\{ u \mid X \in f (u) \}^{\complement}) &
+         \textrm{\text{(by definition of }} f)
+       \end{array} \]
+    So by definition of $f$, $\{ u \mid X \in f (u) \} \in f (w)$.
+    
+    \item[$g$ is transitive] Same as the proof for $f$, except we use the fact
+    that $\Prop$ is idempotent.
+    
+    \item[$g$ contains $f$] Suppose $X \in f (w)$, i.e. $w \not{\in} \Reach
+    (X^{\complement})$. Since for all $S$, $\Prop (S) \subseteq \Reach (S)$,
+    we have $w \not{\in} \Prop (X^{\complement})$. And so $X \in g (w)$, and
+    we are done.
+    
+    \item[$f$ is the skeleton of $g$] Suppose $w \in \cap f (Y)$. We will show
+    the $(\leftarrow)$ direction; the other direction is similar. Suppose $\{
+    u \mid X \in g (u) \} \cup (\cap f (Y))^{\complement} \in g (w)$. By
+    choice of $g$, $w \not{\in} \Prop ([\{ u \mid X \in g (u) \} \cup (\cap f
+    (Y))^{\complement}]^{\complement})$. Distributing the outer complement, we
+    have $w \not{\in} \Prop \left( \left\{ u \mid X \not{\in} g (u) \right\}
+    \cap (\cap f (Y)) \right)$. Again by choice of $g$, $w \not{\in} \Prop
+    \left( \left\{ u \mid u \in \Prop (X^{\complement}) \right\} \cap (\cap f
+    (Y)) \right) = \Prop \left( \Prop (X^{\complement}) \cap (\cap f (Y))
+    \right)$. By choice of $f$, $w \not{\in} \Prop \left( \Prop
+    (X^{\complement}) \cap \bigcup_{w \in Y} \left( \bigcap_{w \not{\in}
+    \Reach (Y^{\complement})} Y \right) \right)$. Substituting
+    $Y^{\complement}$ for $Y$, we get $w \not{\in} \Prop \left( \Prop
+    (X^{\complement}) \cap \bigcup_{w \in Y^{\complement}} \left( \bigcap_{w
+    \not{\in} \Reach (Y)} Y^{\complement} \right) \right)$. By our alternative
+    characterization of $\Reachedby$ (Proposition
+    \ref{alternative-reachedby}), $w \not{\in} \Prop \left( \Prop
+    (X^{\complement}) \cap \Reachedby (Y^{\complement}) \right)$.
+    
+    Similarly, $w \in \cap f (Y)$ gives us $w \in \Reachedby
+    (Y^{\complement})$, the precondition of Minimal Cause (Proposition
+    \ref{minimal-cause}). By Minimal Cause, we conclude that $w \not{\in}
+    \Prop (X^{\complement})$, i.e. $X \in g (w)$.
+  \end{description}
+\end{proof}
+
+\section{From Frames to Nets}
+
+\tmtextbf{{\center{This is the harder (``completeness'') direction!}}}
+
+\begin{definition}
+  Let $\Model$ be a model based on preferential filter $\mathcal{F} = \langle
+  W, f, g \rangle$. Its \key{simulation}\key{net} $\Net^{\bullet} = \langle N,
+  E, W, A, I \rangle$ is the BFNN given by:
+  \begin{itemize}
+    \item $N = W$
+    
+    \item $(u, v) \in E$ iff $u \in \cap f (v)$
+  \end{itemize}
+  Now let $m_1, \ldots, m_k$ list those nodes such that $(m_i, n) \in E$.
+  \begin{itemize}
+    \item $W (m_i, n) =${\todo{Does not matter; arbitrary}}
+    
+    \item $A^{(n)} (\vec{x}, \vec{w}) = 1 \text{ iff } \{ m_i \mid x_i = 1
+    \}^{\complement} \not{\in} g (n)$
+    
+    \item $I (p) = V (p)$
+  \end{itemize}
+\end{definition}
+
+\begin{claim}
+  \label{simulation-is-a-BFNN}$\Net^{\bullet}$ is a BFNN.
+\end{claim}
+
+\begin{proof}
+  Clearly $\Net^{\bullet}$ is a binary ANN. We check the rest of the
+  conditions:
+  \begin{description}
+    \item[$\Net^{\bullet}$ is feed-forward] Suppose that $E$ contains a cycle,
+    i.e. $n_1, \ldots, n_k \in N$ such that $n_1 \op{E} n_2, \ldots, n_{k - 1}
+    \op{E} n_k, n_k \op{E} n_1$. We show that each $n_i = n_j$ by induction on
+    $k$.
+    \begin{description}
+      \item[Base Case] $k = 1$, and so trivially $n_1 = n_k$.
+      
+      \item[Inductive Case] Let $k \geq 1$. By our inductive hypothesis, $n_1
+      = \cdots = n_{k - 1}$. We will show in particular that $n_1 = n_k$ (the
+      other cases are similar). Since $n_{k - 1} \op{E} n_k$ and $n_1 = n_{k -
+      1}$, we have $n_1 \op{E} n_k$. From our earlier assumptions, we also
+      have $n_k \op{E} n_1$. By definition of $E$, $n_1 \in \cap f (n_k)$, and
+      $n_k \in \cap f (n_1)$. Since $f$ is antisymmetric, $n_1 = n_k$.
+    \end{description}
+    \item[$O^{(n)} \circ A^{(n)}$ is zero at zero] Suppose for contradiction
+    that $A^{(v)} (\vec{0}, \vec{w}) = 1$. Then $\emptyset^{\complement} = W
+    \not{\in} g (v)$, which contradicts the fact that $f$ contains the unit.
+  \end{description}
+\end{proof}
+
+\begin{lemma}
+  \label{lemma-Reach-and-R*}$\Reach_{\Net^{\bullet}} (S) = \left\{ n \mid
+  S^{\complement} \not{\in} f (n) \right\}$
+\end{lemma}
+
+\begin{proof}
+  For the $(\supseteq)$ direction, suppose $S^{\complement} \not{\in} f (n)$.
+  We claim that $\cap f (n) \not{\subseteq} S^{\complement}$. Why not? If
+  $\cap f (n) \subseteq S^{\complement}$, we have $\cap f (n) \in f (n)$
+  (since $f$ is closed under finite intersection) and so $S^{\complement} \in
+  f (n)$ (since $f$ is closed under superset). This would contradict
+  $S^{\complement} \not{\in} f (n)$.
+  
+  So $\cap f (n) \not{\subseteq} S^{\complement}$. This means that there is
+  some $m \in \cap f (n)$ such that $m \not{\in} S^{\complement}$. That is,
+  $(m, n) \in E$ and $m \in S$. But then $m \in \Reach_{\Net^{\bullet}} (S)$.
+  So we have $m \in \Reach_{\Net^{\bullet}} (S)$ and a path $(m, n) \in E$
+  from $m$ to $n$, i.e. $n \in \Reach_{\Net^{\bullet}} (S)$.
+  
+  Now for the $(\subseteq)$ direction. Suppose $n \in \Reach_{\Net^{\bullet}}
+  (S)$. So there is a path from some $m \in S$ to $n$. We proceed by induction
+  on the length $l$ of this path.
+  \begin{description}
+    \item[Base step] $l = 0$, i.e. $m = n$, which gives us $n \in S$. Suppose
+    for contradiction that $S^{\complement} \in f (n)$. By definition of core,
+    $\cap f (n) \subseteq S^{\complement}$. But since $\mathcal{F}$ is
+    reflexive, $n \in \cap f (n)$. So $n \in S^{\complement}$, which
+    contradicts $n \in S$.
+    
+    \item[Inductive step] Let $l \geqslant 0$. Let $u$ immediately precede $n$
+    on this path i.e. there is a path from $m$ to $u$ and $(u, n) \in E$ (and
+    so $u \in \cap f (n)$). Note that $u \in \Reach_{\Net^{\bullet}} (S)$, and
+    so by our inductive hypothesis $S^{\complement} \not{\in} f (u)$. Now
+    suppose for contradiction that $S^{\complement} \in f (n)$. Since $f$ is
+    transitive, $\{ t \mid S^{\complement} \in f (t) \} \in f (n)$. By
+    definition of core, $\cap f (n) \subseteq \{ t \mid S^{\complement} \in f
+    (t) \}$. Since $u \in \cap f (n)$, $S^{\complement} \in f (u)$. But this
+    contradicts $S^{\complement} \not{\in} f (u)$!
+  \end{description}
+\end{proof}
+
+\begin{lemma}
+  \label{lemma-Prop-and-H*}$\Prop_{\Net^{\bullet}} (S) = \left\{ n \mid
+  S^{\complement}  \not{\in} g (n) \right\}$
+\end{lemma}
+
+\begin{proof}
+  First, let's consider the $(\supseteq)$ direction. Since $\Net^{\bullet}$ is
+  feed-forward (i.e. acyclic), we can perform a topological sort on its nodes
+  to get a well-ordering $\prec$ over $N$ such that for all $n \neq m \in N$,
+  \[ \text{If } (m, n) \in E \text{ then } m \prec n \]
+  Let $n \in N$ be such that $S^{\complement} \not{\in} g (n)$. We proceed by
+  induction on the ordering $\prec$.
+  \begin{description}
+    \item[Base Step] There are no nodes $m$ such that $m \prec n$, and hence
+    no nodes $m \neq n$ with $(m, n) \in E$. We also have $S^{\complement}
+    \not{\in} g (n)$ from before.
+    
+    {\claimstar{$n \in S$ (and so we can conclude that $n \in
+    \Prop_{\Net^{\bullet}} (S)$ by the base case of $\Prop$)}}
+    
+    \begin{proof}
+      $S^{\complement} \not{\in} g (n)$, and so $S^{\complement} \not{\in} f
+      (n)$ (since $g$ contains $f$). Since $f$ is closed under superset and
+      finite intersection, $\cap f (n) \not{\subseteq} S^{\complement}$, i.e.
+      there is some $u \in \cap f (n)$ such that $u \in S$. $u \in \cap f (n)$
+      gives us $(u, n) \in E$ (by choice of $E$), but there are \tmtextit{no}
+      $u \neq n$ with $(u, n) \in E$. But that means that $u = n$ --- and so
+      $n \in S$!
+    \end{proof}
+    
+    \item[Inductive Step] Let $\vec{m} = m_1, \ldots, m_k$ be all those nodes
+    $m_i \neq n$ such that $(m_i, n) \in E$. In particular, each $m_i \prec
+    n$, and so we can apply our Inductive Hypothesis to each $m_i$:
+    \begin{description}
+      \item[Inductive Hypothesis] $m_i \in \Prop_{\Net^{\bullet}} (S) \text{
+      iff } S^{\complement} \not{\in} g (m_i)$
+    \end{description}
+    \begin{claim}
+      \label{helper-Prop}$\left\{ m_i \mid m_i \in \Prop_{\Net^{\bullet}} (S)
+      \right\} = \left\{ u \mid S^{\complement} \not{\in} g (u) \right\} \cap
+      (\cap f (n))$
+    \end{claim}
+    
+    \begin{proof}
+      $
+      \[ \begin{array}{llll}
+           \left\{ m_i \mid m_i \in \Prop_{\Net^{\bullet}} (S) \right\} & = &
+           \left\{ m_i \mid S^{\complement} \not{\in} g (m_i) \right\} &
+           \text{(by Inductive Hypothesis)}\\
+           & = & \left\{ u \mid S^{\complement} \not{\in} g (u) \infixand (u,
+           n) \in E \right\} & \text{(by choice of } m_1, \ldots, m_k
+           \text{)}\\
+           & = & \left\{ u \mid S^{\complement} \not{\in} g (u) \infixand u
+           \in \cap f (n) \right\} & \text{(by choice of } E \text{)}\\
+           & = & \left\{ u \mid S^{\complement} \not{\in} g (u) \right\} \cap
+           (\cap f (n)) & \text{}
+         \end{array} \]$
+    \end{proof}
+    
+    \begin{claim}
+      \label{helper-activates}$\Activ_S (\vec{m}, n) = 1$ iff $\{ m_i \mid m_i
+      \in S \}^{\complement} \not{\in} g (n)$
+    \end{claim}
+    
+    \begin{proof}
+      $\Activ_S (\vec{m}, n) = 1$ iff:
+      \[ \begin{array}{lll}
+           & A^{(n)} \left( \left( \bigchi_S (m_1), \ldots, \bigchi_S (m_k)
+           \right) ; (W (m_1, n), \ldots, W (m_k, n)) \right) = 1 & \text{(by
+           definition of}  \Activ \text{)}\\
+           \infixiff & \left\{ m_i \mid \bigchi_S (m_i) = 1
+           \right\}^{\complement} \not{\in} g (n) & \text{(by our choice of }
+           A^{(n)} \text{)}\\
+           \infixiff & \{ m_i \mid m_i \in S \}^{\complement} \not{\in} g (n)
+           & \text{(by definition of } \bigchi_S \text{)}
+         \end{array} \]
+    \end{proof}
+    
+    \
+    
+    Putting everything together, we have:
+    \[ \begin{array}{llll}
+         S^{\complement} \not{\in} g (n) & \quad \rightarrow \quad & \{ u \mid
+         S^{\complement} \in g (u) \} \cup (\cap f (n))^{\complement}
+         \not{\in} g (n) & \text{(by Proposition \ref{instance-of-skeleton},
+         since } f \text{ is a skeleton of} g \text{)}\\
+         & \quad \rightarrow \quad & \left[ \left\{ u \mid S^{\complement}
+         \not{\in} g (u) \right\} \cap (\cap f (n)) \right]^{\complement} &
+         \text{(distributing the complement)}\\
+         & \quad \rightarrow \quad & \left\{ m_i \mid m_i \in
+         \Prop_{\Net^{\bullet}} (S) \right\}^{\complement} \not{\in} g (n) &
+         \text{(by Claim \ref{helper-Prop} above)}\\
+         & \quad \rightarrow \quad & \Activ_{\Prop_{\Net^{\bullet}} (S)}
+         (\vec{m}, n) = 1 & \text{(by Claim \ref{helper-activates} above)}\\
+         & \quad \rightarrow \quad & n \in \Prop_{\Net^{\bullet}} (S) &
+         \text{(by the constructor of } \Prop \text{)}
+       \end{array} \]
+  \end{description}
+  As for the $(\subseteq)$ direction, suppose $n \in \Prop_{\Net^{\bullet}}
+  (S)$, and proceed by induction on $\Prop$.
+  \begin{description}
+    \item[Base step] $n \in S$. Suppose for contradiction that
+    $S^{\complement} \in g (n)$. Since $g$ is reflexive, $n \in \cap g (n)$.
+    By definition of core, we have $\cap g (n) \subseteq S^{\complement}$. But
+    then $n \in \cap g (n) \subseteq S^{\complement}$, i.e. $n \in
+    S^{\complement}$, which contradicts $n \in S$.
+    
+    \item[Inductive step] Let $\vec{m} = m_1, \ldots, m_k$ list those nodes
+    such that $(u_i, v) \in E$. We have
+    \[ \Activ_{\Prop_{\Net^{\bullet}} (S)} (\vec{m}, n) = 1 \]
+    Re-using Claim \ref{helper-activates} above, this means that $\left\{ m_i
+    \mid m_i \in \Prop_{\Net^{\bullet}} (S) \right\}^{\complement} \not{\in} g
+    (n)$. But by our inductive hypothesis, $\left\{ m_i \mid m_i \in
+    \Prop_{\Net^{\bullet}} (S) \right\} = \left\{ m_i \mid S^{\complement}
+    \not{\in} g (n) \right\}$. For convenience, let $T$ be this latter set,
+    i.e. $T = \left\{ m_i \mid S^{\complement} \not{\in} g (n) \right\}$. So
+    we have $T^{\complement} \not{\in} g (n)$.
+    
+    We would like to show that $S^{\complement} \not{\in} g (n)$. Suppose for
+    contradiction that $S^{\complement} \in g (n)$. Notice that, by definition
+    of $T$, $T^{\complement} = \{ u_i \mid S^{\complement} \in g (u_i) \}$.
+    Since $S^{\complement} \in g (v)$ and $\mathcal{G}$ is transitive,
+    $T^{\complement} \in g (v)$, which contradicts $T^{\complement} \not{\in}
+    g (v)$.
+  \end{description}
+  
+\end{proof}
+
+\begin{theorem}
+  \label{frame-to-net}Let $\Model$ be a model based on a preferential filter
+  $\mathcal{F}$, and let $\Net^{\bullet}$ be the corresponding simulation net.
+  We have, for all $w \in W$,
+  \[ \Model, w \Vdash \varphi \infixiff \Net^{\bullet}, w \Vdash \varphi \]
+\end{theorem}
+
+\begin{proof}
+  By induction on $\varphi$. Again, the propositional, $\neg \varphi$, and
+  $\varphi \wedge \psi$ cases are trivial.
+  \begin{description}
+    \tmtextbf{}\tmtextbf{$\diaKnow \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model, w \Vdash \diaKnow \varphi & \text{iff } & \left\{ u \mid
+         \Model, w \not{\Vdash} \varphi \right\} \nin f (w) & \text{(by
+         definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in}
+         \semantics{\varphi}_{\Net^{\bullet}} \right\}  \nin f (w) &
+         \text{(Inductive Hypothesis)}\\
+         & \tmop{iff} & \semantics{\varphi}_{\Net^{\bullet}}^{\complement}
+         \nin g (w) & \\
+         & \tmop{iff} & w \in \Reach_{\Net^{\bullet}} (\semantics{\varphi}) &
+         \text{(by Lemma \ref{lemma-Reach-and-R*})}\\
+         & \text{iff } & w \in \semantics{\diaKnow \varphi}_{\Net^{\bullet}}
+         & \text{(by definition)}\\
+         & \tmop{iff} & \Net^{\bullet}, w \Vdash \diaKnow \varphi & \text{(by
+         definition)}
+       \end{array} \]
+    \tmtextbf{$\diaKnownby \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model, w \Vdash \diaKnownby \varphi & \text{iff } & \exists u \text{
+         such that } w \in \cap f (u) \text{ and } \Model, u \Vdash \varphi &
+         \text{(by definition)}\\
+         & \tmop{iff} & \exists u \text{ such that } w \in \cap f (u) \text{
+         and } u \in \semantics{\varphi}_{\Net^{\bullet}} & \text{(IH)}\\
+         & \tmop{iff} & \exists u \in \semantics{\varphi}_{\Net^{\bullet}}
+         \text{ such that } w \in \bigcap_{X \in f (u)} X & \\
+         &  & \exists u \in \semantics{\varphi}_{\Net^{\bullet}} \text{ such
+         that } w \in \bigcap_{u \not{\in} \Reach_{\Net^{\bullet}}
+         (X^{\complement})} X & \text{(by Lemma \ref{lemma-Reach-and-R*})}\\
+         &  & w \in \Reachedby \left( \semantics{\varphi}_{\Net^{\bullet}}
+         \right) & \text{(by Proposition \ref{alternative-reachedby})}\\
+         & \tmop{iff} & \Net^{\bullet}, w \Vdash \diaKnownby \varphi &
+         \text{(by definition)}
+       \end{array} \]
+    \tmtextbf{$\diaTyp \varphi$ case:}
+    \[ \begin{array}{lcll}
+         \Model, w \Vdash \diaTyp \varphi & \text{iff } & \left\{ u \mid
+         \Model, u \not{\Vdash} \varphi \right\} \nin g (w) & \text{(by
+         definition)}\\
+         & \text{iff } & \left\{ u \mid u \not{\in}
+         \semantics{\varphi}_{\Net^{\bullet}} \right\} \nin g (w) &
+         \text{(Inductive Hypothesis)}\\
+         & \text{iff } & \semantics{\varphi}_{\Net^{\bullet}}^{\complement}
+         \nin g (w) & \\
+         & \text{iff } & w \in \Prop_{\Net^{\bullet}} (\semantics{\varphi}) &
+         \text{(by Lemma \ref{lemma-Prop-and-H*})}\\
+         & \text{iff } & w \in \semantics{\diaTyp \varphi}_{\Net^{\bullet}} &
+         \text{(by definition)}\\
+         & \tmop{iff} & \Net^{\bullet}, w \Vdash \diaTyp \varphi & \text{(by
+         definition)}
+       \end{array} \]
+  \end{description}
+  
+\end{proof}
+
+\begin{corollary}
+  {\Model}$\models \varphi$ iff $\Net^{\bullet} \models \varphi$.
+\end{corollary}
+
+\section{Completeness}
+
+\subsection{The Base Modal Logic}
+
+\begin{definition}
+  Our logic {\Logic} is the smallest set of formulas in $\Lang$ containing the
+  axioms
+  \begin{itemize}
+    \item \begin{axiom}
+      Distr$_{\Know}$
+    \end{axiom}\quad$\Know (\varphi \rightarrow \psi) \rightarrow \left( \Know
+    \varphi \rightarrow \Know \psi \right)$
+    
+    \item \begin{axiom}
+      Refl$_{\Know}$
+    \end{axiom}\quad$\Know \varphi \rightarrow \varphi$
+    
+    \item \begin{axiom}
+      Trans$_{\Know}$
+    \end{axiom}\quad$\Know \varphi \rightarrow \Know \Know \varphi$
+    
+    \item \begin{axiom}
+      Grz$_{\Know}$
+    \end{axiom}\quad$\Know \left( \Know \left( \varphi \rightarrow \Know
+    \varphi \right) \rightarrow \varphi \right) \rightarrow \varphi$
+    
+    \
+    
+    \item \begin{axiom}
+      Distr$_{\Know}$
+    \end{axiom}\quad$\Knownby (\varphi \rightarrow \psi) \rightarrow \left(
+    \Knownby \varphi \rightarrow \Knownby \psi \right)$
+    
+    \item \begin{axiom}
+      Back
+    \end{axiom}\quad$\varphi \rightarrow \Know \diaKnownby \varphi$
+    
+    \item \begin{axiom}
+      Forth
+    \end{axiom}\quad$\varphi \rightarrow \Knownby \diaKnow \varphi$
+    
+    \
+    
+    \item \begin{axiom}
+      Refl$_{\Typ}$
+    \end{axiom}\quad$\Typ \varphi \rightarrow \varphi$
+    
+    \item \begin{axiom}
+      Trans$_{\Typ}$
+    \end{axiom}\quad$\Typ \varphi \rightarrow \Typ \Typ \varphi$
+    
+    \item \begin{axiom}
+      Incl
+    \end{axiom}\quad$\Know \varphi \rightarrow \Typ \varphi$
+    
+    \item \begin{axiom}
+      Skel
+    \end{axiom}\quad$\diaKnownby \psi \rightarrow \left( \Typ \varphi
+    \leftrightarrow \Typ \left( \diaKnownby \psi \rightarrow \Typ \varphi
+    \right) \right)$
+  \end{itemize}
+  that is closed under:
+  \begin{itemize}
+    \item \begin{axiom}
+      Nec
+    \end{axiom} If $\varphi \in \Logic$ then $\Box \varphi \in \Logic$ for
+    $\Box \in \left\{ \Know, \Knownby, \Typ \right\}$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 2.30]{pacuit2017neighborhood}} \key{\tmcolor{red}{?}}
+  $\proves \varphi$ iff either $\varphi$ is an axiom, or $\varphi$ follows
+  from some previously obtained formula by one of the inference rules. If
+  $\Gamma \subseteq \Lang$ is a set of formulas, $\Gamma \proves \varphi$
+  whenever there are finitely many $\psi_1, \ldots, \psi_k \in \Gamma$ such
+  that $\proves \psi_1 \wedge \ldots \wedge \psi_k \rightarrow \varphi$.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 2.36]{pacuit2017neighborhood}} $\Gamma$ is
+  \key{consistent} iff $\Gamma \not{\proves} \bot$. $\Gamma$ is
+  \key{maximally}\key{consistent} if $\Gamma$ is consistent and for all
+  $\varphi \in \Lang$ either $\varphi \in \Gamma$ or $\varphi \not{\in}
+  \Gamma$.
+\end{definition}
+
+\begin{lemma}
+  \label{lindenbaum}{\cite[Lemma 2.19]{pacuit2017neighborhood}}
+  (``Lindenbaum's Lemma'') We can extend any consistent set $\Gamma$ to a
+  maximally consistent set $\Delta \supseteq \Gamma$.
+\end{lemma}
+
+\begin{definition}
+  {\cite[Definition 2.36]{pacuit2017neighborhood}} \key{(Proof}\key{Set)} $|
+  \varphi |_{\Logic} = \left\{ \Delta \mid \Delta \text{ is maximally
+  consistent and } \varphi \in \Delta \right\}$
+\end{definition}
+
+\begin{proposition}
+  \label{max-consistent-fact}Let $\Delta$ be maximally consistent, and let
+  $\Box \in \left\{ \Know, \Knownby, \Typ \right\}$. We have $\Box \varphi \in
+  \Delta$ iff
+  \[ \forall \Sigma \text{ maximally consistent}, \text{if } \forall \psi,
+     \Box \psi \in \Delta \text{ implies } \psi \in \Sigma, \text{ then }
+     \varphi \in \Sigma \]
+\end{proposition}
+
+\begin{proof}
+  The $(\rightarrow)$ direction is straightforward. As for the $(\leftarrow)$
+  direction, suppose contrapositively that $\Box \varphi \not{\in} \Delta$,
+  and let $\Sigma = \{ \psi \mid \Box \psi \in \Delta \} \cup \{ \neg \varphi
+  \}$.
+  
+  First, we need to check that $\Sigma$ is consistent. Suppose for
+  contradiction that $\bot \in \Sigma$. By definition of $\Sigma$, either
+  $\Box \bot \in \Delta$ or $\bot \equiv \neg \varphi$ (i.e. $\varphi$ is
+  $\top$). In the former case, the appropriate instances of \begin{axiom}
+    Refl
+  \end{axiom} give us $\bot \in \Delta$, which contradicts the consistency of
+  $\Delta$. In the latter case, $\varphi$ is $\top$, and so our assumption
+  that $\Box \varphi \not{\in} \Delta$ gives us $\Box \top \not{\in} \Delta$.
+  But $\Box \top$ follows from our axioms (specifically, \begin{axiom}
+    Nec
+  \end{axiom}).
+  
+  So by Lindenbaum's Lemma, we can extend $\Sigma$ to maximally consistent
+  $\Sigma^{\ast}$. From here, we can apply our hypothesis. By construction,
+  for all $\psi$, $\Box \psi \in \Delta$ implies $\psi \in \Sigma \subseteq
+  \Sigma^{\ast}$, but $\varphi \not{\in} \Sigma^{\ast}$ (since $\neg \varphi
+  \in \Sigma \subseteq \Sigma^{\ast}$).
+\end{proof}
+
+\begin{lemma}
+  \label{canonical-knownby}Let $\Sigma, \Delta$ be maximally consistent. The
+  following are equivalent:
+  \begin{enumerate}
+    \item $\Know \varphi \in \Sigma$ implies $\varphi \in \Delta$
+    
+    \item $\Knownby \varphi \in \Delta$ implies $\varphi \in \Sigma$
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Suppose (1) holds, and suppose $\Knownby \varphi \in \Delta$. For
+  contradiction, suppose $\varphi \not{\in} \Sigma$. Since $\Sigma$ is
+  maximally consistent, $\neg \varphi \in \Sigma$. Applying the \begin{axiom}
+    Back
+  \end{axiom} axiom, we get $\Know \diaKnownby \neg \varphi \in \Sigma$, i.e.
+  $\Know \neg \Knownby \varphi \in \Sigma$. By (1), $\neg \Knownby \varphi \in
+  \Delta$, i.e. $\Knownby \varphi \not{\in} \Delta$. But this contradicts
+  $\Knownby \varphi \in \Delta$!
+  
+  Now suppose (2) holds, and suppose $\Know \varphi \in \Sigma$. For
+  contradiction, suppose $\varphi \not{\in} \Delta$. Since $\Delta$ is
+  maximally consistent, $\neg \varphi \in \Delta$. Applying the \begin{axiom}
+    Forth
+  \end{axiom} axiom, we get $\Knownby \diaKnow \neg \varphi \in \Delta$, i.e.
+  $\Knownby \neg \Know \varphi \in \Delta$. By (2), $\neg \Know \varphi \in
+  \Sigma$, i.e. $\Know \varphi \not{\in} \Sigma$. But this contradicts $\Know
+  \varphi \in \Sigma$!
+\end{proof}
+
+\subsection{Soundness}
+
+\begin{theorem}
+  \tmtextbf{(Soundness)} If $\Gamma \proves \varphi$ then $\Gamma
+  \models_{\text{BFNN}} \varphi$
+\end{theorem}
+
+\begin{proof}
+  Suppose $\Gamma \proves \varphi$, and let $\Net, n \models \Gamma$ We just
+  need to check that each of the axioms and rules of inference are sound, from
+  which we can conclude that $\Net, n \models \varphi$. We can do this either
+  by the semantics of BFNNs, or instead by checking them in an equivalent
+  preferential frame $\Model^{\bullet} = \langle W, f, g, V \rangle$:
+  \[ \begin{array}{lll}
+       \text{To show soundness of:} & \text{Use:} & \text{Alternative:}\\
+       \begin{axiom}
+         \tmop{Distr}_{\Know}
+       \end{axiom} & \text{Monotonicity of } \Reach & \langle W, f \rangle
+       \text{ forms a filter}\\
+       \begin{axiom}
+         \tmop{Refl}_{\Know}
+       \end{axiom} & \text{Inclusion of } \Reach & \text{Reflexivity of } f\\
+       \begin{axiom}
+         \tmop{Trans}_{\Know}
+       \end{axiom} & \text{Idempotence of } \Reach & \text{Transitivity of }
+       f\\
+       \begin{axiom}
+         \tmop{Grz}_{\Know}
+       \end{axiom} & \text{Antisymmetry of {\Reach}} & f \text{ is
+       antisymmetric}\\
+       \begin{axiom}
+         \tmop{Distr}_{\Know}
+       \end{axiom} & \text{Definition of } \Reachedby & \text{Definition of }
+       \Knownby\\
+       \begin{axiom}
+         \tmop{Back}
+       \end{axiom} & \text{Monotonicity of } \Reach & \langle W, f \rangle
+       \text{ forms a filter}\\
+       \begin{axiom}
+         \tmop{Forth}
+       \end{axiom} & \text{Monotonicity of } \Reach & \langle W, f \rangle
+       \text{ forms a filter}\\
+       \begin{axiom}
+         \tmop{Refl}_{\Typ}
+       \end{axiom} & \text{Inclusion of } \Prop & \text{Reflexivity of } g\\
+       \begin{axiom}
+         \tmop{Trans}_{\Typ}
+       \end{axiom} & \text{Idempotence of } \Prop & \text{Transitivity of }
+       g\\
+       \begin{axiom}
+         \tmop{Incl}
+       \end{axiom} & \Reach \text{ contains } \Prop & g \text{ contains} f\\
+       \begin{axiom}
+         \tmop{Skel}
+       \end{axiom} & \text{Minimal Cause} & f \text{ is a skeleton of } g\\
+       \begin{axiom}
+         \tmop{Nec}
+       \end{axiom} & \forall w, w \not{\in} \Reach (\emptyset), \Prop
+       (\emptyset) & f, g \text{ contain the unit}
+     \end{array} \]
+  
+\end{proof}
+
+\subsection{Model Building}
+
+Given a set $\Gamma \subseteq \Lang$, I will show that we can build a net
+$\Net$ that models $\Gamma$. Since preferential filters are equivalent to
+BFNNs (over $\Lang$), I will focus instead on building a preferential filter
+$\mathcal{F}$. This is the same strategy taken by
+{\cite{leitgeb2001nonmonotonic}}, who constructs KLM cumulative-ordered models
+in order to build a neural net.
+
+The following are the standard canonical construction and facts for
+neighborhood models (see Eric Pacuit's book). Adapting these to our logic of
+$\Know, \Knownby, \Typ$ is a straightforward exercise in modal logic.
+
+\begin{lemma}
+  {\cite[Lemma 2.12 \& Definition 2.37]{pacuit2017neighborhood}}
+  \label{canonical-model}We can build a \key{canonical} neighborhood model for
+  $\Logic$, i.e. a model $\Model^C = \langle W^C, f^C, g^C, V^C \rangle$ such
+  that:
+  \begin{itemize}
+    \item $W^C = \left\{ \Delta \mid \Delta \text{ is maximally consistent}
+    \right\}$
+    
+    \item For each $\Delta \in W^C$ and each $\varphi \in \Lang$, $| \varphi
+    |_{\Logic} \in f^C (\Delta)$ iff $\Know \varphi \in \Delta$
+    
+    \item For each $\Delta \in W^C$ and each $\varphi \in \Lang$, $| \varphi
+    |_{\Logic} \in g^C (\Delta)$ iff $\Typ \varphi \in \Delta$
+    
+    \item $V^C (p) = | p |_{\Logic}$
+  \end{itemize}
+\end{lemma}
+
+\begin{note*}
+  This is where the Necessitation rules come into play --- we need them in
+  order to guarantee that we can actually build this model!
+\end{note*}
+
+\begin{lemma}
+  {\cite[Lemma 2.13]{pacuit2017neighborhood}} \label{truth-lemma}
+  \tmtextbf{(Truth Lemma)} We have, for canonical model $\Model^C$,
+  \[ \left\{ \Delta \mid \Model^C, \Delta \Vdash \varphi \right\} = | \varphi
+     |_{\Logic} \]
+\end{lemma}
+
+\begin{proof}
+  By induction on $\varphi$. The propositional, and boolean cases are
+  straightforward.
+  \begin{description}
+    \item[$\Know$ case]
+    \[ \begin{array}{llll}
+         \Model^C, \Delta \Vdash \Know \varphi & \infixiff & \left\{ u \mid
+         \Model^C, \Sigma \Vdash \varphi \right\} \in f^C (\Delta) & \text{(by
+         definition)}\\
+         & \infixiff & | \varphi |_{\Logic} \in f^C (\Delta) & \text{(by
+         IH)}\\
+         & \infixiff & \Know \varphi \in \Delta & \text{(since $\Model^C$ is
+         canonical)}\\
+         & \infixiff & \Delta \in \left| \Know \varphi \right|_{\Logic} &
+         \text{(by definition)}
+       \end{array} \]
+    \item[$\Knownby$ case]
+    \[ \begin{array}{llll}
+         \Model^C, \Delta \Vdash \Knownby \varphi & \infixiff & \forall \Sigma
+         \in W^C, \text{ if } \Delta \in \cap f^C (\Sigma) \text{ then }
+         \Model, \Sigma \Vdash \varphi & \text{(by definition)}\\
+         & \infixiff & \forall \Sigma \in W^C, \text{ if } \Delta \in \cap
+         f^C (\Sigma) \text{ then } \Sigma \in | \varphi |_{\Logic} &
+         \text{(by IH)}\\
+         & \infixiff & \forall \Sigma \in W^C, \text{ if } \Delta \in \cap
+         f^C (\Sigma) \text{ then } \varphi \in \Sigma & \\
+         & \infixiff & \forall \Sigma \in W^C, \text{ if } \left( | \psi
+         |_{\Logic} \in f^C (\Sigma) \text{ implies } \Delta \in | \psi
+         |_{\Logic} \right) \text{ then } \varphi \in \Sigma & \text{(by
+         definition of core)}\\
+         & \infixiff & \forall \Sigma \in W^C, \text{ if } \left( \forall
+         \psi, \Know \psi \in \Sigma \text{ implies } \psi \in \Delta \right)
+         \text{ then } \varphi \in \Sigma & \text{(since $\Model^C$ is
+         canonical)}\\
+         & \infixiff & \forall \Sigma \in W^C, \text{ if } \left( \forall
+         \psi, \Knownby \psi \in \Delta \text{ implies } \psi \in \Sigma
+         \right) \text{ then } \varphi \in \Sigma & \text{(by Lemma
+         \ref{canonical-knownby})}\\
+         & \infixiff & \Knownby \varphi \in \Delta & \text{(by Proposition
+         \ref{max-consistent-fact})}\\
+         & \infixiff & \Delta \in \left| \Knownby \varphi \right|_{\Logic} &
+         \text{(by definition)}
+       \end{array} \]
+    \item[{\Typ} case]
+    \[ \begin{array}{llll}
+         \Model^C, \Delta \Vdash \Typ \varphi & \infixiff & \left\{ u \mid
+         \Model^C, \Sigma \Vdash \varphi \right\} \in g^C (\Delta) & \text{(by
+         definition)}\\
+         & \infixiff & | \varphi |_{\Logic} \in g^C (\Delta) & \text{(by
+         IH)}\\
+         & \infixiff & \Typ \varphi \in \Delta & \text{(since $\Model^C$ is
+         canonical)}\\
+         & \infixiff & \Delta \in \left| \Typ \varphi \right|_{\Logic} &
+         \text{(by definition)}
+       \end{array} \]
+  \end{description}
+  
+\end{proof}
+
+\begin{theorem}
+  \label{finite-model-property}{\todo{State that our logic has the finite
+  model property}}
+\end{theorem}
+
+\begin{proof}
+  {\todo{Prove it by the usual filtration construction --- the fact that the
+  filtration is closed under $\cap, \subseteq$, reflexive, and transitive are
+  all shown in Pacuit's book. So I just need to show that the same is true of
+  the acyclic \& skeleton properties.}}
+\end{proof}
+
+\begin{proposition}
+  \label{canonical-model-is-preferential-filter}If $\Model$ is finite and
+  satisfies the Truth Lemma, then $\Model$ is a preferential filter.
+\end{proposition}
+
+\begin{proof}
+  We check each property in turn:
+  \begin{description}
+    \item[$W^C$ is finite] Holds by assumption.
+    
+    \item[$f^C$ is closed under finite intersection] It's enough to show that
+    $f^C$ is closed under binary intersections. $\Logic$ contains all
+    instances of \begin{axiom}
+      Distr$_{\Know}$
+    \end{axiom}, from which we can derive all instances of:
+    \[ \begin{axiom}
+         \tmop{Conjunction} - \tmop{Closure}_{\Know}
+       \end{axiom} \quad \Know \varphi \wedge \Know \psi \rightarrow \Know
+       (\varphi \wedge \psi) \]
+    Suppose $| \varphi |_{\Logic}, | \psi |_{\Logic} \in f^C (\Delta)$. By
+    definition of $f^C$, $\Know \varphi \in \Delta$ and $\Know \psi \in
+    \Delta$. So $\Know \varphi \wedge \Know \psi \in \Delta$. Applying
+    $\begin{axiom}
+      \tmop{Conjunction} - \tmop{Closure}_{\Know}
+    \end{axiom}$, $\Know (\varphi \wedge \psi) \in \Delta$. So $| \varphi
+    \wedge \psi |_{\Logic} = | \varphi |_{\Logic} \cap | \psi |_{\Logic} \in
+    \Delta$.
+    
+    \item[$f^C$ is closed under superset] $\Logic$ contains all instances of
+    \begin{axiom}
+      Distr$_{\Know}$
+    \end{axiom} and the necessitation rule, from which we can derive:
+    \[ \begin{axiom}
+         \tmop{Right} - \tmop{Monotone}_{\Know}
+       \end{axiom} \quad \text{If } \varphi \rightarrow \psi \in \Logic \text{
+       then } \Know \varphi \rightarrow \Know \psi \in \Logic \]
+    Suppose $| \varphi |_{\Logic} \in f^C (\Delta)$, and $| \varphi |_{\Logic}
+    \subseteq | \psi |_{\Logic}$. The former fact gives us $\Know \varphi \in
+    \Delta$. The latter gives us, for all maximally consistent $\Delta$, if
+    $\varphi \in \Delta$ then $\psi \in \Delta$, i.e. $\varphi \rightarrow
+    \psi \in \Logic$ {\todo{Is this correct? Probably not; we need to close
+    the canonical model under superset}}. By$\begin{axiom}
+      \tmop{Right} - \tmop{Monotone}_{\Know}
+    \end{axiom}$, we have $\Know \psi \in \Delta$, i.e. $| \psi |_{\Logic} \in
+    f^C (\Delta)$.
+    
+    \item[$f^C$ contains the unit] $\Logic$ is closed under \begin{axiom}
+      Nec
+    \end{axiom} for $\Know$, from which we can derive:
+    \[ \begin{axiom}
+         \tmop{Top}_{\Know}
+       \end{axiom} \quad \Know \top \]
+    That is, $\Know \top \in \Delta$ for all maximally consistent $\Delta$. So
+    $| \top |_{\Logic} \in f^C (\Delta)$, i.e. $W^C \in f^C (\Delta)$.
+    
+    \item[$f^C$ is reflexive] First, let $\Delta \in W^C$, and suppose $|
+    \varphi |_{\Logic} \in f^C (\Delta)$. By definition of $f^C$, $\Know
+    \varphi \in \Delta$. By \begin{axiom}
+      Refl$_{\Know}$
+    \end{axiom}, $\varphi \in \Delta$. Since $\varphi$ was chosen arbitrarily,
+    we have for all $\varphi$, if $| \varphi |_{\Logic} \in f^C (\Delta)$ then
+    $\varphi \in \Delta$. In other words, $\Delta \in \bigcap_{| \varphi
+    |_{\Logic} \in f^C (\Delta)} | \varphi |_{\Logic} = \cap f^C (\Delta)$.
+    
+    \item[$f^C$ is transitive] Suppose $| \varphi |_{\Logic} \in f^C
+    (\Delta)$. By definition of $f^C$, $\Know \varphi \in \Delta$. By the
+    \begin{axiom}
+      Trans$_{\Know}$
+    \end{axiom} axiom, $\Know \Know \varphi \in \Delta$. But this means that
+    $\left| \Know \varphi \right|_{\Logic} \in f^C (\Delta)$. By definition of
+    proof set, we have $\left\{ \Sigma \mid \Know \varphi \in \Sigma \right\}
+    \in f^C (\Delta)$. That is, $\left\{ \Sigma \mid | \varphi |_{\Logic} \in
+    f^C (\Sigma) \right\} \in f^C (\Delta)$, and we are done.
+    
+    \item[$f^C$ is antisymmetric] Suppose $\Delta_1 \in \cap f^C (\Delta_2)$
+    and $\Delta_2 \in \cap f^C (\Delta_1)$. By definition of core, $\Delta_1
+    \in \bigcap_{| \varphi |_{\Logic} \in f^C (\Delta_2)} | \varphi
+    |_{\Logic}$ and $\Delta_2 \in \bigcap_{| \varphi |_{\Logic} \in f^C
+    (\Delta_1)} | \varphi |_{\Logic}$, i.e. we have both of the following:
+    \begin{enumerate}
+      \item $\forall \varphi$, if $\Know \varphi \in \Delta_2$ then $\varphi
+      \in \Delta_1$
+      
+      \item $\forall \varphi$, if $\Know \varphi \in \Delta_1$ then $\varphi
+      \in \Delta_2$
+    \end{enumerate}
+    We want to show that $\Delta_1 = \Delta_2$. For contradiction, suppose
+    not; without loss of generality, say $\varphi \in \Delta_1$, but $\varphi
+    \not{\in} \Delta_2$.
+    
+    From $\varphi \not{\in} \Delta_2$ and (2) we get $\Know \varphi \not{\in}
+    \Delta_1$. Since $\Delta_1$ is maximal, $\neg \Know \varphi \in \Delta_1$.
+    Since $\varphi \in \Delta_1$ and $\neg \Know \varphi \in \Delta_1$,
+    $\varphi \wedge \neg \Know \varphi \in \Delta_1$. Since $\Delta_1$ is
+    consistent, $\neg \left( \varphi \wedge \neg \Know \varphi \right) \equiv
+    \neg \varphi \vee \Know \varphi \equiv \varphi \rightarrow \Know \varphi
+    \not{\in} \Delta_1$. From (1) we have $\Know \left( \varphi \rightarrow
+    \Know \varphi \right) \not{\in} \Delta_2$.
+    
+    From here, we can apply the $\left( \text{T}_{\Know} \right)$ axiom to get
+    $\Know \Know \left( \varphi \rightarrow \Know \varphi \right) \not{\in}
+    \Delta_2$. Since $\Delta_2$ is maximal, $\neg \Know \Know \left( \varphi
+    \rightarrow \Know \varphi \right) \in \Delta_2$. And so $\neg \Know \Know
+    \left( \varphi \rightarrow \Know \varphi \right) \vee \Know \varphi \in
+    \Delta_2$ (we can disjunct with anything; I happened to choose $\Know
+    \varphi$). But this is just $\Know \Know \left( \varphi \rightarrow \Know
+    \varphi \right) \rightarrow \Know \varphi \in \Delta_2$.
+    
+    We can apply the (K) axiom to re-distribute the $\Know$: $\Know \left(
+    \Know \left( \varphi \rightarrow \Know \varphi \right) \rightarrow \varphi
+    \right) \in \Delta_2$. Since $\varphi \not{\in} \Delta_2$, $\neg \varphi
+    \in \Delta_2$. So in particular, $\Know \left( \Know \left( \varphi
+    \rightarrow \Know \varphi \right) \rightarrow \varphi \right) \wedge \neg
+    \varphi \in \Delta_2$. Factoring the negation out, we have $\neg \left[
+    \neg \Know \left( \Know \left( \varphi \rightarrow \Know \varphi \right)
+    \rightarrow \varphi \right) \vee \varphi \right] \equiv \neg \left[ \Know
+    \left( \Know \left( \varphi \rightarrow \Know \varphi \right) \rightarrow
+    \varphi \right) \rightarrow \varphi \right] \in \Delta_2$. But this
+    contradicts the \begin{axiom}
+      Grz$_{\Know}$
+    \end{axiom} axiom $\Know \left( \Know \left( \varphi \rightarrow \Know
+    \varphi \right) \rightarrow \varphi \right) \rightarrow \varphi \in
+    \Delta_2$!
+    
+    \item[$g^C$ contains the unit] Similar to the proof for $f^C$, but apply
+    necessitation for $\Typ$ instead of $\Know$.
+    
+    \item[$g^C$ is reflexive] Similar to the proof for $f^C$, but apply
+    \begin{axiom}
+      Refl$_{\Typ}$
+    \end{axiom} instead of \begin{axiom}
+      Refl$_{\Know}$
+    \end{axiom}.
+    
+    \item[$g^C$ is transitive] Similar to the proof for $f^C$, but apply
+    \begin{axiom}
+      Trans$_{\Typ}$
+    \end{axiom} instead of \begin{axiom}
+      Trans$_{\Know}$
+    \end{axiom}.
+    
+    \item[$g^C$ contains $f^C$] Suppose $| \varphi |_{\Logic} \in f^C
+    (\Delta)$. By definition of $f^C$, $\Know \varphi \in \Delta$. By the
+    $\begin{axiom}
+      \tmop{Incl}
+    \end{axiom}$ axiom, $\Typ \varphi \in \Delta$. And so $| \varphi
+    |_{\Logic} \in f^C (\Delta)$.
+    
+    \item[$f^C$ is the skeleton of $g^C$] Let $\varphi, \psi$ be formulas, and
+    suppose $\Delta \in \cap f^C \left( | \psi |_{\Logic} \right)$. We would
+    like to show:
+    \[ | \varphi |_{\Logic} \in g^C (\Delta) \infixiff \left\{ \Sigma \mid |
+       \varphi |_{\Logic} \in g^C (\Sigma) \right\} \cup \left( \cap f^C
+       \left( | \psi |_{\Logic} \right) \right)^{\complement} \in g^C (\Delta)
+    \]
+    First, let's unpack our hypothesis. By definition, $\Delta \in
+    \bigcup_{\Theta \in | \psi |_{\Logic}} \cap f^C (\Theta)$. In other words,
+    $\Delta \in \left\{ \Sigma \mid \exists \Theta \text{ such that } \psi \in
+    \Theta \text{ and } \Sigma \in \cap f^C (\Theta) \right\}$. Well, $\psi
+    \in \Theta$ holds iff $\Theta \in | \psi |_{\Logic}$ iff $\Model^C, \Theta
+    \Vdash \psi$ (by the Truth Lemma). So we have $\Delta \in \left\{ \Sigma
+    \mid \exists \Theta \text{ such that } \Model^C, \Theta \Vdash \psi \text{
+    and } \Sigma \in \cap f^C (\Theta) \right\}$, i.e. $\Delta \in \left\{
+    \Sigma \mid \Model^C, \Sigma \Vdash \diaKnownby \psi \right\}$. Applying
+    the Truth Lemma again, this gives us $\Delta \in \left| \diaKnownby \psi
+    \right|$, i.e. $\diaKnownby \psi \in \Delta$.
+    
+    Now let's prove the original claim. We will show the $(\rightarrow)$
+    direction (the $(\leftarrow)$ direction is similar). Suppose $| \varphi
+    |_{\Logic} \in g^C (\Delta)$. By definition of $g^C$, $\Typ \varphi \in
+    \Delta$. Since $\diaKnownby \psi \in \Delta$, the \begin{axiom}
+      Skel
+    \end{axiom} axiom gives us $\Typ \left( \diaKnownby \psi \rightarrow \Typ
+    \varphi \right) \in \Delta$. By definition of $g^C$ again, $\left|
+    \diaKnownby \psi \rightarrow \Typ \varphi \right|_{\Logic} \in g^C
+    (\Delta)$. Well,
+    \[ \begin{array}{llll}
+         \left| \diaKnownby \psi \rightarrow \Typ \varphi \right|_{\Logic} &
+         \quad = \quad & \left| \neg \diaKnownby \psi \vee \Typ \varphi
+         \right|_{\Logic} & \\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left| \neg
+         \diaKnownby \psi \right|_{\Logic} & \\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left\{ \Sigma \mid
+         \Model^C, \Sigma \models \diaKnownby \psi \right\}^{\complement} &
+         \text{(Truth Lemma)}\\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left\{ \Sigma \mid
+         \exists \Theta \text{ such that } \Model^C, \Theta \Vdash \psi \text{
+         and } \Sigma \in \cap f^C (\Theta) \right\}^{\complement} & \text{(by
+         our semantics)}\\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left\{ \Sigma \mid
+         \exists \Theta \text{ such that } \Theta \in | \psi |_{\Logic} \text{
+         and } \Sigma \in \cap f^C (\Theta) \right\}^{\complement} &
+         \text{(Truth Lemma)}\\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left\{ \Sigma \mid
+         \exists \Theta \text{ such that } \psi \in \Theta \text{ and } \Sigma
+         \in \cap f^C (\Theta) \right\}^{\complement} & \text{(definition of
+         $| \psi |_{\Logic}$)}\\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left(
+         \bigcup_{\Theta \in | \psi |_{\Logic}} \cap f^C (\Theta)
+         \right)^{\complement} & \\
+         &  & \left| \Typ \varphi \right|_{\Logic} \cup \left( \cap f^C
+         \left( | \psi |_{\Logic} \right) \right)^{\complement} & \\
+         &  & \left\{ \Sigma \mid \Typ \varphi \in \Sigma \right\} \cup
+         \left( \cap f^C \left( | \psi |_{\Logic} \right)
+         \right)^{\complement} & \text{(definition of $\left| \Typ \varphi
+         \right|_{\Logic}$)}\\
+         &  & \left\{ \Sigma \mid | \varphi |_{\Logic} \in g^C (\Sigma)
+         \right\} \cup \left( \cap f^C \left( | \psi |_{\Logic} \right)
+         \right)^{\complement} & \text{(definition of $g^C$)}
+       \end{array} \]
+  \end{description}
+  So this latter set is in $g^C (\Delta)$. But that is exactly what we wanted
+  to show!
+\end{proof}
+
+\begin{theorem}
+  \label{model-building}\tmtextbf{(Model Building)} Given any consistent
+  $\Gamma \subseteq \Lang$, we can construct a BFNN $\Net$ and neuron $n \in
+  N$ such that $\Net, n \models \Gamma$.
+\end{theorem}
+
+\begin{proof}
+  Extend $\Gamma$ to maximally consistent $\Delta$ using Lemma
+  \ref{lindenbaum}. Let $\Model^C$ be a canonical model for $\Logic$
+  guaranteed by Lemma \ref{canonical-model}. By the Truth Lemma (Lemma
+  \ref{truth-lemma}), $\Model^C, \Delta \models \Delta$. So in particular,
+  $\Model^C, \Delta \models \Gamma$.
+  
+  By the Finite Model Property (Lemma \ref{finite-model-property}), we can
+  construct a finite model $\Model'$ satisfying exactly the same formulas at
+  all worlds. By Proposition \ref{canonical-model-is-preferential-filter},
+  $\Model'$ is a preferential filter.
+  
+  From here, we can build our net $\Net^{\bullet}$ as before, satisfying
+  exactly the same formulas as $\Model$ at all neurons (by Theorem
+  \ref{frame-to-net}). And so $\Net^{\bullet}, \Delta \models \Gamma$.
+\end{proof}
+
+\begin{theorem}
+  \tmtextbf{(Completeness)} For all consistent $\Gamma \subseteq \Lang$, if
+  $\Gamma \models_{\text{BFNN}} \varphi$ then $\Gamma \proves \varphi$
+\end{theorem}
+
+\begin{proof}
+  Suppose contrapositively that $\Gamma \not{\proves} \varphi$. This means
+  that $\Gamma \cup \{ \neg \varphi \}$ is consistent, i.e. by Theorem
+  \ref{model-building} we can build a BFNN $\Net$ and neuron $n$ such that
+  $\Net, n \models \Gamma \cup \{ \neg \varphi \}$. In particular, $\Net, n
+  \not{\models} \varphi$. But then we must have $\Gamma \not{\models}
+  \varphi$.
+\end{proof}
+
+\section*{TODO:}
+
+\begin{itemize}
+  \item Change activation functions so that they aren't dependent on weights
+  
+  \item Make diagrams in Tikz
+  
+  \item Think about unsupervised Hebbian update $[\varphi]^{\ast}$
+  
+  \item Figure out if we need activation function to be monotonically
+  increasing
+  
+  \item Prove Loop \& Cumulative from our properties
+  
+  \item Do filtration/finite model property
+  
+  \item Get bound on the size of the finite model (if it seems easy)
+  
+  \item Close canonical models under $\subseteq$
+  
+  \item Write careful paragraph about leaving fuzzy to future work, and why we
+  make this choice despite it being an over-simplified case.
+  
+  \item Make corrections Saul gave earlier (whoops, I forgot!)
+\end{itemize}
+\begin{thebibliography}{10}
+  \bibitem[1]{bader2005dimensions}Sebastian Bader  and  Pascal Hitzler.
+  {\newblock}Dimensions of neural-symbolic integration-a structured survey.
+  {\newblock}\tmtextit{ArXiv preprint cs/0511042}, 2005.{\newblock}
+  
+  \bibitem[2]{balkenius1991nonmonotonic}Christian Balkenius  and  Peter
+  G{\"a}rdenfors. {\newblock}Nonmonotonic Inferences in Neural Networks.
+  {\newblock}In \tmtextit{KR},  pages  32--39. 1991.{\newblock}
+  
+  \bibitem[3]{belle2021logic}Vaishak Belle. {\newblock}Logic Meets Learning:
+  From Aristotle to Neural Networks. {\newblock}In \tmtextit{Neuro-Symbolic
+  Artificial Intelligence: The State of the Art},  pages  78--102. IOS Press,
+  2021.{\newblock}
+  
+  \bibitem[4]{blutner2004nonmonotonic}Reinhard Blutner.
+  {\newblock}Nonmonotonic inferences and neural networks. {\newblock}In
+  \tmtextit{Information, Interaction and Agency},  pages  203--234. Springer,
+  2004.{\newblock}
+  
+  \bibitem[5]{browne2001connectionist}Antony Browne  and  Ron Sun.
+  {\newblock}Connectionist inference models. {\newblock}\tmtextit{Neural
+  Networks}, 14(10):1331--1355, 2001.{\newblock}
+  
+  \bibitem[6]{gabbay1994temporal}Dov~M Gabbay, Ian Hodkinson, and  Mark~A
+  Reynolds. {\newblock}Temporal logic: mathematical foundations and
+  computational aspects. {\newblock}1994.{\newblock}
+  
+  \bibitem[7]{garcez2001symbolic}Artur~S~d'Avila Garcez, Krysia Broda, and 
+  Dov~M Gabbay. {\newblock}Symbolic knowledge extraction from trained neural
+  networks: a sound approach. {\newblock}\tmtextit{Artificial Intelligence},
+  125(1-2):155--207, 2001.{\newblock}
+  
+  \bibitem[8]{garcez2008neural}Artur~S~d'Avila Garcez, Luis~C Lamb, and  Dov~M
+  Gabbay. {\newblock}\tmtextit{Neural-symbolic cognitive reasoning}.
+  {\newblock}\begin{tabular}{ll}
+    Springer Science & Business Media
+  \end{tabular}, 2008.{\newblock}
+  
+  \bibitem[9]{giordano2021}Laura Giordano, Valentina Gliozzi, and 
+  Daniele~Theseider Dupr{\'e}. {\newblock}From common sense reasoning to
+  neural network models through multiple preferences: An overview.
+  {\newblock}\tmtextit{CoRR}, abs/2107.04870, 2021.{\newblock}
+  
+  \bibitem[10]{giordano2022conditional}Laura Giordano, Valentina Gliozzi, and 
+  Daniele Theseider Dupr{\'E}. {\newblock}A conditional, a fuzzy and a
+  probabilistic interpretation of self-organizing maps.
+  {\newblock}\tmtextit{Journal of Logic and Computation}, 32(2):178--205,
+  2022.{\newblock}
+  
+  \bibitem[11]{hebb-organization-of-behavior-1949}Donald Hebb.
+  {\newblock}\tmtextit{The organization of behavior: A neuropsychological
+  theory}. {\newblock}Wiley, New York, 1949.{\newblock}
+  
+  \bibitem[12]{kautz-2020future}The Third AI Summer, AAAI Robert S. Engelmore
+  Memorial Award Lecture. {\newblock}AAAI, 2020.{\newblock}
+  
+  \bibitem[13]{kisby2022logic}Caleb Kisby, Sa{\'u}l Blanco, and  Lawrence
+  Moss. {\newblock}The logic of hebbian learning. {\newblock}In \tmtextit{The
+  International FLAIRS Conference Proceedings},  volume~35. 2022.{\newblock}
+  
+  \bibitem[14]{leitgeb2001nonmonotonic}Hannes Leitgeb. {\newblock}Nonmonotonic
+  reasoning by inhibition nets. {\newblock}\tmtextit{Artificial Intelligence},
+  128(1-2):161--201, 2001.{\newblock}
+  
+  \bibitem[15]{leitgeb2003nonmonotonic}Hannes Leitgeb. {\newblock}Nonmonotonic
+  reasoning by inhibition nets II. {\newblock}\tmtextit{International Journal
+  of Uncertainty, Fuzziness and Knowledge-Based Systems}, 11(supp02):105--135,
+  2003.{\newblock}
+  
+  \bibitem[16]{leitgeb2018neural}Hannes Leitgeb. {\newblock}Neural Network
+  Models of Conditionals. {\newblock}In \tmtextit{Introduction to Formal
+  Philosophy},  pages  147--176. Springer, 2018.{\newblock}
+  
+  \bibitem[17]{mcculloch1943logical}Warren~S McCulloch  and  Walter Pitts.
+  {\newblock}A logical calculus of the ideas immanent in nervous activity.
+  {\newblock}\tmtextit{The bulletin of mathematical biophysics},
+  5(4):115--133, 1943.{\newblock}
+  
+  \bibitem[18]{odense2022semantic}Simon Odense  and  Artur~d'Avila Garcez.
+  {\newblock}A semantic framework for neural-symbolic computing.
+  {\newblock}\tmtextit{ArXiv preprint arXiv:2212.12050}, 2022.{\newblock}
+  
+  \bibitem[19]{pacuit2017neighborhood}Eric Pacuit.
+  {\newblock}\tmtextit{Neighborhood semantics for modal logic}.
+  {\newblock}Springer, 2017.{\newblock}
+  
+  \bibitem[20]{sarker2021neuro}Md~Kamruzzaman Sarker, Lu Zhou, Aaron Eberhart,
+  and  Pascal Hitzler. {\newblock}Neuro-symbolic artificial intelligence:
+  current trends. {\newblock}\tmtextit{ArXiv preprint arXiv:2105.05330},
+  2021.{\newblock}
+  
+  \bibitem[21]{yu2021survey}Dongran Yu, Bo Yang, Dayou Liu, and  Hui Wang.
+  {\newblock}A survey on neural-symbolic systems. {\newblock}\tmtextit{ArXiv
+  preprint arXiv:2111.08164}, 2021.{\newblock}
+\end{thebibliography}
+
+\section*{Talk Abstract}
+
+Artificial Intelligence is in the midst of a crisis. Its two main paradigms
+--- connectionist neural networks and classical (logic) models --- seem
+diametrically opposed, with no clear way to reconcile the two. Neural networks
+learn flexibly from unstructured data, and are more cognitively plausible. But
+it is difficult to interpret what a neural network \tmtextit{knows} or
+\tmtextit{has learned}. On the other hand, classical models \tmtextit{do}
+represent knowledge explicitly and transparently, but are notoriously rigid
+and are often criticized for being completely cognitively implausible. This
+talk is an introduction to a developing theory of \tmtextit{Neuro-Symbolic
+Artificial Intelligence} that aims to bridge the gap. The key insight of this
+theory is that neural networks and classical models are really two different
+representations of the same information; it is in principle possible to
+translate between the two. I will illustrate how this is possible by offering
+(1) a translation for feed-forward nets that is \tmtextup{provably correct},
+and (2) a logical account for ``naive'' Hebbian learning. Although this talk
+is primarily from the point-of-view of AI, I hope to convince you that this is
+a deep result for cognitive science at large.
+
+\
+
+\tmtextbf{Bio:}
+
+Caleb Schultz Kisby is a fifth-year Computer Science PhD student at Indiana
+University, co-advised by Sa{\'u}l Blanco and Larry Moss. He is interested in
+combining neural and symbolic accounts of reasoning, especially for systems
+that learn (which has long been neglected by Neuro-Symbolic AI). Before
+joining IU, he received his B.S. in Computer Science and Mathematics at the
+University of South Carolina.
+
+\end{document}

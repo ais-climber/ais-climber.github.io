@@ -1,0 +1,26 @@
+﻿\definecolor{myblue}{rgb}{0.03, 0.27, 0.65}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\set}[1]{\{ #1 \}}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit}
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+% nodes
+\node[circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a){$a$};
+\node[below=0.5 of a,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b){$b$};
+
+\node[right=2.2 of $(a)!0.5!(b)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](c){$c$};
+
+% sets
+\node[fill=myblue,color=myblue, opacity=0.5,oval,fit=(a),inner sep=-1pt]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(a) (b)]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(c)]{};
+
+% set labels
+\node [color=myblue,opacity=1,left=0.3 of $(a)$]{bird};
+\node [color=myblue,opacity=0.75,left=0.3 of $(b)$]{penguin};
+\node [color=myblue,opacity=0.75,above=0.3 of $(c)$]{flies};
+
+\draw[edge, color=myblue] (a) -- (c) node [near start, above] {\small{\textbf{$2$}}};
+\draw[edge, color=myblue] (b) -- (c) node [near start, above] {\small{\textbf{$-2$}}};
+\end{tikzpicture}

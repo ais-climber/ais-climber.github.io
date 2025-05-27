@@ -1,0 +1,84 @@
+- [x] **Get insurance reimbursement money; Expecting $787
+	- [x] Figure out the start and end dates for this reimbursement period
+	- [x] Collect all of the therapy receipts
+	- [x] Log in to the Anthem website
+	- [x] Find the reimbursement claims portal
+	- [x] Enter each of the receipts in as separate claims, submit them
+		- [x] Progress: 9/10
+	- [x] Determine whether I've hit my deductible already this year
+	- [x] Based on that information, calculate how much money I'm owed from reimbursement
+	-  I'm expecting: **$787** ($312 from 2023 (deductible met); $475 from 2024 (after meeting $500 deductible))
+- [ ] **Pay Saul back the travel money**
+	- [x] Make sure I have the $1500 expendable money in my bank account
+	- [x] Email Sarah McAfee back explaining delay, and also asking if I need to fill out a different invoice with an updated due date
+	- [x] Print out the invoice and fill in the necessary information, following the invoice payment instructions (for wire transfer)
+	- [x] Scan the filled out invoice
+	- [x] Email it back to Sarah McAfee and wait for the payment to be processed
+	- [ ] **In addition,** make sure I have $136.39 extra expendable money in my bank account
+	- [ ] Then, print out the itemized google doc sheet (in color, preferably)
+	- [ ] Go by Lynne's office *with the receipt envelope* and the *itemized accounting sheet* and process the reimbursement to Saul's account
+- [ ] **Get my job application materials together**
+	- [ ] Write the Other Academic Projects section of my CV (be very selective; show undergrad projects & substantial graduate projects that did not result in a publication).  Put it just after Conference Activity
+	- [ ] Write the Skills section of my CV (based on M. D.'s skills section).  Put it just after Other Academic Projects, just before Awards
+	- [ ] Write the Teaching section of my CV (based on both)
+	- [ ] Write the Relevant Coursework section of my CV (based on V. C.'s skills section)
+	- [ ] Step away from the CV.  Come back after time and figure out the appropriate amount of spacing between section headings & the title.
+	- [ ] Fix the section spacings.
+	- [ ] Fix any broken links.  If a Github page is missing, make/fork one, lightly edit the README to explain what's going on, and then link the Github page.
+	- [ ] Add my LinkedIn link to the top of the CV
+	- [ ] **After the CV is done:** Update my LinkedIn page to contain exactly the same information as my CV.  Update what jobs I'm looking for (at this point, research postdoc & starting positions)
+	- [ ] Take a professional photo by a blackboard, make it Sepia.  Update my website, LinkedIn, Google, and Github with this photograph
+	- [ ] Update my Github self description
+	- [ ] Fix the color scheme on my website to be Gruvbox proper
+	- [ ] Link my CV on my website
+	- [ ] Update my Teaching page on my website
+	- [ ] Update my Contact page on my website
+	- [ ] **After I finish all of that:** Identify 5 people I trust that are going through / have recently gone through the academic job market, and email/message them asking if I can send my CV for advice, and additionally if they can give any guidance on cover letter / research statement
+	- [ ] Gather a list of places I would like to work, where I should always be on the lookout for job postings (based on who I know, who works there, what work they do)
+	- [ ] Gather information on grant proposals for postdocs --- what is the process, what should I look for, what do I need to do and by when?  Make a list of funding opportunities along these lines.
+- [ ] **Start building up my professional network**
+	- [x] Print out "networking on the network" by Phil Agre.  Punch holes in the side and put it in a dedicated binder to read while taking cats outside
+	- [x] Install the "Database Folders" plugin for Obsidian
+	- [x] Make a "People I Know Professionally" folder, and make it a database folder
+	- [x] Create the columns: Name, Preferred contact method, How close are we?, Birthday, Interests, How we met, Current work, Other notes
+	- [ ] For each place I've been at & conference activity / talk / project I've been involved with, try to think of everyone I've ever been professionally involved with through that place
+		- [x] University of South Carolina Computer Science faculty
+		- [x] University of South Carolina Computer Science students
+		- [x] University of South Carolina Math faculty
+		- [x] University of South Carolina Math students
+		- [x] Indiana University PL Wonks
+		- [x] Indiana University Computer Science Faculty
+		- [ ] Indiana University Computer Science Students (the rest)
+		- [x] Indiana University Cognitive Science Faculty
+		- [ ] Indiana University Cognitive Science Students
+		- [ ] Indiana University Logic Faculty
+		- [ ] Indiana University Logic Students
+		- [ ] Indiana University Students I've taught
+		- [ ] Indiana University Faculty I've taught for
+		- [ ] Indiana University Cognitive science seminar speakers (I've had dinner with)
+		- [ ] Indiana University Logic seminar speakers (I've had dinner with)
+		- [ ] People I've met through SCALE (IU)
+		- [ ] People I've met through SCALE (Notre Dame & IUPUI)
+		- [ ] People I've met through SCALE (Crane/govnt/other)
+		- [ ] Charleston AMS Meeting
+		- [ ] Discover USC Poster Event
+		- [ ] ICCBR 2019
+		- [ ] AAAI 2020
+		- [ ] FLAIRS 2022
+		- [x] CALCO/MFPS 2023
+		- [x] NeSy 2023
+		- [ ] AAAI 2024
+		- [x] GALAI Workshop
+	- [ ] Compose a similar table of People I'd **like** to meet; these will be people I cite, people I consider wise, people in positions I would eventually like to be in, people who cite me, or leaders in areas I'd like to interact with.  (It's important to first identify subareas of research that I would like to engage with.)  Include what conference they usually go to / what main community they're a part of.
+	- [ ] Fill out the rest of the details for each person.  "Interests" category seems vague but should actually be somewhat structured --- at least to sort out in my head what it is they do.  I should think very carefully about the options for "How close are we?" and make a numbering scheme for it (higher will get sorted as higher)
+	- [ ] Finish reading "Networking on the network"
+		- [x] Progress: 25%
+- [ ] **Go to the testing clinic and get a psychological exam**
+	- [ ] Prepare a detailed list of all my actual insurmountable problems and what I have done (concretely) to try to fix them.  Consider whether each of these also occurred when I was a child/teenager
+	- [ ] Prepare a detailed list of psychological quirks that don't impact my day-to-day life in a significant way (e.g. cats in the fridge), but seem to be unique to me
+	- [ ] Send a contact message to http://www.drdawnlindeman.com/pages/contact explaining that my therapist referred me to get tested there (for ADHD specifically, but I'm not so sure myself, and I personally would like clarity & some direction for what kind of help I need).
+	- [ ] Schedule an appointment
+	- [ ] Search my apartment for my insurance card to bring with me
+	- [ ] Go to the testing place at the scheduled time, *bring my insurance card* and *bring my experience/issues notebook*, and fill out the intake form
+	- [ ] Do the intake appointment to determine what tests they're going to run
+	- [ ] Come back for the actual test appointments

@@ -1,0 +1,570 @@
+\documentclass[12pt]{article}  
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{lscape}
+
+% Packages Caleb added: %%%
+\usepackage{xcolor}
+\usepackage{stmaryrd}
+\usepackage{comment}
+\usepackage{soul}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{bigstrut}
+%\usepackage{MnSymbol}
+\usepackage{bbm}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{tikz}
+\usepackage{lingmacros}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newcommand{\more}{\mbox{\sf More}}
+\newcommand{\existsgeq}{\mbox{\sf AtLeast}}
+\newcommand{\Pol}{\mbox{\emph{Pol}}}
+  \newcommand{\nonered}{\textcolor{red}{=}}
+  \newcommand{\equalsred}{\nonered}
+  \newcommand{\redstar}{\textcolor{red}{\star}}
+    \newcommand{\dred}{\textcolor{red}{d}}
+    \newcommand{\dmark}{\dred}
+    \newcommand{\redflip}{\textcolor{red}{flip}}
+        \newcommand{\flipdred}{\textcolor{red}{\mbox{\scriptsize \em flip}\ d}}
+        \newcommand{\mdred}{\textcolor{blue}{m}\textcolor{red}{d}}
+        \newcommand{\ndred}{\textcolor{blue}{n}\textcolor{red}{d}}
+\newcommand{\arrowm}{\overset{\textcolor{blue}{m}}{\rightarrow} }
+\newcommand{\arrown}{\overset{\textcolor{blue}{n}}{\rightarrow} }
+\newcommand{\arrowmn}{\overset{\textcolor{blue}{mn}}{\longrightarrow} }
+\newcommand{\arrowmonemtwo}{\overset{\textcolor{blue}{m_1 m_2}}{\longrightarrow} }
+\newcommand{\bluen}{\textcolor{blue}{n}}
+\newcommand{\bluem}{\textcolor{blue}{m}}
+\newcommand{\bluemone}{\textcolor{blue}{m_1}}
+\newcommand{\bluemtwo}{\textcolor{blue}{m_2}}
+\newcommand{\blueminus}{\textcolor{blue}{-}}
+
+\newcommand{\bluedot}{\textcolor{blue}{\cdot}}
+\newcommand{\bluepm}{\textcolor{blue}{\pm}}
+\newcommand{\blueplus}{\textcolor{blue}{+ }}
+\newcommand{\translate}[1]{{#1}^{tr}}
+\newcommand{\Caba}{\mbox{\sf Caba}} 
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\Pre}{\mbox{\sf Pre}} 
+\newcommand{\wmarkpolarity}{\scriptsize{\mbox{\sf W}}}
+\newcommand{\wmarkmarking}{\scriptsize{\mbox{\sf Mon}}}
+\newcommand{\smark}{\scriptsize{\mbox{\sf S}}}
+\newcommand{\bmark}{\scriptsize{\mbox{\sf B}}}
+\newcommand{\mmark}{\scriptsize{\mbox{\sf M}}}
+\newcommand{\jmark}{\scriptsize{\mbox{\sf J}}}
+\newcommand{\kmark}{\scriptsize{\mbox{\sf K}}}
+\newcommand{\tmark}{\scriptsize{\mbox{\sf T}}}
+\newcommand{\greatermark}{\mbox{\tiny $>$}}
+\newcommand{\lessermark}{\mbox{\tiny $<$}}
+%%{\mbox{\ensuremath{>}}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\upred}{\textcolor{red}{\uparrow}}
+\newcommand{\downred}{\textcolor{red}{\downarrow}}
+\usepackage[all,cmtip]{xy}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{multicol}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}{Conjecture}
+%\theoremstyle{case}
+
+
+\newcounter{cases}
+\newcounter{subcases}
+\newenvironment{mycases}
+  {%
+    \setcounter{cases}{0}%
+    \def\case
+      {\bigskip
+        \par\noindent
+        \refstepcounter{cases}%
+        \textbf{Case \thecases\ }
+      }%
+  }
+  {%
+    \par
+  }
+\newenvironment{subcases}
+  {
+    \setcounter{subcases}{0}%
+    \def\subcase
+      {\bigskip
+        \par\noindent
+        \refstepcounter{subcases}%
+        \textbf{Subcase \thesubcases\ }
+      }%
+  }
+  {%
+  }
+\renewcommand*\thecases{\arabic{cases}}
+\renewcommand*\thesubcases{\roman{subcases}}
+
+
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.14in}\raiseonebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.13in}}
+\newcommand{\toplus}{\abovearrow{r}}
+\newcommand{\tominus}{\abovearrow{i}} 
+\newcommand{\todestroy}{\abovearrow{d}}
+\newcommand{\tom}{\abovearrow{m}}
+\newcommand{\tomprime}{\abovearrow{m'}}
+\newcommand{\A}{\textsf{App}}
+\newcommand{\At}{\textsf{At}}
+\newcommand{\Emb}{\textsf{Emb}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\usepackage{verbatim}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\Marking}{\mbox{Mar}}
+\newcommand{\Markings}{\Marking}
+\newcommand{\Mar}{\Marking}
+\newcommand{\Model}{\mathcal{M}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TTM}{\TT_{\Markings}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\erase}{\mbox{\textsf{erase}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\arrowplus}{\overset{\blueplus}{\rightarrow} }
+\newcommand{\arrowminus}{\overset{\blueminus}{\rightarrow} }
+\newcommand{\arrowdot}{\overset{\bluedot}{\rightarrow} }
+\newcommand{\arrowboth}{\overset{\bluepm}{\rightarrow} }
+\newcommand{\arrowpm}{\arrowboth}
+\newcommand{\arrowplusminus}{\arrowboth}
+\newcommand{\arrowmone}{\overset{m_1}{\rightarrow} }
+\newcommand{\arrowmtwo}{\overset{m_2}{\rightarrow} }
+\newcommand{\arrowmthree}{\overset{m_3}{\rightarrow} }
+\newcommand{\arrowmcomplex}{\overset{m_1 \orr m_2}{\longrightarrow} }
+\newcommand{\arrowmproduct}{\overset{m_1 \cdot m_2}{\longrightarrow} }
+\newcommand{\proves}{\vdash}
+\newcommand{\Dual}{\mbox{\sc dual}}
+\newcommand{\orr}{\vee}
+\newcommand{\uar}{\uparrow}
+\newcommand{\dar}{\downarrow}
+\newcommand{\andd}{\wedge}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\arrowmprime}{\overset{m'}{\rightarrow} }
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\Con}{\mbox{\sf Con}}
+\newcommand{\type}{\mbox{\sf type}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\necc}{\Box}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\Types}{\mathcal{T}_\mathcal{M}}
+\newcommand{\mon}{\mbox{\sf mon}}
+\newcommand{\anti}{\mbox{\sf anti}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\rem}[1]{\relax}
+
+
+\newcommand{\raiseone}{\mbox{raise}^1}
+\newcommand{\raisetwo}{\mbox{raise}^2}
+\newcommand{\wrapper}[1]{{#1}}
+\newcommand{\sfa}{\wrapper{\mbox{\sf a}}}
+\newcommand{\sfb}{\wrapper{\mbox{\sf b}}}
+\newcommand{\sfv}{\wrapper{\mbox{\sf v}}}
+\newcommand{\sfw}{\wrapper{\mbox{\sf w}}}
+\newcommand{\sfx}{\wrapper{\mbox{\sf x}}}
+\newcommand{\sfy}{\wrapper{\mbox{\sf y}}}
+\newcommand{\sfz}{\wrapper{\mbox{\sf z}}}
+  \newcommand{\sff}{\wrapper{\mbox{\sf f}}}
+    \newcommand{\sft}{\wrapper{\mbox{\sf t}}}
+      \newcommand{\sfc}{\wrapper{\mbox{\sf c}}}
+      \newcommand{\sfu}{\wrapper{\mbox{\sf u}}}
+            \newcommand{\sfs}{\wrapper{\mbox{\sf s}}}
+  \newcommand{\sfg}{\wrapper{\mbox{\sf g}}}
+
+\newcommand{\sfvomits}{\wrapper{\mbox{\sf vomits}}}
+\newlength{\mathfrwidth}
+  \setlength{\mathfrwidth}{\textwidth}
+  \addtolength{\mathfrwidth}{-2\fboxrule}
+  \addtolength{\mathfrwidth}{-2\fboxsep}
+\newsavebox{\mathfrbox}
+\newenvironment{mathframe}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}\begin{center}}
+    {\end{center}\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}}
+    \newenvironment{mathframenocenter}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}}
+    {\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}} 
+ \renewcommand{\hat}{\widehat}
+ \newcommand{\nott}{\neg}
+  \newcommand{\preorderO}{\mathbb{O}}
+ \newcommand{\PreorderP}{\mathbb{P}}
+  \newcommand{\preorderE}{\mathbb{E}}
+\newcommand{\preorderP}{\mathbb{P}}
+\newcommand{\preorderN}{\mathbb{N}}
+\newcommand{\preorderQ}{\mathbb{Q}}
+\newcommand{\preorderX}{\mathbb{X}}
+\newcommand{\preorderA}{\mathbb{A}}
+\newcommand{\preorderR}{\mathbb{R}}
+\newcommand{\preorderOm}{\mathbb{O}^{\bluem}}
+\newcommand{\preorderPm}{\mathbb{P}^{\bluem}}
+\newcommand{\preorderQm}{\mathbb{Q}^{\bluem}}
+\newcommand{\preorderOn}{\mathbb{O}^{\bluen}}
+\newcommand{\preorderPn}{\mathbb{P}^{\bluen}}
+\newcommand{\preorderQn}{\mathbb{Q}^{\bluen}}
+ \newcommand{\PreorderPop}{\mathbb{P}^{\blueminus}}
+  \newcommand{\preorderEop}{\mathbb{E}^{\blueminus}}
+\newcommand{\preorderPop}{\mathbb{P}^{\blueminus}}
+\newcommand{\preorderNop}{\mathbb{N}^{\blueminus}}
+\newcommand{\preorderQop}{\mathbb{Q}^{\blueminus}}
+\newcommand{\preorderXop}{\mathbb{X}^{\blueminus}}
+\newcommand{\preorderAop}{\mathbb{A}^{\blueminus}}
+\newcommand{\preorderRop}{\mathbb{R}^{\blueminus}}
+ \newcommand{\PreorderPflat}{\mathbb{P}^{\flat}}
+  \newcommand{\preorderEflat}{\mathbb{E}^{\flat}}
+\newcommand{\preorderPflat}{\mathbb{P}^{\flat}}
+\newcommand{\preorderNflat}{\mathbb{N}^{\flat}}
+\newcommand{\preorderQflat}{\mathbb{Q}^{\flat}}
+\newcommand{\preorderXflat}{\mathbb{X}^{\flat}}
+\newcommand{\preorderAflat}{\mathbb{A}^{\flat}}
+\newcommand{\preorderRflat}{\mathbb{R}^{\flat}}
+\newcommand{\pstar}{\preorderBool^{\preorderBool^{E}}}
+\newcommand{\pstarplus}{(\pstar)^{\blueplus}}
+\newcommand{\pstarminus}{(\pstar)^{\blueminus}}
+\newcommand{\pstarm}{(\pstar)^{\bluem}}
+\newcommand{\Reals}{\preorderR}
+\newcommand{\preorderS}{\mathbb{S}}
+\newcommand{\preorderBool}{\mathbbm{2}}
+ \renewcommand{\o}{\cdot}
+ \newcommand{\NP}{\mbox{\sc np}}
+ \newcommand{\NPplus}{\NP^{\blueplus}}
+  \newcommand{\NPminus}{\NP^{\blueminus}}
+   \newcommand{\NPplain}{\NP}
+    \newcommand{\npplus}{np^{\blueplus}}
+  \newcommand{\npminus}{np^{\blueminus}}
+   \newcommand{\npplain}{np}
+   \newcommand{\np}{np}
+   \newcommand{\Term}{\mbox{\sc t}}
+  \newcommand{\N}{\mbox{\sc n}}
+   \newcommand{\X}{\mbox{\sc x}}
+      \newcommand{\Y}{\mbox{\sc y}}
+            \newcommand{\V}{\mbox{\sc v}}
+    \newcommand{\Nbar}{\overline{\mbox{\sc n}}}
+    \newcommand{\Pow}{\mathcal{P}}
+    \newcommand{\powcontravariant}{\mathcal{Q}}
+    \newcommand{\Id}{\mbox{Id}}
+    \newcommand{\pow}{\Pow}
+   \newcommand{\Sent}{\mbox{\sc s}}
+   \newcommand{\lookright}{\slash}
+   \newcommand{\lookleft}{\backslash}
+   \newcommand{\dettype}{(e \to t)\arrowminus ((e\to t)\arrowplus t)}
+\newcommand{\ntype}{e \to t}
+\newcommand{\etttype}{(e\to t)\arrowplus t}
+\newcommand{\nptype}{(e\to t)\arrowplus t}
+\newcommand{\verbtype}{TV}
+\newcommand{\who}{\infer{(\nptype)\arrowplus ((\ntype)\arrowplus (\ntype))}{\mbox{who}}}
+\newcommand{\iverbtype}{IV}
+\newcommand{\Nprop}{\N_{\mbox{prop}}}
+\newcommand{\VP}{{\mbox{\sc vp}}}
+\newcommand{\CN}{{\mbox{\sc cn}}}
+\newcommand{\Vintrans}{\mbox{\sc iv}}
+\newcommand{\Vtrans}{\mbox{\sc tv}}
+\newcommand{\Num}{\mbox{\sc num}}
+%\newcommand{\S}{\mathbb{A}}
+\newcommand{\Det}{\mbox{\sc det}}
+\newcommand{\preorderB}{\mathbb{B}}
+\newcommand{\simA}{\sim_A}
+\newcommand{\simB}{\sim_B}
+\newcommand{\polarizedtype}{\mbox{\sf poltype}}
+\newcommand{\Diag}{\mbox{Diag}}
+\newcommand{\OffDiag}{\mbox{Off-diag}}
+\newcommand{\Pairs}{\mbox{Pairs}}
+\newcommand{\Bad}{\mbox{Bad}}
+\newcommand{\argmax}{\mbox{argmax}}
+\newcommand{\Clamp}{\mbox{Clamp}}
+\newcommand{\sClamp}{\mbox{subset-Clamp}}
+\newcommand{\ordercanonical}{<_{\scriptstyle can}}
+\newcommand{\lex}{\ordercanonical}
+\newcommand{\lexcanonical}{\ordercanonical}
+\newcommand{\precsubseteq}{\preceq_{\scriptsize subset}}
+\newcommand{\approxsubset}{\approx_{\scriptsize subset}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% I'm trying on different choices of symbols for our relations.
+% 
+% This choice is inspired by the "Syllogistic Logic with Cardinality Comparisons" paper.
+% Here, 'p' could mean "pairs", but in the paper *should mean* "provable"
+\newcommand{\provsub}{\subseteq_{\Gamma}}
+\newcommand{\provle}{\le_{\Gamma}}
+\newcommand{\provlt}{<_{\Gamma}}
+
+\newcommand{\nprovle}{\nleq_{\Gamma}}
+\newcommand{\provextended}{\preceq_{\Gamma}}
+\newcommand{\provextendedstrict}{\prec_{\Gamma}}
+\newcommand{\nprovextended}{\npreceq_{\Gamma}}
+
+\newcommand{\proverule}{\textsc}
+
+
+% Something I use for words in a 'code' font.
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Interpretation of the Lemma}
+
+The purpose of these notes is to discuss the relevance of our combinatorial result (\textbf{Lemma 1}) to proving the completeness of the syllogistic logic involving `all', `some', `more than', and `at least'.  We offer a helpful interpretation of the conjecture that makes this connection clear.
+
+\section{Statement of the Lemma}
+
+Our (recently proved) lemma is the following:
+
+\begin{lemma}\label{Combinatorial-Lemma}
+    Let $<_0$ be a strict linear order of pairs $(i, j)$ of indices $1, \ldots, n$ satisfying the \textbf{Singleton Condition}, that is: $i \ne j \implies (i, i) <_0 (i, j)$.  Then there exist sets $S_1$, \ldots, $S_n$ such that:
+    
+    \begin{itemize}
+        \item $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$
+    \end{itemize}
+\end{lemma}
+
+\section{The Interpretation}
+
+Let $\Gamma$ be a set of sentences containing sentences $all(x, y)$, $some(x, y)$, $more(x, y)$, and $atleast(x, y)$, where $x$ and $y$ can be base nouns or noun unions.
+
+In our completeness proof, we must show that:
+\begin{enumerate}
+    \item \label{sound} If $\Gamma \vdash \varphi$ then $\Gamma \vDash \varphi$, and
+    \item \label{complete} If $\Gamma \vDash \varphi$ then $\Gamma \vdash \varphi$.
+\end{enumerate}
+
+(\ref{sound}) is easy; we just verify that none of our rules can produce sentences that do not follow from the premises, i.e. that all of our rules are sound.  As for (\ref{complete}), we suppose $\Gamma \vDash \varphi$, then \textit{construct a model for} $\Gamma$, and then subsequently make use of this model's structure in order to show that $\Gamma \vdash \varphi$.  Our Lemma \ref{Combinatorial-Lemma} relates specifically to the step of \textit{constructing a model for} $\Gamma$.
+
+Here is the interpretation: Our strict linear order $<_0$ corresponds to the order imposed by $more(A \cup B, C \cup D)$ sentences in $\Gamma$.  The claim that ``there exist $S_1, \ldots, S_n$" corresponds to ``there exists a model with nouns $S_1, \ldots, S_n$."  Finally, the condition $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$ corresponds to the interpretation: $|\llbracket S_i \cup S_j \rrbracket| < |\llbracket S_k \cup S_l \rrbracket|$ iff the $more(A \cup B, C \cup D)$ sentences require that $S_i \cup S_j$ comes before $S_k \cup S_l$ (i.e. that this supposed
+model is \textit{actually} a model of $\Gamma$).
+
+We will explicitly point out that pairs $(i, i)$ in our ordering $<_0$ are meant to represent singleton nouns $S_i$ in our model (i.e. unions $S_i \cup S_i$).  All the \textbf{Singleton Condition} says is that our ordering $<_0$ never imposes $(i, i) <_0 (i, j)$, i.e. our set $\Gamma$ never imposes $more(S_i \cup S_j, S_i)$ (where, of course, $i \ne j$).
+
+Following this interpretation, our lemma can be restated as:
+
+\begin{lemma}\label{Reinterpreted-Comb-Lemma}
+    Suppose $\Gamma$ is a set of sentences of the type $more(x, y)$,
+    with $x$ and $y$ possibly involving noun unions.
+    Suppose furthermore that for all nouns $a \ne b$, 
+    $\Gamma \nvDash more(a, a \cup b)$ (this is part of the assumption
+    that $\Gamma$ is \textit{consistent}).  Then there exists a model
+    of $\Gamma$ with nouns $S_1, \ldots, S_n$.
+\end{lemma}
+
+This is almost exactly the lemma we will need for direction 
+\ref{complete} of our completeness proof.  The only issue is that this
+lemma only applies to $\Gamma$ with $more(x, y)$ sentences in it, and
+says nothing about modeling $all(x, y), some(x, y), atleast(x, y) \in \Gamma$.
+
+\section{How the lemma gets used in a completeness theorem}
+
+We consider the logic of $\more(t,u)$, where $t$ and $u$ are terms (possibly union terms).
+The logic that we use is transitivity of $\more(t,u)$, and also $\more(x\cup y, x)$ for $x$ and $y$
+basic nouns.  Further, we have the contradiction rule:
+from $\Gamma\proves\more(t,t)$, derive anything.
+We write $\Gamma\proves\more(t,u)$
+for the evident provability relation.  
+
+Recall that an \emph{antichain model} is one where for all basic $x$ and $y$, if $x$ and $y$ are different,
+then $\semantics{x} \not\subseteq \semantics{y}$.
+We also write $\Gamma\models\more(t,u)$
+to mean that for all {antichain models} $\Model$, if $\Model$ satisfies every sentence in $\Gamma$,
+then it also satisfies $\more(t,u)$.
+
+\begin{proposition}
+$\Gamma\proves \more(t,u)$ iff $\Gamma\models\more(t,u)$.
+\end{proposition}
+
+\begin{proof}
+The only non-trivial step is to show that if 
+$\Gamma\not\proves \more(t,u)$, then there is a model of $\Gamma$
+where $\more(t,u)$ is false.
+
+Write $<$ for the order on basic or union nouns determined by provability from
+$\Gamma$:  $i < j$ iff $\Gamma\proves \more(j,i)$.
+This order is transitive and irreflexive.   (For if $\Gamma\proves\more(i,i)$,
+then by the contradiction rule,  we have $\Gamma\proves \more(t,u)$, 
+contrary to our assumption.)
+
+Recall Lemma 3.4 of ``Syllogistic Logic with Cardinality Comparisions'' 
+(or any other source on this): if $(T, <)$ transitive irreflexive relation
+on a finite set,
+and if $x \not{<} y$ in $T$, then there is a listing of $T$ as 
+\[ t_1, \ldots, t_n \]
+Such that 
+\begin{enumerate}
+    \item For $i < j$ in the listing $t_i < t_j$ in $T$
+    \item $y$ is listed before $x$.
+\end{enumerate}
+In effect, we linearize $T$.
+
+We apply this result to the order $<$ on 
+basic and union terms determined from $\Gamma$, 
+and incorporating the extra condition that 
+$\Gamma\not\proves \more(t,u)$.
+We then apply Lemma 1.  (But that lemma also should be strengthened
+to say that the sets $S_i$ are an antichain.)
+\end{proof}
+
+
+\section{Future TODO}
+
+We would like our final result to look something like:
+
+\begin{conjecture}
+    Let $<_0$, $\le_0$, $\subseteq_0$ be linear orders (strict, nonstrict, nonstrict, respectively) of pairs $(i, j)$ of indices. $1, \ldots, n$ satisfying some \textbf{Consistency Conditions}.  Then there exist sets $S_1$, \ldots, $S_n$ such that:
+    
+    \begin{itemize}
+        \item $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$,
+        \item $|S_i \cup S_j| \le |S_k \cup S_l|$ iff $(i, j) \le_0 (k, l)$, and
+        \item $|S_i \cup S_j| \subseteq |S_k \cup S_l|$ iff $(i, j) \subseteq_0 (k, l)$
+    \end{itemize}
+\end{conjecture}
+
+where our \textbf{Consistency Conditions} are conditions similar to our \textbf{Singleton Condition} that amount in our interpretation to the claim that $\Gamma$ is consistent.  That is, the conditions will state constraints on $<_0$, $\le_0$, and $\subseteq_0$ (and interactions between these orderings) so that we do not obtain nonsense pair orderings.
+
+
+\begin{section}{Definition of `Suitable Relations' (Reminder)}
+The construction we use to build a model for our completeness theorem for our logic requires a \textit{suitable pair} of relations over $\Pairs(n)$.
+For convenience, here is the definition of a suitable pair taken from \code{thoughts.tex}:
+
+\begin{definition}
+A \emph{suitable pair of relations on $\Pairs(n)$} is a pair of relations
+\[ (\le, \subseteq) \]
+such that 
+\begin{enumerate}
+\item $\le$ and $\subseteq$ are preorders on $\Pairs(n)$.
+\item  
+ For all $(i,j), (k,l)\in \Pairs(n)$,
+ either $(i,j) \le (k,l)$ or $(k,l) < (i,j)$, where
+ \[ x < y \quadiff x \le y \mbox{ but not } y \le x\]
+ \item If $i < j$, then $(i,i) \subseteq (i,j)$.  If $j < i$, then $(i,i) \subseteq (j,i)$. 
+ \item If $(i,i) \subseteq (k,l)$ and $(j,j) \subseteq (k,l)$ and $i < j$,
+ then $(i,j) \subseteq (k,l)$.
+\item If $(i,j) \subseteq (k,l)$, then $(i,j) \le (k,l)$.
+\item If $(i,j) \subseteq (k,l)$ and $(k,l) \le (i,j)$, then $(k,l) \subseteq (i,j)$.
+\end{enumerate}
+\label{def-suitable-pair}
+\end{definition}
+
+% \[ (i, j) \provle (k, l) \quadiff \Gamma \vdash atleast(k \cup l, i \cup j)\]
+% \[ (i, j) \provlt (k, l) \quadiff \Gamma \vdash more(k \cup l, i \cup j)\]
+% \[ (i, j) \provsub (k, l) \quadiff \Gamma \vdash all(i \cup j, k \cup l)\]
+\end{section}
+
+\begin{section}{Verifying that our Interpretation Works}
+
+\hl{TODO:} What do we do about $\varphi$?  Do we need to ensure anything about its falseness in our model before the extension?  This will be dealt with in the actual completeness proof.
+
+The rules of our logic include those rules from ``Syllogistic Logic with Cardinality Comparisons'', excluding rules involving $some(x, y)$ and noun complement.  In addition, we have the rules displayed in Figure \ref{fig-all-unions}
+
+In order to apply the Clamping Construction to build our model (in the completeness proof for this logic), we need to construct orderings $\provextended, \provsub$ that (1) preserve those sentences provable from $\Gamma$, (2) ensure the particular sentence $\varphi$ is false, and (3) form a `suitable' pair.
+
+We first define:
+
+\begin{itemize}
+    \item $(i, j) \provle (k, l)$ iff $\Gamma \vdash atleast(k \cup l, i \cup j)$
+    
+    \item $(i, j) \provsub (k, l)$ iff $\Gamma \vdash all(i \cup j, k \cup l)$
+\end{itemize}
+% We would like to extend $\provle$ to a linear ordering $\provextended$ over $\Pairs(n)$.
+
+\begin{lemma}
+    We can extend $\provle$ to a \textit{linear} ordering $\provextended$ over $\Pairs(n)$ that preserves those relevant sentences provable from $\Gamma$, i.e.
+    
+    \begin{enumerate}
+        \item If $\Gamma \vdash atleast(k \cup l, i \cup j)$, then $(i,j) \provextended (k,l)$, and
+        
+        \item If $\Gamma \vdash more(k \cup l, i \cup j)$, then $(i,j) \provextendedstrict (k,l)$, where
+        \[ x \provextendedstrict y \quadiff x \provextended y \mbox{ but } y \nprovextended x\]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+To construct $\provextended$, we simply invoke the fact that any partial order can be extended to a linear order (extending $\provle$ to $\provextended$).
+We easily check (1): If $\Gamma \vdash atleast(k \cup l, i \cup j)$, then $(i,j) \provle (k,l)$, and by extension $(i,j) \provextended (k,l)$.
+
+Regarding (2): If $\Gamma \vdash more(k \cup l, i \cup j)$, since $\Gamma$ is consistent (and using $\proverule{(x)}$), $\Gamma \nvdash atleast(i \cup j, k \cup l)$.  So $(k,l) \nprovle (i,j)$.  
+Since $(i,j)$ and $(k,l)$ were comparable before the extension, we have $(k,l) \nprovextended (i,j)$.  In addition, since $\Gamma \vdash more(k \cup l, i \cup j)$, we have $\Gamma \vdash atleast(k \cup l, i \cup j)$ (by $\proverule{(More At Least)}$) and hence $(i,j) \provextended (k,l)$.  By definition of $\provextendedstrict$, this gives us $(i,j) \provextendedstrict (k,l)$.
+
+\end{proof}
+
+We now need to show that $(\provextended, \provsub)$ is, in fact, a suitable pair. This will allow us to apply our Clamping construction from before.  
+
+\begin{lemma}
+    Let $\Gamma$ be a set of sentences involving $atleast(x, y)$, $more(x, y)$, and $all(x, y)$, where $x, y$ are union terms.  Then $(\provextended, \provsub)$ is a suitable pair.
+    
+\end{lemma}
+
+\begin{proof}
+
+
+% We show each implication:
+% \paragraph{$(\longrightarrow)$} Suppose $(i, j) \provlt (k, l)$.  So $\Gamma \vdash more(k \cup l, i \cup j)$.  By ($\proverule{More At Least}$), $\Gamma \vdash atleast(k \cup l, i \cup j)$.  So $(i, j) \provle (k, l)$.  Additionally, using ($\proverule{x}$), since $\Gamma$ is consistent and $\Gamma vdash more(k \cup l, i \cup j)$, $\Gamma \nvdash atleast(i \cup j, k \cup l)$.  So it is not the case that $(k, l) \provle (i, j)$
+% \paragraph{$(\longleftarrow)$} TODO
+ 
+
+We show that $(\provextended, \provsub)$ satisfy each of the 6 properties in turn:
+
+\begin{enumerate}
+    \item We must show that $\provextended$ and $\provsub$ are both reflexive and transitive.  $\provsub$ is reflexive by ($\proverule{Axiom}$), and is transitive by ($\proverule{Barbara}$).  $\provextended$ is reflexive and transitive simply because it was constructed to be a linear ordering.
+    
+    % OLD: $\provle$ is reflexive by application of ($\proverule{Axiom}$) and ($\proverule{Subset  Size}$).  $\provle$ is transitive by ($\proverule{Card Trans}$)
+    
+    \item $\provextended$ is a linear ordering, and hence is trichotomous.  So for any $(i, j), (k, l) \in \Pairs(n)$, either $(i,j) \provextended (k,l)$ or $(k,l) \provextendedstrict (i,j)$.
+    
+    \item Suppose $i < j$.  Well, $\Gamma \vdash all(i, i \cup j)$ by ($\proverule{Union Extend}$).  So $(i, i) \provsub (i, j)$.  Similarly, if $j < i$ we may use ($\proverule{Union Extend}$) again to obtain $(i, i) \provsub (j, i)$.
+    
+    \item Suppose $(i, i) \provsub (k, l)$, $(j, j) \provsub (k, l)$, and $i < j$.  So $\Gamma \vdash all(i, k \cup l)$ and $\Gamma \vdash all(j, k \cup l)$.  So by ($\proverule{Union All}$), $\Gamma \vdash all(i \cup j, k \cup l)$.  So $(i, j) \provsub (k, l)$.
+    
+    \item Suppose $(i, j) \provsub (k, l)$.  Then $\Gamma \vdash all(i \cup j, k \cup l)$.  By ($\proverule{Subset Size}$), $\Gamma \vdash atleast(k \cup l, i \cup j)$, i.e. $(i, j) \provextended (k, l)$.
+    
+    \item Suppose $(i, j) \provsub (k, l)$ and $(k, l) \provextended (i, j)$.  So $\Gamma \vdash all(i \cup j, k \cup l)$.  By ($\proverule{Subset Size}$), $\Gamma \vdash atleast(k \cup l, i \cup j)$.  This means that $(i,j)$ and $(k,l)$ were comparable before the extension!  So $(k,l) \provextended (i,j) \implies (k,l) \provle (i,j)$.  This means that $\Gamma \vdash atleast(i \cup j, k \cup l)$.  So by ($\proverule{Card Trans}$) we may conclude that $\Gamma \vdash all(i \cup j, k \cup l)$.
+    
+\end{enumerate}
+
+
+
+\end{proof}
+
+\end{section}
+
+\begin{figure}[t]
+\begin{mathframe}
+\[
+\begin{array}{l@{\qquad}l@{\qquad}l}
+\infer[(\proverule{union-idemp})]{\mbox{\sf All ($x\cup x$) $x$}}{} &
+\infer[(\proverule{union-extend})]{\mbox{\sf All $x$ ($x\cup y$) }}{}   \\  \\
+\infer[(\proverule{union-symm})]{\mbox{\sf All ($y \cup x$) ($x\cup y$) }}{} &
+\infer[(\proverule{union-all})]{\mbox{\sf All ($x\cup y$) $t$}}{\mbox{\sf All $x$ $t$} & \mbox{\sf All $y$ $t$}}
+\end{array}
+\]
+\caption{The additional rules for our logic with unions
+\label{fig-all-unions}}
+\end{mathframe}
+\end{figure}
+
+\end{document}

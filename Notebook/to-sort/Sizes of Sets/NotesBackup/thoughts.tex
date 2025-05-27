@@ -1,0 +1,2172 @@
+\documentclass[12pt]{article}  
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{lscape}
+
+\usepackage{bigstrut}
+%\usepackage{MnSymbol}
+\usepackage{bbm}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{tikz}
+\usepackage{lingmacros}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+\newcommand{\existsgeq}{\mbox{\sf AtLeast}}
+\newcommand{\Pol}{\mbox{\emph{Pol}}}
+  \newcommand{\nonered}{\textcolor{red}{=}}
+  \newcommand{\equalsred}{\nonered}
+  \newcommand{\redstar}{\textcolor{red}{\star}}
+    \newcommand{\dred}{\textcolor{red}{d}}
+    \newcommand{\dmark}{\dred}
+    \newcommand{\redflip}{\textcolor{red}{flip}}
+        \newcommand{\flipdred}{\textcolor{red}{\mbox{\scriptsize \em flip}\ d}}
+        \newcommand{\mdred}{\textcolor{blue}{m}\textcolor{red}{d}}
+        \newcommand{\ndred}{\textcolor{blue}{n}\textcolor{red}{d}}
+\newcommand{\arrowm}{\overset{\textcolor{blue}{m}}{\rightarrow} }
+\newcommand{\arrown}{\overset{\textcolor{blue}{n}}{\rightarrow} }
+\newcommand{\arrowmn}{\overset{\textcolor{blue}{mn}}{\longrightarrow} }
+\newcommand{\arrowmonemtwo}{\overset{\textcolor{blue}{m_1 m_2}}{\longrightarrow} }
+\newcommand{\bluen}{\textcolor{blue}{n}}
+\newcommand{\bluem}{\textcolor{blue}{m}}
+\newcommand{\bluemone}{\textcolor{blue}{m_1}}
+\newcommand{\bluemtwo}{\textcolor{blue}{m_2}}
+\newcommand{\blueminus}{\textcolor{blue}{-}}
+
+\newcommand{\bluedot}{\textcolor{blue}{\cdot}}
+\newcommand{\bluepm}{\textcolor{blue}{\pm}}
+\newcommand{\blueplus}{\textcolor{blue}{+ }}
+\newcommand{\translate}[1]{{#1}^{tr}}
+\newcommand{\Caba}{\mbox{\sf Caba}} 
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\Pre}{\mbox{\sf Pre}} 
+\newcommand{\wmarkpolarity}{\scriptsize{\mbox{\sf W}}}
+\newcommand{\wmarkmarking}{\scriptsize{\mbox{\sf Mon}}}
+\newcommand{\smark}{\scriptsize{\mbox{\sf S}}}
+\newcommand{\bmark}{\scriptsize{\mbox{\sf B}}}
+\newcommand{\mmark}{\scriptsize{\mbox{\sf M}}}
+\newcommand{\jmark}{\scriptsize{\mbox{\sf J}}}
+\newcommand{\kmark}{\scriptsize{\mbox{\sf K}}}
+\newcommand{\tmark}{\scriptsize{\mbox{\sf T}}}
+\newcommand{\greatermark}{\mbox{\tiny $>$}}
+\newcommand{\lessermark}{\mbox{\tiny $<$}}
+%%{\mbox{\ensuremath{>}}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\upred}{\textcolor{red}{\uparrow}}
+\newcommand{\downred}{\textcolor{red}{\downarrow}}
+\usepackage[all,cmtip]{xy}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{multicol}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+%\theoremstyle{case}
+
+
+\newcounter{cases}
+\newcounter{subcases}
+\newenvironment{mycases}
+  {%
+    \setcounter{cases}{0}%
+    \def\case
+      {\bigskip
+        \par\noindent
+        \refstepcounter{cases}%
+        \textbf{Case \thecases\ }
+      }%
+  }
+  {%
+    \par
+  }
+\newenvironment{subcases}
+  {
+    \setcounter{subcases}{0}%
+    \def\subcase
+      {\bigskip
+        \par\noindent
+        \refstepcounter{subcases}%
+        \textbf{Subcase \thesubcases\ }
+      }%
+  }
+  {%
+  }
+\renewcommand*\thecases{\arabic{cases}}
+\renewcommand*\thesubcases{\roman{subcases}}
+
+
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.14in}\raiseonebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.13in}}
+\newcommand{\toplus}{\abovearrow{r}}
+\newcommand{\tominus}{\abovearrow{i}} 
+\newcommand{\todestroy}{\abovearrow{d}}
+\newcommand{\tom}{\abovearrow{m}}
+\newcommand{\tomprime}{\abovearrow{m'}}
+\newcommand{\A}{\textsf{App}}
+\newcommand{\At}{\textsf{At}}
+\newcommand{\Emb}{\textsf{Emb}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\usepackage{verbatim}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\Marking}{\mbox{Mar}}
+\newcommand{\Markings}{\Marking}
+\newcommand{\Mar}{\Marking}
+\newcommand{\Model}{\mathcal{M}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TTM}{\TT_{\Markings}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\erase}{\mbox{\textsf{erase}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\arrowplus}{\overset{\blueplus}{\rightarrow} }
+\newcommand{\arrowminus}{\overset{\blueminus}{\rightarrow} }
+\newcommand{\arrowdot}{\overset{\bluedot}{\rightarrow} }
+\newcommand{\arrowboth}{\overset{\bluepm}{\rightarrow} }
+\newcommand{\arrowpm}{\arrowboth}
+\newcommand{\arrowplusminus}{\arrowboth}
+\newcommand{\arrowmone}{\overset{m_1}{\rightarrow} }
+\newcommand{\arrowmtwo}{\overset{m_2}{\rightarrow} }
+\newcommand{\arrowmthree}{\overset{m_3}{\rightarrow} }
+\newcommand{\arrowmcomplex}{\overset{m_1 \orr m_2}{\longrightarrow} }
+\newcommand{\arrowmproduct}{\overset{m_1 \cdot m_2}{\longrightarrow} }
+\newcommand{\proves}{\vdash}
+\newcommand{\Dual}{\mbox{\sc dual}}
+\newcommand{\orr}{\vee}
+\newcommand{\uar}{\uparrow}
+\newcommand{\dar}{\downarrow}
+\newcommand{\andd}{\wedge}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\arrowmprime}{\overset{m'}{\rightarrow} }
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\Con}{\mbox{\sf Con}}
+\newcommand{\type}{\mbox{\sf type}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\necc}{\Box}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\Types}{\mathcal{T}_\mathcal{M}}
+\newcommand{\mon}{\mbox{\sf mon}}
+\newcommand{\anti}{\mbox{\sf anti}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\rem}[1]{\relax}
+
+
+\newcommand{\raiseone}{\mbox{raise}^1}
+\newcommand{\raisetwo}{\mbox{raise}^2}
+\newcommand{\wrapper}[1]{{#1}}
+\newcommand{\sfa}{\wrapper{\mbox{\sf a}}}
+\newcommand{\sfb}{\wrapper{\mbox{\sf b}}}
+\newcommand{\sfv}{\wrapper{\mbox{\sf v}}}
+\newcommand{\sfw}{\wrapper{\mbox{\sf w}}}
+\newcommand{\sfx}{\wrapper{\mbox{\sf x}}}
+\newcommand{\sfy}{\wrapper{\mbox{\sf y}}}
+\newcommand{\sfz}{\wrapper{\mbox{\sf z}}}
+  \newcommand{\sff}{\wrapper{\mbox{\sf f}}}
+    \newcommand{\sft}{\wrapper{\mbox{\sf t}}}
+      \newcommand{\sfc}{\wrapper{\mbox{\sf c}}}
+      \newcommand{\sfu}{\wrapper{\mbox{\sf u}}}
+            \newcommand{\sfs}{\wrapper{\mbox{\sf s}}}
+  \newcommand{\sfg}{\wrapper{\mbox{\sf g}}}
+
+\newcommand{\sfvomits}{\wrapper{\mbox{\sf vomits}}}
+\newlength{\mathfrwidth}
+  \setlength{\mathfrwidth}{\textwidth}
+  \addtolength{\mathfrwidth}{-2\fboxrule}
+  \addtolength{\mathfrwidth}{-2\fboxsep}
+\newsavebox{\mathfrbox}
+\newenvironment{mathframe}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}\begin{center}}
+    {\end{center}\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}}
+    \newenvironment{mathframenocenter}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}}
+    {\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}} 
+ \renewcommand{\hat}{\widehat}
+ \newcommand{\nott}{\neg}
+  \newcommand{\preorderO}{\mathbb{O}}
+ \newcommand{\PreorderP}{\mathbb{P}}
+  \newcommand{\preorderE}{\mathbb{E}}
+\newcommand{\preorderP}{\mathbb{P}}
+\newcommand{\preorderN}{\mathbb{N}}
+\newcommand{\preorderQ}{\mathbb{Q}}
+\newcommand{\preorderX}{\mathbb{X}}
+\newcommand{\preorderA}{\mathbb{A}}
+\newcommand{\preorderR}{\mathbb{R}}
+\newcommand{\preorderOm}{\mathbb{O}^{\bluem}}
+\newcommand{\preorderPm}{\mathbb{P}^{\bluem}}
+\newcommand{\preorderQm}{\mathbb{Q}^{\bluem}}
+\newcommand{\preorderOn}{\mathbb{O}^{\bluen}}
+\newcommand{\preorderPn}{\mathbb{P}^{\bluen}}
+\newcommand{\preorderQn}{\mathbb{Q}^{\bluen}}
+ \newcommand{\PreorderPop}{\mathbb{P}^{\blueminus}}
+  \newcommand{\preorderEop}{\mathbb{E}^{\blueminus}}
+\newcommand{\preorderPop}{\mathbb{P}^{\blueminus}}
+\newcommand{\preorderNop}{\mathbb{N}^{\blueminus}}
+\newcommand{\preorderQop}{\mathbb{Q}^{\blueminus}}
+\newcommand{\preorderXop}{\mathbb{X}^{\blueminus}}
+\newcommand{\preorderAop}{\mathbb{A}^{\blueminus}}
+\newcommand{\preorderRop}{\mathbb{R}^{\blueminus}}
+ \newcommand{\PreorderPflat}{\mathbb{P}^{\flat}}
+  \newcommand{\preorderEflat}{\mathbb{E}^{\flat}}
+\newcommand{\preorderPflat}{\mathbb{P}^{\flat}}
+\newcommand{\preorderNflat}{\mathbb{N}^{\flat}}
+\newcommand{\preorderQflat}{\mathbb{Q}^{\flat}}
+\newcommand{\preorderXflat}{\mathbb{X}^{\flat}}
+\newcommand{\preorderAflat}{\mathbb{A}^{\flat}}
+\newcommand{\preorderRflat}{\mathbb{R}^{\flat}}
+\newcommand{\pstar}{\preorderBool^{\preorderBool^{E}}}
+\newcommand{\pstarplus}{(\pstar)^{\blueplus}}
+\newcommand{\pstarminus}{(\pstar)^{\blueminus}}
+\newcommand{\pstarm}{(\pstar)^{\bluem}}
+\newcommand{\Reals}{\preorderR}
+\newcommand{\preorderS}{\mathbb{S}}
+\newcommand{\preorderBool}{\mathbbm{2}}
+ \renewcommand{\o}{\cdot}
+ \newcommand{\NP}{\mbox{\sc np}}
+ \newcommand{\NPplus}{\NP^{\blueplus}}
+  \newcommand{\NPminus}{\NP^{\blueminus}}
+   \newcommand{\NPplain}{\NP}
+    \newcommand{\npplus}{np^{\blueplus}}
+  \newcommand{\npminus}{np^{\blueminus}}
+   \newcommand{\npplain}{np}
+   \newcommand{\np}{np}
+   \newcommand{\Term}{\mbox{\sc t}}
+  \newcommand{\N}{\mbox{\sc n}}
+   \newcommand{\X}{\mbox{\sc x}}
+      \newcommand{\Y}{\mbox{\sc y}}
+            \newcommand{\V}{\mbox{\sc v}}
+    \newcommand{\Nbar}{\overline{\mbox{\sc n}}}
+    \newcommand{\Pow}{\mathcal{P}}
+    \newcommand{\powcontravariant}{\mathcal{Q}}
+    \newcommand{\Id}{\mbox{Id}}
+    \newcommand{\pow}{\Pow}
+   \newcommand{\Sent}{\mbox{\sc s}}
+   \newcommand{\lookright}{\slash}
+   \newcommand{\lookleft}{\backslash}
+   \newcommand{\dettype}{(e \to t)\arrowminus ((e\to t)\arrowplus t)}
+\newcommand{\ntype}{e \to t}
+\newcommand{\etttype}{(e\to t)\arrowplus t}
+\newcommand{\nptype}{(e\to t)\arrowplus t}
+\newcommand{\verbtype}{TV}
+\newcommand{\who}{\infer{(\nptype)\arrowplus ((\ntype)\arrowplus (\ntype))}{\mbox{who}}}
+\newcommand{\iverbtype}{IV}
+\newcommand{\Nprop}{\N_{\mbox{prop}}}
+\newcommand{\VP}{{\mbox{\sc vp}}}
+\newcommand{\CN}{{\mbox{\sc cn}}}
+\newcommand{\Vintrans}{\mbox{\sc iv}}
+\newcommand{\Vtrans}{\mbox{\sc tv}}
+\newcommand{\Num}{\mbox{\sc num}}
+%\newcommand{\S}{\mathbb{A}}
+\newcommand{\Det}{\mbox{\sc det}}
+\newcommand{\preorderB}{\mathbb{B}}
+\newcommand{\simA}{\sim_A}
+\newcommand{\simB}{\sim_B}
+\newcommand{\polarizedtype}{\mbox{\sf poltype}}
+\newcommand{\Diag}{\mbox{Diag}}
+\newcommand{\OffDiag}{\mbox{Off-diag}}
+\newcommand{\Pairs}{\mbox{Pairs}}
+\newcommand{\Bad}{\mbox{Bad}}
+\newcommand{\argmax}{\mbox{argmax}}
+\newcommand{\Clamp}{\mbox{Clamp}}
+\newcommand{\sClamp}{\mbox{subset-Clamp}}
+\newcommand{\ordercanonical}{<_{\scriptstyle can}}
+\newcommand{\lex}{\ordercanonical}
+\newcommand{\lexcanonical}{\ordercanonical}
+\newcommand{\precsubseteq}{\preceq_{\scriptsize subset}}
+\newcommand{\approxsubset}{\approx_{\scriptsize subset}}
+
+\begin{document}
+\section{Producing antichain familes from suitable orders}
+
+\begin{definition}
+Let $n\geq 1$.   We write $[n]$ for $\set{1,\ldots, n}$.
+An \emph{$n$-family} is  a family of sets
+\[ S = (S_1, \ldots, S_n)\]
+\rem{
+A \emph{suitable $n$-family}
+is
+such that for all $i \neq j$ in $\set{1,\ldots, n}$,
+the set-theoretic difference
+$S_i\setminus S_j$ is non-empty (and hence so is $S_j\setminus S_i$).
+}
+For a family $S$, we write $s_{i,j}$
+for $|S_i\cup S_j|$.  Note that $s_{i,j}$
+is a number, not a set.
+We also write $s_i$ for $s_{i,i}$.
+For a family $T$, we would of course use the notation $t_{i,j}$.
+
+$S$ is an \emph{antichain family} if whenever $i \neq j$,
+$S_i$ is not a subset of $S_j$.
+
+The \emph{size class} of $(i,j)$ is $\set{(a,b): s_{a,b}= s_{i,j}}$.
+
+ We write $\mathcal{C}$ for the
+set of all $n$-families $S$ of sets
+\end{definition}
+
+
+
+\begin{definition}
+Let $n\geq 1$.
+We define  sets $\Diag(n)$, $\OffDiag(n)$, and $\Pairs(n)$ as follows:
+\[
+\begin{array}{lcl}
+\Diag(n) & = & \set{(i,j)\in [n]^2:  i = j}\\
+\OffDiag(n) & = & \set{(i,j)\in [n]^2:  i < j}\\
+\Pairs(n) & = & \Diag(n)\cup\OffDiag(n)\\
+m  & = & |\Pairs(n)|\\
+\end{array}
+\]
+Observe that $|\Diag(n)| = n$,
+$|\OffDiag(n)| = \binom{n}{2}$,
+so that $m =  |\Pairs(n)| = \binom{n+1}{2}$.
+
+Frequently we drop the $n$ and just write
+$\Diag$, $\OffDiag$, and $\Pairs$.
+\end{definition}
+
+\rem{
+\begin{definition} Let $<$ be a   suitable linear preorder of $\Pairs(n)$.
+We fix a well-order $\ordercanonical$ on $\Pairs(n)$
+to be any well-order on $\Pairs(n)$ with the property that if $(a,b) < (c,d)$ then $(a,b) \ordercanonical (c,d)$.
+\end{definition}
+}
+
+\begin{definition}\label{def-suitable}
+A \emph{suitable linear preorder} on $\Pairs(n)$
+is a relation $\preceq$ such that
+\begin{enumerate}
+    \item $\preceq$ is reflexive and transitive.
+    \item For all $(i,j), (k,l)\in \Pairs(n)$,
+ either $(i,j) \preceq (k,l)$ or $(k,l) \prec (i,j)$,
+ where 
+ \[ (i,j) \prec(k,l) \quadiff  (i,j) \preceq (k,l) \mbox{ but not } (k,l)\preceq (i,j)
+ \]
+    \item For $i < j$, $(i,i) \prec (i,j)$.
+    For $i > j$, $(i,i) \prec (j,i)$.
+ \end{enumerate}
+We write $(i,j)\equiv (k,l)$ if
+$(i,j)\preceq (k,l) \preceq (i,j)$.
+\end{definition}
+
+\begin{example} Let  $S$  be a family of sets,
+and assume that $S$ is an antichain family.
+Then the relation 
+$\preceq$ is suitable, where $\preceq$ is defined by 
+\[ (i,j) \preceq (k,l) \quadiff s_{i,j} \leq s_{k,l}
+\]
+\label{example-suitable}
+\end{example}
+
+
+
+
+\begin{theorem}
+Let $\preceq$ be a suitable linear preorder.
+Then there is a family of sets $S$
+such that for all $(i,j)$, $(k,l)\in\Pairs(n)$,
+\begin{equation}
+    \label{goal}
+ (i,j) \preceq  (k,l) \quadiff 
+ s_{i,j}\leq s_{k,l}.
+ \end{equation}
+ \label{theorem-thoughts}
+ \end{theorem}
+ 
+ This representation theorem is tantamount to the completeness of the
+ associated logical system.
+ 
+\subsection{The Clamp Construction on Families of Sets}
+ Let $S$ be a  family,
+ and let $(i,j)\in\Pairs(n)$.
+ Let $r\in \omega$.
+ We define a new family 
+ \[ \Clamp(S,i,j,r)\]
+ from $S$, $i$, $j$, and $r$, as follows:
+$*_1,\ldots, *_r$ be   fresh points.
+For $a\in[n]$, let 
+\[ \begin{array}{lcl}
+\Clamp(S,i,j,p)_a & = & \left\{
+\begin{array}{ll}
+S_a \cup \set{*_1,\ldots, *_r} & \mbox{if $a\neq i$ and $a\neq j$}\\
+ S_a & \mbox{if $a= i$ or $a = j$}\\
+ \end{array}
+ \right.
+\end{array}
+\]
+In words, we are adding $r$ new points
+simultaneously to all sets $S_a$, except
+for $S_i$ and $S_j$.  In words, we clamp $S_i$ and $S_j$, and raise all other sets
+by simultaneously adding points to them.    Note that the clamping raises all unions,
+except for $S_i\cup S_i$, $S_j \cup S_j$, and $S_i\cup S_j$.
+
+\begin{proposition}
+Let $S$ be a family on $n$, and fix $i,j\in[n]$
+and $r\in\omega$.
+Write $T$ for $\Clamp(S,i,j,r)$.
+\begin{enumerate}
+    %\item  $T$ is an antichain family.
+    \item For $(a,b)\notin \set{(i,j),(i,i),(j,j)}$, $t_{a,b} = s_{a,b} + r$.
+   % $|T_{a} \cup T_{b}| =|S_{a} \cup S_{b}| +p $.
+    \item For $(a,b)\in \set{(i,j),(i,i),(j,j)}$, $t_{a,b} = s_{a,b}$.
+%    $|T_{a} \cup T_{b}| =|S_{a} \cup S_{b}| $.
+    \item For all $(a,b), (c,d)$
+    in \[\Pairs(n)\setminus
+    \set{(i,j),(i,i),(j,j)} \]
+we have 
+\[ s_{a,b} - s_{c,d} = t_{a,b} - t_{c,d}.\]
+%|S_{a}\cup S_{b}| - |S_{c}\cup S_{d}|
+%= |T_{a}\cup T_{b}| - |T_{c}\cup T_{d}|.\]
+\rem{\item $\Bad(T)\setminus\Bad(S)$ is a subset of
+\[\set{((a,b),(c,d))\in \Pairs(n)^2 : \mbox{either $(a,b)$ or $(c,d)$ belongs to $ \set{(i,j),(i,i),(j,j)}$}}.\]
+\item  \marginpar{This point is slightly off, in 
+addition to being awkward.}
+$(\Bad(T)\cap \OffDiag(n)^2)\setminus
+(\Bad(S)\cap \OffDiag(n)^2)$ is exactly
+\[ 
+\begin{array}{lcl}
+& \set{(i,j),(c,d))\in\OffDiag(n)^2 :0\leq |S_i\cup S_j| - |S_c \cup S_d| \leq p} \\
+\cup & \set{(c,d),(i,j))\in\OffDiag(n)^2  :0\leq |S_i\cup S_j| - |S_c \cup S_d| \leq p} \\
+\end{array}
+\]
+    \item If $i = j$ and $f(S) = 0$, then $f(T) = 0$.
+}
+\item If $s_{k,l}, s_{m,n} > s_{i,j}$,
+then $s_{m,n}\leq s_{k,l}$ iff
+ $t_{m,n}\leq t_{k,l}$.
+
+\end{enumerate}
+\label{proposition-clamp}
+\end{proposition}
+
+\subsection{Equalizing the sizes of some pairs in a family}
+
+\begin{lemma}
+Let $S$ be a family.  Let $k\geq 2$, and let 
+\[p_1 = (a_1,b_1), \ldots, p_k =(a_k,b_k)\]
+be pairs,
+and assume that if $p_n = (a_n, b_n)$, 
+then neither $(a_n,a_n)$ nor  $(b_n,b_n)$ is  on the list 
+$p_1, \ldots, p_k$.
+Then there is a family $T$ such that 
+\begin{enumerate}
+    \item $t_{a_1, b_1} = t_{a_2, b_2} = \cdots = t_{a_k, b_k}$.
+    \item If $(k,l)$ and $(m,n)$ are any pairs with $s_{k,l}, s_{m,n} >
+    \max_n s_{a_n,b_n}$,
+    then 
+    \[ \mbox{$t_{k,l} \leq t_{m,n} $ if and only if $s_{k,l} \leq s_{m,n} $}.\]
+\label{equalize2}
+\end{enumerate}
+\label{lemma-equalize}
+\end{lemma}
+
+\begin{proof}
+Reorder the given pairs so that
+\[  s_{a_1, b_1} \leq s_{a_2, b_2} \leq \cdots\leq s_{a_k, b_k}.
+\]
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,a_2,b_2,s_{a_2, b_2} - s_{a_1, b_1})\\
+T^2 & = & \Clamp(T^1,a_3, b_3, s_{a_3, b_3} - s_{a_2, b_2} )\\
+  & \vdots   & \\
+T^{k-1} & = & \Clamp(T^{k-2},a_k,b_k,
+s_{a_k, b_k} - s_{a_{k-1}, b_{k-1}})\\
+\end{array}
+\]
+Let $T = T^{k-1}$
+
+To save on a lot of notation, let us write $s_i$ for $s_{a_i, b_i}$
+and similarly for $t^j_i$.
+
+An induction on $1\leq i \leq k -1$ shows that
+for $1 \leq j \leq i+1$,
+\begin{equation}
+\label{equalization}
+s_{i+1}  = t^i_{1} = t^i_{i} = \cdots t^i_{i} =  t^i_{i+1}.
+\end{equation}
+For $i = 1$, recall that $s_1 \leq s_2$.
+Also, $t^1_1 = s_1 + (s_2 - s_1) = s_2$.
+Moreover, $t^1_2= s_2$, since 
+the definition of $T^1$ uses $\Clamp$ at $p_2$.
+
+
+
+Assume (\ref{equalization}) for  $i$.
+Let   $1\leq j \leq i+1$.
+Then \[ t^{i+1}_j = s_{i+1} + (s_{i+2} - s_{i+1}) 
+= s_{i+2}\]
+Also, $t^{i+1}_{i+2} = s_{i+2} $ since $T^{i+1}$ uses $\Clamp$
+at $p_{i+2}$.
+
+Taking $i = k -1$ in (\ref{equalization}) proves our result.
+\end{proof}
+ 
+\subsection{Making a list of pairs larger than all $\prec$-predecessors
+of it}
+
+\begin{lemma}
+Let $S$ be a family, and let $q_1\preceq q_2 \preceq \cdots \preceq q_k$ be a sequence 
+from $\Pairs(n)$.  
+Then there is a family $T$ such that
+\begin{enumerate} 
+    \item For $1\leq i,j \leq k$, $s_i \leq s_j$ iff $t_i \leq t_j$.
+    \label{competitor1}
+    \item for all 
+pairs $p \prec q_1$, 
+$t_{p}  <  t_{q_i}$ for all $i$.
+\label{competitor2}
+\end{enumerate}
+\label{lemma-competitor}
+\end{lemma}
+ 
+
+ \begin{proof}
+ Let $m =  \min_i s_{i} = \min_i s_{q_i}$.
+We call a pair $p$ a \emph{size competitor} if 
+$p\prec q_1$ and $t_p \geq m$.
+ 
+List the size competitors as $p_1, \ldots, p_k$. 
+ Note that if $p_i = (a_i,b_i)$, then none of the original
+ points $q_j$ are $(a_i,a_i)$ or $(b_i,b_i)$
+or $p_i$.   This
+is because $p_i \prec q_j$, and 
+$(a_i,a_i), (b_i,b_i) \prec p_i$.
+(Recall Definition~\ref{def-suitable}.)
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,p_1,  s_{p_1} -m + 1)\\
+
+T^2 & = & \Clamp(T^1,p_2,  s_{p_2}-m + 1 )\\
+  & \vdots   & \\
+T^{k} & = & \Clamp(T^{k-1},p_k, s_{p_k}-m + 1 )\\
+\end{array}
+\]
+Let $T = T^{k}$.
+We claim that the original points $q_j$ have $t_{q_j} > t_{p}$
+for all $p \prec q_1$.
+The reason is that 
+\[ t_{q_j} = s_{q_j} + ( s_{p_1} -m + 1) + (s_{p_2}-m + 1) + \cdots 
++ ( s_{p_k} -m + 1)
+\]
+On the other hand, for one of the size competitors, say $p_i$
+\[\begin{array}{lcl}
+t_{p_i} & = & s_{p_i} + ( s_{p_1}-m  + 1) + \cdots +
+(s_{p_{i-1}} -m  + 1)
++ (s_{p_{i+1}} -m  + 1) + \cdots +(s_{p_k}-m + 1)\\
+& > &  \\
+\end{array}
+\]
+That is, $p_i$ is clamped as we move from $T^{i-1}$ to $T^i$.
+The upshot is that \[t_{q_j} - t_{p_i} \geq s_{q_j} + (s_{p_i}-m + 1)  -
+s_{p_i} = s_{q_j} - m + 1
+\geq  s_{q_j} -s_{q_i} +1  = 1.\]
+The reason that the first $\geq$ is not an equals sign $=$
+is that it may be the case that $p_i$ is of the form $(a,a)$
+and some other $p_{i'}$ is $(a,b)$ for some $b$.
+At the end, we used the fact that $m \leq s_{q_i}$.
+And so $t_{q_j} > t_{p_i}$.
+
+
+For all $p \prec q_1$ which are not  size competitors,
+the calculations are easier.  For such $p$,
+$s_p < s_{q_j}$ for all $j$.
+So we get 
+$t_{q_j} - t_{p} \geq s_{q_j} - s_{p} > 0$.
+
+This completes the proof.
+\end{proof}
+
+\section{Algorithm}
+
+We prove Theorem~\ref{theorem-thoughts} by designing an algorithm
+which represents a suitable linear preorder $\preceq$ on $\Pairs(n)$ by a family
+of sets.   We construct the family using Lemmas~\ref{lemma-equalize}
+a[~\ref{lemma-competitor} on each of the 
+size classes of $\preceq$.
+
+
+Consider the given ordering $\preceq$.
+A \emph{size class} is a set of $\equiv$
+ pairs $p$.   We list the size classes in order, from $\prec$-largest to 
+ $\prec$-smallest.   Let's say the size classes in this order are 
+ \[  C_1, C_2, \ldots, C_K \]
+ Since we are listing them from 
+ $\prec$-largest to 
+ $\prec$-smallest, we have the following fact:
+ if $(a,b) \prec (c,d)$, and also  $(a,b)\in C_i$, and finally
+ $(c,d)\in C_j$,
+ then $j < i$.
+ 
+ Our algorithm has $K+1$ steps, one to start
+ and one for each size class $C^i$. 
+ We construct families $S^0, S^1, \ldots, S^K$.
+ In Step $i$,
+ we assure the following two assertions:
+ \begin{enumerate}
+ \item For all $(a,b)$, $(c,d)\in \bigcup_{1\leq j\leq i} C_j$,
+\begin{equation}
+    \label{goal-in-alg}
+ (a,b) \preceq  (c,d) \quadiff 
+ s^i_{a,b}\leq s^i_{c,d}.
+ \end{equation}
+%     \item  For $1 \leq j \leq i$,
+ %the sizes of all pairs in $C_j$ are the same.
+ %That is, for $p, q\in C_j$,  $s^i_p = s^i_q$.
+     \item 
+The sizes of all pairs in $\bigcup_{j< i} C_j$ are larger than the sizes of all pairs in $\bigcup_{j\geq i} C_j$.
+   That is, for  $j < i$, $q\in C_j$ and $p\in C_i$, $s^i_q > s^i_p$.
+ \end{enumerate}
+ If we do this for $i = 0, 1, \ldots, K$, then $S^K$ will
+ prove Theorem~\ref{theorem-thoughts}.
+ 
+ We begin by taking $S^0$ to be the empty family\footnote{This
+ choice of the empty family is not really needed.
+ The proof in fact shows that we can take $S^0$ to be \emph{any}
+ family on $n$}   on $n$.
+ Assertions (1) and (2) from above are trivially satisfied.
+ 
+ \paragraph{Step i ($1 \leq i \leq K$)}
+ At the start of this step, we have a family $S^{i-1}$.
+ We assume (1) and (2) for $i -1$.
+ 
+ \paragraph{Substep $a$}
+ Let $C_i$ be listed as $p_1, \ldots, p_k$.
+ If $k = 1$, set $T = S^{i-1}$ and go to  Substep $b$ in the 
+ next paragraph.  Otherwise, 
+  use Lemma~\ref{lemma-equalize} with these pairs 
+  $p_1, \ldots, p_k$ and with the family
+  $S^{i-1}$.
+  By the lemma, we get a new family which we'll call $T$.
+  In it, all pairs in $C_i$ have the same size.
+ By (2) for $i$, and by part~\ref{equalize2} of Lemma~\ref{lemma-equalize},
+ we have (1) for $T$.
+  
+ \paragraph{Substep $b$}  
+Enumerate $\bigcup_{1\leq j \leq i} C_j$ as 
+$q_1 \preceq q_2\preceq \cdots \preceq q_k$.
+(Note that elements of $C_i$
+appear in the beginning of this list.)
+Apply Lemma~\ref{lemma-competitor}
+to this sequence and to the family $T$
+from Substep $a$.  We get a new family, say 
+$S^i$.  
+Lemma~\ref{lemma-competitor}, part~\ref{competitor1}, insures that (1) holds for $S^i$, since it held for $T$.
+ And Lemma~\ref{lemma-competitor}, part~\ref{competitor2},
+ insures that (2) holds for $S^i$.
+ 
+ \subsection{Example}
+ 
+ \rem{
+ task6 = [[(5,5),(6,6)], [(5,6),(4,4),(7,7)], 
+         [(7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)], [(3, 2),  (2, 1),(3, 1),(7,0),(3, 0), (2, 0)],
+	    [(1, 0), (4,0),(7,1),(7,2), (8,2),(8,1), (8,3), (8,7)], 
+         [(7,3), (7,5),(7,6),(4,1),(4,2), (4,3), (8,6)],
+	    [(6,0),(6,1),(6,2),(6,3),(5,1), (8,5), (8,4)],
+         [(6,4),(5,0),(5,2),(5,3)]]
+insertionSort(task6)
+}
+
+
+
+
+ Let $n = 9$, and let $\prec$ have size classes as shown in lists below:
+ \[
+ \begin{array}{l}
+\ [(5,5),(6,6)] \\
+ \  [(5,6),(4,4),(7,7)] \\
+  \  [(7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)],\\
+  \ [(3, 2),  (2, 1),(3, 1),(7,0),(3, 0), (2, 0)]\\
+\	    [(1, 0), (4,0),(7,1),(7,2), (8,2),(8,1), (8,3), (8,7)]\\
+ \        [(7,3), (7,5),(7,6),(4,1),(4,2), (4,3), (8,6)] \\
+\	    [(6,0),(6,1),(6,2),(6,3),(5,1), (8,5), (8,4)]\\
+ \        [(6,4),(5,0),(5,2),(5,3)]
+         \end{array}
+ \]
+
+ 
+ We illustrate with step $6$.
+ We begin with a family $S$ with cardinalities as shown below.
+ \[
+ \begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l}
+ \begin{array}{l}
+|S[0]| = 65 \\
+|S[1]| = 63  \\
+|S[2]| = 63 \\
+|S[3]| = 64 \\
+|S[4]| = 64 \\
+|S[5]| = 70 \\
+|S[6]| = 71 \\
+|S[7]| = 60 \\
+|S[8]| = 68 \\
+\hline
+|S[5] \cup S[5]| = 70  \\
+|S[6] \cup S[6]| = 71 \\
+  \\
+|S[5] \cup S[6]| = 79 \\
+|S[4] \cup S[4]| = 64 \\
+|S[7] \cup S[7]| = 60 \\
+  \\
+|S[7] \cup S[4]| = 79 \\
+|S[4] \cup S[5]| = 79 \\
+|S[2] \cup S[2]| = 63 \\
+|S[1] \cup S[1]| = 63 \\
+|S[0] \cup S[0]| = 65 \\
+|S[8] \cup S[8]| = 68 \\
+|S[3] \cup S[3]| = 64 \\
+  \end{array}
+&
+  \begin{array}{l}
+|S[3] \cup S[2]| = 80 \\
+|S[2] \cup S[1]| = 80 \\ 
+|S[3] \cup S[1]| = 80 \\
+|S[7] \cup S[0]| = 80 \\
+|S[3] \cup S[0]| = 80 \\
+|S[2] \cup S[0]| = 80 \\
+  \\
+  
+|S[1] \cup S[0]| = 81 \\
+|S[4] \cup S[0]| = 81 \\
+|S[7] \cup S[1]| = 81 \\
+|S[7] \cup S[2]| = 81 \\
+|S[8] \cup S[2]| = 81 \\
+|S[8] \cup S[1]| = 81 \\
+|S[8] \cup S[3]| = 81 \\
+|S[8] \cup S[7]| = 81 \\
+  \\
+|S[7] \cup S[3]| = 82 \\
+|S[7] \cup S[5]| = 82 \\
+|S[7] \cup S[6]| = 82 \\
+|S[4] \cup S[1]| = 82 \\
+|S[4] \cup S[2]| = 82 \\
+|S[4] \cup S[3]| = 82 \\
+|S[8] \cup S[6]| = 82 \\
+ \end{array}
+ &
+  \begin{array}{l}
+|S[6] \cup S[0]| = 83 \\
+|S[6] \cup S[1]| = 83 \\
+|S[6] \cup S[2]| = 83 \\
+|S[6] \cup S[3]| = 83 \\
+|S[5] \cup S[1]| = 83 \\
+|S[8] \cup S[5]| = 83 \\
+|S[8] \cup S[4]| = 83 \\
+  \\
+|S[6] \cup S[4]| = 84 \\
+|S[5] \cup S[0]| = 84 \\
+|S[5] \cup S[2]| = 84 \\
+|S[5] \cup S[3]| = 84 \\
+ \end{array} 
+ \end{array}
+ \]
+Step $6$ concerns the sixth size class, starting from the highest one.
+So  we are working on the size class 
+ \[  (7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)
+ \]
+ The first step is to equalize the sizes in this class, using Lemma~\ref{lemma-equalize}.
+ We reorder this in size order in our family above, obtaining
+  \[  (1,1), (2, 2), (3,3),  (0,0),(8,8), (7,4),(4,5)
+ \]
+ We therefore calculate:
+\[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,(2,2), 63-63)\\
+
+T^2 & = & \Clamp(T^1,(3,3),  64-63)\\
+
+T^{3} & = & \Clamp(T^{2}, (0,0), 65-64 )\\
+T^{4} & = & \Clamp(T^{3}, (8,8), 68-65 )\\
+T^{5} & = & \Clamp(T^4, (7,4),79-69 )\\
+T^{6} & = & \Clamp(T^{5}, (4,5), 79-79)\\
+\end{array}
+\]
+ We use $T^6$.
+ 
+After equalizing, we get 
+\[
+ \begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l}
+\begin{array}{l}
+|S[0]| = 103 \\
+|S[1]| = 103 \\
+|S[2]| = 103 \\
+|S[3]| = 103 \\
+|S[4]| = 72 \\
+|S[5]| = 94 \\
+|S[6]| = 111 \\
+|S[7]| = 84 \\
+|S[8]| = 103 \\
+\hline
+|S[5] \cup S[5]| = 94 \\
+|S[6] \cup S[6]| = 111 \\
+  \\
+|S[5] \cup S[6]| = 119 \\
+|S[4] \cup S[4]| = 72 \\
+|S[7] \cup S[7]| = 84 \\
+  \\
+|S[7] \cup S[4]| = 103 \\
+|S[4] \cup S[5]| = 103 \\
+|S[2] \cup S[2]| = 103 \\
+|S[1] \cup S[1]| = 103 \\
+|S[0] \cup S[0]| = 103 \\
+|S[8] \cup S[8]| = 103 \\
+|S[3] \cup S[3]| = 103 \\
+ \end{array}
+&
+  \begin{array}{l}
+|S[3] \cup S[2]| = 120 \\
+|S[2] \cup S[1]| = 120 \\
+|S[3] \cup S[1]| = 120 \\
+|S[7] \cup S[0]| = 120 \\
+|S[3] \cup S[0]| = 120 \\
+|S[2] \cup S[0]| = 120 \\
+  \\
+|S[1] \cup S[0]| = 121 \\
+|S[4] \cup S[0]| = 121 \\
+|S[7] \cup S[1]| = 121 \\
+|S[7] \cup S[2]| = 121 \\
+|S[8] \cup S[2]| = 121 \\
+|S[8] \cup S[1]| = 121 \\
+|S[8] \cup S[3]| = 121 \\
+|S[8] \cup S[7]| = 121 \\
+  \\
+|S[7] \cup S[3]| = 122 \\
+|S[7] \cup S[5]| = 122 \\
+|S[7] \cup S[6]| = 122 \\
+|S[4] \cup S[1]| = 122 \\
+|S[4] \cup S[2]| = 122 \\
+|S[4] \cup S[3]| = 122 \\
+|S[8] \cup S[6]| = 122 \\
+ \end{array}
+ &
+  \begin{array}{l}
+|S[6] \cup S[0]| = 123 \\
+|S[6] \cup S[1]| = 123 \\
+|S[6] \cup S[2]| = 123 \\
+|S[6] \cup S[3]| = 123 \\
+|S[5] \cup S[1]| = 123 \\
+|S[8] \cup S[5]| = 123 \\
+|S[8] \cup S[4]| = 123 \\
+  \\
+|S[6] \cup S[4]| = 124 \\
+|S[5] \cup S[0]| = 124 \\
+|S[5] \cup S[2]| = 124 \\
+|S[5] \cup S[3]| = 124 \\
+  \end{array}
+    \end{array}
+  \]
+Note that for classes above the classes of interest in this step,
+the sizes stay larger during the equalization.
+
+  \pagebreak
+  
+At this point, the size competitors are $(5,6)$ and $(6,6)$.
+We want to make the sizes of the sets in our current size class larger than the sizes of $(5,6)$ and $(6,6)$.
+So we use Lemma~\ref{lemma-competitor}.
+That is, we clamp $(5,6)$ and $(5,5)$, increasing all sets by
+one more than the difference of the sizes of those sets with $103$, 
+We get
+
+\[
+\begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l}
+\begin{array}{l}
+|S[0]| = 120 \\
+|S[1]| = 120 \\
+|S[2]| = 120 \\
+|S[3]| = 120 \\
+|S[4]| = 89 \\
+|S[5]| = 94 \\
+|S[6]| = 111 \\
+|S[7]| = 101 \\
+|S[8]| = 120 \\
+\hline
+|S[5] \cup S[5]| = 94 \\
+|S[6] \cup S[6]| = 111 \\
+  \\
+|S[5] \cup S[6]| = 119 \\
+|S[4] \cup S[4]| = 89 \\
+|S[7] \cup S[7]| = 101 \\
+  \\
+|S[7] \cup S[4]| = 120 \\
+|S[4] \cup S[5]| = 120 \\
+|S[2] \cup S[2]| = 120 \\
+|S[1] \cup S[1]| = 120 \\
+|S[0] \cup S[0]| = 120 \\
+|S[8] \cup S[8]| = 120 \\
+|S[3] \cup S[3]| = 120 \\
+ \end{array}
+&
+  \begin{array}{l}
+
+|S[3] \cup S[2]| = 137 \\
+|S[2] \cup S[1]| = 137 \\
+|S[3] \cup S[1]| = 137 \\
+|S[7] \cup S[0]| = 137 \\
+|S[3] \cup S[0]| = 137 \\
+|S[2] \cup S[0]| = 137 \\
+  \\
+|S[1] \cup S[0]| = 138 \\
+|S[4] \cup S[0]| = 138 \\
+|S[7] \cup S[1]| = 138 \\
+|S[7] \cup S[2]| = 138 \\
+|S[8] \cup S[2]| = 138 \\
+|S[8] \cup S[1]| = 138 \\
+|S[8] \cup S[3]| = 138 \\
+|S[8] \cup S[7]| = 138 \\
+  \\
+|S[7] \cup S[3]| = 139 \\
+|S[7] \cup S[5]| = 139 \\
+|S[7] \cup S[6]| = 139 \\
+|S[4] \cup S[1]| = 139 \\
+|S[4] \cup S[2]| = 139 \\
+|S[4] \cup S[3]| = 139 \\
+|S[8] \cup S[6]| = 139 \\
+   \end{array}
+ &
+  \begin{array}{l}
+|S[6] \cup S[0]| = 140 \\
+|S[6] \cup S[1]| = 140 \\
+|S[6] \cup S[2]| = 140 \\
+|S[6] \cup S[3]| = 140 \\
+|S[5] \cup S[1]| = 140 \\
+|S[8] \cup S[5]| = 140 \\
+|S[8] \cup S[4]| = 140 \\
+  \\
+|S[6] \cup S[4]| = 141 \\
+|S[5] \cup S[0]| = 141 \\
+|S[5] \cup S[2]| = 141 \\
+|S[5] \cup S[3]| = 141 \\
+\end{array}
+\end{array}
+\]
+Note that it wasn't really necessary to clamp $(5,6)$ after we clamped $(5,5)$.
+So our algorithm does a bit of work that is not necessary.   It could be elaborated to 
+produce slightly smaller sets in the end.  But it is correct.
+
+\vfil\eject
+
+
+\section{Subset Information}
+
+{\bf starting here, it's a self-contained presentation}
+
+\begin{definition}
+Let $n\geq 1$.   We write $[n]$ for $\set{1,\ldots, n}$.
+An \emph{$n$-family} is  a family of  finite sets
+\[ S = (S_1, \ldots, S_n)\]
+For a family $S$, we write $s_{i,j}$
+for $|S_i\cup S_j|$.  Note that $s_{i,j}$
+is a number, not a set.
+We also write $s_i$ for $s_{i,i}$.
+For a family $T$, we would of course use the notation $t_{i,j}$.
+\end{definition}
+
+\begin{definition}
+Let $n\geq 1$.
+We define  sets $\Diag(n)$, $\OffDiag(n)$, and $\Pairs(n)$ as follows:
+\[
+\begin{array}{lcl}
+\Diag(n) & = & \set{(i,j)\in [n]^2:  i = j}\\
+\OffDiag(n) & = & \set{(i,j)\in [n]^2:  i < j}\\
+\Pairs(n) & = & \Diag(n)\cup\OffDiag(n)\\
+m  & = & |\Pairs(n)|\\
+\end{array}
+\]
+\end{definition}
+
+\paragraph{Notation}
+For the elements of $\Pairs(n)$, we use two kinds of notation.
+We could denote pairs by, well, pairs, writing $(a,b)$, or $(i,j)$, or something similar.
+But sometimes we just want to say: let $p$ be a pair.  And so at times we
+use notation like $p$, $q$, etc. for pairs.
+I'm sure that this will be confusing, but the fact is that each
+kind of notation has its place in what we're going to do.
+
+\begin{definition}
+A \emph{suitable pair of relations on $\Pairs(n)$} is a pair of relations\footnote{I know that
+the notation $\precsubseteq$ is lousy.   I don't think we can use the letter $s$ alone there,
+since we use that all over the place for other things.    But surely there is a better notation.
+Anyways, it's all a macro that can be changed.}
+\[ (\preceq, \precsubseteq) \]
+such that 
+\begin{enumerate}
+\item $\preceq$ and $\precsubseteq$ are preorders on $\Pairs(n)$.
+\item  
+ For all $(i,j), (k,l)\in \Pairs(n)$,
+ either $(i,j) \preceq (k,l)$ or $(k,l) \prec (i,j)$.
+ \item If $i < j$, then $(i,i) \precsubseteq (i,j)$.  If $j < i$, then $(i,i) \precsubseteq (j,i)$. 
+ \item If $(i,i) \precsubseteq (k,\ell)$ and $(j,j) \precsubseteq (k,\ell)$ and $i < j$,
+ then $(i,j) \precsubseteq (k,\ell)$.
+\item If $p \precsubseteq q$, then $p\preceq q$.
+\item If $p \precsubseteq q$ and $q\preceq p$, then $q \precsubseteq p$.
+\end{enumerate}
+\label{def-suitable-pair}
+\end{definition}
+
+
+%(Compare with Definition~\ref{def-suitable}.)
+
+\begin{definition}
+An $n$-family $S$ is \emph{$\precsubseteq$-preserving}
+if $p\precsubseteq q$ implies that $S_p \subseteq S_q$.
+
+$S$ is \emph{$\precsubseteq$-reflecting} if 
+$S_p \subseteq S_q$ implies that $p\precsubseteq q$. 
+\end{definition}
+
+
+\begin{example} Let  $S$  be a family of sets.
+Then the pair of relations $(\preceq, \precsubseteq)$
+is suitable, where 
+\[ \begin{array}{lcl}
+(i,j) \preceq (k,l) & \quadiff  & s_{i,j} \leq s_{k,l}\\
+(i,j) \precsubseteq (k,l) & \quadiff  & S_{i,j} \subseteq S_{k,l}\\
+\end{array}
+\]
+Moreover, $S$ preserves and reflects $\precsubseteq$.
+\label{example-suitable-pair}
+\end{example}
+
+Here is our main representation result:
+
+\begin{theorem}
+Let $(\preceq, \precsubseteq)$ be a suitable pair of relations.
+Then there is a family of sets $S$
+such that for all $(i,j)$, $(k,l)\in\Pairs(n)$,
+\begin{equation}
+    \label{goal-main1}
+ (i,j) \preceq  (k,l) \quadiff 
+ s_{i,j}\leq s_{k,l}.
+ \end{equation}
+ And also
+ \begin{equation}
+    \label{goal-main2}
+ (i,j) \precsubseteq  (k,l) \quadiff 
+S_{i,j}\subseteq S_{k,l}.
+ \end{equation}
+ That is, (\ref{goal}) holds for $\preceq$, and $S$ preserves and reflects $\precsubseteq$.
+ \label{theorem-thoughts-subset}
+ \end{theorem}
+ 
+ 
+\subsection{The s-Clamp Construction on Families  $S$  and Preorders
+$\precsubseteq$}
+ Let $S$ be an $n$-family.
+ Let $(i,j)\in\Pairs(n)$.
+ Let $r\in \omega$.
+ We define a new family 
+ \[ \sClamp(S,i,j,r)\]
+ from $S$, $i$, $j$, and $r$, as follows:
+$*_1,\ldots, *_r$ be   fresh points.
+For $a\in[n]$, let 
+\[ \begin{array}{lcl}
+\sClamp(S,i,j,r)_a & = & \left\{
+\begin{array}{ll}
+S_a \cup \set{*_1,\ldots, *_r} & \mbox{if $\nott ((a,a)\precsubseteq (i,j))$}\\
+ S_a & \mbox{if $(a,a)\precsubseteq (i,j)$}\\ 
+ \end{array}
+ \right.
+\end{array}
+\]
+In words, we are adding $r$ new points
+simultaneously to all sets $S_a$, except when 
+$\precsubseteq$ ``wants 
+$S_a$ to be a subset of  $S_i\cup S_j$.''
+
+Note that $\precsubseteq$ is involved in the definition of $\sClamp$, but it is not
+part of the notation.
+
+
+\begin{proposition}
+Let $S$ be a family on $n$, and fix $i,j\in[n]$
+and $r\in\omega$.
+Write $T$ for $\sClamp(S,i,j,r)$.
+\begin{enumerate}
+    %\item  $T$ is an antichain family.
+ %   \item For $(a,b)\notin \set{(i,j),(i,i),(j,j)}$, 
+   % $|T_{a} \cup T_{b}| =|S_{a} \cup S_{b}| +p $.
+    \item For $(a,b)\precsubseteq (i,j)$, $T_{a,b} = S_{a,b}$.
+    \label{part-easy}
+\item For $(a,b)$ such that $(i,j) \prec (a,b)$, $T_{a,b} =  S_{a,b}\cup\set{*_1,\ldots, *_r}$.
+\label{part-bigger}
+\rem{    \item For all $(a,b), (c,d)$
+    in \[\Pairs(n)\setminus
+    \set{(i,j),(i,i),(j,j)} \]
+we have 
+\[ s_{a,b} - s_{c,d} = t_{a,b} - t_{c,d}.\]
+%|S_{a}\cup S_{b}| - |S_{c}\cup S_{d}|
+%= |T_{a}\cup T_{b}| - |T_{c}\cup T_{d}|.\]
+}
+%item If $s_{k,l}, s_{m,n} > s_{i,j}$,
+%then $s_{m,n}\leq s_{k,l}$ iff
+% $t_{m,n}\leq t_{k,l}$.
+\item If $S$ preserves $\precsubseteq$,
+then $T$  preserves $\precsubseteq$.
+\label{part-preserve}
+\item If $S$  reflects $\precsubseteq$,
+then $T$  reflects $\precsubseteq$.
+\label{part-reflect}
+\end{enumerate}
+\label{proposition-sClamp}
+\end{proposition}
+
+\begin{proof}
+Here is the proof of part (\ref{part-easy}).
+If $(a,b)\precsubseteq (i,j)$, then both $(a,a)\precsubseteq (i,j)$ and $(b,b)\precsubseteq (i,j)$.
+And so $T_a = S_a$ and $T_b = S_b$.
+ Thus, $T_{a,b} = T_a \cup T_b = S_a \cup S_b = S_{a,b}$.
+ 
+ Turning to part (\ref{part-bigger}), let  $(i,j) \prec (a,b)$.
+ We claim that either $\nott ((a,a) \precsubseteq (i,j))$ or $\nott ((b,b) \precsubseteq (i,j))$.
+To see this, suppose towards a contradiction that both $(a,a) \precsubseteq(i,j)$ and $(b,b) \precsubseteq (i,j)$.
+ Then $(a,b) \precsubseteq (i,j)$, and so $(a,b) \preceq (i,j)$.  And this contradicts 
+$(i,j) \prec (a,b)$.
+
+Without loss of generality, 
+$\nott ((a,a) \precsubseteq (i,j))$.
+Then $T_a = S_a \cup \set{*_1,\ldots, *_r}$.
+And so
+\[ T_{a,b} = T_a \cup T_b = S_a\cup\set{*_1,\ldots, *_r} \cup S_b = S_{a,b}\cup\set{*_1,\ldots, *_r}.\]
+This completes the proof.
+
+
+In  part (\ref{part-preserve}),
+let $(a,b) \precsubseteq (c,d)$.  We show that $T_{a,b} \subseteq T_{c,d}$.
+
+If $(a,b)\precsubseteq (i,j)$, then $T_{a,b} = S_{a,b}$.
+By our assumption that $S$ preserves $\precsubseteq$, $S_{a,b} \subseteq S_{c,d}$.
+And clearly $S_{c,d} \subseteq T_{c,d}$.
+So in this case we easily get $T_{a,b} \subseteq T_{c,d}$.
+
+It remains to argue the case when
+$\nott((a,b)\precsubseteq (i,j))$.
+So in this case,  
+$T_{a,b} =  S_{a,b} \cup \set{*_1,\ldots, *_r}$.
+We claim that in this case,
+$T_{c,d} =  S_{c,d} \cup \set{*_1,\ldots, *_r}$.
+This again would imply $T_{a,b} \subseteq T_{c,d}$.
+
+Suppose towards a contradiction that 
+$T_{c,d} \neq  S_{c,d} \cup \set{*_1,\ldots, *_r}$.
+Then $T_{c,d} =  S_{c,d} $.
+In this case, $T_{c,c} = S_{c,c}$ and $T_{d,d} = S_{d,d}$.
+So  $(c,c)\precsubseteq (i,j)$,
+and   $(d,d)\precsubseteq (i,j)$.
+And now we have   $(c,d)\precsubseteq (i,j)$.
+Recall that 
+$(a,b) \precsubseteq (c,d)$. 
+And so we have $(a,b) \precsubseteq (i,j)$. 
+This is a contradiction to the assumption in this case that 
+$\nott((a,b)\precsubseteq (i,j))$.
+
+Part (\ref{part-reflect}) is easier:  if we take any family which reflects $\precsubseteq$ and
+add fresh points in any way whatsoever, the resulting family will reflect $\precsubseteq$.
+\end{proof}
+
+\subsection{Equalizing the sizes in a size class}
+
+In this section, we fix a suitable pair 
+$(\preceq, \precsubseteq)$.
+
+Recall that a \emph{size class} of $\preceq$ is an equivalence class $C$
+of the induced equivalence relation $\approx$ induced by $\preceq$.
+
+The size classes of $\preceq$ have an induced strict order.
+
+\begin{lemma}
+Let $S$ be a family which preserves and reflects $\precsubseteq$.  Let $k\geq 2$, and let 
+\[ C = \set{p_1, \ldots, p_k} \]
+be a size class of  $\preceq$.
+ 
+Then there is a family $T$ such that 
+\begin{enumerate}
+    \item 
+ For $1\leq r,s \leq k$, $t_{p_r} = t_{p_s}$.
+ In words, the  unions corresponding to the pairs in $C$ have equal size in $T$.   
+%    $t_{a_1, b_1} = t_{a_2, b_2} = \cdots = t_{a_k, b_k}$.
+    \item If $(k,l)$ and $(m,n)$ are any pairs 
+    which belong to larger size classes than $C$,
+    then 
+    \[ \mbox{$t_{k,l} \leq t_{m,n} $ if and only if $s_{k,l} \leq s_{m,n} $}.\]
+    \item $T$ preserves and reflects $\precsubseteq$. 
+\label{equalize2}
+\end{enumerate}
+\label{lemma-equalize-subset}
+\end{lemma}
+
+
+\begin{proof}
+Before we begin the construction of $T$,
+we have an observation.
+$C$, being a size class of $\approx$, splits into one or more
+$\approxsubset$ classes, where $\approxsubset$ is the equivalence relation induced by $\precsubseteq$.
+The observation is that if $q_1$ and $q_2$ are members of $C$ which are in different $\approxsubset$
+classes, then neither $q_1 \precsubseteq q_2$ nor  $q_2 \precsubseteq q_1$.
+To see this, suppose towards a contradiction that  $q_1 \precsubseteq q_2$.
+Then since we also have $q_2 \preceq q_1$, we have 
+$q_1 \precsubseteq q_2$ by one of the properties of the suitable pair $(\preceq, \precsubseteq)$.
+
+
+
+Let us chose one pair in each $\approxsubset$-class of 
+$C$, and list the chosen pairs in size order according to $S$.
+That is, we have 
+\[ (a_1, b_1), \ldots, (a_k,b_k) \]
+so that every element of $C$ is $\approxsubset$ to exactly one pair on this list,
+and the order is chosen so that as numbers,
+\[  s_{a_1, b_1} \leq s_{a_2, b_2} \leq \cdots\leq s_{a_k, b_k}.
+\]
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \sClamp(S,a_2,b_2,s_{a_2, b_2} - s_{a_1, b_1})\\
+T^2 & = & \sClamp(T^1,a_3, b_3, s_{a_3, b_3} - s_{a_2, b_2} )\\
+  & \vdots   & \\
+T^{k-1} & = & \sClamp(T^{k-2},a_k,b_k,
+s_{a_k, b_k} - s_{a_{k-1}, b_{k-1}})\\
+\end{array}
+\]
+Let $T = T^{k-1}$
+
+To save on a lot of notation, let us write $s_i$ for $s_{a_i, b_i}$
+and similarly for $t^j_i$.
+
+An induction on $1\leq i \leq k -1$ shows that
+for $1 \leq j \leq i+1$,
+\begin{equation}
+\label{equalization}
+s_{i+1}  = t^i_{1} = t^i_{i} = \cdots t^i_{i} =  t^i_{i+1}.
+\end{equation}
+For $i = 1$, recall that $s_1 \leq s_2$.
+Also, $t^1_1 = s_1 + (s_2 - s_1) = s_2$.
+This is one place where we use our observation at the beginning of the proof.
+That is, $\nott ((a_1,b_1) \precsubseteq (a_2,b_2))$.
+Moreover, $t^1_2= s_2$, since 
+the definition of $T^1$ uses $\sClamp$ at $p_2$.
+
+
+
+Assume (\ref{equalization}) for  $i$.
+Let   $1\leq j \leq i+1$.
+Then \[ t^{i+1}_j = s_{i+1} + (s_{i+2} - s_{i+1}) 
+= s_{i+2}\]
+Again, we are using  our observation at the beginning of the proof.
+Also, $t^{i+1}_{i+2} = s_{i+2} $ since $T^{i+1}$ uses $\sClamp$
+at $p_{i+2}$.
+
+Taking $i = k -1$ in (\ref{equalization}) proves the first part of our result.
+
+The second is an easy induction using Proposition~\ref{proposition-sClamp}, part (\ref{part-bigger}).
+
+The last part is also an easy induction, this time using 
+ Proposition~\ref{proposition-sClamp}, parts (\ref{part-preserve}) and (\ref{part-reflect}).
+\end{proof}
+
+\subsection{Making a list of pairs larger than all $\prec$-predecessors
+of it}
+\begin{lemma}
+Let $S$ be a family which  preserves and reflects $\precsubseteq$.  
+Let $q_1$, $\ldots$, $q_{\ell}$ be a sequence from 
+%$q_1\preceq q_2 \preceq \cdots \preceq q_k$ be a sequence 
+from $\Pairs(n)$.  
+Then there is a family $T$ such that
+\begin{enumerate} 
+    \item For $1\leq i,j \leq k$, $s_i \leq s_j$ iff $t_i \leq t_j$.
+    (Here we are writing $s_i$ and $s_j$ for $s_{q_i}$ and $s_{q_j}$, respectively.)
+    \label{competitor1}
+    \item For all 
+pairs $p $ which are $\prec$-below all $q_j$, we also have 
+$t_{p}  <  t_{q_i}$ for all $i$.
+\label{competitor2}
+  \item $T$ preserves and reflects $\precsubseteq$. 
+
+\end{enumerate}
+\label{lemma-competitor-subset}
+\end{lemma}
+ 
+
+ \begin{proof}
+ Let $m =  \min_i s_{i} = \min_i s_{q_i}$.
+We call a pair $p$ a \emph{size competitor} if 
+$p\prec q_j$ for all $j$, and yet  $t_p \geq m$.
+ 
+List the size competitors as $p_1, \ldots, p_k$. 
+ Note that for all size competitors $p_i$ and all of the original points
+ $q_j$,  we have $\nott (q_j \precsubseteq p_i)$.
+For if we did have $q_j \precsubseteq p_i$, then we would have 
+$q_j \preceq p_i$; and the definition of a size competitor
+insures that that $p_i \prec q_j$ for all $i, j$.
+
+
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \sClamp(S,p_1,  s_{p_1} -m + 1)\\
+
+T^2 & = & \sClamp(T^1,p_2,  s_{p_2}-m + 1 )\\
+  & \vdots   & \\
+T^{k} & = & \sClamp(T^{k-1},p_k, s_{p_k}-m + 1 )\\
+\end{array}
+\]
+Let $T = T^{k}$.
+We claim that the original points $q_j$ have $t_{q_j} > t_{p}$
+for all $p \prec q_1$.
+The reason is that 
+\[ t_{q_j} = s_{q_j} + ( s_{p_1} -m + 1) + (s_{p_2}-m + 1) + \cdots 
++ ( s_{p_k} -m + 1)
+\]
+On the other hand, for one of the size competitors, say $p_i$, we have
+\begin{equation}
+\label{nearendsubset}
+\begin{array}{lcl}
+t_{p_i} & = & s_{p_i} + ( s_{p_1}-m  + 1) + \cdots +
+(s_{p_{i-1}} -m  + 1)
++ (s_{p_{i+1}} -m  + 1) + \cdots +(s_{p_k}-m + 1)\\
+%& > &  \\
+\end{array}
+\end{equation}
+That is, $p_i$ is $s$-clamped as we move from $T^{i-1}$ to $T^i$.
+The upshot is that 
+\begin{equation}\label{upshot}
+t_{q_j} - t_{p_i} \geq s_{q_j} + (s_{p_i}-m + 1)  -
+s_{p_i} = s_{q_j} - m + 1
+\geq  s_{q_j} -s_{q_i} +1  = 1.
+\end{equation}
+The reason that the first $\geq$ is not an equals sign $=$
+is that it may be the case that $p_i\precsubseteq p_{i'}$.
+
+At the end of (\ref{upshot}), we used the fact that $m \leq s_{q_i}$.
+By (\ref{upshot}), we see that $t_{q_j} > t_{p_i}$.
+
+
+For all $p \prec q_1$ which are not  size competitors,
+the calculations are easier.  For such $p$,
+$s_p < s_{q_j}$ for all $j$.
+So we get 
+$t_{q_j} - t_{p} \geq s_{q_j} - s_{p} > 0$.
+
+
+This completes the proof of the first part of our lemma, and the other parts follow as in Lemma~\ref{lemma-equalize-subset}.
+This completes the proof.
+\end{proof}
+
+\section{Algorithm}
+
+We prove Theorem~\ref{theorem-thoughts-subset} by designing an algorithm
+which represents a suitable pair $(\preceq,\precsubseteq)$ on $\Pairs(n)$ by a family
+of sets.   We construct the required family using Lemmas~\ref{lemma-equalize-subset}
+and~\ref{lemma-competitor-subset} on each of the 
+size classes of $\preceq$.
+
+
+Consider the given ordering $\preceq$.
+Recall that a \emph{size class} is a set of $\equiv$
+ pairs $p$.   We list the size classes in order, from $\prec$-largest to 
+ $\prec$-smallest.   Let's say the size classes in this order are 
+ \[  C_1, C_2, \ldots, C_K \]
+ Since we are listing them from 
+ $\prec$-largest to 
+ $\prec$-smallest, we have the following fact:
+ if $(a,b) \prec (c,d)$, and also  $(a,b)\in C_i$, and finally
+ $(c,d)\in C_j$,
+ then $j < i$.
+ 
+ Our algorithm has $K+1$ steps, one to start
+ and one for each size class $C_i$. 
+ We construct families $S^0, S^1, \ldots, S^K$.
+ In Step $i$,
+ we assure the following two assertions:
+ \begin{enumerate}
+ \item For all $(a,b)$, $(c,d)\in \bigcup_{1\leq j\leq i} C_j$,
+\begin{equation}
+    \label{goal-in-alg}
+ (a,b) \preceq  (c,d) \quadiff 
+ s^i_{a,b}\leq s^i_{c,d}.
+ \end{equation}
+%     \item  For $1 \leq j \leq i$,
+ %the sizes of all pairs in $C_j$ are the same.
+ %That is, for $p, q\in C_j$,  $s^i_p = s^i_q$.
+     \item 
+The sizes of all pairs in $\bigcup_{j< i} C_j$ are larger than the sizes of all pairs in $\bigcup_{j\geq i} C_j$.
+   That is, for  $j < i$, $q\in C_j$ and $p\in C_i$, $s^i_q > s^i_p$.
+   \item $S^i$ preserves and reflects $\precsubseteq$.
+ \end{enumerate}
+ If we do this for $i = 0, 1, \ldots, K$, then $S^K$ will
+ prove Theorem~\ref{theorem-thoughts}.
+ 
+ We begin by taking $S^0$ to be any family
+ which preserves and reflects $\precsubseteq$.
+ The canonical choice is to take $S^0_i$ to be the join-prime up-closed
+ subsets of $(X,\preceq)$ that contain $(i,i)$ as an element, where $X$ is the set of all unary and binary union terms.
+ 
+
+ Assertions (1) and (2) from above are trivially satisfied.
+ 
+ \paragraph{Step i ($1 \leq i \leq K$)}
+ At the start of this step, we have a family $S^{i-1}$.
+ We assume (1) and (2) for $i -1$.
+ 
+ \paragraph{Substep $a$}
+ Let $C_i$ be listed as $p_1, \ldots, p_k$.
+ If $k = 1$, set $T = S^{i-1}$ and go to  Substep $b$ in the 
+ next paragraph.  Otherwise, 
+  use Lemma~\ref{lemma-equalize-subset} with these pairs 
+  $p_1, \ldots, p_k$ and with the family
+  $S^{i-1}$.
+  By the lemma, we get a new family which we'll call $T$.
+  In it, all pairs in $C_i$ have the same size.
+ By (2) for $i$, and by part~\ref{equalize2} of Lemma~\ref{lemma-equalize-subset},
+ we have (1) for $T$.
+ (3) holds by  Lemma~\ref{lemma-equalize-subset}.
+  
+ \paragraph{Substep $b$}  
+Write $\bigcup_{1\leq j \leq i} C_j$ as 
+$\set{q_1, q_2,\ldots, q_k}$.
+Apply Lemma~\ref{lemma-competitor-subset}
+to this set and to the family $T$
+from Substep $a$.  We get a new family, say 
+$S^i$.  
+Lemma~\ref{lemma-competitor-subset}, part~\ref{competitor1}, insures that (1) holds for $S^i$, since it held for $T$.
+ And Lemma~\ref{lemma-competitor-subset}, part~\ref{competitor2},
+ insures that (2) holds for $S^i$.
+  (3) holds by  Lemma~\ref{lemma-competitor-subset}.
+ 
+\end{document}
+
+ \begin{definition}
+ Let $<$ be a suitable linear
+ preorder on $\Pairs(n)$.
+ Let $S$ be a  family on $n$.
+ The pair $(a,b)$ is \emph{bad} in $S$
+ if either of the following conditions holds:
+ \begin{enumerate}
+     \item 
+     There is some $(c,d)$ such that $s_{c,d} = s_{a,b}$, but $(a,b) > (c,d)$.
+     \item
+     There is some $(c,d)$ such that $s_{c,d} > s_{a,b}$, but $(a,b) \geq (c,d)$.
+ \end{enumerate}
+ In either case, we say that $(c,d)$
+ is \emph{bad for $(a,b)$}.
+ 
+ We say that $(a,b)$ is \emph{good  in $S$} if
+ it is not bad in $S$.  And $(a,b)$
+ is \emph{very good in $S$} if $(a,b)$ is good in $S$, and for
+ all $(c,d)$ such that $s_{c,d}  >  s_{a,b}$,
+ $(c,d)$ is also good in $S$.
+ \label{definition-bad}
+ \end{definition}
+
+\begin{proposition}
+If there are no bad pairs for $S$,
+then (\ref{goal}) holds.
+Thus, if (\ref{goal}) does not hold,
+then some pair is not very good.
+\end{proposition} 
+
+\begin{proposition}
+If $(e,f)$ and $(g,h)$ are both good in $S$, and $s_{e,f} = s_{g,h}$, then $(e,f) \equiv (g,h)$.
+\label{prop-bothgood}
+\end{proposition}
+ 
+ \begin{definition}
+ Let $<$ be a suitable linear preorder order on $\Pairs(n)$.  Let $m = \binom{n+1}{2}$.
+
+Suppose that $S$ does not meet the goal for $<$.
+Let $p(S)$
+be a pair $(a,b)$ which is bad and with
+$s_{a,b}$ maximal among the bad  pairs.
+And in case of ties, we take the $\ordercanonical$-least such pair.
+Further let 
+ \[
+ g(S) = \mbox{the number of pairs which
+ are bad for $p(S)$ in $S$}.
+\]
+If $f(S) = 0$, then we set $g(S) = 0$ as well.
+
+We further let \[ h(S)= (p(S),g(S)).\]
+Note that $h(S) \in \Pairs(n) \times [m]$.
+We regard $\Pairs(n) \times [m]$ as a well-ordered set using the lexicographic order on the product,
+where $\Pairs(n)$ is well-ordered by $\lex$, and $[m]$ by the order on natural numbers.
+ \end{definition}
+ 
+ 
+ \begin{lemma} [Main Lemma]
+ If $h(S) \neq (0,0)$, then there is some $T$ such that 
+ either $T$ meets the goal, or else
+ $h(T)\prec h(S)$.
+ \end{lemma}
+ 
+ This implies that  we can find one that satisfies
+ (\ref{goal}) by starting with the empty family
+ (or any other family) and
+ repeatedly finding families with smaller and smaller value of $h$.
+ Eventually, we reach some $T$ such   achieves the goal in (\ref{goal}).
+ 
+ The rest of this section is devoted to the proof.
+ We assume that $h(S) \neq (0,0)$.
+ Let $p(S)$ be $(a,b)$.
+ Recall that $(a,b)$ is bad and of maximal size in $S$ for the bad pairs.
+ Thus
+ \begin{equation}\label{verygood}
+ \mbox{$(e,f)$ is very good in $S$ iff $s_{e,f} > s_{a,b}$}
+ \end{equation}
+ 
+ \begin{mycases}
+ 
+ \section{Case 1}
+ 
+ 
+ \case \label{case1}
+  There is some $(c,d)$ such that $s_{c,d} = s_{a,b}$, but $(a,b) > (c,d)$.
+  
+ Let $T = \Clamp(S,c,d,1)$.
+ Then for all $(e,f)$ except $(c,d)$, $(c,c)$, and $(d,d)$, 
+ $t_{e,f} = s_{e,f}+1$.
+ But when $(e,f)$ is either $(c,d)$, or $(c,c)$, or $(d,d)$, 
+ $t_{e,f} = s_{e,f}$.
+ In particular, 
+ \[t_{a,b} = s_{a,b}+1 = s_{c,d} + 1 = t_{c,d}+ 1> t_{c,d}\]
+ That is, $(c,d)$ is not bad for $(a,b)$ in $T$.
+ 
+Note as well that for all $(e,f)$ such that $s_{e,f} > s_{a,b}$,
+$(e,f)$ is not one of the pairs $(c,d)$, $(c,c)$, or $(d,d)$.
+So $(e,f)$ is very good for $S$.  Indeed, $(e,f)$ is very good for $T$ as well.
+
+\begin{subcases}
+\subcase  $(a,b)$ is good for $T$.
+
+Then, $(a,b)$ would be very good for $T$.
+This is because the size classes above $(a,b)$ are the same in $S$ as in $T$.
+
+In this subcase,  we claim that
+$p(T) \lex p(S)$.  
+The reason is that $p(T)$ would be the lexicog
+
+And since we are using the lexicographic
+order in connection with $h$, we see that $h(T) \prec h(S)$.
+
+\subcase 
+$(a,b)$ is bad for $T$.
+Then it is not very good, either.   
+In this case, we 
+have (\ref{verygood}) for $T$.   This implies that
+$f(T) = f(S)$. 
+We claim that $p(T) = p(S) = (a,b)$.  This is because $(a,b)$
+is of maximal size for a bad pair for $T$, and in case of a tie,
+it would be lexicographically least in that set.    (That is, the
+size class of $(a,b)$ in $T$ is a subset of the size class of $(a,b)$ in $S$.
+Thus, the the lexicographically
+least element of the second set, $(a,b)$, is also 
+he lexicographically
+least element of the first set.)
+But we also have $g(T) < g(S)$, since 
+$(c,d)$ is not bad for $(a,b)$ in $T$, and (it is easy to check)
+that every pair which is bad for $(a,b)$ in $T$ is already bad for $(a,b)$
+in $S$.
+
+This again implies that $h(T) \prec h(S)$.
+
+\end{subcases}
+
+
+\section{Case 2}
+
+
+ \case \label{case2}
+ Case~\ref{case1} does not hold, and
+ there is some $(c,d)$ such that $s_{c,d} > s_{a,b}$, but $(a,b) \equiv (c,d)$.
+ We fix such a pair
+  $(c,d)$ which minimizes $s_{c,d}$.
+  
+\begin{claim}\label{sizeclassOfab}
+All pairs $(e,f)$ in the size class   
+of $(a,b)$ in $S$ have $(e,f) \leq (a,b)$.
+\end{claim}
+
+\begin{proof}
+If $(a,b) > (e,f)$, then we would be in  Case~\ref{case1},
+contrary to the assumption in this case.
+\end{proof}
+
+
+\begin{claim}\label{nopairs}
+There are no pairs $(e,f)$ with 
+$s_{a,b} < s_{e,f} < s_{c,d}$.
+\end{claim}
+
+\begin{proof}
+Suppose towards a contradiction that $(e,f)$ exists.
+By (\ref{verygood}), $(e,f)$ is good in $S$.
+So $(e,f) < (c,d)$.  By the choice of $(c,d)$, either $(a,b) < (e,f)$,
+or $(e,f) > (a,b)$.
+If $(a,b) < (e,f)$, we  would have $(a,b)< (c,d)$, contradicting the 
+choice of $(c,d)$ in Case 2.
+If $(e,f) > (a,b)$, then since we also have $(a,b) \equiv (c,d)$,
+we contradict our earlier observation that $(e,f) < (c,d)$.
+\end{proof}
+
+
+\rem{
+We claim that for all $(e,f)$ such that  $s_{e,f} = s_{a,b}$,
+we must have  $(e,f) \geq (c,d)$.
+Suppose that $(e,f) < (c,d)$.  Then since $(a,b) \equiv (c,d)$,
+we have  $(a,b)>(e,f)$.  And then $(e,f)$ would put us in Case~\ref{case1},
+contrary to the assumption in this case.
+}
+
+Let $r = s_{c,d} - s_{a,b}$.
+ Enumerate the size class of $(c,d)$ by
+ \[ (c_1,d_1), \ldots, (c_p, d_p)\]
+ Let \[ \begin{array}{lcl}
+ T_1  & = &  \Clamp(S,c_1,d_1,r)\\
+T_2 & = & \Clamp(T_1,c_2, d_2, r)\\
+  & \vdots   & \\
+T_p & = & \Clamp(T_{p-1},c_{p},c_{p}, r)\\
+\end{array}
+\]
+Let $T = T_p$.
+
+
+\begin{claim}\label{sizeclaimCase1}
+\begin{enumerate}
+    \item For all $(e,f)$, $t_{e,f} = s_{e,f} +qr$ for some $q\leq p$.
+        \label{sizeclaimCase1Part4}
+    \item For $i = 1, \ldots, p$, $t_{c_i,d_i} =s_{c_i,d_i} + (p-1)r$.
+    \label{sizeclaimCase1Part1}
+    \item $t_{a,b} =s_{a,b} + pr = (s_{c,d}-r) + pr = t_{c,d}$.
+        \label{sizeclaimCase1Part2}
+    \item If $s_{e,f} > s_{c,d}$, then $t_{e,f} = s_{e,f} +pr$.
+        \label{sizeclaimCase1Part3}
+
+    \item If $s_{e,f} < s_{a,b}$, then $t_{e,f} < t_{c,d}$.
+        \label{sizeclaimCase1Part5}
+            \item If $t_{c,d} < t_{e,f}$, then $s_{c,d} < s_{e,f}$.
+        \label{sizeclaimCase1Part5a}
+    \item The size class of $(c,d)$ in $T$ is the 
+    size class of $(c,d)$ in $S$ together with the size class of $(a,b)$ in $S$.
+     \label{sizeclaimCase1Part6}
+    \item If $s_{e,f} > s_{c,d}$, then the size
+     class of $(e,f)$ in $T$ is the 
+    size class of $(e,f)$ in $S$. 
+        \label{sizeclaimCase1Part7}
+\end{enumerate}
+\end{claim}
+
+
+\begin{proof}
+Parts~\ref{sizeclaimCase1Part4},
+\ref{sizeclaimCase1Part1}, and~\ref{sizeclaimCase1Part2}
+are clear from the definition of $\Clamp$ and the choice of $r$.
+Part~\ref{sizeclaimCase1Part3} comes from the observation that
+if $s_{e,f} > s_{c,d}$, then $(e,f)$ is not among
+the following paris: $(c_1,d_1)$, $(c_1, c_1)$, $(d_1,d_1)$,
+$\ldots$, $(c_p,d_p)$, $(c_p, c_p)$, $(d_p,d_p)$.
+
+Here is the proof of 
+Part~\ref{sizeclaimCase1Part5}.
+Let $s_{e,f} < s_{a,b}$.   Let $q$ be as in Parts~\ref{sizeclaimCase1Part1} for
+$(e,f)$.
+Then $t_{e,f} = s_{e,f} +qr \leq   s_{e,f} +pr  < s_{a,b} + pr = t_{c,d}$.
+
+Part~\ref{sizeclaimCase1Part5a} follows from Parts~\ref{sizeclaimCase1Part3} and~\ref{sizeclaimCase1Part5}.
+
+Parts~\ref{sizeclaimCase1Part6} and~\ref{sizeclaimCase1Part7}
+follow easily from the previous parts.
+\end{proof}
+
+
+\begin{claim} $(c,d)$ is good for $T$.
+\label{claimcdgood}
+\end{claim}
+
+\begin{proof}
+Suppose not.  
+As listed in Definition~\ref{definition-bad},
+there are two ways that $(c,d)$ could be bad for $T$.
+There might be an element $(e,f)$ in the size class of $(c,d)$ in $T$
+such that $(e,f) > (c,d)$.
+By Claim~\ref{sizeclaimCase1}, part~\ref{sizeclaimCase1Part6},
+$(e,f)$ is either in the size class of $(c,d)$ in $S$, or else it is in the size class of $(a,b)$ in $S$.
+The first case would imply that $(c,d)$ is bad in $S$, contrary to
+(\ref{verygood}).
+In the second case, we have $(e,f) \leq (a,b)$ by Claim~\ref{sizeclassOfab}.
+But $(a,b) \equiv (c,d)$, and so $(e,f) \leq (c,d)$.   This contradicts $(e,f) > (c,d)$.
+
+The second way that $(c,d)$ could be bad for $T$ is that there is some
+$(e,f)$ in a larger size class than $(c,d)$ in $T$ such that $(c,d) \geq (e,f)$.
+But by Claim~\ref{sizeclaimCase1}, part~\ref{sizeclaimCase1Part7},
+such $(e,f)$ would belong to a larger size class than $(c,d)$ in $S$.
+And so $(c,d)$ would be bad in $S$; we know that this is a contradiction.
+\end{proof}
+
+\begin{claim}\label{claimPropagateVeryGood}
+If $(e,f)$ is very good for $S$, then $(e,f)$ is very good for $T$.
+Thus $f(T) \leq f(S)$.
+\end{claim}
+
+\begin{proof}
+By (\ref{verygood}), $s_{e,f}>s_{a,b}$.
+By Claim~\ref{nopairs},  $s_{e,f} \geq s_{c,d}$.
+
+Let us first consider the case when $s_{e,f} = s_{c,d}$.
+By Proposition~\ref{prop-bothgood},  $(e,f) \equiv (c,d)$.
+If either
+Looking back at Definition~\ref{definition-bad}, we see that
+if  $(e,f)$ were bad for $T$, then $(c,d)$ would also be bad for $T$, 
+contradicting  Claim~\ref{claimcdgood}.
+
+
+
+If $s_{e,f}  > s_{c,d}$, then the size class of $(e,f)$ in $T$
+is the same as that in $S$; and the same holds for $(g,h)$ with $s_{g,h} > s_{e,f}$.
+It follows easily that $(e,f)$ is good in $T$.
+
+
+This completes the proof.
+\end{proof}
+
+We conclude Case~\ref{case2} by checking that $h(T)\prec h(S)$.
+
+
+\begin{subcases}
+\subcase  
+Some pair $(a',b')$ in the size class of 
+$(a,b)$  in $S$
+ is also  good for $T$.
+We show that every such $(a',b')$ is very good for $T$.
+Let $(e,f)$ be such that  $t_{e,f} >t_{a',b'} = t_{c,d}$.
+By Claim~\ref{sizeclaimCase1},
+Part~\ref{sizeclaimCase1Part5a}, 
+$s_{e,f}  > s_{c,d}$.
+By (\ref{verygood}), 
+ $(e,f)$ is very good for $S$.
+By Claim~\ref{claimPropagateVeryGood},  $(e,f)$ is good for $T$.
+
+At this point in the subcase, we know that $(a',b')$ is very good for $T$, and that it is bad for $S$.
+Recall also Claim~\ref{claimPropagateVeryGood}.
+We see that  $f(T) < f(S)$.  Thus $h(T)\prec h(S)$.
+
+
+\subcase
+No pair $(a',b')$ in the size class of 
+$(a,b)$  in $S$
+ is also  good for $T$.
+We show in this subcase that every $(e,f)$ which is very good for $T$ is very good for $S$.
+For if $(e,f)$ were very good for $T$, then $t_{e,f} \geq t_{a,b}$.
+If $t_{e,f} = t_{a,b}$, then $(e,f)$ is in the size class of $(e,f)$ in $T$.
+By Claim~\ref{sizeclaimCase1},
+Part~\ref{sizeclaimCase1Part6}, $(e,f)$ is either in the size class of $(c,d)$ in $S$
+(and then it is clearly very good in $S$)
+or else  $(e,f)$ is either in the size class of $(a,b)$ in $S$
+(and then we would be in Subcase i).
+ 
+As we saw in Claim~\ref{claimPropagateVeryGood}, $f(S) \leq f(T)$.
+In this subcase, we actually have equality: $f(S) = f(T)$.
+This is because $(a,b)$ is bad for $T$.
+
+Continuing with this subcase, $(a,b)$ is a pair which is bad in $T$
+and of maximal size.
+As in Subcase ii of Case~\ref{case1}, 
+ we claim that $p(T) = p(S) = (a,b)$.  This is because $(a,b)$
+is of maximal size for a bad pair for $T$, and in case of a tie,
+it would be lexicographically least in that set. 
+And  we again have $g(T) < g(S)$, since 
+$(c,d)$ is not bad for $(a,b)$ in $T$, and (it is easy to check)
+that every pair which is bad for $(a,b)$ in $T$ is already bad for $(a,b)$
+in $S$.
+
+Finally, we check $g(T) < g(S)$, and this will conclude the proof
+that  
+ $h(T)\prec h(S)$.
+We know that $(c,d)$ is not bad for $(a,b)$ in $T$,
+since $t_{c,d} = t_{a,b}$.
+Suppose that $(e,f)$ is bad for 
+ $(a,b)$ in $T$.
+ If $t_{e,f} > t_{a,b}$, then also 
+  $s_{e,f} > s_{a,b}$, due to 
+Claim~\ref{sizeclaimCase1},
+Part~\ref{sizeclaimCase1Part5a}.
+And then $(e,f)$ would be bad for 
+ $(a,b)$ in $S$.
+ If $t_{e,f} = t_{a,b}$, then $(e,f)$ is either in the size class of $(a,b)$ in $S$
+ or in the size class of $(c,d)$ in $S$.   In the former case, 
+ $(e,f)$ would be bad for 
+ $(a,b)$ in $S$.
+ In the latter case, we get a contradiction.
+ We would have $(e,f) < (a,b)$ by badness in $S$, and yet 
+ $(e,f) \equiv (c,d)$ (since the two pairs are in the same size class),
+ and $(c,d) \equiv (a,b)$ (by the statement of Case~\ref{case2}).
+ 
+ We conclude that the pairs which are bad for $(a,b)$ in $T$
+ are all bad for $(a,b)$ in $S$, and $(c,d)$ is not among them.
+ This implies the desired conclusion: $g(T) < g(S)$.
+
+\end{subcases}
+
+\section{Case 3}
+\label{case3}
+
+\case Cases~\ref{case1} and~\ref{case2} do not hold, and
+ there is some $(c,d)$ such that $s_{c,d} > s_{a,b}$, but $(a,b) > (c,d)$.
+ Note that 
+(\ref{verygood}) still holds, and so $(c,d)$ if very good in $S$.
+ 
+ 
+ \begin{claim}\label{sizeclassOfabCase3}
+All pairs $(e,f)$ in the size class   
+of $(a,b)$ in $S$ have $(e,f) \leq (a,b)$.
+All pairs $(e,f)$ in the size class   
+of $(c,d)$ in $S$ have $(c,d) \equiv (e,f)$.
+\end{claim}
+
+\begin{proof}
+For the first assertion: 
+if $(a,b) > (e,f)$, then we would be in  Case~\ref{case1},
+contrary to the assumption in this case.
+The second assertion comes from Proposition~\ref{prop-bothgood}.
+\end{proof}
+
+
+ 
+\begin{claim}\label{nopairsCase3}
+There are no pairs $(e,f)$ with 
+$s_{a,b} < s_{e,f} < s_{c,d}$.
+\end{claim}
+
+\begin{proof}
+Suppose towards a contradiction that $(e,f)$ exists.
+By (\ref{verygood}), $(e,f)$ is good in $S$.
+So $(e,f) < (c,d)$.  By the choice of $(c,d)$, either
+$(e,f) > (a,b)$
+or else $(a,b)\equiv (e,f)$.
+If $(a,b) < (e,f)$, we  would have $(a,b)< (c,d)$, contradicting the 
+choice  $(a,b) > (c,d) $ as stated in Case 3.
+If $(e,f) \equiv (a,b)$,
+we would be in Case 2 rather than Case 3.
+\end{proof}
+ 
+ 
+Let $r = s_{c,d} - s_{a,b}+1$.
+ Enumerate the size class of $(c,d)$ by
+ \[ (c_1,d_1), \ldots, (c_p, d_p)\]
+ Let \[ \begin{array}{lcl}
+ T_1  & = &  \Clamp(S,c_1,d_1,r)\\
+T_2 & = & \Clamp(T_1,c_2, d_2, r)\\
+  & \vdots   & \\
+T_p & = & \Clamp(T_{p-1},c_{p},c_{p}, r)\\
+\end{array}
+\]
+Let $T = T_p$.
+
+
+\begin{claim}\label{sizeclaimCase3}
+\begin{enumerate}
+    \item For all $(e,f)$, $t_{e,f} = s_{e,f} +qr$ for some $q\leq p$.
+        \label{sizeclaimCase3Part4}
+    \item For $i = 1, \ldots, p$, $t_{c_i,d_i} =s_{c_i,d_i} + (p-1)r$.
+    \label{sizeclaimCase3Part1}
+    \item $t_{a,b} =s_{a,b} + pr = (s_{c,d}-r +1) + pr  >  (s_{c,d}-r ) + pr  = t_{c,d}$.
+        \label{sizeclaimCase3Part2}
+    \item If $s_{e,f} > s_{c,d}$, then $t_{e,f} = s_{e,f} +pr$.
+        \label{sizeclaimCase3Part3}
+
+    \item If $s_{e,f} < s_{a,b}$, then $t_{e,f} < t_{c,d}$.
+        \label{sizeclaimCase3Part5}
+            \item If $t_{c,d} < t_{e,f}$, then $s_{c,d} < s_{e,f}$.
+        \label{sizeclaimCase3Part5a}
+    \item The size class of $(c,d)$ in $T$ is the 
+    size class of $(c,d)$ in $S$.
+    % together with the size class of $(a,b)$ in $S$.
+     \label{sizeclaimCase3Part6}
+        \item The size class of $(a,b)$ in $T$ is the 
+    size class of $(a,b)$ in $S$.
+    % together with the size class of $(a,b)$ in $S$.
+     \label{sizeclaimCase3Part6a}
+    \item If $s_{e,f} > s_{c,d}$, then the size
+     class of $(e,f)$ in $T$ is the 
+    size class of $(e,f)$ in $S$. 
+        \label{sizeclaimCase3Part7}
+\end{enumerate}
+\end{claim}
+
+
+\begin{proof}
+Parts~\ref{sizeclaimCase1Part4},
+\ref{sizeclaimCase1Part1}, and~\ref{sizeclaimCase1Part2}
+are clear from the definition of $\Clamp$ and the choice of $r$.
+
+Part~\ref{sizeclaimCase1Part3} comes from the observation that
+if $s_{e,f} > s_{c,d}$, then $(e,f)$ is not among
+the following paris: $(c_1,d_1)$, $(c_1, c_1)$, $(d_1,d_1)$,
+$\ldots$, $(c_p,d_p)$, $(c_p, c_p)$, $(d_p,d_p)$.
+
+Here is the proof of 
+Part~\ref{sizeclaimCase1Part5}.
+Let $s_{e,f} < s_{a,b}$.   Let $q$ be as in Parts~\ref{sizeclaimCase1Part1} for
+$(e,f)$.
+Then $t_{e,f} = s_{e,f} +qr \leq   s_{e,f} +pr  < s_{a,b} + pr = t_{c,d}$.
+
+Part~\ref{sizeclaimCase1Part5a} follows from Parts~\ref{sizeclaimCase1Part3} and~\ref{sizeclaimCase1Part5}.
+
+Parts~\ref{sizeclaimCase1Part6} and~\ref{sizeclaimCase1Part7}
+follow easily from the previous parts.
+\end{proof}
+
+
+ 
+ 
+ 
+ \end{mycases}
+ 
+ 
+ 
+ \end{document}
+
+
+\begin{definition}
+Let $<$ be a suitable linear preorder order on $\Pairs(n)$.
+Let $S$ be a suitable family.  We define several
+  functions from $\mathcal{C}$ to $[n]\cup\set{0}$ and to $[\binom{n+1}{2}]\cup \set{0}$:
+
+\begin{enumerate}
+\item $\Bad(S) = \set{((i,j),(k,l))\in \Pairs^2 : \nott
+\bigl( (i,j) \leq  (k,l) \mbox{ iff } |S_i \cup S_j | \leq |S_k \cup S_l |\bigr)}$.
+\item $f(S) = |\Bad(S)\cap \OffDiag(n)^2|$.
+\item $W(S) = \set{i\in[n]: \mbox{for some
+$(k,l)\in \Pairs$, $((i,i),(k,l))\in \Bad(S)$}}$.
+\item \[\begin{array}{lcl}g(S) & = & 
+\left\{\begin{array}{ll}
+\argmax_{i\in W(S)} |S_i| &  \mbox{if $W(S)\neq\emptyset$}\\
+0 & \mbox{if $W(S) = \emptyset$}
+\end{array}
+\right.
+\end{array}
+\]
+If there are multiple $i\in W(S)$ which maximize
+$|S_i|$, $g(S)$ may be taken to be any of these.
+For concreteness, we take the least in the natural order on $[n]$.
+\item If $g(S)\neq 0$, then
+\[h(S) = 
+|\set{(k,l)\in \Pairs : \nott
+\bigl( (g(S),g(S)) \leq  (k,l) \mbox{ iff } |S_{g(S)}| \leq |S_k \cup S_l |\bigr)}|\]
+And if $g(S) = 0$, $h(S) = 0$ as well.
+\item $i(S) = (f(S),g(S),h(S))$.
+\end{enumerate}
+\end{definition}
+
+Note that $<$ figures into the definitions of all of these,
+but it is left out of the notation.
+We fix $<$ for the rest of this section.
+
+
+\begin{proposition}
+\begin{enumerate}
+    \item $\Bad(S) = \emptyset$ iff condition (\ref{goal}) holds.
+    \item \label{twoconditionsBad}
+    $((i,j),(k,l))\in\Bad(S)$ iff one of the
+    following conditions holds:
+  \begin{enumerate}
+    \item  $(i,j) <  (k,l)$, but  $|S_i \cup S_j | \geq |S_k \cup S_l|$.
+    \item 
+    $(i,j) \equiv (k,l)$, but  $|S_k \cup S_l | < |S_i \cup S_j|$.
+    \item  $(k,l) <  (i,j)$, but  $|S_k \cup S_l | \geq |S_i \cup S_j|$.
+ \item 
+    $(k,l) \equiv (i,j)$, but  $|S_i \cup S_j | < |S_k \cup S_l|$.
+\end{enumerate} 
+Note that (c) and (d) are the same as (a)
+and (b), but with the pairs $(i,j)$ and $(k,l)$
+interchanged.
+\item $\Bad(S)$ is a symmetric relation on $\Pairs(n)$.
+    \item If $\Bad(S) \neq \emptyset$, then either $f(S) > 0$ or $W(S)\neq \emptyset$.
+    \item If $W(S)\neq \emptyset$, then $g(S) \in [n]$.
+    (That is, if $W(S)\neq \emptyset$, then $g(S)> 0 $.)
+    \item If $\Bad(S) \neq \emptyset$ and $f(S) = 0$,
+    so that $W(S)\neq \emptyset$ and $g(S)\in [n]$, then $h(S) >0$.
+\item $i(S) \in ([m]\cup\set{0}) \times ([n]\cup\set{0}) \times
+([n]\cup\set{0})$, where $m = \binom{n+1}{2}$ is $|\Pairs(n)|$.
+\end{enumerate}
+\end{proposition}
+
+\subsection{The Clamp Construction on Families of Sets}
+ Let $S$ be a suitable family,
+ and let $(i,j)\in\Pairs(n)$.
+ Let $r\in \omega$.
+ We define a new family 
+ \[ \Clamp(S,i,j,r)\]
+ from $S$, $i$, $j$, and $r$, as follows:
+$*_1,\ldots, *_r$ be   fresh points.
+For $a\in[n]$, let 
+\[ \begin{array}{lcl}
+\Clamp(S,i,j,r)_a & = & \left\{
+\begin{array}{ll}
+S_a \cup \set{*_1,\ldots, *_r} & \mbox{if $a\neq i$ and $a\neq j$}\\
+ S_a & \mbox{if $a= i$ or $a = j$}\\
+ \end{array}
+ \right.
+\end{array}
+\]
+In words, we are adding $r$ new points
+simultaneously to all sets $S_a$, except
+for $S_i$ and $S_j$.
+
+\begin{proposition}
+Let $S$ be an antichain family, and fix $i,j\in[n]$
+and $p\in\omega$.
+Write $T$ for $\Clamp(S,i,j,p)$.
+\begin{enumerate}
+    \item  $T$ is suitable.
+    \item For $(a,b)\notin \set{(i,j),(i,i),(j,j)}$,
+    $|T_{a} \cup T_{b}| =|S_{a} \cup S_{b}| +p $.
+    \item For $(a,b)\in \set{(i,j),(i,i),(j,j)}$,
+    $|T_{a} \cup T_{b}| =|S_{a} \cup S_{b}| $.
+    \item For all $(a,b), (c,d)$
+    in \[\Pairs(n)\setminus
+    \set{(i,j),(i,i),(j,j)} \]
+we have 
+\[ |S_{a}\cup S_{b}| - |S_{c}\cup S_{d}|
+= |T_{a}\cup T_{b}| - |T_{c}\cup T_{d}|.\]
+\item $\Bad(T)\setminus\Bad(S)$ is a subset of
+\[\set{((a,b),(c,d))\in \Pairs(n)^2 : \mbox{either $(a,b)$ or $(c,d)$ belongs to $ \set{(i,j),(i,i),(j,j)}$}}.\]
+\item  \marginpar{This point is slightly off, in 
+addition to being awkward.}
+$(\Bad(T)\cap \OffDiag(n)^2)\setminus
+(\Bad(S)\cap \OffDiag(n)^2)$ is exactly
+\[ 
+\begin{array}{lcl}
+& \set{(i,j),(c,d))\in\OffDiag(n)^2 :0\leq |S_i\cup S_j| - |S_c \cup S_d| \leq p} \\
+\cup & \set{(c,d),(i,j))\in\OffDiag(n)^2  :0\leq |S_i\cup S_j| - |S_c \cup S_d| \leq p} \\
+\end{array}
+\]
+    \item If $i = j$ and $f(S) = 0$, then $f(T) = 0$.
+\end{enumerate}
+\end{proposition}
+
+
+\subsection{The order $\prec$, and the main result}
+\begin{definition}
+Let $\preceq$ be the lexicographic order on 
+\[ ([ m]\cup\set{0}) \times ([n]\cup\set{0}) \times
+([n]\cup\set{0})
+\]
+where $m = \binom{n+1}{2}$, and where 
+each factor ordered as in $\omega$.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-main}
+For every $S\in\mathcal{C}$
+such that $i(S)\neq (0,0,0)$, 
+there is some $T\in\mathcal{C}$
+such that $i(T)\prec i(S)$. 
+\end{lemma}
+
+\begin{mycases}
+\case
+$f(S) > 0$.
+
+{\bf the argument below is totally off}
+
+In this case, take $(i,j)$ and $(k,l)$
+in $\OffDiag(n)$ such that 
+(without loss of generality)
+one of the four 
+conditions in part (\ref{twoconditionsBad})
+holds.  We shall assume that it is the 
+first condition, since the arguments in
+the other three cases are nearly the same.
+So we have  $(i,j) <  (k,l)$ but
+ $|S_i \cup S_j | \geq |S_k \cup S_l|$.
+
+ Let $p =|S_k \cup S_l| - |S_i \cup S_j |+1 $.
+ Let $T = \Clamp(S,i,j,p)$.
+Then it is fairly easy to check that $((i,j),(k,l))\notin f(T)$,
+but that for pairs $(a,b)\in \OffDiag(n)$
+which are different from $(i,j)$,
+\[ |T_a \cup T_b| = |S_a \cup S_b|\]
+This implies that 
+\[ \Bad(T)\cap \OffDiag(n)^2 \subseteq (\Bad(S)\cap \OffDiag(n)^2 )\setminus
+ \set{((i,j),(k,l)),((k,l),(i,j))}.
+\]
+From this, $f(T)< f(S)$.   So $i(T)\prec i(S)$.
+
+
+\case
+$f(S)= 0$.
+
+In this case, $W(S)\neq \emptyset$. 
+Let $i^*$ maximize $|S_{i^*}|$ for all elements of $W(S)$.
+
+
+\begin{subcases}
+\subcase
+ There is some $(k,l)\in\OffDiag(n)$
+ such that $|S_{k}\cup S_l| = |S_{i^*}|$
+ and $(k,l) < (i^*,i^*)$.
+ Note that $i^*$ must be different from $k$ and $l$
+ (and it is possible that $k =l$).
+ 
+ Enumerate the pairs $(k,l)\in\OffDiag$ with
+ the properties in the last paragraph by
+ \[ (k_1,l_1), \ldots, (k_c, l_c)\]
+ Let \[ \begin{array}{lcl}
+ T_1  & = &  \Clamp(S,k_1,l_1,1)\\
+T_2 & = & \Clamp(T_1,k_2,l_2, 1)\\
+  & \vdots   & \\
+T_c & = & \Clamp(T_{c-1},k_{c},l_{c}, 1)\\
+\end{array}
+\]
+ Check that for $d, e \in [c]$,
+ $|T_{k_d}| = |T_{k_e}| $.
+ From this, it follows easily that 
+ $f(T) = f(S)$.  And since
+ we are in Case 2, $f(T) = f(S)= 0$.
+ For all $x\in[n]$, $|T_x| = |S_x|+1$, except for $x = k$
+ and $x = l$. 
+ Note that $|S_k|$ and $|S_l|$ are both $< |S_{k}\cup S_l| = |S_{i^*}|$.
+ It follows that $g(T) = g(S)$.
+ But $h(T) < h(S)$, since $h(S)$ contains $(k,l)$
+ but $h(T)$ does not.
+ 
+ From all of these, $i(T) = (f(T),g(T),h(T)) \prec 
+ (f(S),g(S),h(S)) = i(S)$.
+ 
+ \bigskip
+ 
+ 
+ \subcase
+ There is some $(k,l)\in\Pairs(n)$
+ such that $|S_{k}\cup S_l| = |S_{i^*}|$
+ and $(i^*,i^*)< (k,l)$.
+ Note again that $i^*$ must be different from $k$ and $l$.
+ 
+ This time we take $T$ to be $\Clamp(S,i^*,i^*,1)$.
+ Just as above, we have
+  $i(T)\prec i(S)$.
+ 
+ \bigskip
+ 
+ 
+ \subcase
+ There is some $(k,l)\in\Pairs(n)$
+ such that $(i^*,i^*)< (k,l)$
+ and $|S_k\cup S_l| \leq |S_{i^*}|$.
+ 
+\end{subcases}
+\end{mycases}
+
+
+\end{document}
+

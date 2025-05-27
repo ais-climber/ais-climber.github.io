@@ -1,0 +1,974 @@
+\documentclass[12pt]{article}  
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{lscape}
+
+\usepackage{bigstrut}
+%\usepackage{MnSymbol}
+\usepackage{bbm}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{tikz}
+\usepackage{lingmacros}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+\newcommand{\existsgeq}{\mbox{\sf AtLeast}}
+\newcommand{\Pol}{\mbox{\emph{Pol}}}
+  \newcommand{\nonered}{\textcolor{red}{=}}
+  \newcommand{\equalsred}{\nonered}
+  \newcommand{\redstar}{\textcolor{red}{\star}}
+    \newcommand{\dred}{\textcolor{red}{d}}
+    \newcommand{\dmark}{\dred}
+    \newcommand{\redflip}{\textcolor{red}{flip}}
+        \newcommand{\flipdred}{\textcolor{red}{\mbox{\scriptsize \em flip}\ d}}
+        \newcommand{\mdred}{\textcolor{blue}{m}\textcolor{red}{d}}
+        \newcommand{\ndred}{\textcolor{blue}{n}\textcolor{red}{d}}
+\newcommand{\arrowm}{\overset{\textcolor{blue}{m}}{\rightarrow} }
+\newcommand{\arrown}{\overset{\textcolor{blue}{n}}{\rightarrow} }
+\newcommand{\arrowmn}{\overset{\textcolor{blue}{mn}}{\longrightarrow} }
+\newcommand{\arrowmonemtwo}{\overset{\textcolor{blue}{m_1 m_2}}{\longrightarrow} }
+\newcommand{\bluen}{\textcolor{blue}{n}}
+\newcommand{\bluem}{\textcolor{blue}{m}}
+\newcommand{\bluemone}{\textcolor{blue}{m_1}}
+\newcommand{\bluemtwo}{\textcolor{blue}{m_2}}
+\newcommand{\blueminus}{\textcolor{blue}{-}}
+
+\newcommand{\bluedot}{\textcolor{blue}{\cdot}}
+\newcommand{\bluepm}{\textcolor{blue}{\pm}}
+\newcommand{\blueplus}{\textcolor{blue}{+ }}
+\newcommand{\translate}[1]{{#1}^{tr}}
+\newcommand{\Caba}{\mbox{\sf Caba}} 
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\Pre}{\mbox{\sf Pre}} 
+\newcommand{\wmarkpolarity}{\scriptsize{\mbox{\sf W}}}
+\newcommand{\wmarkmarking}{\scriptsize{\mbox{\sf Mon}}}
+\newcommand{\smark}{\scriptsize{\mbox{\sf S}}}
+\newcommand{\bmark}{\scriptsize{\mbox{\sf B}}}
+\newcommand{\mmark}{\scriptsize{\mbox{\sf M}}}
+\newcommand{\jmark}{\scriptsize{\mbox{\sf J}}}
+\newcommand{\kmark}{\scriptsize{\mbox{\sf K}}}
+\newcommand{\tmark}{\scriptsize{\mbox{\sf T}}}
+\newcommand{\greatermark}{\mbox{\tiny $>$}}
+\newcommand{\lessermark}{\mbox{\tiny $<$}}
+%%{\mbox{\ensuremath{>}}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\upred}{\textcolor{red}{\uparrow}}
+\newcommand{\downred}{\textcolor{red}{\downarrow}}
+\usepackage[all,cmtip]{xy}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{multicol}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+%\theoremstyle{case}
+
+
+\newcounter{cases}
+\newcounter{subcases}
+\newenvironment{mycases}
+  {%
+    \setcounter{cases}{0}%
+    \def\case
+      {\bigskip
+        \par\noindent
+        \refstepcounter{cases}%
+        \textbf{Case \thecases\ }
+      }%
+  }
+  {%
+    \par
+  }
+\newenvironment{subcases}
+  {
+    \setcounter{subcases}{0}%
+    \def\subcase
+      {\bigskip
+        \par\noindent
+        \refstepcounter{subcases}%
+        \textbf{Subcase \thesubcases\ }
+      }%
+  }
+  {%
+  }
+\renewcommand*\thecases{\arabic{cases}}
+\renewcommand*\thesubcases{\roman{subcases}}
+
+
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.14in}\raiseonebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.13in}}
+\newcommand{\toplus}{\abovearrow{r}}
+\newcommand{\tominus}{\abovearrow{i}} 
+\newcommand{\todestroy}{\abovearrow{d}}
+\newcommand{\tom}{\abovearrow{m}}
+\newcommand{\tomprime}{\abovearrow{m'}}
+\newcommand{\A}{\textsf{App}}
+\newcommand{\At}{\textsf{At}}
+\newcommand{\Emb}{\textsf{Emb}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\usepackage{verbatim}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\Marking}{\mbox{Mar}}
+\newcommand{\Markings}{\Marking}
+\newcommand{\Mar}{\Marking}
+\newcommand{\Model}{\mathcal{M}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TTM}{\TT_{\Markings}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\erase}{\mbox{\textsf{erase}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\arrowplus}{\overset{\blueplus}{\rightarrow} }
+\newcommand{\arrowminus}{\overset{\blueminus}{\rightarrow} }
+\newcommand{\arrowdot}{\overset{\bluedot}{\rightarrow} }
+\newcommand{\arrowboth}{\overset{\bluepm}{\rightarrow} }
+\newcommand{\arrowpm}{\arrowboth}
+\newcommand{\arrowplusminus}{\arrowboth}
+\newcommand{\arrowmone}{\overset{m_1}{\rightarrow} }
+\newcommand{\arrowmtwo}{\overset{m_2}{\rightarrow} }
+\newcommand{\arrowmthree}{\overset{m_3}{\rightarrow} }
+\newcommand{\arrowmcomplex}{\overset{m_1 \orr m_2}{\longrightarrow} }
+\newcommand{\arrowmproduct}{\overset{m_1 \cdot m_2}{\longrightarrow} }
+\newcommand{\proves}{\vdash}
+\newcommand{\Dual}{\mbox{\sc dual}}
+\newcommand{\orr}{\vee}
+\newcommand{\uar}{\uparrow}
+\newcommand{\dar}{\downarrow}
+\newcommand{\andd}{\wedge}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\arrowmprime}{\overset{m'}{\rightarrow} }
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\Con}{\mbox{\sf Con}}
+\newcommand{\type}{\mbox{\sf type}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\necc}{\Box}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\Types}{\mathcal{T}_\mathcal{M}}
+\newcommand{\mon}{\mbox{\sf mon}}
+\newcommand{\anti}{\mbox{\sf anti}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\rem}[1]{\relax}
+
+
+\newcommand{\raiseone}{\mbox{raise}^1}
+\newcommand{\raisetwo}{\mbox{raise}^2}
+\newcommand{\wrapper}[1]{{#1}}
+\newcommand{\sfa}{\wrapper{\mbox{\sf a}}}
+\newcommand{\sfb}{\wrapper{\mbox{\sf b}}}
+\newcommand{\sfv}{\wrapper{\mbox{\sf v}}}
+\newcommand{\sfw}{\wrapper{\mbox{\sf w}}}
+\newcommand{\sfx}{\wrapper{\mbox{\sf x}}}
+\newcommand{\sfy}{\wrapper{\mbox{\sf y}}}
+\newcommand{\sfz}{\wrapper{\mbox{\sf z}}}
+  \newcommand{\sff}{\wrapper{\mbox{\sf f}}}
+    \newcommand{\sft}{\wrapper{\mbox{\sf t}}}
+      \newcommand{\sfc}{\wrapper{\mbox{\sf c}}}
+      \newcommand{\sfu}{\wrapper{\mbox{\sf u}}}
+            \newcommand{\sfs}{\wrapper{\mbox{\sf s}}}
+  \newcommand{\sfg}{\wrapper{\mbox{\sf g}}}
+
+\newcommand{\sfvomits}{\wrapper{\mbox{\sf vomits}}}
+\newlength{\mathfrwidth}
+  \setlength{\mathfrwidth}{\textwidth}
+  \addtolength{\mathfrwidth}{-2\fboxrule}
+  \addtolength{\mathfrwidth}{-2\fboxsep}
+\newsavebox{\mathfrbox}
+\newenvironment{mathframe}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}\begin{center}}
+    {\end{center}\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}}
+    \newenvironment{mathframenocenter}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}}
+    {\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}} 
+ \renewcommand{\hat}{\widehat}
+ \newcommand{\nott}{\neg}
+  \newcommand{\preorderO}{\mathbb{O}}
+ \newcommand{\PreorderP}{\mathbb{P}}
+  \newcommand{\preorderE}{\mathbb{E}}
+\newcommand{\preorderP}{\mathbb{P}}
+\newcommand{\preorderN}{\mathbb{N}}
+\newcommand{\preorderQ}{\mathbb{Q}}
+\newcommand{\preorderX}{\mathbb{X}}
+\newcommand{\preorderA}{\mathbb{A}}
+\newcommand{\preorderR}{\mathbb{R}}
+\newcommand{\preorderOm}{\mathbb{O}^{\bluem}}
+\newcommand{\preorderPm}{\mathbb{P}^{\bluem}}
+\newcommand{\preorderQm}{\mathbb{Q}^{\bluem}}
+\newcommand{\preorderOn}{\mathbb{O}^{\bluen}}
+\newcommand{\preorderPn}{\mathbb{P}^{\bluen}}
+\newcommand{\preorderQn}{\mathbb{Q}^{\bluen}}
+ \newcommand{\PreorderPop}{\mathbb{P}^{\blueminus}}
+  \newcommand{\preorderEop}{\mathbb{E}^{\blueminus}}
+\newcommand{\preorderPop}{\mathbb{P}^{\blueminus}}
+\newcommand{\preorderNop}{\mathbb{N}^{\blueminus}}
+\newcommand{\preorderQop}{\mathbb{Q}^{\blueminus}}
+\newcommand{\preorderXop}{\mathbb{X}^{\blueminus}}
+\newcommand{\preorderAop}{\mathbb{A}^{\blueminus}}
+\newcommand{\preorderRop}{\mathbb{R}^{\blueminus}}
+ \newcommand{\PreorderPflat}{\mathbb{P}^{\flat}}
+  \newcommand{\preorderEflat}{\mathbb{E}^{\flat}}
+\newcommand{\preorderPflat}{\mathbb{P}^{\flat}}
+\newcommand{\preorderNflat}{\mathbb{N}^{\flat}}
+\newcommand{\preorderQflat}{\mathbb{Q}^{\flat}}
+\newcommand{\preorderXflat}{\mathbb{X}^{\flat}}
+\newcommand{\preorderAflat}{\mathbb{A}^{\flat}}
+\newcommand{\preorderRflat}{\mathbb{R}^{\flat}}
+\newcommand{\pstar}{\preorderBool^{\preorderBool^{E}}}
+\newcommand{\pstarplus}{(\pstar)^{\blueplus}}
+\newcommand{\pstarminus}{(\pstar)^{\blueminus}}
+\newcommand{\pstarm}{(\pstar)^{\bluem}}
+\newcommand{\Reals}{\preorderR}
+\newcommand{\preorderS}{\mathbb{S}}
+\newcommand{\preorderBool}{\mathbbm{2}}
+ \renewcommand{\o}{\cdot}
+ \newcommand{\NP}{\mbox{\sc np}}
+ \newcommand{\NPplus}{\NP^{\blueplus}}
+  \newcommand{\NPminus}{\NP^{\blueminus}}
+   \newcommand{\NPplain}{\NP}
+    \newcommand{\npplus}{np^{\blueplus}}
+  \newcommand{\npminus}{np^{\blueminus}}
+   \newcommand{\npplain}{np}
+   \newcommand{\np}{np}
+   \newcommand{\Term}{\mbox{\sc t}}
+  \newcommand{\N}{\mbox{\sc n}}
+   \newcommand{\X}{\mbox{\sc x}}
+      \newcommand{\Y}{\mbox{\sc y}}
+            \newcommand{\V}{\mbox{\sc v}}
+    \newcommand{\Nbar}{\overline{\mbox{\sc n}}}
+    \newcommand{\Pow}{\mathcal{P}}
+    \newcommand{\powcontravariant}{\mathcal{Q}}
+    \newcommand{\Id}{\mbox{Id}}
+    \newcommand{\pow}{\Pow}
+   \newcommand{\Sent}{\mbox{\sc s}}
+   \newcommand{\lookright}{\slash}
+   \newcommand{\lookleft}{\backslash}
+   \newcommand{\dettype}{(e \to t)\arrowminus ((e\to t)\arrowplus t)}
+\newcommand{\ntype}{e \to t}
+\newcommand{\etttype}{(e\to t)\arrowplus t}
+\newcommand{\nptype}{(e\to t)\arrowplus t}
+\newcommand{\verbtype}{TV}
+\newcommand{\who}{\infer{(\nptype)\arrowplus ((\ntype)\arrowplus (\ntype))}{\mbox{who}}}
+\newcommand{\iverbtype}{IV}
+\newcommand{\Nprop}{\N_{\mbox{prop}}}
+\newcommand{\VP}{{\mbox{\sc vp}}}
+\newcommand{\CN}{{\mbox{\sc cn}}}
+\newcommand{\Vintrans}{\mbox{\sc iv}}
+\newcommand{\Vtrans}{\mbox{\sc tv}}
+\newcommand{\Num}{\mbox{\sc num}}
+%\newcommand{\S}{\mathbb{A}}
+\newcommand{\Det}{\mbox{\sc det}}
+\newcommand{\preorderB}{\mathbb{B}}
+\newcommand{\simA}{\sim_A}
+\newcommand{\simB}{\sim_B}
+\newcommand{\polarizedtype}{\mbox{\sf poltype}}
+\newcommand{\Diag}{\mbox{Diag}}
+\newcommand{\OffDiag}{\mbox{Off-diag}}
+\newcommand{\Pairs}{\mbox{Pairs}}
+\newcommand{\Bad}{\mbox{Bad}}
+\newcommand{\argmax}{\mbox{argmax}}
+\newcommand{\Update}{\mbox{Clamp}}
+\newcommand{\ordercanonical}{<_{\scriptstyle can}}
+\newcommand{\lex}{\ordercanonical}
+\newcommand{\lexcanonical}{\ordercanonical}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statement of our Representation Theorem}
+
+%%%%%%%%%%
+\begin{definition}
+
+Let $n\geq 1$.
+An \emph{$n$-family} is  a family of sets
+\[ S = (S_1, \ldots, S_n)\]
+
+We write $\mathcal{C}$ for the
+collection of all $n$-families $S$ of sets.
+\end{definition}
+
+
+%%%%%%%%%%
+\begin{definition}
+
+For a family $S$, we write $s_{i,j}$ as a convenient shorthand
+for $|S_i\cup S_j|$.  Note that $s_{i,j}$
+is the \textbf{size} of this union, not the union itself.
+We also write $s_i$ for $s_{i,i}$ (which just denotes the size $|S_i|$ of $S_i$ alone).
+
+The \emph{size class} of $(i,j)$ is the set of those pairs that index unions of the same size as $|S_i\cup S_j|$, i.e.
+
+\[\set{(a,b): s_{a,b}= s_{i,j}}\]
+\end{definition}
+
+
+%%%%%%%%%%
+\begin{definition}
+Let $n\geq 1$, and let $[n] = \set{1,\ldots, n}$.
+We define  sets $\Pairs(n)$ as follows:
+\[
+\Pairs(n) = \set{(i,j)\in [n]^2:  i < j} \cup \set{(i,i)\in [n]^2}
+\]
+We will also write $m = |\Pairs(n)|$.  Observe that $m = |\Pairs(n)| = \binom{n}{2} + n = \binom{n+1}{2}$  
+
+In addition, we will often drop the $n$ and just write $\Pairs$.
+\end{definition}
+
+
+%%%%%%%%%%
+\begin{definition}\label{def-suitable}
+
+Let $\preceq$ be a \emph{linear pre-order} on $\Pairs(n)$, i.e. an ordering such that
+\begin{enumerate}
+    \item $\preceq$ is reflexive and transitive
+    \item For all $(i, j), (k, l) \in \Pairs(n)$,
+          either $(i, j) \preceq (k, l)$ or $(k, l) \prec (i, j)$, where $\prec$ is defined as:
+          
+          \[ (i,j) \prec(k,l) \quadiff  (i,j) \preceq (k,l) \mbox{ but not } (k,l)\preceq     (i,j)
+          \]
+\end{enumerate}
+
+(We write $(i,j)\equiv (k,l)$ whenever
+$(i,j)\preceq (k,l) \preceq (i,j)$.)
+
+We call $\preceq$ a \emph{suitable} linear pre-order whenever, for all $(i, i), (j, j), (i, j) \in \Pairs$, if $i < j$ then $(i, i) \prec (i, j)$ and $(j, j) \prec (i, j)$.
+\end{definition}
+
+
+%%%%%%%%%%
+\begin{example} For any family $S$ of sets, the relation
+$\preceq$ is suitable, where $\leq$ is defined by 
+\[ (i,j) \preceq (k,l) \quadiff s_{i,j} \leq s_{k,l}
+\]
+\end{example}
+
+
+%%%%%%%%%%
+\begin{theorem}
+Let $\preceq$ be a suitable linear pre-order.
+Then there is a family of sets $S$
+such that for all $(i,j)$, $(k,l)\in\Pairs(n)$,
+\begin{equation}
+    \label{goal}
+ (i,j) \preceq  (k,l) \quadiff 
+ s_{i,j}\leq s_{k,l}.
+ \end{equation}
+ \label{theorem-thoughts}
+ \end{theorem}
+ 
+ This representation theorem is tantamount to the completeness of the
+ associated logical system.  Note that this is just a fragment of the syllogistic logic involving `moreThan', `atLeast', and noun unions; our assumption that $\preceq$ is \emph{suitable} excludes sets of sentences that require $(i, i) \equiv (i, j)$ for $(i, i), (i, j) \in \Pairs(n)$, $i \ne j$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lemmas for Tweaking the Family's Size}
+
+%%%%%%%%%%
+We will prove this representation theorem by constructing an appropriate family $S$ from the given suitable linear pre-order $\preceq$.  To do this, we must first develop some tools for tweaking the relative sizes of our unions $s_{i, j}$.
+
+The first such lemma, which we call the \emph{Clamp Construction}, allows us to forcibly lower the relative size of a selected union $S_i \cup S_j$.
+The second lemma allows us to \emph{equalize} the sizes of some selected unions $s_{a_1, b_1}, \ldots, s_{a_k, b_k}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%
+\subsection{The Clamp Construction}
+ Let $S$ be a  family,
+ and let $(i,j)\in\Pairs(n)$.
+ Let $r\in \omega$.
+ We define a new family 
+ \[ \Update(S,i,j,r)\]
+ from $S$, $i$, $j$, and $r$, as follows:
+
+Let $*_1,\ldots, *_r$ be   fresh points.
+For $a\in[n]$, let 
+\[ \begin{array}{lcl}
+\Update(S,i,j,p)_a & = & \left\{
+\begin{array}{ll}
+S_a \cup \set{*_1,\ldots, *_r} & \mbox{if $a\neq i$ and $a\neq j$}\\
+ S_a & \mbox{if $a= i$ or $a = j$}\\
+ \end{array}
+ \right.
+\end{array}
+\]
+That is, we are adding $r$ new points
+simultaneously to all sets $S_a$, except
+for $S_i$ and $S_j$.  In other words, we ``clamp" $S_i$ and $S_j$, and raise all other sets
+by simultaneously adding points to them.    Note that the clamping increases the size of all unions, except for $S_i\cup S_i$, $S_j \cup S_j$, and $S_i\cup S_j$.
+
+
+%%%%%%%%%%
+\begin{proposition}
+Let $S$ be a family on $n$, and fix $i,j\in[n]$
+and $r\in\omega$.
+Let $T = \Update(S,i,j,r)$.  Then the following are true of $T$:
+
+\begin{enumerate}
+    \item \label{1} For $(a,b)\notin \set{(i,j),(i,i),(j,j)}$, $t_{a,b} = s_{a,b} + r$.
+    \item \label{2} For $(a,b)\in \set{(i,j),(i,i),(j,j)}$, $t_{a,b} = s_{a,b}$.
+    \item \label{3} For all $(a,b), (c,d)$
+    in \[\Pairs(n)\setminus
+    \set{(i,j),(i,i),(j,j)} \]
+we have 
+\[ s_{a,b} - s_{c,d} = t_{a,b} - t_{c,d}.\]
+
+\item \label{4} If $s_{k,l}, s_{m,n} > s_{i,j}$,
+then $s_{m,n}\leq s_{k,l}$ iff
+ $t_{m,n}\leq t_{k,l}$.
+
+\end{enumerate}
+
+% TODO Could phrase better
+In words, (\ref{1}) and (\ref{2}) simply state that clamping increases the size of all unions by $r$, except for the unions of the clamped sets.  (\ref{3}) states that for all unions whose sizes increase, clamping preserves the difference between the unions.  Finally, (\ref{4}) states that clamping preserves the relative order of all unions with size greater than the clamped $s_{i, j}$.
+\end{proposition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Equalizing the Sizes of Unions}
+
+%%%%%%%%%%
+\begin{lemma}
+Let $S$ be an $n$-family.  Let $k\geq 2$, and let 
+\[E = \set{(a_1,b_1), \ldots, (a_k,b_k)}\]
+be a subset of $\Pairs(n)$.
+Assume further that if $(a_t, b_t) \in E$, and $a_t \ne b_t$ 
+then neither $(a_t,a_t)$ nor $(b_t,b_t)$ is in $E$. 
+Then there is a family $T$ such that:
+\begin{enumerate}
+    \item \label{1} $t_{a_1, b_1} = t_{a_2, b_2} = \cdots = t_{a_k, b_k}$.
+    \item \label{2} If $(k,l)$ and $(m,n)$ are any pairs with $s_{k,l}, s_{m,n} >
+    \max_t s_{a_t,b_t}$,
+    then 
+    \[ \mbox{$t_{k,l} \leq t_{m,n} $ if and only if $s_{k,l} \leq s_{m,n} $}.\]
+\label{equalize2}
+\end{enumerate}
+\label{lemma-equalize}
+\end{lemma}
+
+That is, given a family $S$ and a subset of pairs $E$ to ``equalize", we can construct a family $T$ such that (\ref{1}) the unions $t_{a_1, b_1}, t_{a_2, b_2}, \ldots, t_{a_k, b_k}$ indexed by the pairs are all equal, and (\ref{2}) this construction preserves the relative order of those unions above $s_{a_1, b_1}, s_{a_2, b_2}, \ldots, s_{a_k, b_k}$.
+
+%%%%%%%%%%
+\begin{proof}
+Order the given pairs in $E$ so that
+\[  s_{a_1, b_1} \leq s_{a_2, b_2} \leq \cdots\leq s_{a_k, b_k}.
+\]
+
+We will now construct $T$.  Let \[ \begin{array}{lcl}
+ T^1  & = &  \Update(S,a_2,b_2,s_{a_2, b_2} - s_{a_1, b_1})\\
+T^2 & = & \Update(T^1,a_3, b_3, s_{a_3, b_3} - s_{a_2, b_2} )\\
+  & \vdots   & \\
+T^{k-1} & = & \Update(T^{k-2},a_k,b_k,
+s_{a_k, b_k} - s_{a_{k-1}, b_{k-1}})\\
+\end{array}
+\]
+Finally, let $T = T^{k-1}$.
+
+To save on a lot of notation, let us write $s_i$ for $s_{a_i, b_i}$
+and similarly for $t^j_i$.  
+
+We show by induction on $1\leq i \leq k -1$ that for $1 \leq j \leq i+1$,
+\begin{equation}
+\label{equalization}
+s_{i+1}  = t^i_{1} = t^i_{2} = \cdots t^i_{i} =  t^i_{i+1}.
+\end{equation}
+and in addition if $(k, l), (m, n) \in \Pairs$ and $s_{k,l}, s_{m,n} > s_1, \ldots, s_k$, then 
+\[ \mbox{$t^i_{k,l} \leq t^i_{m,n} $ if and only if $s_{k,l} \leq s_{m,n} $}.\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CALEB BOOKMARK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--------------------------------- TODO: Prove this second part of the lemma!
+
+\begin{itemize}
+    \item \textbf{Base Step: }
+        For $i = 1$, recall that we ordered the pairs in $E$ so that $s_1 \leq s_2$.
+        So by the Clamp Construction, $t^1_1 = s_1 + (s_2 - s_1) = s_2$.
+        Moreover, $t^1_2= s_2$, since the Clamp Construction in $T^1$ ``clamps" the pair $(a_2, b_2)$.
+        So $t^1_1 = t^1_2$.  Note that we do not have to worry about $t^1_1$ being clamped, since if $a_2 \ne b_2$ neither $(a_2, a_2)$ nor $(b_2, b_2) \in E$.
+    
+    \item \textbf{Inductive Step: }
+        Assume (\ref{equalization}) for  $i$.  Let   $1\leq j \leq i+1$.
+        Then by the Clamp Construction used in $T^{i+1}$:
+            \[ t^{i+1}_j = s_{i+1} + (s_{i+2} - s_{i+1}) = s_{i+2}\]
+        In addition, $t^{i+1}_{i+2} = s_{i+2}$, since the Clamp Construction in $T^{i+1}$ ``clamps"
+        the pair $(a_{i+2}, b_{i+2})$.  So $t^{i+1}_1 = $
+        Again, we do not need to worry about $t^{i+1}_j$ (for $1 \leq j \leq i+1$) being clamped, since if $a_{i+2} \ne b_{i+2}$ neither $(a_{i+2}, a_{i+2}), (b_{i+2}, b_{i+2}) \in E$.
+        
+\end{itemize}
+
+Taking $i = k -1$ in (\ref{equalization}) proves our result.
+\end{proof}
+ 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Making a list of pairs larger than all $\prec$-predecessors
+of it}
+
+\begin{lemma}
+Let $S$ be a family, and let $q_1\preceq q_2 \preceq \cdots \preceq q_k$ be a sequence 
+from $\Pairs(n)$.  
+Then there is a family $T$ such that
+\begin{enumerate} 
+    \item For $1\leq i,j \leq k$, $s_i \leq s_j$ iff $t_i \leq t_j$.
+    \label{competitor1}
+    \item for all 
+pairs $p \prec q_1$, 
+$t_{p}  < t_1 = t_{q_i}$ for all $i$.
+\label{competitor2}
+\end{enumerate}
+\label{lemma-competitor}
+\end{lemma}
+ 
+
+ \begin{proof}
+ Let $m =  \min_i s_{i} = \min_i s_{q_i}$.
+We call a pair $p$ a \emph{size competitor} if 
+$p\prec q_1$ and $t_p \geq m$.
+ 
+List the size competitors as $p_1, \ldots, p_k$. 
+ Note that if $p_i = (a_i,b_i)$, then none of the original
+ points $q_j$ are $(a_i,a_i)$ or $(b_i,b_i)$
+or $p_i$.   This
+is because $p_i \prec q_j$, and 
+$(a_i,a_i), (b_i,b_i) \prec p_i$.
+(Recall Definition~\ref{def-suitable}.)
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \Update(S,p_1,  s_{p_1} -m + 1)\\
+
+T^2 & = & \Update(T^1,p_2,  s_{p_2}-m + 1 )\\
+  & \vdots   & \\
+T^{k} & = & \Update(T^{k-1},p_k, s_{p_k}-m + 1 )\\
+\end{array}
+\]
+Let $T = T^{k}$.
+We claim that the original points $q_j$ have $t_{q_j} > t_{p}$
+for all $p \prec q_1$.
+The reason is that 
+\[ t_{q_j} = s_{q_j} + ( s_{p_1} -m + 1) + (s_{p_2}-m + 1) + \cdots 
++ ( s_{p_k} -m + 1)
+\]
+On the other hand, for one of the size competitors, say $p_i$
+\[\begin{array}{lcl}
+t_{p_i} & = & s_{p_i} + ( s_{p_1}-m  + 1) + \cdots +
+(s_{p_{i-1}} -m  + 1)
++ (s_{p_{i+1}} -m  + 1) + \cdots +(s_{p_k}-m + 1)\\
+& > &  \\
+\end{array}
+\]
+That is, $p_i$ is clamped as we move from $T^{i-1}$ to $T^i$.
+The upshot is that \[t_{q_j} - t_{p_i} \geq s_{q_j} + (s_{p_i}-m + 1)  -
+s_{p_i} = s_{q_j} - m + 1
+\geq  s_{q_j} -s_{q_i} +1  = 1.\]
+The reason that the first $\geq$ is not an equals sign $=$
+is that it may be the case that $p_i$ is of the form $(a,a)$
+and some other $p_{i'}$ is $(a,b)$ for some $b$.
+At the end, we used the fact that $m \leq s_{q_i}$.
+And so $t_{q_j} > t_{p_i}$.
+
+
+For all $p \prec q_1$ which are not  size competitors,
+the calculations are easier.  For such $p$,
+$s_p < s_{q_j}$ for all $j$.
+So we get 
+$t_{q_j} - t_{p} \geq s_{q_j} - s_{p} > 0$.
+
+This completes the proof.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithm}
+
+We prove Theorem~\ref{theorem-thoughts} by designing an algorithm
+which represents a suitable linear preorder $\preceq$ on $\Pairs(n)$ by a family
+of sets.   We construct the family using Lemmas~\ref{lemma-equalize}
+and~\ref{lemma-competitor} on each of the 
+size classes of $\preceq$.
+
+
+Consider the given ordering $\preceq$.
+A \emph{size class} is a set of $\equiv$
+ pairs $p$.   We list the size classes in order, from $\prec$-largest to 
+ $\prec$-smallest.   Let's say the size classes in this order are 
+ \[  C_1, C_2, \ldots, C_K \]
+ Since we are listing them from 
+ $\prec$-largest to 
+ $\prec$-smallest, we have the following fact:
+ if $(a,b) \prec (c,d)$, and also  $(a,b)\in C_i$, and finally
+ $(c,d)\in C_j$,
+ then $j < i$.
+ 
+ Our algorithm has $K+1$ steps, one to start
+ and one for each size class $C^i$. 
+ We construct families $S^0, S^1, \ldots, S^K$.
+ In Step $i$,
+ we assure the following two assertions:
+ \begin{enumerate}
+ \item For all $(a,b)$, $(c,d)\in \bigcup_{1\leq j\leq i} C_j$,
+\begin{equation}
+    \label{goal-in-alg}
+ (a,b) \preceq  (c,d) \quadiff 
+ s^i_{a,b}\leq s^i_{c,d}.
+ \end{equation}
+%     \item  For $1 \leq j \leq i$,
+ %the sizes of all pairs in $C_j$ are the same.
+ %That is, for $p, q\in C_j$,  $s^i_p = s^i_q$.
+     \item 
+The sizes of all pairs in $\bigcup_{j< i} C_j$ are larger than the sizes of all pairs in $\bigcup_{j\geq i} C_j$.
+   That is, for  $j < i$, $q\in C_j$ and $p\in C_i$, $s^i_q > s^i_p$.
+ \end{enumerate}
+ If we do this for $i = 0, 1, \ldots, K$, then $S^K$ will
+ prove Theorem~\ref{theorem-thoughts}.
+ 
+ We begin by taking $S^0$ to be the empty family\footnote{This
+ choice of the empty family is not really needed.
+ The proof in fact shows that we can take $S^0$ to be \emph{any}
+ family on $n$}   on $n$.
+ Assertions (1) and (2) from above are trivially satisfied.
+ 
+ \paragraph{Step i ($1 \leq i \leq K$)}
+ At the start of this step, we have a family $S^{i-1}$.
+ We assume (1) and (2) for $i -1$.
+ 
+ \paragraph{Substep $a$}
+ Let $C_i$ be listed as $p_1, \ldots, p_k$.
+ If $k = 1$, set $T = S^{i-1}$ and go to  Substep $b$ in the 
+ next paragraph.  Otherwise, 
+  use Lemma~\ref{lemma-equalize} with these pairs 
+  $p_1, \ldots, p_k$ and with the family
+  $S^{i-1}$.
+  By the lemma, we get a new family which we'll call $T$.
+  In it, all pairs in $C_i$ have the same size.
+ By (2) for $i$, and by part~\ref{equalize2} of Lemma~\ref{lemma-equalize},
+ we have (1) for $T$.
+  
+ \paragraph{Substep $b$}  
+Enumerate $\bigcup_{1\leq j \leq i} C_j$ as 
+$q_1 \preceq q_2\preceq \cdots \preceq q_k$.
+(Note that elements of $C_i$
+appear in the beginning of this list.)
+Apply Lemma~\ref{lemma-competitor}
+to this sequence and to the family $T$
+from Substep $a$.  We get a new family, say 
+$S^i$.  
+Lemma~\ref{lemma-competitor}, part~\ref{competitor1}, insures that (1) holds for $S^i$, since it held for $T$.
+ And Lemma~\ref{lemma-competitor}, part~\ref{competitor2},
+ insures that (2) holds for $S^i$.
+ 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \subsection{Example}
+ 
+ \rem{
+ task6 = [[(5,5),(6,6)], [(5,6),(4,4),(7,7)], 
+         [(7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)], [(3, 2),  (2, 1),(3, 1),(7,0),(3, 0), (2, 0)],
+	    [(1, 0), (4,0),(7,1),(7,2), (8,2),(8,1), (8,3), (8,7)], 
+         [(7,3), (7,5),(7,6),(4,1),(4,2), (4,3), (8,6)],
+	    [(6,0),(6,1),(6,2),(6,3),(5,1), (8,5), (8,4)],
+         [(6,4),(5,0),(5,2),(5,3)]]
+insertionSort(task6)
+}
+
+
+
+
+ Let $n = 9$, and let $\prec$ have size classes as shown in lists below:
+ \[
+ \begin{array}{l}
+\ [(5,5),(6,6)] \\
+ \  [(5,6),(4,4),(7,7)] \\
+  \  [(7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)],\\
+  \ [(3, 2),  (2, 1),(3, 1),(7,0),(3, 0), (2, 0)]\\
+\	    [(1, 0), (4,0),(7,1),(7,2), (8,2),(8,1), (8,3), (8,7)]\\
+ \        [(7,3), (7,5),(7,6),(4,1),(4,2), (4,3), (8,6)] \\
+\	    [(6,0),(6,1),(6,2),(6,3),(5,1), (8,5), (8,4)]\\
+ \        [(6,4),(5,0),(5,2),(5,3)]
+         \end{array}
+ \]
+
+ 
+ We illustrate with step $6$.
+ We begin with a family $S$ with cardinalities as shown below.
+ \[
+ \begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l}
+ \begin{array}{l}
+|S[0]| = 65 \\
+|S[1]| = 63  \\
+|S[2]| = 63 \\
+|S[3]| = 64 \\
+|S[4]| = 64 \\
+|S[5]| = 70 \\
+|S[6]| = 71 \\
+|S[7]| = 60 \\
+|S[8]| = 68 \\
+\hline
+|S[5] \cup S[5]| = 70  \\
+|S[6] \cup S[6]| = 71 \\
+  \\
+|S[5] \cup S[6]| = 79 \\
+|S[4] \cup S[4]| = 64 \\
+|S[7] \cup S[7]| = 60 \\
+  \\
+|S[7] \cup S[4]| = 79 \\
+|S[4] \cup S[5]| = 79 \\
+|S[2] \cup S[2]| = 63 \\
+|S[1] \cup S[1]| = 63 \\
+|S[0] \cup S[0]| = 65 \\
+|S[8] \cup S[8]| = 68 \\
+|S[3] \cup S[3]| = 64 \\
+  \end{array}
+&
+  \begin{array}{l}
+|S[3] \cup S[2]| = 80 \\
+|S[2] \cup S[1]| = 80 \\ 
+|S[3] \cup S[1]| = 80 \\
+|S[7] \cup S[0]| = 80 \\
+|S[3] \cup S[0]| = 80 \\
+|S[2] \cup S[0]| = 80 \\
+  \\
+  
+|S[1] \cup S[0]| = 81 \\
+|S[4] \cup S[0]| = 81 \\
+|S[7] \cup S[1]| = 81 \\
+|S[7] \cup S[2]| = 81 \\
+|S[8] \cup S[2]| = 81 \\
+|S[8] \cup S[1]| = 81 \\
+|S[8] \cup S[3]| = 81 \\
+|S[8] \cup S[7]| = 81 \\
+  \\
+|S[7] \cup S[3]| = 82 \\
+|S[7] \cup S[5]| = 82 \\
+|S[7] \cup S[6]| = 82 \\
+|S[4] \cup S[1]| = 82 \\
+|S[4] \cup S[2]| = 82 \\
+|S[4] \cup S[3]| = 82 \\
+|S[8] \cup S[6]| = 82 \\
+ \end{array}
+ &
+  \begin{array}{l}
+|S[6] \cup S[0]| = 83 \\
+|S[6] \cup S[1]| = 83 \\
+|S[6] \cup S[2]| = 83 \\
+|S[6] \cup S[3]| = 83 \\
+|S[5] \cup S[1]| = 83 \\
+|S[8] \cup S[5]| = 83 \\
+|S[8] \cup S[4]| = 83 \\
+  \\
+|S[6] \cup S[4]| = 84 \\
+|S[5] \cup S[0]| = 84 \\
+|S[5] \cup S[2]| = 84 \\
+|S[5] \cup S[3]| = 84 \\
+ \end{array} 
+ \end{array}
+ \]
+Step $6$ concerns the sixth size class, starting from the highest one.
+So  we are working on the size class 
+ \[  (7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)
+ \]
+ The first step is to equalize the sizes in this class, using Lemma~\ref{lemma-equalize}.
+ We reorder this in size order in our family above, obtaining
+  \[  (1,1), (2, 2), (3,3),  (0,0),(8,8), (7,4),(4,5)
+ \]
+ We therefore calculate:
+\[ \begin{array}{lcl}
+ T^1  & = &  \Update(S,(2,2), 63-63)\\
+
+T^2 & = & \Update(T^1,(3,3),  64-63)\\
+
+T^{3} & = & \Update(T^{2}, (0,0), 65-64 )\\
+T^{4} & = & \Update(T^{3}, (8,8), 68-65 )\\
+T^{5} & = & \Update(T^4, (7,4),79-69 )\\
+T^{6} & = & \Update(T^{5}, (4,5), 79-79)\\
+\end{array}
+\]
+ We use $T^6$.
+ 
+After equalizing, we get 
+\[
+ \begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l}
+\begin{array}{l}
+|S[0]| = 103 \\
+|S[1]| = 103 \\
+|S[2]| = 103 \\
+|S[3]| = 103 \\
+|S[4]| = 72 \\
+|S[5]| = 94 \\
+|S[6]| = 111 \\
+|S[7]| = 84 \\
+|S[8]| = 103 \\
+\hline
+|S[5] \cup S[5]| = 94 \\
+|S[6] \cup S[6]| = 111 \\
+  \\
+|S[5] \cup S[6]| = 119 \\
+|S[4] \cup S[4]| = 72 \\
+|S[7] \cup S[7]| = 84 \\
+  \\
+|S[7] \cup S[4]| = 103 \\
+|S[4] \cup S[5]| = 103 \\
+|S[2] \cup S[2]| = 103 \\
+|S[1] \cup S[1]| = 103 \\
+|S[0] \cup S[0]| = 103 \\
+|S[8] \cup S[8]| = 103 \\
+|S[3] \cup S[3]| = 103 \\
+ \end{array}
+&
+  \begin{array}{l}
+|S[3] \cup S[2]| = 120 \\
+|S[2] \cup S[1]| = 120 \\
+|S[3] \cup S[1]| = 120 \\
+|S[7] \cup S[0]| = 120 \\
+|S[3] \cup S[0]| = 120 \\
+|S[2] \cup S[0]| = 120 \\
+  \\
+|S[1] \cup S[0]| = 121 \\
+|S[4] \cup S[0]| = 121 \\
+|S[7] \cup S[1]| = 121 \\
+|S[7] \cup S[2]| = 121 \\
+|S[8] \cup S[2]| = 121 \\
+|S[8] \cup S[1]| = 121 \\
+|S[8] \cup S[3]| = 121 \\
+|S[8] \cup S[7]| = 121 \\
+  \\
+|S[7] \cup S[3]| = 122 \\
+|S[7] \cup S[5]| = 122 \\
+|S[7] \cup S[6]| = 122 \\
+|S[4] \cup S[1]| = 122 \\
+|S[4] \cup S[2]| = 122 \\
+|S[4] \cup S[3]| = 122 \\
+|S[8] \cup S[6]| = 122 \\
+ \end{array}
+ &
+  \begin{array}{l}
+|S[6] \cup S[0]| = 123 \\
+|S[6] \cup S[1]| = 123 \\
+|S[6] \cup S[2]| = 123 \\
+|S[6] \cup S[3]| = 123 \\
+|S[5] \cup S[1]| = 123 \\
+|S[8] \cup S[5]| = 123 \\
+|S[8] \cup S[4]| = 123 \\
+  \\
+|S[6] \cup S[4]| = 124 \\
+|S[5] \cup S[0]| = 124 \\
+|S[5] \cup S[2]| = 124 \\
+|S[5] \cup S[3]| = 124 \\
+  \end{array}
+    \end{array}
+  \]
+Note that for classes above the classes of interest in this step,
+the sizes stay larger during the equalization.
+
+  \pagebreak
+  
+At this point, the size competitors are $(5,6)$ and $(6,6)$.
+We want to make the sizes of the sets in our current size class larger than the sizes of $(5,6)$ and $(6,6)$.
+So we use Lemma~\ref{lemma-competitor}.
+That is, we clamp $(5,6)$ and $(5,5)$, increasing all sets by
+one more than the difference of the sizes of those sets with $103$, 
+We get
+
+\[
+\begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l}
+\begin{array}{l}
+|S[0]| = 120 \\
+|S[1]| = 120 \\
+|S[2]| = 120 \\
+|S[3]| = 120 \\
+|S[4]| = 89 \\
+|S[5]| = 94 \\
+|S[6]| = 111 \\
+|S[7]| = 101 \\
+|S[8]| = 120 \\
+\hline
+|S[5] \cup S[5]| = 94 \\
+|S[6] \cup S[6]| = 111 \\
+  \\
+|S[5] \cup S[6]| = 119 \\
+|S[4] \cup S[4]| = 89 \\
+|S[7] \cup S[7]| = 101 \\
+  \\
+|S[7] \cup S[4]| = 120 \\
+|S[4] \cup S[5]| = 120 \\
+|S[2] \cup S[2]| = 120 \\
+|S[1] \cup S[1]| = 120 \\
+|S[0] \cup S[0]| = 120 \\
+|S[8] \cup S[8]| = 120 \\
+|S[3] \cup S[3]| = 120 \\
+ \end{array}
+&
+  \begin{array}{l}
+
+|S[3] \cup S[2]| = 137 \\
+|S[2] \cup S[1]| = 137 \\
+|S[3] \cup S[1]| = 137 \\
+|S[7] \cup S[0]| = 137 \\
+|S[3] \cup S[0]| = 137 \\
+|S[2] \cup S[0]| = 137 \\
+  \\
+|S[1] \cup S[0]| = 138 \\
+|S[4] \cup S[0]| = 138 \\
+|S[7] \cup S[1]| = 138 \\
+|S[7] \cup S[2]| = 138 \\
+|S[8] \cup S[2]| = 138 \\
+|S[8] \cup S[1]| = 138 \\
+|S[8] \cup S[3]| = 138 \\
+|S[8] \cup S[7]| = 138 \\
+  \\
+|S[7] \cup S[3]| = 139 \\
+|S[7] \cup S[5]| = 139 \\
+|S[7] \cup S[6]| = 139 \\
+|S[4] \cup S[1]| = 139 \\
+|S[4] \cup S[2]| = 139 \\
+|S[4] \cup S[3]| = 139 \\
+|S[8] \cup S[6]| = 139 \\
+   \end{array}
+ &
+  \begin{array}{l}
+|S[6] \cup S[0]| = 140 \\
+|S[6] \cup S[1]| = 140 \\
+|S[6] \cup S[2]| = 140 \\
+|S[6] \cup S[3]| = 140 \\
+|S[5] \cup S[1]| = 140 \\
+|S[8] \cup S[5]| = 140 \\
+|S[8] \cup S[4]| = 140 \\
+  \\
+|S[6] \cup S[4]| = 141 \\
+|S[5] \cup S[0]| = 141 \\
+|S[5] \cup S[2]| = 141 \\
+|S[5] \cup S[3]| = 141 \\
+\end{array}
+\end{array}
+\]
+Note that it wasn't really necessary to clamp $(5,6)$ after we clamped $(5,5)$.
+So our algorithm does a bit of work that is not necessary.   It could be elaborated to 
+produce slightly smaller sets in the end.  But it is correct.
+
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

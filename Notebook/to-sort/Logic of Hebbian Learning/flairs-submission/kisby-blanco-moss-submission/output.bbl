@@ -1,0 +1,138 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Abadi and
+  others}{2015}]{tensorflow2015-whitepaper}
+Abadi, M., et~al.
+\newblock 2015.
+\newblock {TensorFlow}: {L}arge-{S}cale {M}achine {L}earning on {H}eterogeneous
+  {S}ystems.
+\newblock Software available from tensorflow.org.
+
+\bibitem[\protect\citeauthoryear{Bader and Hitzler}{2005}]{bader2005dimensions}
+Bader, S., and Hitzler, P.
+\newblock 2005.
+\newblock Dimensions of neural-symbolic integration-a structured survey.
+\newblock {\em arXiv preprint cs/0511042}.
+
+\bibitem[\protect\citeauthoryear{Balkenius and
+  G{\"a}rdenfors}{1991}]{balkenius1991nonmonotonic}
+Balkenius, C., and G{\"a}rdenfors, P.
+\newblock 1991.
+\newblock {Nonmonotonic Inferences in Neural Networks}.
+\newblock In {\em KR},  32--39.
+
+\bibitem[\protect\citeauthoryear{Baltag \bgroup et al\mbox.\egroup
+  }{2019}]{baltag2019dynamic}
+Baltag, A.; Gierasimczuk, N.; {\"O}zg{\"u}n, A.; Sandoval, A. L.~V.; and Smets,
+  S.
+\newblock 2019.
+\newblock {A dynamic logic for learning theory}.
+\newblock {\em Journal of Logical and Algebraic Methods in Programming}
+  109:100485.
+
+\bibitem[\protect\citeauthoryear{Baltag, Li, and
+  Pedersen}{2019}]{baltag2019right}
+Baltag, A.; Li, D.; and Pedersen, M.~Y.
+\newblock 2019.
+\newblock {On the right path: a modal logic for supervised learning}.
+\newblock In {\em International Workshop on Logic, Rationality and
+  Interaction},  1--14.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Blutner}{2004}]{blutner2004nonmonotonic}
+Blutner, R.
+\newblock 2004.
+\newblock {Nonmonotonic inferences and neural networks}.
+\newblock In {\em Information, Interaction and Agency}. Springer.
+\newblock  203--234.
+
+\bibitem[\protect\citeauthoryear{Garcez, Broda, and
+  Gabbay}{2001}]{garcez2001symbolic}
+Garcez, A.~d.; Broda, K.; and Gabbay, D.~M.
+\newblock 2001.
+\newblock Symbolic knowledge extraction from trained neural networks: A sound
+  approach.
+\newblock {\em Artificial Intelligence} 125(1-2):155--207.
+
+\bibitem[\protect\citeauthoryear{Garcez, Lamb, and
+  Gabbay}{2008}]{garcez2008neural}
+Garcez, A.~S.; Lamb, L.~C.; and Gabbay, D.~M.
+\newblock 2008.
+\newblock {\em {Neural-symbolic cognitive reasoning}}.
+\newblock Springer Science \& Business Media.
+
+\bibitem[\protect\citeauthoryear{Giordano, Gliozzi, and
+  Dupr{\'{e}}}{2021}]{giordano2021}
+Giordano, L.; Gliozzi, V.; and Dupr{\'{e}}, D.~T.
+\newblock 2021.
+\newblock From common sense reasoning to neural network models through multiple
+  preferences: {A}n overview.
+\newblock {\em CoRR} abs/2107.04870.
+
+\bibitem[\protect\citeauthoryear{Hebb}{1949}]{hebb-organization-of-behavior-1949}
+Hebb, D.
+\newblock 1949.
+\newblock {\em The organization of behavior: {A} neuropsychological theory}.
+\newblock New York: Wiley.
+
+\bibitem[\protect\citeauthoryear{Kraus, Lehmann, and
+  Magidor}{1990}]{kraus1990nonmonotonic}
+Kraus, S.; Lehmann, D.; and Magidor, M.
+\newblock 1990.
+\newblock Nonmonotonic reasoning, preferential models and cumulative logics.
+\newblock {\em Artificial intelligence} 44(1-2):167--207.
+
+\bibitem[\protect\citeauthoryear{Leitgeb}{2001}]{leitgeb2001nonmonotonic}
+Leitgeb, H.
+\newblock 2001.
+\newblock {Nonmonotonic reasoning by inhibition nets}.
+\newblock {\em Artificial Intelligence} 128(1-2):161--201.
+
+\bibitem[\protect\citeauthoryear{Leitgeb}{2003}]{leitgeb2003nonmonotonic}
+Leitgeb, H.
+\newblock 2003.
+\newblock {Nonmonotonic reasoning by inhibition nets II}.
+\newblock {\em International Journal of Uncertainty, Fuzziness and
+  Knowledge-Based Systems} 11(supp02):105--135.
+
+\bibitem[\protect\citeauthoryear{Leitgeb}{2018}]{leitgeb2018neural}
+Leitgeb, H.
+\newblock 2018.
+\newblock {Neural Network Models of Conditionals}.
+\newblock In {\em Introduction to Formal Philosophy}. Springer.
+\newblock  147--176.
+
+\bibitem[\protect\citeauthoryear{McCulloch and
+  Pitts}{1943}]{mcculloch1943logical}
+McCulloch, W.~S., and Pitts, W.
+\newblock 1943.
+\newblock {A logical calculus of the ideas immanent in nervous activity}.
+\newblock {\em The bulletin of mathematical biophysics} 5(4):115--133.
+
+\bibitem[\protect\citeauthoryear{Sarker \bgroup et al\mbox.\egroup
+  }{2021}]{sarker2021neuro}
+Sarker, M.~K.; Zhou, L.; Eberhart, A.; and Hitzler, P.
+\newblock 2021.
+\newblock Neuro-symbolic artificial intelligence: Current trends.
+\newblock {\em arXiv preprint arXiv:2105.05330}.
+
+\bibitem[\protect\citeauthoryear{Valiant}{2003}]{valiant2003three}
+Valiant, L.~G.
+\newblock 2003.
+\newblock Three problems in computer science.
+\newblock {\em Journal of the ACM (JACM)} 50(1):96--99.
+
+\bibitem[\protect\citeauthoryear{Van~Benthem and
+  Liu}{2007}]{van2007prefupgrade}
+Van~Benthem, J., and Liu, F.
+\newblock 2007.
+\newblock Dynamic logic of preference upgrade.
+\newblock {\em Journal of Applied Non-Classical Logics} 17(2):157--182.
+
+\bibitem[\protect\citeauthoryear{Van~Benthem}{2007}]{van2007beliefrevision}
+Van~Benthem, J.
+\newblock 2007.
+\newblock Dynamic logic for belief revision.
+\newblock {\em Journal of applied non-classical logics} 17(2):129--155.
+
+\end{thebibliography}

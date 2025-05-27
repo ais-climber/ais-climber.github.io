@@ -1,0 +1,195 @@
+\documentclass[letterpaper]{article}
+\usepackage{arxiv}
+\usepackage{natbib}
+\setcitestyle{authoryear,square,comma}
+
+%═══════════════════════════════════════════
+% Uncomment for debugging and proofreading
+%═══════════════════════════════════════════
+% \usepackage{lineno}
+% \linenumbers
+
+% Colors that are easier on the eyes
+\usepackage{xcolor} 
+\pagecolor[HTML]{f9f5d7} 
+\color[HTML]{3c3836}
+
+%═══════════════════════════════════════════
+% Fonts and math packages
+%═══════════════════════════════════════════
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{bbm}
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools}
+\usepackage{proof}
+\usepackage{bussproofs}
+
+%═══════════════════════════════════════════
+% Formatting, margins, and spacing packages
+%═══════════════════════════════════════════
+\usepackage{microtype}
+%\frenchspacing
+% \usepackage{lscape}
+\usepackage{setspace}
+%\usepackage{fullpage}
+
+%═══════════════════════════════════════════
+% Graphics packages
+%═══════════════════════════════════════════
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit}
+
+%═══════════════════════════════════════════
+% Environments
+%═══════════════════════════════════════════
+\usepackage{paralist}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\AtBeginEnvironment{quote}{\par\singlespacing\small}
+\setcounter{secnumdepth}{0}
+\usepackage{float}
+\setlist[description]{leftmargin=1cm,labelindent=1cm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+%═══════════════════════════════════════════
+% References, Links, and Color
+%═══════════════════════════════════════════
+\usepackage{hyperref}
+\definecolor{myblue}{rgb}{0.03, 0.27, 0.65}
+\definecolor{myred}{rgb}{0.82, 0.1, 0.26}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=myblue,
+    urlcolor=myblue,
+    citecolor=myblue,
+}
+\urlstyle{same}
+
+\usepackage{xcolor}
+\definecolor{myblue1}{RGB}{158,202,225}
+\definecolor{myblue2}{RGB}{49,130,189}
+
+%═══════════════════════════════════════════
+% Custom Commands, General Use
+%═══════════════════════════════════════════
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\proves}{\vdash}
+\renewcommand{\o}{\cdot}
+\newcommand{\orr}{\vee}
+\newcommand{\andd}{\wedge}
+\newcommand{\nott}{\neg}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\rem}[1]{\relax}
+ \newcommand{\NP}{\mbox{\sc np}}
+\newcommand{\axiom}{\textsc}
+\newcommand*{\bigchi}{\mbox{\Large$\chi$}}% big chi
+
+%═══════════════════════════════════════════
+% Custom Commands, Hebbian Learning
+%═══════════════════════════════════════════
+\newcommand{\Typ}{\textrm{\textup{\textbf{T}}}}
+\newcommand{\Prop}{\textsf{Prop}}
+\newcommand{\Update}{\textsf{Update}}
+\newcommand{\Inc}{\textsf{Inc}}
+\newcommand{\AllNets}{\mathsf{Net}}
+\newcommand{\Net}{\mathcal{N}}
+
+%═══════════════════════════════════════════
+% Title, Author, Pdfinfo
+%═══════════════════════════════════════════
+% \hypersetup{pdfinfo={
+% Title={Hebbian Learning and Preference Upgrade},
+% Author={Caleb Kisby, Sa\'{u}l A. Blanco, Lawrence S. Moss},
+% Keywords={Neurosymbolic AI, Hebbian Learning,
+% Dynamic Logics, Knowledge Representation and Reasoning, Nonmonotonic Reasoning, Preference Upgrade}
+% }}
+
+\renewcommand{\headeright}{}
+\renewcommand{\undertitle}{}
+
+\title{Hebbian Learning and Preference Upgrade}
+% \author{\textbf{Caleb Kisby$^1$, Sa\'{u}l A. Blanco$^1$, Lawrence S. Moss$^2$}\\
+% \normalsize $^1$Department of Computer Science, Indiana University\\ 
+% \normalsize $^2$Department of Mathematics, Indiana University\\
+% \normalsize Bloomington, IN 47408, USA\\
+% \normalsize \{cckisby, sblancor, lmoss\}@indiana.edu}
+% \and
+% Lawrence S. Moss \\
+% Department of Mathematics, Indiana University,\\ Bloomington, IN 47405, USA\\
+% lmoss@indiana.edu}
+\date{}
+
+%═══════════════════════════════════════════
+% Beginning of Paper
+%═══════════════════════════════════════════
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\section{The Basics of Neural Network Semantics}
+
+\begin{itemize}
+    \item I'd like to include the related work here as ``A Brief History of Neural Network Semantics'' (it's really a historical account).  Maybe I should start with this.  Also discuss the ``holy grail'' of this theory
+    \item Semantic Encodings (make this a subsection, discuss) -- how this work relates.  We're really using two different words for the same thing, with a slight difference in focus
+\end{itemize}
+
+\section{Neural Network Models for Preference Upgrade}
+
+For both, focus on showing that the two are semantically equivalent, \textit{and only then}, at the end, mention axioms \& completeness by reduction
+
+\subsection{Making Neurons Wire Together; Radical Upgrade}
+
+\subsection{If They Fired Together; Conservative Upgrade}
+
+
+\section{Iterated Hebbian Learning; Knowledge-Preserving Upgrade}
+
+\begin{itemize}
+    \item Focus on showing that the two are semantically equivalent, \textit{and only then}, at the end, mention axioms \& completeness by reduction
+\end{itemize}
+
+\section{Single-Step Hebbian Learning; Bubble Upgrade}
+
+\begin{itemize}
+    \item Focus on showing that the two are semantically equivalent, \textit{and only then}, at the end, mention axioms \& completeness by reduction
+\end{itemize}
+
+\section{Stabilized Hebbian Learning; TODO}
+
+\section{Why Bother with Completeness?}
+
+\begin{itemize}
+    \item tldr; completeness of any of these update systems is \emph{equivalent to} having neural network model building, i.e.~ being able to do AI alignment (never unlearn)
+
+    \item Here's where I should do a demonstration of this!!!  Have something that I want a Hebbian learner to never unlearn, and then actually build the network that does this!  (Even if I end up leaving the stabilized variant as an open problem)
+\end{itemize}
+
+\section{Conclusions and Future Directions}
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{neurosymbolic}
+
+\end{document}

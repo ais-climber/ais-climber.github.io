@@ -1,0 +1,22 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Baltag, Moss, and Solecki(2023)}]{logicsforepistemicactions}
+Baltag, A.; Moss, L.~S.; and Solecki, S. 2023.
+\newblock Logics for epistemic actions: completeness, decidability,
+  expressivity.
+\newblock \emph{Logics}, 1(2): 97--147.
+
+\bibitem[{Leitgeb(2001)}]{leitgeb2001nonmonotonic}
+Leitgeb, H. 2001.
+\newblock Nonmonotonic reasoning by inhibition nets.
+\newblock \emph{Artificial Intelligence}, 128(1-2): 161--201.
+
+\bibitem[{Moura and Ullrich(2021)}]{moura2021lean}
+Moura, L.~d.; and Ullrich, S. 2021.
+\newblock The {L}ean 4 theorem prover and programming language.
+\newblock In \emph{Automated Deduction--CADE 28: 28th International Conference
+  on Automated Deduction, Virtual Event, July 12--15, 2021, Proceedings 28},
+  625--635. Springer.
+
+\end{thebibliography}

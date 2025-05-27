@@ -1,0 +1,12 @@
+### Postdoc Opportunities
+- **[LUCI Lab](https://luci.unimi.it/) @University of Milan**
+	- **Location:** Milan, Italy
+	- **Status:** Sent CV + email expressing interest
+	- **Contact Person:** Hykel Hosni
+	- **Posting Link:** [Link](https://luci.unimi.it/open-positions/)
+- **[Computational Logic Group](https://www.compute.dtu.dk/english/research/research-sections/algolog/computational-logic1) @DTU Compute**
+	- **Location:** Copenhagen, Denmark
+	- **Status:** Nina has submitted a grant "with my name on it"
+	- **Contact Person:** Nina Gierasimczuk
+	- **Posting Link:** No posting yet
+- 

@@ -1,0 +1,2159 @@
+\def\year{2020}\relax
+\documentclass[letterpaper]{article}
+
+% AAAI Defaults; change for 
+% Journal of Logic and Computation
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{graphicx}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+\pdfinfo{
+/Title (Logics for Sizes with Union or Intersection)
+/Author (Caleb Kisby, Saul A. Blanco, Alex Kruckman, Lawrence S. Moss)
+}	
+
+\setcounter{secnumdepth}{2} %May be changed to 1 or 2 if section numbers are desired.
+
+
+
+\title{Logics for Sizes with Union or Intersection}
+
+\author{Caleb Kisby,\textsuperscript{\rm 1} 
+Sa\'ul A.~Blanco,\textsuperscript{\rm 1} 
+Alex Kruckman,\textsuperscript{\rm 2} and 
+Lawrence S.~Moss\textsuperscript{\rm 3}\\ 
+\textsuperscript{1}
+Department of Computer Science, Indiana University, Bloomington, IN 47408, USA \\
+cckisby@indiana.edu, sblancor@indiana.edu \\
+\textsuperscript{2}
+Department of Mathematics and Computer Science, Wesleyan University, Middletown, CT 06459,  USA\\
+akruckman@wesleyan.edu \\
+\textsuperscript{3}
+Department of Mathematics, Indiana University, Bloomington, IN 47405, USA \\
+lmoss@indiana.edu \\
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools}
+\usepackage{lscape}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[mathscr]{eucal}
+\usepackage{stackengine}
+\usepackage{pdfpages}
+\usepackage{xr}
+\usepackage{microtype}
+
+\usepackage{bigstrut}
+%\usepackage{MnSymbol}
+%\usepackage{bbm}
+\usepackage{proof}
+\usepackage{bussproofs}
+%\usepackage{tikz}
+%\usepackage{lingmacros}
+
+
+\newcommand{\existsgeq}{\mbox{\sf AtLeast}}
+\newcommand{\Pol}{\mbox{\emph{Pol}}}
+  \newcommand{\nonered}{\textcolor{red}{=}}
+  \newcommand{\equalsred}{\nonered}
+  \newcommand{\redstar}{\textcolor{red}{\star}}
+    \newcommand{\dred}{\textcolor{red}{d}}
+    \newcommand{\dmark}{\dred}
+    \newcommand{\redflip}{\textcolor{red}{flip}}
+        \newcommand{\flipdred}{\textcolor{red}{\mbox{\scriptsize \em flip}\ d}}
+        \newcommand{\mdred}{\textcolor{blue}{m}\textcolor{red}{d}}
+        \newcommand{\ndred}{\textcolor{blue}{n}\textcolor{red}{d}}
+\newcommand{\arrowm}{\overset{\textcolor{blue}{m}}{\rightarrow} }
+\newcommand{\arrown}{\overset{\textcolor{blue}{n}}{\rightarrow} }
+\newcommand{\arrowmn}{\overset{\textcolor{blue}{mn}}{\longrightarrow} }
+\newcommand{\arrowmonemtwo}{\overset{\textcolor{blue}{m_1 m_2}}{\longrightarrow} }
+\newcommand{\bluen}{\textcolor{blue}{n}}
+\newcommand{\bluem}{\textcolor{blue}{m}}
+\newcommand{\bluemone}{\textcolor{blue}{m_1}}
+\newcommand{\bluemtwo}{\textcolor{blue}{m_2}}
+\newcommand{\blueminus}{\textcolor{blue}{-}}
+
+\newcommand{\bluedot}{\textcolor{blue}{\cdot}}
+\newcommand{\bluepm}{\textcolor{blue}{\pm}}
+\newcommand{\blueplus}{\textcolor{blue}{+ }}
+\newcommand{\translate}[1]{{#1}^{tr}}
+\newcommand{\Caba}{\mbox{\sf Caba}} 
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\Pre}{\mbox{\sf Pre}} 
+\newcommand{\wmarkpolarity}{\scriptsize{\mbox{\sf W}}}
+\newcommand{\wmarkmarking}{\scriptsize{\mbox{\sf Mon}}}
+\newcommand{\smark}{\scriptsize{\mbox{\sf S}}}
+\newcommand{\bmark}{\scriptsize{\mbox{\sf B}}}
+\newcommand{\mmark}{\scriptsize{\mbox{\sf M}}}
+\newcommand{\jmark}{\scriptsize{\mbox{\sf J}}}
+\newcommand{\kmark}{\scriptsize{\mbox{\sf K}}}
+\newcommand{\tmark}{\scriptsize{\mbox{\sf T}}}
+%%{\mbox{\ensuremath{>}}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\upred}{\textcolor{red}{\uparrow}}
+\newcommand{\downred}{\textcolor{red}{\downarrow}}
+\usepackage[all,cmtip]{xy}
+\usepackage{enumitem}
+%\usepackage{fullpage} % Forbidden by AAAI
+
+
+
+%\usepackage[authoryear]{natbib}
+%\newcommand{\citet}[1]{\citeauthor{#1}~\shortcite{#1}}
+%\newcommand{\citep}{\cite}
+%\newcommand{\citealp}[1]{\citeauthor{#1}~\citeyear{#1}
+
+
+
+%\usepackage{multicol}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+%\newtheorem*{relatedwork*}{Related Work}
+\newtheorem*{contribution*}{Our Contribution}
+\newtheorem*{organization*}{Organization}
+\newtheorem*{nextsteps*}{Next Steps}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.14in}\raiseonebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.13in}}
+\newcommand{\toplus}{\abovearrow{r}}
+\newcommand{\tominus}{\abovearrow{i}} 
+\newcommand{\todestroy}{\abovearrow{d}}
+\newcommand{\tom}{\abovearrow{m}}
+\newcommand{\tomprime}{\abovearrow{m'}}
+\newcommand{\A}{\textsf{App}}
+\newcommand{\At}{\textsf{At}}
+\newcommand{\Emb}{\textsf{Emb}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\usepackage{verbatim}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\Marking}{\mbox{Mar}}
+\newcommand{\Markings}{\Marking}
+\newcommand{\Mar}{\Marking}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\newcommand{\TTM}{\TT_{\Markings}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\erase}{\mbox{\textsf{erase}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\arrowplus}{\overset{\blueplus}{\rightarrow} }
+\newcommand{\arrowminus}{\overset{\blueminus}{\rightarrow} }
+\newcommand{\arrowdot}{\overset{\bluedot}{\rightarrow} }
+\newcommand{\arrowboth}{\overset{\bluepm}{\rightarrow} }
+\newcommand{\arrowpm}{\arrowboth}
+\newcommand{\arrowplusminus}{\arrowboth}
+\newcommand{\arrowmone}{\overset{m_1}{\rightarrow} }
+\newcommand{\arrowmtwo}{\overset{m_2}{\rightarrow} }
+\newcommand{\arrowmthree}{\overset{m_3}{\rightarrow} }
+\newcommand{\arrowmcomplex}{\overset{m_1 \orr m_2}{\longrightarrow} }
+\newcommand{\arrowmproduct}{\overset{m_1 \cdot m_2}{\longrightarrow} }
+\newcommand{\proves}{\vdash}
+\newcommand{\Dual}{\mbox{\sc dual}}
+\newcommand{\orr}{\vee}
+\newcommand{\uar}{\uparrow}
+\newcommand{\dar}{\downarrow}
+\newcommand{\andd}{\wedge}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\arrowmprime}{\overset{m'}{\rightarrow} }
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\Con}{\mbox{\sf Con}}
+\newcommand{\type}{\mbox{\sf type}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\necc}{\Box}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\Types}{\mathcal{T}_\mathcal{M}}
+\newcommand{\mon}{\mbox{\sf mon}}
+\newcommand{\anti}{\mbox{\sf anti}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\rem}[1]{\relax}
+
+\newcommand{\raiseone}{\mbox{raise}^1}
+\newcommand{\raisetwo}{\mbox{raise}^2}
+\newcommand{\wrapper}[1]{{#1}}
+\newcommand{\sfa}{\wrapper{\mbox{\sf a}}}
+\newcommand{\sfb}{\wrapper{\mbox{\sf b}}}
+\newcommand{\sfv}{\wrapper{\mbox{\sf v}}}
+\newcommand{\sfw}{\wrapper{\mbox{\sf w}}}
+\newcommand{\sfx}{\wrapper{\mbox{\sf x}}}
+\newcommand{\sfy}{\wrapper{\mbox{\sf y}}}
+\newcommand{\sfz}{\wrapper{\mbox{\sf z}}}
+  \newcommand{\sff}{\wrapper{\mbox{\sf f}}}
+    \newcommand{\sft}{\wrapper{\mbox{\sf t}}}
+      \newcommand{\sfc}{\wrapper{\mbox{\sf c}}}
+      \newcommand{\sfu}{\wrapper{\mbox{\sf u}}}
+            \newcommand{\sfs}{\wrapper{\mbox{\sf s}}}
+  \newcommand{\sfg}{\wrapper{\mbox{\sf g}}}
+
+\newcommand{\sfvomits}{\wrapper{\mbox{\sf vomits}}}
+\newsavebox{\mathfrbox}
+\newenvironment{mathframe}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}\begin{center}}
+    {\end{center}\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}}
+    \newenvironment{mathframenocenter}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}}
+    {\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}} 
+ \newcommand{\nott}{\neg}
+  \newcommand{\preorderO}{\mathbb{O}}
+ \newcommand{\PreorderP}{\mathbb{P}}
+  \newcommand{\preorderE}{\mathbb{E}}
+\newcommand{\preorderP}{\mathbb{P}}
+\newcommand{\preorderN}{\mathbb{N}}
+\newcommand{\preorderQ}{\mathbb{Q}}
+\newcommand{\preorderX}{\mathbb{X}}
+\newcommand{\preorderA}{\mathbb{A}}
+\newcommand{\preorderR}{\mathbb{R}}
+\newcommand{\preorderOm}{\mathbb{O}^{\bluem}}
+\newcommand{\preorderPm}{\mathbb{P}^{\bluem}}
+\newcommand{\preorderQm}{\mathbb{Q}^{\bluem}}
+\newcommand{\preorderOn}{\mathbb{O}^{\bluen}}
+\newcommand{\preorderPn}{\mathbb{P}^{\bluen}}
+\newcommand{\preorderQn}{\mathbb{Q}^{\bluen}}
+ \newcommand{\PreorderPop}{\mathbb{P}^{\blueminus}}
+  \newcommand{\preorderEop}{\mathbb{E}^{\blueminus}}
+\newcommand{\preorderPop}{\mathbb{P}^{\blueminus}}
+\newcommand{\preorderNop}{\mathbb{N}^{\blueminus}}
+\newcommand{\preorderQop}{\mathbb{Q}^{\blueminus}}
+\newcommand{\preorderXop}{\mathbb{X}^{\blueminus}}
+\newcommand{\preorderAop}{\mathbb{A}^{\blueminus}}
+\newcommand{\preorderRop}{\mathbb{R}^{\blueminus}}
+ \newcommand{\PreorderPflat}{\mathbb{P}^{\flat}}
+  \newcommand{\preorderEflat}{\mathbb{E}^{\flat}}
+\newcommand{\preorderPflat}{\mathbb{P}^{\flat}}
+\newcommand{\preorderNflat}{\mathbb{N}^{\flat}}
+\newcommand{\preorderQflat}{\mathbb{Q}^{\flat}}
+\newcommand{\preorderXflat}{\mathbb{X}^{\flat}}
+\newcommand{\preorderAflat}{\mathbb{A}^{\flat}}
+\newcommand{\preorderRflat}{\mathbb{R}^{\flat}}
+\newcommand{\pstar}{\preorderBool^{\preorderBool^{E}}}
+\newcommand{\pstarplus}{(\pstar)^{\blueplus}}
+\newcommand{\pstarminus}{(\pstar)^{\blueminus}}
+\newcommand{\pstarm}{(\pstar)^{\bluem}}
+\newcommand{\Reals}{\preorderR}
+\newcommand{\preorderS}{\mathbb{S}}
+\newcommand{\preorderBool}{\mathbbm{2}}
+ \newcommand{\NPplus}{\NP^{\blueplus}}
+  \newcommand{\NPminus}{\NP^{\blueminus}}
+   \newcommand{\NPplain}{\NP}
+    \newcommand{\npplus}{np^{\blueplus}}
+  \newcommand{\npminus}{np^{\blueminus}}
+   \newcommand{\npplain}{np}
+   \newcommand{\np}{np}
+   \newcommand{\Term}{\mbox{\sc t}}
+  \newcommand{\N}{\mbox{\sc n}}
+   \newcommand{\X}{\mbox{\sc x}}
+      \newcommand{\Y}{\mbox{\sc y}}
+            \newcommand{\V}{\mbox{\sc v}}
+    \newcommand{\Nbar}{\overline{\mbox{\sc n}}}
+    \newcommand{\Pow}{\mathcal{P}}
+    \newcommand{\powcontravariant}{\mathcal{Q}}
+    \newcommand{\Id}{\mbox{Id}}
+    \newcommand{\pow}{\Pow}
+   \newcommand{\Sent}{\mbox{\sc s}}
+   \newcommand{\lookright}{\slash}
+   \newcommand{\lookleft}{\backslash}
+   \newcommand{\dettype}{(e \to t)\arrowminus ((e\to t)\arrowplus t)}
+\newcommand{\ntype}{e \to t}
+\newcommand{\etttype}{(e\to t)\arrowplus t}
+\newcommand{\nptype}{(e\to t)\arrowplus t}
+\newcommand{\verbtype}{TV}
+\newcommand{\who}{\infer{(\nptype)\arrowplus ((\ntype)\arrowplus (\ntype))}{\mbox{who}}}
+\newcommand{\iverbtype}{IV}
+\newcommand{\Nprop}{\N_{\mbox{prop}}}
+\newcommand{\VP}{{\mbox{\sc vp}}}
+\newcommand{\CN}{{\mbox{\sc cn}}}
+\newcommand{\Vintrans}{\mbox{\sc iv}}
+\newcommand{\Vtrans}{\mbox{\sc tv}}
+\newcommand{\Num}{\mbox{\sc num}}
+%\newcommand{\S}{\mathbb{A}}
+\newcommand{\Det}{\mbox{\sc det}}
+\newcommand{\preorderB}{\mathbb{B}}
+\newcommand{\simA}{\sim_A}
+\newcommand{\simB}{\sim_B}
+\newcommand{\polarizedtype}{\mbox{\sf poltype}}
+
+% Fonts for the logics we are talking about
+\newcommand{\Aunion}{\mathscr{A}^{\cup}}
+\newcommand{\Munion}{\mathscr{M}^{\cup}}
+\newcommand{\Sunion}{\mathscr{S}^{\cup}}
+\newcommand{\Ainter}{\mathscr{A}^{\cap}}
+\newcommand{\Minter}{\mathscr{M}^{\cap}}
+\newcommand{\Sinter}{\mathscr{S}^{\cap}}
+
+\newcommand{\BAPA}{\sf{BAPA}}
+\newcommand{\QFBAPA}{\sf{QFBAPA}}
+\newcommand{\CardCompLogic}{\sf{CardCompLogic}}
+
+\newcommand{\proverule}{\textsc}
+
+\newcommand{\axiom}{\proverule{axiom}}
+\newcommand{\barbara}{\proverule{barbara}}
+\newcommand{\unionl}{\proverule{union-l}}
+\newcommand{\unionr}{\proverule{union-r}}
+\newcommand{\unionall}{\proverule{union-all}}
+\newcommand{\interl}{\proverule{inter-l}}
+\newcommand{\interr}{\proverule{inter-r}}
+\newcommand{\interall}{\proverule{inter-all}}
+\newcommand{\some}{\proverule{some}}
+\newcommand{\conversion}{\proverule{conversion}}
+\newcommand{\darii}{\proverule{darii}}
+\newcommand{\mix}{\proverule{mix}}
+\newcommand{\size}{\proverule{size}}
+\newcommand{\trans}{\proverule{trans}}
+\newcommand{\morel}{\proverule{more-l}}
+\newcommand{\morer}{\proverule{more-r}}
+\newcommand{\moreatleast}{\proverule{more-atleast}}
+\newcommand{\x}{\proverule{x}}
+\newcommand{\raa}{\proverule{raa}}
+
+% Complexity Macros
+\newcommand{\Ptime}{\textsc{PTime}}
+\newcommand{\NP}{\textsc{NP}}
+
+%Macros for logic
+\newcommand{\All}[2]{\mathsf{All}\,\,#1\,\,#2}
+\newcommand{\Some}[2]{\mathsf{Some}\,\,#1\,\,#2}
+\newcommand{\Atleast}[2]{\mathsf{AtLeast}\,\,#1\,\,#2}
+\newcommand{\More}[2]{\mathsf{More}\,\,#1\,\,#2}
+\newcommand{\Most}[2]{\mathsf{Most}\,\,#1\,\,#2}
+\newcommand{\R}[2]{\mathsf{R}\,\,#1\,\,#2}
+\newcommand{\AllNoArgs}{\mathsf{All}}
+\newcommand{\SomeNoArgs}{\mathsf{Some}}
+\newcommand{\AtleastNoArgs}{\mathsf{AtLeast}}
+\newcommand{\MoreNoArgs}{\mathsf{More}}
+\newcommand{\MostNoArgs}{\mathsf{Most}}
+
+\newcommand{\card}{\mathrm{card}}
+
+
+% Miscellaneous
+\newcommand{\provesarbitrary}{\proves_{\mbox{\small{arb}}}}
+\newcommand{\Ruleset}{\mathcal{R}}
+
+\newcommand{\Diag}{\mbox{Diag}}
+\newcommand{\OffDiag}{\mbox{Off-diag}}
+\newcommand{\Pairs}{\mbox{Pairs}}
+\newcommand{\Bad}{\mbox{Bad}}
+\newcommand{\argmax}{\mbox{argmax}}
+\newcommand{\Clamp}{\protect{\mbox{\textit{Clamp}}}}
+%\newcommand{\sClamp}{\mbox{subset-Clamp}}
+\newcommand{\ordercanonical}{<_{\scriptstyle can}}
+\newcommand{\lex}{\ordercanonical}
+\newcommand{\lexcanonical}{\ordercanonical}
+
+\newcommand{\precsubseteq}{\Subset}
+\newcommand{\approxsubset}{\Subset}
+
+\newcommand{\suitable}{suitable}%%Saul removed the $\Aunion(\card)$ part
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some additional symbols for the proof of completeness of Aunion(\card)
+\newcommand{\provsub}{\subseteq_{\Gamma}}
+\newcommand{\provle}{\le_{\Gamma}}
+\newcommand{\provlt}{<_{\Gamma}}
+\newcommand{\provsubDelta}{\subseteq_{\Delta}}
+\newcommand{\provleDelta}{\le_{\Delta}}
+\newcommand{\provltDelta}{<_{\Delta}}
+\newcommand{\provlestrict}{\provlt}
+
+\newcommand{\nprovle}{\nleq_{\Gamma}}
+\newcommand{\provextended}{\preceq_{\Gamma}}
+\newcommand{\provextendedstrict}{\prec_{\Gamma}}
+\newcommand{\nprovextended}{\npreceq_{\Gamma}}
+\newcommand{\provprecsubseteq}{\precsubseteq_{\Gamma}}
+\newcommand{\nprovleDelta}{\nleq_{\Delta}}
+\newcommand{\provextendedDelta}{\preceq_{\Delta}}
+\newcommand{\provextendedstrictDelta}{\prec_{\Delta}}
+\newcommand{\nprovextendedDelta}{\npreceq_{\Delta}}
+\newcommand{\provprecsubseteqDelta}{\precsubseteq_{\Delta}}
+
+\newcommand{\provsubstar}{\subseteq_{\Gamma^\star}}
+\newcommand{\provlestar}{\le_{\Gamma^\star}}
+\newcommand{\provltstar}{<_{\Gamma^\star}}
+\newcommand{\provlestrictstar}{\provltstar}
+\newcommand{\provextendedstar}{\preceq_{\Gamma^\star}}
+\newcommand{\provextendedstrictstar}{\prec_{\Gamma^\star}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% New commands needed just for notes at the end
+\newcommand{\toAtLeast}{\rightarrow}
+\newcommand{\toMore}{\xrightarrow[]{<}}
+\newcommand{\toAll}{\xrightarrow[]{\subseteq}}
+
+\newcommand{\chainAtLeast}{\toAtLeast \ldots \toAtLeast}
+\newcommand{\chainMore}{\toAtLeast \ldots \toMore \ldots \toAtLeast}
+\newcommand{\chainAll}{\toAll \ldots \toAll}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+    This paper presents the most basic logics for reasoning about the sizes of sets that admit either the union of terms or the intersection of terms.  That is, our logics handle assertions $\All{x}{y}$ and $\Atleast{x}{y}$, where $x$ and $y$ are built up from basic terms by either unions or intersections.  We present a sound, complete, and polynomial-time decidable proof system for these logics. 
+    An immediate consequence of our work is the completeness of the logic additionally permitting $\More{x}{y}$.  The logics considered here may be viewed as efficient fragments of two logics which appear in the literature:  Boolean Algebra with Presburger Arithmetic and the Logic of Comparative Cardinality.
+\end{abstract}
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Reasoning about the sizes of sets is common in both human and artificial reasoning.  It is also common, both in ``real-world'' human settings and in artificial systems, to reason in this way about unions and intersections of sets. In human settings, this use of union or intersection is often reflected by natural language phrases such as ``animals \emph{or} plants'' (for union), or ``mammals \emph{with} paws'' (for intersection).  For example, one might reason that if \emph{all cats are mammals that purr} and \emph{there are at least as many cats as purring things}, then it follows that \emph{all purring things are cats}.
+In this paper, we examine logics which capture the most basic fragments of reasoning about the sizes of finite sets alongside union or intersection.  Our two main logics handle assertions $\All{x}{y}$ (\emph{all $x$ are $y$}) and $\Atleast{x}{y}$ (\emph{there are at least as many $x$ as $y$}).  In the first logic, terms may be formed using union, whereas in the second logic, terms may be formed using intersection.
+
+We emphasize that these fragments are the most basic because we wish to reflect one of the primary lessons of cognitive science:  That computationally light systems are the most cognitively plausible ones \cite{reasoning_about_sizes_of_sets}.
+Accordingly, the two main logics we present are decidable in polynomial time.
+%The two main logics we present are both minimally expressive and decidable in polynomial time.
+
+The logics considered here are part of a broader enterprise of \emph{natural logic} \cite{Moss2015,reasoning_about_sizes_of_sets,vanBenthemHistory08}.  One of the main goals of this program is to demonstrate that components of natural language inference that can be modeled at all can be modeled by decidable logical systems.
+Also, our work aims at obtaining \emph{complete} logical systems for
+its fragments, with an eye toward efficient computer implementations.
+Union and intersection are common points of interest and inspiration in natural language semantics~\cite{KeenanFaltz}, and reasoning about the sizes of sets has been a common subject of investigation in natural logic \cite{reasoning_about_sizes_of_sets,pratt_hartmann_2008}.
+This paper contributes to this goal of natural logic: we provide complete axiomatizations of fragments of reasoning about sizes with either union or intersection, and we show that these logics are decidable in polynomial time.
+
+\begin{organization*}
+The rest of the paper is organized as follows. In Section~\ref{s:logics}, we describe formally our logics and their rules.  Our discussion focuses on logics allowing only binary (unnested) union and intersection terms, but we show in Section \ref{subsection-arbitraryterms} that we can interpret arbitrarily large terms in this restricted system.  In Section~\ref{s:comp_Aunion(card)} we establish the completeness of our logic $\Aunion(\card)$, making use of a representation lemma (Lemma~\ref{lemma-representation}), which in turn is proved in Section~\ref{s:representation}. In Section~\ref{s:completenes_intersections}, we show that the completeness of our logic $\Ainter(\card)$ is a straightforward consequence of the completeness of $\Aunion(\card)$. We furthermore show that our logics are decidable in polynomial time, and the details are given in Section~\ref{s:complexity}. Finally, in Section~\ref{s:future_work} we discuss several
+avenues to extend our work, particularly towards the logics $\BAPA$ and $\CardCompLogic$.
+
+In Appendix A, we provide proofs of completeness for some basic related logics involving union or intersection terms.
+Proofs of particularly technical lemmas and propositions throughout the paper are included in Appendix B.  Finally, Appendix C contains an illustrative example of the primary construction used to prove the representation lemma.
+\end{organization*}
+
+\textbf{\textcolor{red}{INCORPORATE INTRODUCTION WITH RELATED WORK}}
+
+There has been recent work at the confluence of logic and artificial intelligence on systems for reasoning about sizes, often including reasoning about union and intersection.
+The closest system to ours in the literature is the polynomial-time decidable logic of $\AllNoArgs$, $\SomeNoArgs$,
+$\AtleastNoArgs$, $\MoreNoArgs$, with set complement as a term forming
+operation (but not including union or intersection), which was investigated in~\cite{syllogistic_cardinality_comparisons}.
+
+% If one were to add set complement and propositional connectives $\andd$, $\orr$, and $\nott$ on top of our work, and also require all variables $x$ to have a finite interpretation (by including the predicate $Fin(x)$), then the resulting logic would be the Logic of Comparative Cardinality $\CardCompLogic$ in~\cite{DHH}.
+If one were to add \emph{strict} cardinality comparison, set complement, and propositional connectives $\andd$, $\orr$, and $\nott$ on top of our work, the resulting logic would look like the Logic of Comparative Cardinality $\CardCompLogic$ in~\cite{DHH}.  Our logics are restricted further by requiring that all variables $x$ have a finite interpretation (in $\CardCompLogic$ one may express this using the predicate $Fin(x)$).
+% since in our logics all variables $x$ are required to have a finite interpretation, we must consider but with all variables $x$ required to have a finite interpretation by prefixing with $Fin(x)$.
+As shown in \cite{DHH}, $\CardCompLogic$ is $\NP$-complete, so what our logics lose in expressive power they recoup in efficiency.
+Additionally, the method of proof in~\cite{DHH} is rather different from ours.
+
+The logics presented in this paper may also be viewed as fragments of Boolean Algebra with Presburger Arithmetic ($\BAPA$) \cite{boolean_algebra_presburger_arithmetic}.
+$\BAPA$ is a two-sorted logic, allowing both \emph{set relations} in the language of Boolean Algebra and \emph{numerical relations} in the language of Presburger Arithmetic. These two sorts are connected by a set cardinality function $|s|$ mapping sets to numbers. $\BAPA$ builds formulas from set relations and numerical relations via propositional connectives $\andd, \orr, \neg$, and quantifiers over sets and numbers.
+The two main logics we present capture the sublogic of $\BAPA$ involving subsets, equality, \emph{nonstrict} cardinality comparison, and union or intersection terms, without propositional connectives or quantifiers.  Decidability in $\BAPA$ is also $\NP$-complete \cite{towards_efficient_bapa}, so again our logics present a more efficient fragment of the more expressive logic.
+
+Reasoning about subsets and sizes alongside union and intersection is also relevant to the description logic community.  In \cite{extending_description_logic_ALC}, the authors incorporate the language of $\BAPA$ into the DL $\mathcal{ALC}$ in order to allow constraints on the cardinalities of concepts.
+% reasoning about \emph{concepts} and their inclusions, sizes, with unions (or intersections).
+
+\begin{contribution*}
+The main contribution of this paper is our axiomatization of reasoning about sizes of sets alongside either union or intersection, and the resulting polynomial decidability of these logics.  This efficiency result is in contrast to other logics involving reasoning of this kind (e.g. the $\NP$-complete logics $\BAPA$ and $\CardCompLogic$).
+\end{contribution*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Syntax and Semantics for Our Logics}\label{s:logics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We focus our discussion on the two logics we call $\Aunion(\card)$ and $\Ainter(\card)$. We begin by defining the syntax and semantics of these systems.
+
+\emph{Terms} in our syntax may either be \emph{basic terms} or \emph{binary terms}.  We use symbols $a, b, c, \ldots$ to denote basic terms and symbols $x, y, z, \ldots$ to denote terms that may be either basic or binary. If $a$ and $b$ are basic terms, then $a \cup b$ and $a \cap b$ are binary terms. Note that we do not allow nested terms like $(a\cup b)\cup c$ (we discuss this choice in the following subsection). 
+
+The \emph{sentences} which we consider are $\All{x}{y}$ and $\Atleast{x}{y}$, where $x$ and $y$ are terms.
+Note that in our logics we do not build up more complex sentences using propositional connectives or quantifiers; every sentence is one of these two operators applied to a pair of terms.
+
+We now provide our terms and sentences with their semantics.  A \emph{model} $\mathcal{M}$ consists of a set $M$ (the \emph{universe} of $\mathcal{M}$), together with an interpretation function which assigns to each basic term $a$ a subset $\semantics{a} \subseteq M$.  We extend the interpretation function to binary terms $a \cup b$ and $a \cap b$ by $\semantics{a \cup b} = \semantics{a} \cup \semantics{b}$ and $\semantics{a \cap b} = \semantics{a} \cap \semantics{b}$.
+
+Our sentences are given the expected semantics:
+\[
+\begin{array}{lclcl}
+    \Model \models \All{x}{y} & \textrm{ iff } & 
+        \semantics{x} \subseteq \semantics{y}\\
+    \Model \models \Atleast{x}{y} & \textrm{ iff } & 
+        |\semantics{x}| \ge |\semantics{y}|
+\end{array}
+\] 
+For a set $\Gamma$ of sentences and another sentence $\varphi$, we have that $\Gamma \vDash \varphi$ if every \textit{finite} model $\mathcal{M}$ that satisfies the sentences in $\Gamma$ satisfies $\varphi$.  Note the finiteness assumption about $\mathcal{M}$; this is weaker than the usual logical consequence notion in logic. 
+
+$\Aunion(\card)$ and $\Ainter(\card)$ differ in the terms and proof systems they use. Both logics employ natural-deduction style rules.  The full table of rules is shown in Figure~\ref{fig-rules}.  In particular, $\Aunion(\card)$ is the logic of $\All{x}{y}$ and $\Atleast{x}{y}$, with binary union terms, but no binary intersection terms, using rules (\axiom), (\barbara), (\mix), (\size), (\trans) in addition to (\unionl), (\unionr), and (\unionall).
+$\Ainter(\card)$ is the analogous logic, but with binary intersection terms instead of binary union terms, and using rules $(\interl)$, $(\interr)$, and $(\interall)$ in place of $(\unionl)$, $(\unionr)$, and $(\unionall)$. Note that because we do not allow nested terms, the rules for union and intersection involve variables $a$, $b$, and $c$ representing basic terms, while the other rules involve variables $x$, $y$, and $z$ representing arbitrary terms. 
+
+For a set $\Gamma$ of sentences in one of these logics and another such sentence $\varphi$, we say that $\varphi$ is \emph{provable} from $\Gamma$, written  $\Gamma \proves \varphi$, whenever $\varphi$ may be obtained from the sentences in $\Gamma$ from natural deduction via the rules for that logic.  
+When we speak of the \emph{decidability} of a logic, we refer to the problem of determining whether or not $\Gamma \proves \varphi$ as a function of $\Gamma$ and $\phi$, when $\Gamma$ is finite. 
+
+A logic is \emph{sound} if whenever $\Gamma \proves \varphi$ it follows that $\Gamma \models \varphi$.  We say a logic is \emph{complete} if the converse holds for finite $\Gamma$:  If 
+$\Gamma \models \varphi$ then $\Gamma \proves \varphi$. We only consider finite $\Gamma$ in the definition of completeness because our logics $\Aunion(\card)$ and $\Ainter(\card)$ are not compact. %Arxiv: (see Section~\ref{s:supp:non-compact} in the Supplemental Material).
+One may verify that each of the rules in Figure~\ref{fig-rules} is individually sound for our semantics.  Hence, the selected set of rules for each of our logics is sound.
+
+\begin{remark}
+The expected facts about set union and intersection are provable from the rules of $\Aunion(\card)$ and $\Ainter(\card)$.  For example, symmetry of $\cup$ follows:
+$$
+\infer[(\unionall)]{\All{(b\cup a)}{(a\cup b)}}{
+\infer[(\unionr)]{\All{b}{(a\cup b)}}{} & 
+\infer[(\unionl)]{\All{a}{(a\cup b)}}{}}
+$$
+%$\proves \All{(a \cup b)}{(b \cup a)}$.
+
+The assumption that our models are finite is reflected in (\mix); this rule is not sound for infinite models.
+\end{remark}
+
+% For what follows, we will restrict our attention to those logics with union terms: $\Aunion$, $\Sunion$, and $\Aunion(\card)$.  We will discuss later the completeness of those logics with intersection terms and show, in particular, that the completeness of $\Ainter$ and $\Ainter(\card)$ follows from the completeness of their union counterparts.
+
+\begin{figure*}[t!]
+\begin{equation*}
+\boxed{
+\small
+\begin{array}{c}
+\begin{array}{ccc}
+\\ 
+\infer[(\axiom)]
+    {\All{x}{x}}
+    {} &
+\infer[(\barbara)]
+    {\All{x}{z}}
+    {\All{x}{y} & \All{y}{z}}
+\end{array}
+\\ \\ 
+\begin{array}{ccc}
+\infer[(\mix)]
+    {\All{y}{x}}
+    {\All{x}{y} & \Atleast{x}{y}} &
+\infer[(\size)]
+    {\Atleast{y}{x}}
+    {\All{x}{y}} &
+
+\infer[(\trans)]
+    {\Atleast{x}{z}}
+    {\Atleast{x}{y} & \Atleast{y}{z}} \\ \\
+    \hline \\
+    
+\infer[(\unionl)]
+    {\All{a}{(a\cup b)}}
+    {} &
+    \infer[(\unionr)]
+    {\All{b}{(a\cup b)}}
+    {} &
+\infer[(\unionall)]
+    {\All{(a\cup b)}{c}}
+    {\All{a}{c} & \All{b}{c}} \\ \\
+
+\infer[(\interl)]
+    {\All{(a\cap b)}{a}}
+    {} &
+\infer[(\interr)]
+    {\All{(a\cap b)}{b}}
+    {} &
+\infer[(\interall)]
+    {\All{a}{(b\cap c)}}
+    {\All{a}{b} & \All{a}{c}} \\ \\
+    
+\end{array}
+\end{array}
+}
+\end{equation*}
+\caption{The rules for the logics $\Aunion(\card)$ and $\Ainter(\card)$.  
+In addition to the rules above the line, $\Aunion(\card)$ uses $(\unionl)$, $(\unionr)$, and $(\unionall)$, whereas $\Ainter(\card)$ uses $(\interl)$, $(\interr)$, and $(\interall)$.
+\label{fig-rules}}
+\end{figure*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Logics $\Aunion$ and $\Sunion$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark}
+It is worth mentioning the related logics $\Aunion$ and $\Sunion$.  The logic $\Aunion$ is simply the $\AllNoArgs$-fragment of $\Aunion(\card)$.  $\Sunion$ extends this $\AllNoArgs$-fragment by admitting the sentence former $\Some{x}{y}$ (\emph{some $x$ is $y$}), with the semantics that $\Model \models \Some{x}{y}$ whenever $\semantics{x} \cap \semantics{y} \ne \emptyset$.  $\Sunion$ additionally %Arxiv:employs
+borrows the $(\some)$, $(\conversion)$, and $(\darii)$ rules
+from \cite{syllogistic_cardinality_comparisons}.  %Arxiv:in Figure~\ref{fig-rules-some}.  
+$\Aunion$ and $\Sunion$ are both complete. %Arxiv:, as is shown in Section~\ref{s:supp:completeness_Aunion_Sunion}.
+
+
+$\Aunion$ and $\Sunion$ are complete, as is shown in Section~\ref{s:supp:completeness_Aunion_Sunion}.  We encourage the reader to read these proofs of completeness as a warm-up for the completeness of $\Aunion(\card)$.  The completeness of $\Ainter$ follows from the completeness of $\Aunion$, using the trick described in Section~\ref{}.  However, the completeness of $\Sinter$ does not follow straightforwardly.
+
+\label{remark-related-logics}
+\end{remark}
+
+% Rules for \Sunion
+\begin{figure*}[t]
+\begin{equation*}
+\boxed{
+\begin{array}{c}
+\begin{array}{ccc}
+\\ 
+\infer[(\some)]
+    {\Some{x}{x}}
+    {\Some{x}{y}} 
+&
+\infer[(\conversion)]
+    {\Some{y}{x}}
+    {\Some{x}{y}}
+&
+\infer[(\darii)]
+    {\Some{x}{z}}
+    {\Some{x}{y} & \All{y}{z}}
+\end{array}
+\\
+\end{array}
+}
+\end{equation*}
+\caption{The additional rules for the logics $\Sunion$ and $\Sinter$.
+\label{fig-rules-some}}
+\end{figure*}
+
+In this section, we show the completeness of the logics $\Aunion$ and $\Sunion$ related to our main logics.  For reference, $\Aunion$ and $\Sunion$ are discussed in Remark~\ref{remark-related-logics}.  Both proofs of completeness rely on the following notions of up-closure and primality:
+
+\begin{definition} 
+A set $S$ of terms is an \emph{up-set (for $\Gamma$)} if whenever $t\in S$ and $\Gamma \nvdash \All{t}{u}$, then also $u\in S$.  We denote the \emph{upper closure} of a term $t$ by $\uparrow t = \set{u \mid \Gamma \proves \All{t}{u}}$.
+$S$ is \emph{prime} if whenever $t\cup u \in S$, then either $t\in S$ or $u\in S$.
+\end{definition}
+
+Note that the notion of an up-set is relative to a set $\Gamma$, but the notion of a prime set does not refer to $\Gamma$ at all.
+When $\Gamma$ is clear from the context, we just speak of a set $S$ being an up-set (without referencing $\Gamma$).
+
+Lemma \ref{lemma-zorn} and Lemma \ref{lemma-some-prime-upset} relate prime up-sets to our logics $\Aunion$ and $\Sunion$, respectively.
+
+\begin{lemma}  Fix a set $\Gamma$.
+Let $x$ be any term, and assume that $\Gamma \not\proves \All{x}{(a \cup b)}$.
+Then there is a prime up-set containing $x$ but not containing either $a$ or $b$.
+\label{lemma-zorn}
+\end{lemma}
+
+\begin{proof}
+Let $\SS$ be the family of sets $T$ which contains $x$, is closed upwards, and contains neither  $a$ nor $b$.
+One such set in $\SS$ is $\uparrow x$.  Note first that $\uparrow x$ does not contain either $a$ or $b$ (for if $\Gamma \proves \All{x}{a}$, then since $\Gamma \proves \All{a}{(a \cup b)}$, we would contradict our hypothesis that $\Gamma \not \proves \All{x}{(a \cup b)}$).
+
+By Zorn's Lemma, let $S$ be a maximal element of $\SS$ with respect to inclusion.
+We claim that 
+$S$ is  prime.   To see this, suppose that $c \cup d\in S$.  Suppose towards a contradiction that neither $c$ nor $d$ were in $S$.
+By maximality, $S\cup\uparrow c$ and $S\cup\uparrow d$  would not belong to $\SS$. 
+So they each contain $a$ or $b$.   Without loss of generality, $\Gamma \proves \All{c}{a}$ and $\Gamma \proves \All{d}{b}$.  
+By (\unionall), $\Gamma \proves \All{(c \cup d)}{(a \cup b)}$.  Since $S$ is an up-set, $a \cup b$ belongs to $S$.  And this is a contradiction.
+\end{proof}
+
+\begin{lemma}
+ Suppose that $\Gamma\not\proves \Some{t}{u}$.
+ Suppose also that $\Gamma$ contains the sentence $\Some{x}{y}$.
+ Then there is a prime up-set $S$ containing both $x$ and $y$ such that
+ $S$
+ does not contain both $t$ and $u$.
+ \label{lemma-some-prime-upset}
+ \end{lemma}
+ 
+\begin{proof}
+Let $\SS$ be the family of sets $T$ such that (1) $T$ contains both $x$ and $y$,
+(2) $T$ is closed upwards, and
+(3) $T$  does not contain both $t$ and $u$.
+One such set in $\SS$ is $(\uparrow x)\cup (\uparrow y)$.  
+  This set obviously has (1) and (2).
+Here is the argument for (3):
+ If $\Gamma \proves \All{x}{t}$
+and $\Gamma \proves \All{y}{u}$, using (\darii)
+and 
+ the fact that $\Gamma$ contains the sentence $\Some{x}{y}$,
+ we have
+ $\Gamma \proves \Some{t}{u}$, a contradiction.)
+The same would happen in other cases such as $\Gamma \proves \All{x}{t}$ and $\Gamma \proves \All{y}{u}$.
+The other two rules of the logic are needed in the other cases of this lemma.
+
+By Zorn's Lemma, let $S$ be a maximal element of $\SS$ with respect to inclusion.
+We claim that 
+$S$ is  prime.   To see this, suppose that $a \cup b\in S$,
+where $a$ and $b$ are basic terms.
+Suppose towards a contradiction that neither $a$ nor $b$ were in $S$.
+By maximality, $S\cup(\uparrow a)$ and $S\cup(\uparrow b)$  do not belong to $\SS$. 
+The only problems could come from condition (3).
+Then $\Gamma \proves \All{a}{t}, \All{a}{u}, \All{b}{t}$, and $\All{b}{u}$.
+But then $\Gamma \proves \All{(a \cup b)}{t}$ and $\Gamma \proves \All{(a \cup b)}{u}$.
+So $S$, being closed upwards, contains both $t$ and $u$, and this is a contradiction.
+\end{proof}
+
+We may now show the completeness of both $\Aunion$ and $\Sunion$.
+
+\begin{theorem}
+    The logic $\Aunion$ is complete.
+    \label{theorem-completeness-Aunion}
+\end{theorem}
+
+\begin{proof}
+We need to show that if $\Gamma\models \All{t}{u}$,
+$\Gamma\proves \All{t}{u}$.
+We may assume that $u$ is a union term.  (If $u$ were a basic term $a$, replace $a$ with $a\cup a$.)
+We also may assume that $t$ is a basic term, since if $t$ were $a \cup b$ then both $\Gamma\models \All{a}{u}$
+and $\Gamma\models \All{b}{u}$ follow from our assumption.   If we were to prove that $\Gamma \vdash \All{a}{u}$ and $\Gamma \vdash \All{b}{u}$, then by $(\proverule{union-all})$
+we would have our desired conclusion:
+$\Gamma \vdash \All{(a \cup b)}{u}$.
+
+Thus, we reduce to showing that if  $\Gamma\models \All{a}{(b \cup c)}$, then also  $\Gamma \proves \All{a}{(b \cup c)}$, for basic terms $a, b, c$.
+We show the contrapositive.   Suppose
+ that $\Gamma\not\proves \All{a}{(b \cup c)}$.
+By Lemma~\ref{lemma-zorn}, let $S$ be a prime up-set containing $a$ but not containing either $b$ or $c$.
+We use $S$ to make a model $\Model$ with one point, say $*$.   We put $*\in \semantics{u}$ iff $u\in S$.
+
+First we check that $\Model\models \Gamma$.  
+Suppose that $\Gamma$ contains the sentence $\All{d}{(e \cup f)}$. We may assume that $\semantics{d} = \set{*}$, 
+since otherwise $\semantics{d} = \emptyset$, and trivially $\semantics{d}\subseteq \semantics{e}\cup\semantics{f}$.
+So $d \in S$.  As $S$ is closed upwards and $\Gamma \proves \All{d}{(e \cup f)}$, $e \cup f\in S$ also.   Since $S$ is prime, either $e\in S$ or $f\in S$.
+So either $*\in\semantics{e}$ or $*\in \semantics{f}$.  Either way, $\semantics{e} \cup \semantics{f} = \set{*}$.  And again we have 
+$\semantics{d}\subseteq \semantics{e}\cup\semantics{f}$.
+Thus, $\Model\models \Gamma$.  
+
+By the defining property of $S$, $*\in \semantics{a}$ but $*\not\in \semantics{b}\cup\semantics{c}$.   So 
+$ \semantics{a} \not\subseteq \semantics{b}\cup\semantics{c}$.  Thus $\Model \not\models \All{a}{(b \cup c)}$.  We conclude that $\Gamma \not\models \varphi$.
+This concludes the proof of Theorem~\ref{theorem-completeness-Aunion}.
+\end{proof}
+
+
+\begin{theorem}
+    The logic $\Sunion$ is complete.
+    \label{theorem-completeness-Sunion}
+\end{theorem}
+ 
+\begin{proof}
+
+We would like to show the contrapositive:  
+If $\Gamma \nvdash \varphi$ then $\Gamma \nvDash \varphi$. 
+We have two cases.  Either $\varphi$ is $\All{t}{u}$, or $\varphi$ is $\Some{t}{u}$.
+
+Consider the first case, and suppose $\Gamma \nvdash \All{t}{u}$.
+Let $\Gamma_{\scriptsize all}$ be the $\AllNoArgs$-sentences in $\Gamma$.
+Note that $\Gamma_{\scriptsize all}\not\proves \All{t}{u}$.
+By Theorem~\ref{theorem-completeness-Aunion}, let $\Model$
+be a model of $\Gamma_{\scriptsize all}$ where $\All{t}{u}$ is false.
+Then add the same fresh point $*$ to $\semantics{a}$ for all basic terms $a$, and call the resulting model $\Nodel$.
+Since for all $a$, $\semantics{a}_{\Nodel} = \semantics{a}_{\Model}\cup\set{*}$, $\Nodel$ satisfies every sentence $\Some{x}{y}$,
+no matter whether this sentence is in $\Gamma$ or not.
+And the addition of the fresh point to the interpretation of every term
+has no effect on the $\AllNoArgs$-sentences, as a moment's thought shows.
+So $\Nodel\models\Gamma$, and $\Nodel\not\models\All{t}{u}$.  Thus $\Gamma \nvDash \varphi$.
+
+Now consider the second case.  Suppose $\Gamma \nvdash \Some{t}{u}$.  By Lemma \ref{lemma-some-prime-upset}, 
+ for each sentence $\Some{x}{y}$ in $\Gamma$ we may
+ choose a prime upset $S_{x,y}$ containing both $x$ and $y$
+ but not containing both $t$ and $u$.
+ Let 
+ \[ M = \set{S_{x,y}: \Gamma \mbox{ contains }\protect{\Some{x}{y}}}.\]
+ For a basic term $a$, let 
+ \[\semantics{a} = \set{S_{x,y}
+\in M: \Gamma \vdash \All{x}{a} \mbox{ or } \Gamma \vdash \All{y}{a}}.\]
+ This equips $M$ with the structure of a model which we call $\Model$.
+ Of course, for a binary union term $a \cup b$, 
+ we automatically have $\semantics{a \cup b} = \semantics{a} \cup\semantics{b}$.
+ Then the fact that each $S_{x,y}$ is closed upwards implies that $\Model$
+satisfies the $\AllNoArgs$-sentences in $\Gamma$.
+For a $\SomeNoArgs$-sentence in $\Gamma$, say $\Some{x}{y}$,
+note that $S_{x,y}\in \semantics{x}\cap\semantics{y}$.  
+Thus, $\Model\models\Gamma$.   
+
+We claim that $\semantics{t}\cap\semantics{u} = \emptyset$
+in $\Model$.   To see this, suppose towards a contradiction that 
+$S_{x,y} \in\semantics{t}\cap\semantics{u} $.
+Now $S_{x,y}\in M$, so $\Gamma$ contains
+the sentence $\Some{x}{y}$.
+We have a number of cases; one representative case is when
+$S_{x,y} \in\semantics{t}$ due to $\Gamma \vdash \All{x}{t}$,
+and $S_{x,y} \in\semantics{u}$ due to $\Gamma \vdash \All{y}{u}$.  But then we may use the rules (\darii) and (\conversion) to deduce $\Gamma \proves \Some{t}{u}$, which results in a contradiction.  So $\Model \vDash \Gamma$ and $\Model \nvDash \Some{t}{u}$.  Thus, again, $\Gamma \nvDash \varphi$.
+ \end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Logic $\Aunion(\card)$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Representation Theorem for $\Aunion(\card)$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For the proof of completeness of $\Aunion(\card)$, it remains to justify our representation lemma (Lemma \ref{lemma-representation}).  Given a \suitable{} pair of relations $(\preceq, \precsubseteq)$, we want to build a $BT$-family $S = (S_a)_{a\in BT}$ that preserves and reflects $\preceq$ and $\precsubseteq$.  Our plan is to start with a family that preserves and reflects $\precsubseteq$.  We then build our family of sets iteratively, ensuring that at each stage our family preserves and reflects $\precsubseteq$ and at the final stage our family also preserves and reflects $\preceq$.
+
+\begin{proof}[Proof of Lemma \ref{lemma-representation}]
+
+Consider the preorder $\preceq$.  We call a maximal set of $\preceq$-equivalent pairs a \emph{size class}.  We list the size classes in order, from  $\prec$-largest to $\prec$-smallest. 
+Let's say the size classes in this order are
+    \[  C_1, C_2, \ldots, C_K \]
+Since we are listing them from 
+$\prec$-largest to 
+$\prec$-smallest, we have the following fact:
+if $(a,b) \prec (c,d)$, and also  $(a,b)\in C_i$, and finally
+$(c,d)\in C_j$,
+then $j < i$.
+
+We will inductively construct a sequence of $BT$-families $S^0, S^1, \ldots, S^K$ such that at each step $i$ we ensure that in $S^i$:
+
+\begin{enumerate}[(1)]
+    \item The pairs preceding or in the size class $C_i$ are correctly ordered according to $\preceq$, i.e. for all $(a,b)$, $(c,d)\in \bigcup_{j\leq i} C_i$,
+ $
+        (a,b) \preceq  (c,d)$ iff 
+        $s^i_{a,b}\leq s^i_{c,d}
+        $.
+    
+    \item The sizes of all pairs strictly preceding $C_i$ are larger than the sizes of all pairs in or following $C_i$.
+    That is, for $j, k \in \{1, \ldots, K\}$ such that $j < i \le k$, $q \in C_j$, and $p \in C_k$, $s^i_q > s^i_p$.
+    
+    \item $S^i$ preserves and reflects $\precsubseteq$.
+\end{enumerate}
+If we do this for $i = 0, 1, \ldots, K$, then $S^K$ will
+be a family of sets that preserves and reflects $\preceq$ and $\precsubseteq$.
+
+\paragraph{Constructing $S^K$.} 
+We begin by taking $S^0$ to be any family
+which preserves and reflects $\precsubseteq$.
+%The canonical choice is to take $S^0_i$ to be the join-prime up-closed subsets of $(X,\preceq)$ that contain $(i,i)$ as an element, where $X$ is the set of all unary and binary union terms.  
+One choice is to take, for each basic term $a$, $S^0_a = \set{(c, d) \in \Pairs : (a, a) \not \precsubseteq (c, d)}$.  $S^0$ trivially satisfies assertions (1) and (2) from above and satisfies (3) by construction.
+
+We now consider step $1 \le i \le K$.  Suppose we have a family $S^{i-1}$ that satisfies assertions (1)-(3) above for $i-1$.  In order to appropriately manipulate the sizes of sets $S^i_a$, we will apply the lemmas to follow.  Both lemmas make use of a basic construction on families of sets, which we call \emph{$\Clamp$}.
+
+\begin{definition}  Let $S$ be a $BT$-family.  Let $(c, d) \in \Pairs, r \in \omega$. 
+We define a new family $\Clamp(S, c, d, r)$ as follows: 
+Let $R = \set{*_1, \ldots, *_r}$ be fresh points.  For all $a \in BT$, let
+\[ \begin{array}{lcl}
+\Clamp(S,c,d,r)_a = \left\{
+\begin{array}{ll}
+S_a \cup R & \mbox{if $ (a,a) \not \precsubseteq (c,d)$}\\
+ S_a & \mbox{otherwise}\\ 
+ \end{array}
+ \right.
+\end{array}
+\]
+In words, we add $r$ new points
+simultaneously to all sets $S_a$, except when 
+$\precsubseteq$ ``wants 
+$S_a$ to be a subset of  $S_c\cup S_d$.''
+
+\end{definition}
+
+The following proposition summarizes the basic properties
+of the $\Clamp$ operation.  %Arxiv:The proof of this fact is left to Section~\ref{s:supp:completeness-Aunioncard}.
+\begin{proposition}
+Let $S$ be a $BT$-family, and fix $(c, d) \in \Pairs$ and $r \in \omega$.  Write $T$ for $\Clamp(S, c, d, r)$.  Then:
+
+\begin{enumerate}
+    \item For $(a,b)\precsubseteq (c,d)$, $T_{a,b} = S_{a,b}$. \label{part-easy}
+
+    \item For $(a,b)$ such that $(c,d) \prec (a,b)$, $T_{a,b} =  S_{a,b}\cup\set{*_1,\ldots, *_r}$. \label{part-bigger}
+
+    \item If $S$ preserves and reflects $\precsubseteq$, then so does $T$. \label{part-preserve}
+\end{enumerate}
+
+\label{proposition-sClamp}
+
+\end{proposition}
+\begin{proof}
+We wish to show that properties (1) - (3) hold after a single application of the $\Clamp$ construction (i.e. that they hold for $T$).  We first show (1).  Suppose that $(a, b) \Subset (c, d)$.  Then both $(a,a) \Subset (c,d)$ and $(b,b) \Subset (c,d)$.  And so $T_a = S_a$ and $T_b = S_b$.  Thus, $T_{a,b} = T_a \cup T_b = S_a \cup S_b = S_{a,b}$.
+ 
+Turning to part (2), let  $(c,d) \prec (a,b)$.
+ We claim that either $(a,a) \not \precsubseteq (c,d)$ or $(b,b) \not \precsubseteq (c,d)$.
+To see this, suppose towards a contradiction that both $(a,a) \precsubseteq(c,d)$ and $(b,b) \precsubseteq (c,d)$.
+ Then $(a,b) \precsubseteq (c,d)$, and so $(a,b) \preceq (c,d)$.  And this contradicts 
+$(c,d) \prec (a,b)$.
+
+Without loss of generality, say that $(a,a) \precsubseteq (c,d)$.
+Then $T_a = S_a \cup \set{*_1,\ldots, *_r}$.
+And so,
+\begin{align*} T_{a,b} &= T_a \cup T_b\\ &= S_a\cup\set{*_1,\ldots, *_r} \cup S_b \\&= S_{a,b}\cup\set{*_1,\ldots, *_r}.
+\end{align*}
+This completes the proof of part (2).
+
+Finally, we show part (3): that if $S$ preserves and reflects $\Subset$, then so does $T$.  We first show that $T$ preserves $\Subset$, i.e. for $p, q \in \Pairs$ if $p \Subset q$ then $T_p \subseteq T_q$.
+We have two cases.  First, if $p \precsubseteq (c,d)$ then we have $T_p = S_p$.
+By our assumption that $S$ preserves $\precsubseteq$, $S_p \subseteq S_q$.
+And clearly $S_q \subseteq T_q$.
+So in this case we easily get $T_p \subseteq T_q$.
+
+It remains to argue the case when
+$p \not \precsubseteq (c,d)$.  In this case,  
+$T_p =  S_p \cup \set{*_1,\ldots, *_r}$.
+We claim that in this case,
+$T_q =  S_q \cup \set{*_1,\ldots, *_r}$.
+This again would imply $T_p \subseteq T_q$.
+
+Suppose towards a contradiction that 
+$T_q \neq  S_q \cup \set{*_1,\ldots, *_r}$.
+Then $T_q =  S_q $, by construction.  Write $q$ as $(e, f)$.  So we have $T_{e,e} = S_{e,e}$ and $T_{f,f} = S_{f,f}$.
+By construction of $T$, we must have $(e,e)\precsubseteq (c, d)$
+and   $(f,f)\precsubseteq (c, d)$.
+By property (4) of Definition~\ref{def-suitable-pair-first} of a suitable pair of relations, we have $(e,f)\precsubseteq (c, d)$.
+Recall that 
+$p \precsubseteq (e,f)$. 
+And so we have $p \precsubseteq (c, d)$. 
+This is a contradiction to the assumption in this case that 
+$p \not \precsubseteq (c, d)$.
+
+Concerning the reflection of $\precsubseteq$:
+ if we take any family which reflects $\precsubseteq$ and
+add fresh points to the base sets
+in any way whatsoever, the resulting family will reflect $\precsubseteq$.  Since $T$ is the result of single application of $\Clamp$, T reflects $\precsubseteq$.\hfill$\square$
+\end{proof}
+
+Our first lemma allows us to equalize sizes of unions of pairs in the same size class.  The second lemma ensures that the pairs in our size class $C_i$ have greater size than all pairs in 
+$C_j$ for $j > i$.
+
+\begin{lemma}
+
+Let $S$ be a family which preserves and reflects $\precsubseteq$.  Let $k\geq 2$, and let $C = \set{p_1, \ldots, p_k}$ be a size class of  $\preceq$.  Then there is a $BT$-family $T$ such that: 
+
+\begin{enumerate}
+    \item The unions corresponding to the pairs in $C$ have equal size in $T$; i.e., for $1\leq r,s \leq k$, $t_{p_r} = t_{p_s}$.
+    
+    \item If $(a,b)$ and $(c,d)$ are any pairs 
+    which belong to larger size classes than $C$,
+    then 
+    \[ \mbox{$t_{a,b} \leq t_{c,d} $ if and only if $s_{a,b} \leq s_{c,d} $}.\]
+    
+    \item $T$ preserves and reflects $\precsubseteq$. 
+\label{equalize2}
+\end{enumerate}
+
+\label{lemma-equalizing}
+\end{lemma}
+\begin{proof}
+We now verify that the construction of $T$ in the proof of Lemma~\ref{lemma-equalizing} satisfies properties (1) - (3) listed in Lemma~\ref{lemma-equalizing}.
+Recall that in order to construct $T$, we first selected one pair in each $\approx$-class of $C$ and listed the pairs $(a_1, b_1), \ldots, (a_k, b_k)$ such that $s_{a_1, b_1} \leq s_{a_2, b_2} \leq \cdots \leq s_{a_k, b_k}$.  We then took $T = T^{k-1}$, where:
+
+\[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,a_2,b_2,s_{a_2, b_2} - s_{a_1, b_1})\\
+T^2 & = & \Clamp(T^1,a_3, b_3, s_{a_3, b_3} - s_{a_2, b_2} )\\
+  & \vdots   & \\
+T^{k-1} & = & \Clamp(T^{k-2},a_k,b_k,
+s_{a_k, b_k} - s_{a_{k-1}, b_{k-1}})\\
+\end{array}
+\]
+
+To save on a lot of notation, we write $s_i$ for $s_{a_i, b_i}$,
+and similarly for $t^j_i$.
+
+We would first like to show (1): for $1 \leq r, s \leq k$, $t_{r} = t_{s}$ (actually, since $T = T^{k-1}$, we want to show that $t^{k-1}_{r} = t^{k-1}_{s}$).  In fact, we will show by induction on $1 \leq i \leq k - 1$ something stronger:
+\begin{equation}
+\label{equalization}
+s_{i+1}  = t^i_{1} = t^i_{i} = \cdots = t^i_{i} =  t^i_{i+1}.
+\end{equation}
+We may then take $i = k - 1$ in order to prove our result.    
+
+Well, for $i = 1$, we must show that $s_2 = t^1_1 = t^1_2$.  Recall our observation made at the beginning of the proof of Lemma~\ref{lemma-equalizing}:  $(a_1,b_1) \not \precsubseteq (a_2,b_2)$.  So by the first $\Clamp$ application, $t^1_1 = s_1 + (s_2 - s_1) = s_2$.
+So $t^1_1 = s_1 + (s_2 - s_1) = s_2$.
+Moreover, $t^1_2= s_2$, since the definition of $T^1$ uses $\Clamp$ at $(a_2,b_2)$.
+
+Assume (\ref{equalization}) for  $i$.
+Let   $1\leq j \leq i+1$.  Again, we observed before that $(a_{i+1},b_{i+1}) \not \precsubseteq (a_{i+2},b_{i+2})$.  Then
+\[ t^{i+1}_j = s_{i+1} + (s_{i+2} - s_{i+1}) 
+= s_{i+2}\]
+Also, $t^{i+1}_{i+2} = s_{i+2} $, since $T^{i+1}$ uses $\Clamp$
+at $(a_{i+2},b_{i+2})$.
+
+We would now like to show (2) and (3).  Proposition~\ref{proposition-sClamp}, part (2) states that a single application of $\Clamp$ equally increases the sizes of all $(a, b)$ above a fixed $(c, d)$.  We may use this fact to show (2) by straightforward induction on the $i^{\textrm{th}}$ application of $\Clamp$.  By Proposition~\ref{proposition-sClamp}, part (3), the result of a single application of $\Clamp$ preserves and reflects $\Subset$.  So (3) can be shown by straightforward induction on the $i^{\textrm{th}}$ application of $\Clamp$ as well.  \hfill$\square$
+\end{proof}
+\begin{proof}
+Before we begin the construction of $T$,
+we have an observation.
+Let $\approx$ be the equivalence relation induced by $\precsubseteq$.
+$C$, being a size class of $\approx$, splits into one or more
+$\approx$-classes.
+The observation is that if $q_1$ and $q_2$ are members of $C$ which are in different $\approxsubset$
+classes, then neither $q_1 \precsubseteq q_2$ nor  $q_2 \precsubseteq q_1$.
+To see this, suppose towards a contradiction that  $q_1 \precsubseteq q_2$.
+Then since we also have $q_2 \preceq q_1$, we have 
+$q_1 \precsubseteq q_2$ by one of the properties of the suitable pair $(\preceq, \precsubseteq)$.
+This gives a contradiction, since now $q_1 \approx q_2$.
+
+
+Let us choose one pair in each $\approx$-class of 
+$C$, and list the chosen pairs in size order according to $S$.
+That is, we have pairs $(a_1, b_1), \ldots, (a_k,b_k)$
+so that every element of $C$ is related by 
+$\approx$ to exactly one pair on this list,
+and the order is chosen so that
+$s_{a_1, b_1} \leq s_{a_2, b_2} \leq \cdots\leq s_{a_k, b_k}$.
+ Let 
+\[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,a_2,b_2,s_{a_2, b_2} - s_{a_1, b_1})\\
+T^2 & = & \Clamp(T^1,a_3, b_3, s_{a_3, b_3} - s_{a_2, b_2} )\\
+  & \vdots   & \\
+T^{k-1} & = & \Clamp(T^{k-2},a_k,b_k,
+s_{a_k, b_k} - s_{a_{k-1}, b_{k-1}})\\
+\end{array}
+\]
+We take $T = T^{k-1}$.  One may carefully verify that this $T$ works.  %Arxiv:The verification that this $T$ works is left to Section~\ref{s:supp:completeness-Aunioncard}.
+\end{proof}
+
+
+\begin{lemma}
+
+Let $S$ be a family which  preserves and reflects $\precsubseteq$.  
+Let $q_1$, $\ldots$, $q_{\ell}$ be a sequence of pairs in $\Pairs$.  
+Then there is a family $T$ such that:
+
+\begin{enumerate} 
+    \item For $1\leq i,j \leq k$, $s_{q_i} \leq s_{q_j}$ iff $t_{q_i} \leq t_{q_j}$. \label{competitor1}
+    
+    \item For all pairs $p $ which are $\prec$-below all $q_j$, we also have $t_{p}  <  t_{q_i}$ for all $i$. \label{competitor2}
+  
+    \item $T$ preserves and reflects $\precsubseteq$. 
+
+\end{enumerate}
+
+\label{lemma-sizeadjustment}
+\end{lemma}
+\begin{proof}
+We verify that the construction of $T$ in the proof of Lemma~\ref{lemma-sizeadjustment} satisfies properties (1) - (3) listed in Lemma~\ref{lemma-sizeadjustment}.
+Again, recall that in order to construct $T$, we listed all the size competitors $p_1, \ldots, p_k$ and then took $T = T^k$ where:
+
+\[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,p_1,  s_{p_1} -m + 1)\\
+
+T^2 & = & \Clamp(T^1,p_2,  s_{p_2}-m + 1 )\\
+  & \vdots   & \\
+T^{k} & = & \Clamp(T^{k-1},p_k, s_{p_k}-m + 1 )\\
+\end{array}
+\]
+
+We first handle (2):  For all pairs $p \prec q_j$ (for all $j$), we also have $t_p < t_{q_j}$ (for all $j$).  Let $p \prec q_j$ for all $j$.  If $p$ is not a size competitor, then $s_p < s_{q_j}$ for all $j$.  So $t_{q_j} - t_p \ge s_{q_j} - s_p > 0$, and we are done.
+
+Now suppose instead that $p$ is a size competitor; say $p$ is some $p_i$.  Then $p_i$ gains elements from the $\Clamp$ construction as we move from $T^{i-1}$ to $T^i$.  That is,
+
+\begin{equation}
+\label{nearendsubset}
+\begin{array}{lccc}
+t_{p_i} & = & & s_{p_i}\\
+& & + & ( s_{p_1}-m  + 1)\\
+& & + & \vdots\\
+& & + & (s_{p_{i-1}} -m  + 1)\\
+& & + & (s_{p_{i+1}} -m  + 1)\\
+& & + & \vdots\\
+& & + & (s_{p_k}-m + 1)\\
+%& > &  \\
+\end{array}
+\end{equation}
+The upshot is that
+\begin{equation}\label{upshot}
+\begin{array}{lcl}
+t_{q_j} - t_{p_i} & \geq & s_{q_j} + (s_{p_i}-m + 1) - s_{p_i}\\
+& = & s_{q_j} - m + 1\\
+& \geq & s_{q_j} -s_{q_i} +1\\
+& = & 1\\
+\end{array}
+\end{equation}
+(At the end of (\ref{upshot}), we used the fact that $m \leq s_{q_i}$.)
+By (\ref{upshot}) we see that $t_{q_j} > t_{p_i}$.
+
+\rem{The reason that the first $\ge$ is not an equals sign $=$ is that it may be the case that $p_i \Subset p_{i^'}$}
+
+Parts (1) and (3) follow from straightforward induction arguments on applications of $\Clamp$ (as in Lemma~\ref{lemma-equalizing}).
+This completes the proof.\hfill$\square$
+\end{proof}
+\begin{proof}
+Let $m =  \min_i s_{i} = \min_i s_{q_i}$.
+We call a pair $p$ a \emph{size competitor} if 
+$p\prec q_j$ for all $j$, and yet  $t_p \geq m$.
+
+List the size competitors as $p_1, \ldots, p_k$. 
+ Note that for all size competitors $p_i$ and all of the original points
+ $q_j$,  we have $q_j \not \precsubseteq p_i$.
+For if we did have $q_j \precsubseteq p_i$, then we would have 
+$q_j \preceq p_i$; and the definition of a size competitor
+ensures that that $p_i \prec q_j$ for all $i, j$.
+
+
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,p_1,  s_{p_1} -m + 1)\\
+
+T^2 & = & \Clamp(T^1,p_2,  s_{p_2}-m + 1 )\\
+  & \vdots   & \\
+T^{k} & = & \Clamp(T^{k-1},p_k, s_{p_k}-m + 1 )\\
+\end{array}
+\]
+We take $T = T^{k}$.  Again, one may carefully verify that this $T$ works.  %Arxiv:Again, we verify that this $T$ works in Section~\ref{s:supp:completeness-Aunioncard}.
+\end{proof}
+
+
+We may finally return to constructing the next family $S^i$.  Consider our currently examined size class $C_i$.  If $C_i$ contains $\ge 2$ pairs then we may apply Lemma \ref{lemma-equalizing} with size class $C_i$ and family $S^{i-1}$ in order to obtain a new family which we'll call $T$.  (If $C_i$ contains only $1$ pair, let $T = S^{i-1}$).  In $T$, all pairs in $C_i$ have the same size (by part 1 of Lemma \ref{lemma-equalizing}).  By (1) for $i-1$ and by part 2 of Lemma \ref{lemma-equalizing}, we have (1) for $T$.  Lemma \ref{lemma-equalizing} also ensures that $T$ preserves and reflects $\precsubseteq$.
+
+We list the pairs preceding or in size class $C_i$ as $p_1, \ldots, p_k$.  We apply Lemma \ref{lemma-sizeadjustment} with these pairs $p_1, \ldots, p_k$ and family $T$.  We let $S^i$ be the resulting family.  Lemma \ref{lemma-sizeadjustment}, part 1 ensures that (1) holds for $S^i$, since it held for $T$.  And Lemma \ref{lemma-sizeadjustment}, part 2 ensures that (2) holds for $S^i$.  Lemma \ref{lemma-sizeadjustment} also ensures (3): that $S^i$ preserves and reflects $\precsubseteq$.
+
+This completes the proof of our representation lemma and hence the completeness of $\Aunion(\card)$.
+\end{proof}
+
+% Rules for \Munion(\card)
+\begin{figure*}[ht!]
+\begin{equation*}
+\boxed{
+\small
+\begin{array}{c}
+\begin{array}{ccc}
+\\ 
+\infer[(\morel)]
+    {\More{x}{z}}
+    {\More{x}{y} & \Atleast{y}{z}} 
+&
+\infer[(\morer)]
+    {\More{x}{z}}
+    {\Atleast{x}{y} & \More{y}{z}}
+\end{array}
+\\% \\
+\begin{array}{ccc}
+% TOGGLE FOR SPACING:
+%\\ 
+\infer[(\moreatleast)]
+    {\Atleast{x}{y}}
+    {\More{x}{y}}
+&
+\infer[(\x)]
+    {\varphi}
+    {\More{z}{z}}
+&
+\infer[(\raa)]
+     {\More{x}{y}}
+     {\inferLineSkip=0pt
+     \infer*
+        {\More{z}{z}}
+        {[\Atleast{y}{x}]}}
+\end{array}
+\\
+\end{array}
+}
+\end{equation*}
+\caption{The additional rules for the logics $\Munion(\card)$ and $\Minter(\card)$.
+\label{fig-more-rules}}
+\end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Illustration of the Representation Lemma Algorithm}
+\label{s:supp:illustration}
+
+% |S[0]| = 120 \\
+% |S[1]| = 120 \\
+% |S[2]| = 120 \\
+% |S[3]| = 120 \\
+% |S[4]| = 89 \\
+% |S[5]| = 94 \\
+% |S[6]| = 111 \\
+% |S[7]| = 101 \\
+% |S[8]| = 120 \\
+
+In this section, we provide an example to better illustrate the algorithm for our Representation Lemma (described in Section~\ref{s:representation}).  In particular, we illustrate a step in the process of repeatedly applying Lemma~\ref{lemma-equalizing} and Lemma~\ref{lemma-sizeadjustment} for each size class $C_i$.  Let $n = 9$, and let $\prec$ have size classes as shown in lists below:
+\[
+ \begin{array}{l}
+\ [(5,5),(6,6)], \\
+ \  [(5,6),(4,4),(7,7)], \\
+  \  [(4,7),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)],\\
+  \ [(2,3),  (1,2),(1,3),(0,7),(0,3), (0,2)],\\
+\	    [(0,1), (0,4),(1,7),(2,7), (2,8),(1,8), (3,8), (7,8)],\\
+ \        [(3,7), (5,7),(6,7),(1,4),(2,4), (3,4), (6,8)], \\
+\	    [(0,6),(1,6),(2,6),(3,6),(1,5), (5,8), (4,8)],\\
+ \        [(4,6),(0,5),(2,5),(3,5)]
+         \end{array}
+\]
+To make this procedure easier to follow, we define $\Subset$ for this example such that the only pairs $\Subset$-below a given pair $(a, b)$ are $(a, a)$, $(b, b)$, and $(a, b)$.
+ 
+We illustrate the procedure with step $6$.  We begin with a family $S$ with cardinalities as shown:
+\[
+\arraycolsep=3.0pt
+%\begin{array}[t]{l@{\qquad\qquad}l@{\qquad\qquad}l@{\qquad\qquad}l@{\qquad\qquad}l}
+\begin{array}[t]{lllll}
+ \begin{array}{l}
+|S_0| = 65 \\
+|S_1| = 63 \\
+|S_2| = 63 \\
+|S_3| = 64 \\
+|S_4| = 64 \\
+|S_5| = 70 \\
+|S_6| = 71 \\
+|S_7| = 60 \\
+|S_8| = 68 \\
+\\
+s_{5, 5} = 70 \\
+s_{6, 6} = 71 \\
+\end{array}
+ &
+\begin{array}{l}
+s_{5, 6} = 79 \\
+s_{4, 4} = 64 \\
+s_{7, 7} = 60 \\
+\\
+s_{4, 7} = 79 \\
+s_{4, 5} = 79 \\
+s_{2, 2} = 63 \\
+s_{1, 1} = 63 \\
+s_{0, 0} = 65 \\
+s_{8, 8} = 68 \\
+s_{3, 3} = 64 \\
+\\
+s_{2, 3} = 80 \\
+s_{1, 2} = 80 \\
+s_{1, 3} = 80 \\
+s_{0, 7} = 80 \\
+s_{0, 3} = 80 \\
+s_{0, 2} = 80 \\
+ \end{array}
+&
+  \begin{array}{l}
+s_{0, 1} = 81 \\
+s_{0, 4} = 81 \\
+s_{1, 7} = 81 \\
+s_{2, 7} = 81 \\
+s_{2, 8} = 81 \\
+s_{1, 8} = 81 \\
+s_{3, 8} = 81 \\
+s_{7, 8} = 81 \\
+\\
+s_{3, 7} = 82 \\
+s_{5, 7} = 82 \\
+s_{6, 7} = 82 \\
+s_{1, 4} = 82 \\
+s_{2, 4} = 82 \\
+s_{3, 4} = 82 \\
+s_{6, 8} = 82 \\
+   \end{array}
+ &
+  \begin{array}{l}
+s_{0, 6} = 83 \\
+s_{1, 6} = 83 \\
+s_{2, 6} = 83 \\
+s_{3, 6} = 83 \\
+s_{1, 5} = 83 \\
+s_{5, 8} = 83 \\
+s_{4, 8} = 83 \\
+\\
+s_{4, 6} = 84 \\
+s_{0, 5} = 84 \\
+s_{2, 5} = 84 \\
+s_{3, 5} = 84 \\
+\end{array}
+\end{array}
+\]
+
+Step $6$ concerns the sixth size class, starting from the highest one.
+So  we are working on the size class $[(7,4),(4,5),(2, 2),(1,1),(0,0),(8,8), (3,3)]$.  The first step is to equalize the sizes of unions of the pairs in this class, using Lemma~\ref{lemma-equalizing}.  We first reorder our size classes in order of the size of the union corresponding to each pair, obtaining $[(1,1), (2, 2), (3,3),  (0,0),(8,8), (7,4),(4,5)]$.  We then calculate:
+\[ \begin{array}{lcl}
+ T^1  & = &  \Clamp(S,(2,2), 63-63)\\
+
+T^2 & = & \Clamp(T^1,(3,3),  64-63)\\
+
+T^{3} & = & \Clamp(T^{2}, (0,0), 65-64 )\\
+T^{4} & = & \Clamp(T^{3}, (8,8), 68-65 )\\
+T^{5} & = & \Clamp(T^4, (7,4),79-69 )\\
+T^{6} & = & \Clamp(T^{5}, (4,5), 79-79)\\
+\end{array}
+\]
+We take $T = T^6$.  Note that the process of equalization preserves the relative size of pairs within the same size class, for all size classes above the current (sixth) size class.
+
+After equalizing, we get 
+\[
+\arraycolsep=3.0pt
+\begin{array}[t]{lllll}
+ \begin{array}{l}
+|S_0| = 103 \\
+|S_1| = 103 \\
+|S_2| = 103 \\
+|S_3| = 103 \\
+|S_4| = 72 \\
+|S_5| = 94 \\
+|S_6| = 111 \\
+|S_7| = 84 \\
+|S_8| = 103 \\
+\\
+s_{5, 5} = 94 \\
+s_{6, 6} = 111 \\
+\end{array}
+ &
+\begin{array}{l}
+s_{5, 6} = 119 \\
+s_{4, 4} = 72 \\
+s_{7, 7} = 84 \\
+\\
+s_{4, 7} = 103 \\
+s_{4, 5} = 103 \\
+s_{2, 2} = 103 \\
+s_{1, 1} = 103 \\
+s_{0, 0} = 103 \\
+s_{8, 8} = 103 \\
+s_{3, 3} = 103 \\
+\\
+s_{2, 3} = 120 \\
+s_{1, 2} = 120 \\
+s_{1, 3} = 120 \\
+s_{0, 7} = 120 \\
+s_{0, 3} = 120 \\
+s_{0, 2} = 120 \\
+ \end{array}
+&
+  \begin{array}{l}
+s_{0, 1} = 121 \\
+s_{0, 4} = 121 \\
+s_{1, 7} = 121 \\
+s_{2, 7} = 121 \\
+s_{2, 8} = 121 \\
+s_{1, 8} = 121 \\
+s_{3, 8} = 121 \\
+s_{7, 8} = 121 \\
+\\
+s_{3, 7} = 122 \\
+s_{5, 7} = 122 \\
+s_{6, 7} = 122 \\
+s_{1, 4} = 122 \\
+s_{2, 4} = 122 \\
+s_{3, 4} = 122 \\
+s_{6, 8} = 122 \\
+   \end{array}
+ &
+  \begin{array}{l}
+s_{0, 6} = 123 \\
+s_{1, 6} = 123 \\
+s_{2, 6} = 123 \\
+s_{3, 6} = 123 \\
+s_{1, 5} = 123 \\
+s_{5, 8} = 123 \\
+s_{4, 8} = 123 \\
+\\
+s_{4, 6} = 124 \\
+s_{0, 5} = 124 \\
+s_{2, 5} = 124 \\
+s_{3, 5} = 124 \\
+\end{array}
+\end{array}
+\]
+
+We must now ensure that the pairs in the sixth size class have greater size than all pairs in preceding size classes.  At this point, the size competitors are $(5,6)$ and $(6,6)$.  So we want to make the sizes of the pairs in our current size class larger than the sizes of $(5,6)$ and $(6,6)$.  We use Lemma~\ref{lemma-sizeadjustment} to do this:  We clamp $(5,6)$ and $(6,6)$, increasing all sets by
+one more than the difference of the sizes of those sets with $103$.
+We get
+\[
+\arraycolsep=3.0pt
+\begin{array}[t]{lllll}
+ \begin{array}{l}
+|S_0| = 120 \\
+|S_1| = 120 \\
+|S_2| = 120 \\
+|S_3| = 120 \\
+|S_4| = 89 \\
+|S_5| = 94 \\
+|S_6| = 111 \\
+|S_7| = 101 \\
+|S_8| = 120 \\
+\\
+s_{5, 5} = 94 \\
+s_{6, 6} = 111 \\
+\end{array}
+ &
+\begin{array}{l}
+s_{5, 6} = 119 \\
+s_{4, 4} = 89 \\
+s_{7, 7} = 101 \\
+\\
+s_{4, 7} = 120 \\
+s_{4, 5} = 120 \\
+s_{2, 2} = 120 \\
+s_{1, 1} = 120 \\
+s_{0, 0} = 120 \\
+s_{8, 8} = 120 \\
+s_{3, 3} = 120 \\
+\\
+s_{2, 3} = 137 \\
+s_{1, 2} = 137 \\
+s_{1, 3} = 137 \\
+s_{0, 7} = 137 \\
+s_{0, 3} = 137 \\
+s_{0, 2} = 137 \\
+ \end{array}
+&
+  \begin{array}{l}
+s_{0, 1} = 138 \\
+s_{0, 4} = 138 \\
+s_{1, 7} = 138 \\
+s_{2, 7} = 138 \\
+s_{2, 8} = 138 \\
+s_{1, 8} = 138 \\
+s_{3, 8} = 138 \\
+s_{7, 8} = 138 \\
+\\
+s_{3, 7} = 139 \\
+s_{5, 7} = 139 \\
+s_{6, 7} = 139 \\
+s_{1, 4} = 139 \\
+s_{2, 4} = 139 \\
+s_{3, 4} = 139 \\
+s_{6, 8} = 139 \\
+   \end{array}
+ &
+  \begin{array}{l}
+s_{0, 6} = 140 \\
+s_{1, 6} = 140 \\
+s_{2, 6} = 140 \\
+s_{3, 6} = 140 \\
+s_{1, 5} = 140 \\
+s_{5, 8} = 140 \\
+s_{4, 8} = 140 \\
+\\
+s_{4, 6} = 141 \\
+s_{0, 5} = 141 \\
+s_{2, 5} = 141 \\
+s_{3, 5} = 141 \\
+\end{array}
+\end{array}
+\]
+Note that it wasn't really necessary to clamp $(6,6)$ after we clamped $(5,6)$.
+So our algorithm does a bit of work that is not necessary.   
+It could be elaborated to produce slightly smaller sets in the end.  But it is correct.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Completeness for $\Aunion(\card)$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we prove the completeness of the logic $\Aunion(\card)$.  We will return to $\Ainter(\card)$ in Section~\ref{s:completenes_intersections}. First, we present a representation lemma that will later be used to build a model of any finite set $\Gamma$ of sentences in $\Aunion(\card)$.
+In logics with sentential negation $\nott$ and a proof rule of \emph{reductio ad absurdum}, such a representation lemma is tantamount to completeness.  But $\Aunion(\card)$ has neither of these, and so more work will be needed.  This extra work will be presented subsequently.
+
+
+\subsubsection{Representation Lemma}
+\label{subsection-representation}
+
+Since we restrict our attention to binary terms, we may model the $\AllNoArgs$- and $\AtleastNoArgs$-relationships provable from $\Gamma$ by corresponding relations on pairs of basic terms; this is the content of our representation lemma.  We represent the problem in this way in order to argue that model-building in $\Aunion(\card)$ can be done in polynomial time.
+
+In order to state this lemma, we must first define the appropriate relations on pairs.
+Let $BT$ be a finite set of basic terms.  We fix a linear order $<$ on $BT$.
+We define the set of pairs under discussion as $\Pairs = \set{(a, b) : a, b \in BT \textrm{ and } a \leq b}$.
+
+\begin{definition}
+A \emph{\suitable}
+pair of relations on $\Pairs$ 
+is a pair of relations $(\preceq, \precsubseteq)$ such that for all pairs $p$ and $q$, and all basic terms $a$, $b$, $c$, and $d$,
+
+\begin{enumerate}
+\item $\preceq$ and $\precsubseteq$ are preorders on $\Pairs$.
+(That is, they are reflexive and transitive.)
+\item   $\preceq$ is linear:
+ either $p \preceq q$ or $q \preceq p$ (and possibly both).
+ \item If $a < b$ in the fixed ordering on $BT$, then $(a,a) \precsubseteq (a,b)$.  If $b < a$, then $(a,a) \precsubseteq (b,a)$. 
+ \item If $(a,a) \precsubseteq (c,d)$ and $(b,b) \precsubseteq (c,d)$ and $a < b$,
+ then $(a,b) \precsubseteq (c,d)$.
+\item If $p \precsubseteq q$, then $p\preceq q$.
+\item If $p \precsubseteq q$ and $q\preceq p$, then $q \precsubseteq p$.
+\end{enumerate}
+
+%we let $<$ be the \emph{strict part} of $\leq$:
+%  \[ x < y \quadiff x \leq y \mbox{ but } y \nleq x\]
+
+For $p,q \in \Pairs$, we often write $\prec$ to denote the \emph{strict part} of $\preceq$, i.e. $p \prec q$ whenever $p \preceq q$ but $q \not \preceq p$.
+\label{def-suitable-pair-first}
+\end{definition}
+
+Here is an example:
+Let $\Nodel$ be any model, and define $(a,b) \preceq (c,d)$ iff 
+$|\semantics{a} \cup \semantics{b}| \leq
+|\semantics{c} \cup \semantics{d}|$, and 
+ $(a,b) \precsubseteq (c,d)$ iff 
+$\semantics{a} \cup \semantics{b} \subseteq
+\semantics{c} \cup \semantics{d}$.
+This gives a {\suitable} pair of relations.
+Our representation lemma shows that every {\suitable} pair of relations arises in
+this way.  In order to build such models, we use families of sets corresponding to basic terms, defined as follows:
+
+\begin{definition}
+ A \emph{$BT$-family} is a family of finite sets
+$S = (S_a)_{a\in BT}$.
+For a $BT$-family $S$, we write $S_{a,b}$ for $S_a \cup S_b$.  We also write $s_{a,b}$
+for the number  $|S_a\cup S_b|$.  
+We also write $s_a$ for $s_{a,a}$ (i.e., for $|S_a|$).
+
+For $p\in\Pairs$, say with $p= (a,b)$, we often write $S_p$ instead of $S_{a,b}$.
+\end{definition}
+
+\begin{definition}\label{def-family-model}
+A $BT$-family $S$ is \emph{$\preceq$-preserving} if, for all $p,q \in \Pairs$, $p \preceq q$ implies that $s_{p} \le s_{q}$.  $S$ is \emph{$\preceq$-reflecting} if $s_{p} \le s_{q}$ implies that $p \preceq q$.
+
+Similarly, $S$ is \emph{$\precsubseteq$-preserving}
+if $p \precsubseteq q$ implies that $S_{p} \subseteq S_{q}$, and 
+$S$ is \emph{$\precsubseteq$-reflecting} if 
+$S_{p} \subseteq S_{q}$ implies that $p \precsubseteq  q$. 
+
+Every $BT$-family $S$ determines
+a  model $\Model$ as follows.  Its universe $M$ is  $\bigcup_{a} S_a$.
+This set is finite.
+For a basic term  $a$, let $\semantics{a} = S_{a}$. 
+So  for union terms $a\cup b$, we
+automatically
+have $\semantics{a\cup b} = S_{a} \cup S_{b} = S_{a,b}$.
+\end{definition}
+
+% Our hope is that $S$ preserves and reflects $\preceq$ and $\precsubseteq$, i.e. that we have a model whose terms preserve and relect the behavior of $\mbox{\sf All}$-, $\mbox{\sf More}$-, and $\mbox{\sf Atleast}$-sentences with term union.  
+%We now state our representation lemma and use it to prove the completeness of  $\Aunion(\card)$.
+
+We may now state our representation lemma.  In the next section, we use it to prove the completeness of $\Aunion(\card)$.
+
+\begin{lemma} [Representation Lemma]
+Let $(\preceq, \precsubseteq)$ be a suitable pair of relations on $\Pairs$.
+Then there is a $BT$-family of sets $S$
+such that for all $p,q\in\Pairs$,
+\begin{align}
+\label{goal-main1-first}
+p \preceq q \quadiff 
+ s_{p}\leq s_q  \\
+\label{goal-main2-first} 
+ p \precsubseteq  q \quadiff 
+S_{p}\subseteq S_{q}
+ \end{align}
+ That is, $S$ preserves and reflects $\preceq$ and $\precsubseteq$.
+ \label{lemma-representation}
+ \end{lemma}
+
+\subsubsection{Completeness}
+\label{section-completeness}
+
+\begin{theorem}
+The logic $\Aunion(\card)$ is complete.
+\label{theorem-completeness-Aunioncard}
+\end{theorem}
+
+The rest of this section is devoted to the proof.  We want to show that if $\Gamma$ is a finite set of sentences and $\Gamma \not \proves \varphi$, then $\Gamma \not \models \varphi$.  Our plan is to use Lemma \ref{lemma-representation} to build a model of $\Gamma$ where $\varphi$ is false. Note that we may assume $\varphi$ has the form $\Atleast{(a\cup b)}{(c\cup d)}$ or $\All{(a\cup b)}{(c\cup d)}$ for some basic terms $a$, $b$, $c$, and $d$; for example, $\Atleast{a}{c}$ is provably equivalent to $\Atleast{(a\cup a)}{(c\cup c)}$.
+
+We first define relations $\provle$ and $\provsub$ on $\Pairs$ by
+
+\begin{itemize}%[parsep=0pt,partopsep=0pt]
+    \item $(a,b) \provle (c,d)$ iff $\Gamma \vdash  \Atleast{(c \cup d){(a \cup b)}}$
+    
+    \item $(a,b) \provsub (c,d)$ iff $\Gamma \vdash \All{(a \cup b)}{(c \cup d)}$
+\end{itemize}
+for all $(a,b)$ and  $(c,d)$ in $\Pairs$.  
+
+%\footnote{LM: Here's an explanation of \hl{my main notational choice, in case we want to discuss and/or change it}.  I resisted the temptation to import pairs into our original syntax.   So when it comes to sentences, I wrote $ \All{(a \cup b)}{(c \cup d)}$ and never ``$\All{x}{y}$ where $x$ and $y$ correspond to $p = (a,b)$ and $q=(c,d)$.''  I figure that this second usage would be too much for people.  Do you agree? }
+
+Note that $(\provle, \provsub)$ has all the properties of a suitable pair, except for linearity of $\provle$.  We use the following fact to extend $\provle$ to a linear preorder.  The statement is a bit stronger than a straightforward linearization, for purposes that will become clear at the end of this section.  %Arxiv:We prove this fact in Section~\ref{s:supp:completeness-Aunioncard}.
+
+\begin{proposition}
+\label{proposition-linearization}
+Let $x^\star$ be a fixed pair.  We can extend $\provle$ to a linear preorder $\provextended$ over $\Pairs$ such that for all $y \in \Pairs$, if $y \not \provle x^\star$, then $x^\star \provextendedstrict y$.
+\end{proposition}
+\begin{proof}
+We begin with a very general result.   Let $(P,\leq_0)$ be any preorder whatsoever.
+We show that $(P,\leq_0)$ has a 
+ \emph{linearization}.  This is a relation $\leq_1$ which is a linear preorder on the same set $P$,
+and such that for all $x,y\in P$:
+(a) if $x \leq_0 y$, then also $x\leq_1 y$; and 
+(b) if $x <_0 y$, then $x <_1 y$.
+Here is how we obtain $\leq_1$:
+Let $\equiv$ be the equivalence
+relation on $P$ defined by $x \equiv y$ iff $x \leq_0 y$ and
+$y\leq_0 x$. Let $Q$ be the quotient set $P/\!\equiv$.
+(This is the set of equivalence classes $[x]$ for $x\in P$.)
+Let $\leq_Q$ be the induced order: $[x]\leq_Q [y]$ iff $x \leq_0 y$ in $P$.  Then $(Q, \leq_Q)$ is anti-symmetric, and indeed it is a 
+\emph{partial order}.  It is a standard fact that every partial order
+(finite or not) may be enlarged to a linear order.
+In the finite case, this is a topological sort;
+in the general case, it requires a weak form of the Axiom of Choice.
+
+Let $\leq_L$ be such an extension of $\leq_Q$.
+Define $\leq_1$ on $P$ by $x \leq_1 y$ iff $[x] \leq_L [y]$.
+Then $\leq_1$  is 
+a linear preorder.  For (a), let  $x \leq_0 y$.
+Then $[x] \leq_Q [y]$, so also $[x] \leq_L [y]$,
+and thus $x\leq_1 y$.  For (b), suppose that $x <_0 y$.
+Then $[x] <_Q [y]$.  So $[x] \leq_L [y]$.
+We claim that $[x] <_L [y]$.  The reason:
+if $[y] \leq_L [x]$, then we would have $[x] = [y]$
+by anti-symmetry of $\leq_L$. 
+This means that $x \leq_0 y\leq_0 x$.
+But this contradicts $x <_0 y$.
+
+The paragraphs above are quite general.   We now return to the
+setting of Proposition~\ref{proposition-linearization}.
+We take $P$ to be $\Pairs$
+and $\leq_0$ to be $\provle$.
+We use what we have just seen  to obtain a linearization $\leq_1$
+of $(P,\leq_0)$
+as we have defined it above.
+Let \[ A = \set{z :  z \leq_1 x^*  \mbox{ but } z \nleq_0 x^*}.\]
+We construct a new linear preorder $\leq_2$ by taking $\leq_1$ 
+and moving all points in $A$ (in order) to just after $x^*$. 
+Formally, $u \leq_2 v$ if any of the following four conditions holds:
+\begin{enumerate}
+    \item  $u,v\notin A$, and $u\leq_1 v$
+    \item $u, v \in A$, and $u\leq_1 v$
+        \item $u\in A$, $v\notin A$, and $x^* <_1 v$
+    \item $u\notin A$, $v\in A$, and $u\leq_1 x^*$
+
+\end{enumerate}
+This relation $\leq_2$ is reflexive due to (1) and (2).
+For the linearity, let $u, v\in A$.   If $u,v\in A$, then by (1), either $u \leq_2 v$ or $v\leq_2 u$.
+The same thing happens when $u,v\notin A$.   For the remaining two cases, let us assume that $u\in A$ 
+but $v\notin A$.     Since $\leq_1$ is linear, either $v \leq_1 x^*$ or $x^* <_1 v$.
+In the first case, $v \leq_2 u$ by (4).   In the second case, $u\leq_2 v$ by (3).
+
+\medskip
+
+The transitivity of $\leq_2$ takes sixteen cases.  We are going to list them by pairs $(i,j)$.
+So $(i,j)$ means that $u \leq_2 v$ by (i) and $v \leq_2 w$ by (i).
+
+
+$(1,1)$: we have $u,v,w\notin A$,  and 
+$u \leq_1 v \leq_1 w$.   So $u \leq_1 w$.    Thus  $u \leq_2 w$ by (1).
+
+$(1,2)$, $(1,3)$, $(3,2)$, and $(3,3)$: these are impossible because we would have $v\notin A$ and $v\in A$.
+
+ 
+
+$(1,4)$:  we have $u,v\notin A$, $w\in A$, $u\leq_1 v$ and $v \leq_1 x^*$.
+So $u \leq_1 x^*$ as well. 
+Thus, $u\leq_2 w$ by (4).
+
+$(2,1)$, $(2,4)$,
+$(4,1)$, and  $(4,4)$ : these are impossible  because we would have  $v\in A$ and $v\notin A$.
+
+
+$(2,2)$: we have $u,v,w\in A$,  and 
+$u \leq_1 v \leq_1 w$.   So $u \leq_1 w$.    Thus  $u \leq_2 w$ by (2).
+
+$(2,3)$: we have $u,v\in A$, $u\leq_1 v$,  and $w <_1 x^*$. 
+Then  $u \leq_2 w$ by (3).
+
+$(3,1)$: we have $u\in A$, $v,w\notin A$, $x^*<_1 v$, and $v \leq_1 w$.
+So $x^* <_1 w$.   We have $u \leq_2 w$ by (3).
+
+
+$(3,4)$: we have $u, w\in A$, $v\notin A$, $x^* <_1 v$, and $v\leq_1 x^*$.
+So we have $x^* <_1 v \leq_1 x^*$.  This gives $x^* <_1 x^*$.  Of course, this is a contradiction.
+
+ 
+
+$(4,2)$: we have $u\notin A$, $v,w\in A$, $u\leq_1 x^*$, and $v \leq_1 w$.   
+Then $u \leq_2 w$ by (4)
+
+$(4,3)$: we have  $u,w\notin A$, $v\in A$, $u\leq_1 x^*$, and $x^* <_1 w$.
+We have $u \leq_1 w$.   So  $u \leq_2 w$ by (1).
+ 
+ \medskip
+
+
+Before we move on,
+notice that  $x^*\notin A$, and our definition above arranges that
+$x^* <_2 z$ for all $z\in A$. 
+
+ \medskip
+ 
+Let us check linearization condition  (a) for   $\leq_2$, using the fact that $\leq_1$ is linear.
+  Suppose that  $u\leq_0 v$.
+We break into four cases depending on membership in $A$.
+Suppose that $u, v\in A$.  Then since $u\leq_1 v$, we also have $u \leq_2 v$.
+The same happens when $u, v\notin A$.
+
+We next consider the case when $u\in A$ and $v\notin A$.
+We want to show that $x^* <_1 v$.  If not, then by linearity, $v\leq_1 x^*$.
+Since $v\notin A$, we must have $v \leq_0 x^*$.  But then $u \leq_0 v \leq_0 x^*$,
+and we contradict $u\in A$.  Thus, $u\leq_2 v$ by (3) in the definition of $\leq_2$.
+
+For our last case, suppose that $u\notin A$ and $v\in A$.
+Since $v\in A$, $v\leq_1 x^*$.  Since $u\leq_0 v$, we also have 
+$u\leq_1 v$.  By transitivity, $u\leq_1 x^*$.
+Then $u \leq_2 v$ by condition (4) in the  definition of 
+$\leq_2$.
+ 
+ \medskip
+ 
+
+Turning to linearization condition (b) for $\leq_2$, suppose that $u <_0 v$.
+We showed above that (a) holds for $\leq_2$, and so $u \leq_2 v$; we must show that $v \nleq_2 u$.
+Since $\leq_1$ is a linearization of $\leq_0$, we know that $u <_1 v$.
+
+We shall assume that $v \leq_2 u$ and derive a contradiction.
+We have four cases, (1)--(4) in the definition of $\leq_2$ above, but with $u$ and $v$ switched.  
+In the first two cases, we have $v \leq_1 u$; this contradicts  $u <_1 v$.
+ 
+In the third case, $v\in A$, $u\notin A$, and $x^* <_1 u$.
+Then $v\leq_1 x^*$, since $v\in A$.
+So $v\leq_1 x^* <_1 u$, and thus $v <_1 u$.  
+This contradicts  $u <_1 v$.
+
+In the last case, $v\notin A$, $u\in A$,  and $v \leq_1 x^*$.
+Since   $u <_0 v$ and since $\leq_1$ is a linearization of $\leq_0$, we have $u <_1 v$.
+And now we have $u <_1 v \leq_1 x^*$.  So $u <_1 x^*$.  
+By the linearization property again, $u <_0 x^*$.  This contradicts $u\in A$.
+
+\medskip
+
+Now we have a linearization $\leq_2$.
+We check the additional property in our result
+for  $\leq_2$.  Suppose that $y\nleq_0 x^*$.
+If $x^*\leq_1 y$, then also $x^*\leq_2 y$.   So we may assume that  $x^*\nleq_1 y$.  By linearity,
+$y <_1 x^*$.
+But then $y\in A$.  By condition (4) above, $x^* \leq_2 y$.
+But we don't have $y \leq_2 x^*$.
+(Since $y\in A$ and $x\notin A$, the only way that we could have  $y \leq_2 x^*$ is if $x^* <_1 x^*$.
+Of course this is impossible.)
+So $x^* <_2 y$, as desired.
+\end{proof}
+
+If $\varphi$ is $\Atleast{(a \cup b)}{(c \cup d)}$, let $x^\star$ be the pair $(a, b)$. Otherwise, choose $x^\star$ arbitrarily. Let $\provextended$ be the linear preorder obtained from Proposition~\ref{proposition-linearization} using this $x^\star$.  One can verify the following proposition. %Arxiv:We verify the following proposition in Section~\ref{s:supp:completeness-Aunioncard}.
+
+\begin{proposition}
+\label{proposition-suitablepair}
+$(\provextended, \provsub)$ is a suitable pair of relations on $\Pairs$.
+\end{proposition}
+\begin{proof}
+We will show that $(\provextended, \provsub)$ is a suitable pair.  Except for parts (2) and (6) in the definition of a \suitable{} pair, everything follows from the fact that our logical system has rules that directly ensure the relevant closure properties.  Part (2) follows by construction, since $\provextended$ is a linearization of $\provle$.  So we turn to (6).  Write $p$ as $(a,b)$ and $q$ as $(c,d)$.
+Suppose that $p \provsub q$ and $q \provextended p$.    We must show that $q \provsub p$.
+    
+We have $\Gamma \vdash \All{(a \cup b)}{(c \cup d)}$.  
+    By ($\proverule{subset-size}$), $\Gamma \vdash \Atleast{(c \cup d)}{(a \cup b)}$.  
+    That is,  $p\provle q$.
+   Now if $p\provlestrict q$, we would also have $p\provextendedstrict q$,
+    since $\provextended$ is a linearization of $\provle$.
+    This would contradict  $q \provextended p$.  
+     Thus  $p\provle q$ but $p \not \provlestrict q$; i.e.,
+     $q\provle p$.  
+     This means that 
+     $\Gamma \vdash \Atleast{(a \cup b)}{(c \cup d)}$.  
+     Using (\mix),  $\Gamma \vdash \All{(c \cup d)}{(a \cup b)}$.
+     Therefore $q \provsub p$, as desired.
+\end{proof}
+
+We may now apply Lemma~\ref{lemma-representation}. Take $BT$ to be the set of basic terms appearing in $\Gamma$ and $\varphi$.  There is a $BT$-family of sets $S = (S_a)_{a\in BT}$ such that for all 
+$(a,b),(c,d) \in \Pairs$,
+\begin{equation}
+\label{arrows}
+\begin{array}{cc}
+\Gamma \proves \All{(a \cup b)}{(c \cup d)} & 
+\Gamma \proves \Atleast{(c \cup d)}{(a \cup b)}\\
+\Updownarrow &
+\Downarrow\\
+(a,b) \provsub (c,d) &
+(a,b) \provextended (c,d)\\
+\Updownarrow &
+\Updownarrow\\
+S_a \cup S_b \subseteq S_c \cup S_d &
+|S_a \cup S_b| \le |S_c \cup S_d|
+\end{array}
+\end{equation}
+
+The $\Updownarrow$ on the upper-left  is the definition of $\provsub$.
+The $\Downarrow$ on the upper-right comes from the fact that $\provextended$ is a linearization (hence an extension) of $\provle$.  The lower $\Updownarrow$-arrows follow from the representation lemma.
+
+Let $\Model$ be the model determined by the $BT$-family $S$. By (\ref{arrows}), $\Model$ satisfies the $\AllNoArgs$- and $\AtleastNoArgs$-sentences in $\Gamma$.  We would like to ensure as well that $\Model$ does not satisfy $\varphi$.  We have two cases:
+
+\begin{itemize}
+    \item $\varphi$ is $\All{(a \cup b)}{(c \cup d)}$.
+    Since $\Gamma \not \proves \All{(a \cup b)}{(c \cup d)}$, by (\ref{arrows}) we have $\semantics{a \cup b} = S_a \cup S_b \not \subseteq S_c \cup S_d = \semantics{c \cup d}$.  So $\Model \not \models \varphi$.
+    
+    \item $\varphi$ is $\Atleast{(a \cup b)}{(c \cup d)}$.
+    Recall that when we applied Proposition~\ref{proposition-linearization}, we took $x^\star$ to be $(a, b)$.  Now take $y$ to be $(c, d)$.  Since $\Gamma \not \proves \Atleast{(a \cup b)}{(c \cup d)}$, we have $(c, d) \not \provle (a, b)$ by definition.  Thus, by Proposition~\ref{proposition-linearization}, $(a, b) \provextendedstrict (c, d)$.  So by (\ref{arrows}), $|\semantics{a \cup b}| = |S_a \cup S_b| < |S_c \cup S_d| = |\semantics{c \cup d}|$.  So $\Model \not \models \varphi$.
+    
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Complexity of $\Aunion(\card)$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We now turn our attention towards the complexity of $\Aunion(\card)$ and $\Ainter(\card)$.  As mentioned in Section~\ref{subsection-arbitraryterms}, one of our primary motivations for restricting our language to binary terms was to argue that our logics are decidable in polynomial time.
+The proofs of our claims in this section apply equally well to either of these logics, so for the purposes of this discussion we consider $\Aunion(\card)$.
+
+The proof %Arxiv:(Section~\ref{s:supp:complexity-proofs})
+is based on Theorem $1.5$ of \cite{exploring_the_landscape}, which is a variant of the proof of McAllester's Tractability Lemma \cite{recognition_of_tractability}.
+
+
+The sketch of the proof is this:  Because we can polynomially bound (relative to the combined length of $\Gamma$ and $\varphi$) the number of terms and the number of sentences in our language, we may polynomially bound the number of applications of our proof rules.  Hence we may polynomially bound the height of proof trees in our logics.  There are subtleties involved; the full proof is given in Section~\ref{s:supp:complexity-proofs}.
+
+For this proof, we need to be a bit more careful about which basic terms are used in proofs. So we fix a background language, built from a set of basic terms. Suppose $\mathcal{L}$ is a sublanguage, built from a subset of the basic terms, $\Gamma$ is a set of $\mathcal{L}$-sentences, and $\varphi$ is an $\mathcal{L}$-sentence. Then we write $\Gamma\vdash_{\mathcal{L}} \varphi$ if $\Gamma\vdash \varphi$ and this is witnessed by a proof tree using only $\mathcal{L}$-sentences. Similarly, we write $\Gamma\models_{\mathcal{L}} \varphi$ if every $\mathcal{L}$-model of $\Gamma$ satisfies $\varphi$. 
+
+
+\begin{lemma}\label{lemma-language}
+Let $\Gamma$ be a set of sentences, and let $\varphi$ be a sentence. Let $\mathcal{L}$ be the language containing only the basic terms appearing in $\Gamma \cup \{\varphi\}$. Then $\Gamma\vdash \varphi$ if and only if $\Gamma\vdash_{\mathcal{L}} \varphi$. 
+\end{lemma}
+
+
+\begin{proof}
+One direction is clear. For the other, we assume $\Gamma\vdash \varphi$ and we want to show $\Gamma\vdash_{\mathcal{L}}\varphi$. By soundness in the full language and completeness in the restricted language $\mathcal{L}$, it suffices to show that $\Gamma\models \varphi$ implies  $\Gamma\models_{\mathcal{L}} \varphi$.
+
+So assume $\Gamma\models \varphi$, and let $\Model$ be an $\mathcal{L}$-model of $\Gamma$. We extend $\Model$ to a structure $\Model'$ in the full language by assigning the basic terms which are not in $\mathcal{L}$ arbitrary interpretations. Then $\Model'\models \Gamma$, so $\Model'\models \varphi$, and $\Model\models \varphi$, since satisfaction of $\mathcal{L}$-sentences does not depend on the basic terms which are not in $\mathcal{L}$.  
+\end{proof}
+
+
+\begin{theorem}
+\label{theorem-ptime}
+The relation $\vdash$ is decidable in polynomial time. 
+\end{theorem}
+\begin{proof}
+Let $\Gamma$ be a set of sentences, and let $\varphi$ be a sentence. Let $n$ be the combined length of $\Gamma$ and $\varphi$. Furthermore, we let $\mathcal{L}$ be the language with the set of basic terms restricted to those appearing in $\Gamma$ and $\varphi$. The number of terms and the number of sentences in $\mathcal{L}$ are each bounded by a polynomial in $n$, and by Lemma~\ref{lemma-language}, $\Gamma\vdash \varphi$ if and only if $\Gamma\vdash_{\mathcal{L}} \varphi$.
+
+Now we have a finite set of rules, and a substitution instance of a rule is obtained by substituting at most three terms for term variables in the rule. So there is a polynomial $p(x)$ and a set $R$ of substitution instances of rules of size at most $p(n)$ such that if $\Gamma\vdash \varphi$, then there is a proof tree such that each leaf and node is labeled by an element of $R\cup \Gamma$. Further, we may assume that no element of $R$ appears twice along any path through the proof tree from the root to a leaf. Otherwise, we could shorten the path by replacing the subtrees above the premises of the lower instance of the rule by the subtrees above the premises of the higher instance of the rule. It follows from the pigeonhole principle that if $\Gamma\vdash \varphi$, then this is witnessed by a proof tree of height at most $p(n)$. 
+
+We can now decide if $\Gamma\vdash \varphi$ as follows: Let $\Gamma_0 = \Gamma$. Given $\Gamma_i$, let $\Gamma_{i+1}$ be $\Gamma_i$ together with all sentences which can be deduced from premises in $\Gamma_i$ by a proof rule in $R$. Each set $\Gamma_i$ has size bounded by a polynomial in $n$ (since every element of $\Gamma_i$ is either in $\Gamma$ or is the conclusion of an element of $R$), and $\Gamma_{i+1}$ can be computed from $\Gamma_i$ in polynomial time. It follows that $\Gamma_{p(n)}$ can be computed from $\Gamma$ in polynomial time. By induction, $\Gamma_i$ is the set of all sentences $\psi$ in $\mathcal{L}$ such that $\Gamma\vdash_{\mathcal{L}} \psi$ by a proof tree of height at most $i$. Then $\Gamma\vdash \varphi$ if and only if $\varphi\in \Gamma_{p(n)}$, 
+\end{proof}
+
+Furthermore, for $\Aunion(\card)$ and $\Ainter(\card)$ the following also holds:
+
+
+%%%%%%%%%%%%%%
+\begin{theorem}
+If $\Gamma \not \proves \varphi$ in either $\Aunion(\card)$ or $\Ainter(\card)$, then we can construct a countermodel $\Model$ satisfying $\Gamma$ but falsifying $\varphi$ in polynomial time.
+\label{theorem-ptime-model-building}
+\end{theorem}
+\begin{proof}
+
+Let $n$ be the combined length of $\Gamma$ and $\varphi$. For $\Ainter(\card)$, one may use the translation from intersection terms to union terms in order to build a countermodel of $\varphi$ from one for $\varphi$ in $\Ainter(\card)$, as is done in the proof of Theorem~\ref{theorem-completeness-intersection}.  It is easily seen that this translation can be done in polynomial time.
+
+For $\Aunion(\card)$, we wish to show that the model $\Model$ used in the proof of Theorem~\ref{theorem-completeness-Aunioncard} can be constructed in polynomial time.  First, we may construct $\provle$ and $\provsub$ over $\Pairs$ in polynomial time, since deciding whether $\Gamma \proves \Atleast{(a \cup b)}{(c \cup d)}$ and whether $\Gamma \proves \All{(a \cup b)}{c \cup d)}$ can be done in polynomial time by Theorem~\ref{theorem-ptime}.  One may also check that extending $\provle$ to a linear preorder $\provextended$ can be done in polynomial time.
+%\hl{depends on the proof of Prop. 3.6}
+
+It remains to ensure that the application of Lemma~\ref{lemma-representation} can be done in polynomial time, since no more work is needed to build the countermodel $\Model$.  Let $K$ be the number of size classes listed in the proof of Lemma~\ref{lemma-representation}.  Note that $K$ is bounded by a polynomial in $n$.  Our procedure for constructing $S^K$ involves $K$ steps; in each step, we apply Lemmas \ref{lemma-equalizing} and \ref{lemma-sizeadjustment} in sequence.  The former lemma involves selecting pairs from $\provsub$-equivalence classes, which can be done in polynomial time.  Both lemmas otherwise involve fewer than $K$ applications of the $\Clamp$ construction.  
+
+For each application of $\Clamp$, we must first check whether $(a, a) \not \provsub (i, j)$, i.e. whether $\Gamma \not \proves \All{(a \cup a)}{(i \cup j)}.$   Again, this check can be done in polynomial time by Theorem~\ref{theorem-ptime}.
+Finally, in each application of $\Clamp$, we must verify that the number of points added is bounded by $K$.  We proceed by induction on $i$, the index denoting the current stage $S^i$ of our family of sets.  We consider only those applications of $\Clamp$ in Lemma \ref{lemma-equalizing}, although the argument follows similarly for those in Lemma \ref{lemma-sizeadjustment}.
+
+Consider the number of points added in a given instance of $\Clamp$ just prior to extending family $S^i$.  By inductive hypothesis, each instance of $\Clamp$ applied to obtain $S^i$ added a number of points bounded by a polynomial in $K$ to each set $S^i_a$.  Hence the \textit{total} number of points in each set $S^i_a$ is polynomial in $K$.  When extending $S^i$ to $T = S^{i+1}$, the number of points added in a given $\Clamp$ instance is $|S^i_{a_k} \cup S^i_{b_k}| - |S^i_{a_{k-1}} \cup S^i_{b_{k-1}}|$.  This is consequently bounded by a polynomial in $K$.
+With this, we are done.
+\end{proof}
+
+The proof involves observing that the model-building procedure described in the proof of Theorem~\ref{theorem-completeness-Aunioncard} can be performed in polynomial time (relative to the combined length of $\Gamma$ and $\varphi$).  We may first construct $\provle$ and $\provsub$ over $\Pairs$ in polynomial time, since $\Aunion(\card)$ and $\Ainter(\card)$ are polynomial-time decidable (by Theorem~\ref{theorem-ptime}).  Of course, extending $\provle$ into the appropriate linear preorder $\provextended$ can be done in polynomial time.  The rest of the work is to carefully check that the algorithm described in Section~\ref{s:representation} can be done in polynomial time.  %Arxiv:The details are worked out in Section~\ref{s:supp:complexity-proofs}. 
+%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark}
+It follows from Theorem~\ref{theorem-ptime} that our logics with arbitrarily large finite union (or intersection) terms are also decidable in polynomial time.  
+Given $\Gamma, \varphi$ with arbitrary finite union terms (say), our decision procedure for $\Gamma \provesarbitrary \varphi$ is simply to construct $\Gamma^\star$ and $\varphi^\star$ and then decide whether $\Gamma^\star \proves \varphi^\star$ (see Section~\ref{subsection-arbitraryterms}).  
+Constructing $\Gamma^\star$ and $\varphi^\star$ takes polynomial steps in the size of $\Gamma, \varphi$.  To verify that this is in fact a decision procedure for $\Gamma \provesarbitrary \varphi$, we must check that $\Gamma \provesarbitrary \varphi$ if and only if $\Gamma^\star \proves \varphi^\star$.  $\Gamma^\star \proves \varphi^\star \implies \Gamma \provesarbitrary \varphi$ is handled in Section \ref{subsection-arbitraryterms}.  As for the converse, a proof tree $\mathcal{T}$ for $\Gamma \provesarbitrary \varphi$ is transformed into a proof tree $\mathcal{T}^\star$ for $\Gamma^\star \proves \varphi^\star$ by introducing the term substitutions $t_i$.  One can verify that this is in fact a proof tree.  %Arxiv:Checking that this is in fact a proof tree is similar to the check in Section~\ref{s:supp:completeness-Aintercard}.
+\label{remark-complexity}
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Compactness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We prove that the logic $\Aunion(\card)$ is  not compact.
+We exhibit a set $\Gamma$ and a sentence $\phi$
+ such that
+ $\Gamma\models\phi$, but for all finite $\Gamma_0\subseteq\Gamma$,
+ $\Gamma\not\models\phi$. 
+ 
+ Our set of basic terms is $\set{x,y,a_0,a_1, \ldots}$.
+We take $\varphi$ to be the sentence $\All{x}{y}$. For each $n\in \omega$, let $\Gamma_n$ be the following set of sentences:
+\begin{align*}
+\All{(x\cup y)}{(a_i\cup a_j)}&\quad \text{for }0\leq  i\neq j\leq n\\
+\All{a_i}{(x\cup y)} &\quad \text{for  } 0\leq i\leq n\\
+\Atleast{y}{a_i}&\quad \text{for } 0\leq i\leq n
+\end{align*}
+Let $\Gamma = \bigcup_{n\in \omega} \Gamma_n$. 
+
+\begin{claim} $\Gamma\models \varphi$. 
+\end{claim}
+
+\begin{proof}
+Suppose that $\Model\models \Gamma$. We have $\semantics{a_i}\subseteq \semantics{x\cup y}$ for all $i\in \omega$.
+Recall that $\Model$ is a finite model.
+Thus,  there are only finitely many subsets of $\semantics{x\cup y}$.
+So we must have  $i\neq j$ such that  $\semantics{a_i} = \semantics{a_j}$. But then $\semantics{y}\subseteq \semantics{x\cup y}\subseteq \semantics{a_i\cup a_j}=\semantics{a_i}$, and $|\semantics{y}| \geq |\semantics{a_i}|$, so $\semantics{y} = \semantics{a_i}$. Also $\semantics{x}\subseteq \semantics{x\cup y}\subseteq \semantics{a_i\cup a_j}=\semantics{a_i} = \semantics{y}$, so $\Model\models \varphi$. 
+\end{proof}
+
+\begin{claim} For any finite $\Delta\subseteq \Gamma$, $\Delta\not\models \varphi$. 
+\end{claim}
+\begin{proof}
+Since $\Delta$ is finite, there is some $n\in \omega$ such that $\Delta\subseteq \Gamma_n$. So it suffices to exhibit a model $\Model\models \Gamma_n$ with $\Model\not\models \varphi$. 
+
+The domain of $\Model$ will be $M = \{0,\dots,n\}$. Let $\semantics{x} = \semantics{a_n} = M\setminus \{n\}$, let $\semantics{y} = \semantics{a_0} = M\setminus \{0\}$, and let $\semantics{a_i} = M\setminus \{i\}$ for all $0\leq i\leq n$. Then $\semantics{x\cup y} = M$. 
+Also, $\semantics{a_i\cup a_j} = M$ for all $0\leq i \ne j\leq n$, and $|\semantics{y}| = |\semantics{a_i}| = n$ for all $i\in \omega$.
+So $\mathcal{M}\models \Gamma_n$. 
+In addition, $\semantics{x}\not\subseteq \semantics{y}$, so $\mathcal{M}\not\models \varphi$. 
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Extending $\Aunion(\card)$ \ldots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ldots with Arbitrarily Large Terms}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The reader might object that while in the Introduction we claim to capture basic reasoning about unions and intersections, the logics we address only allow \emph{binary} (unnested) unions and intersections. This restriction has the advantage of simplifying our proof of polynomial decidability in Section~\ref{s:complexity}. Although it may not initially be obvious, the completeness (and polynomial decidability, see Remark~\ref{remark-complexity} below) of $\Aunion(\card)$ and $\Ainter(\card)$ with arbitrarily large finite terms follows from their completeness with only binary terms.
+
+To see this, we reduce arbitrary terms to binary terms in the natural way, iteratively replacing binary subterms of a complex term by fresh basic terms. For example, $a\cup ((b\cup c) \cup d)$ becomes $a\cup (t_1\cup d)$, which becomes $a\cup t_2$. 
+Given $\Gamma$ and $\varphi$ with arbitrary terms, we define $\Gamma^\star$ and $\varphi^\star$ by reducing all terms appearing in $\Gamma$ and $\varphi$ in this way, and then adding additional sentences to $\Gamma^\star$: For every fresh term $t$ replacing a binary term, say $a \cup b$, in either $\Gamma$ \emph{or} $\varphi$, we include in $\Gamma^\star$ the sentences $\All{t}{(a \cup b)}$ and $\All{(a \cup b)}{t}$.  
+
+One can check that this transformation does work, i.e. %Arxiv:We show in Section~\ref{s:supp:arbitrary_terms} in the Supplemental Material that this transformation does work, i.e.
+\[\begin{array}{lclr}
+     \Gamma \models \varphi & 
+     \implies &
+     \Gamma^\star \models \varphi^\star &\\
+     
+     & 
+     \iff &
+     \Gamma^\star \proves \varphi^\star &
+     \textrm{(by Section~\ref{s:comp_Aunion(card)})}\\
+     
+     &
+     \implies &
+     \Gamma \proves \varphi & \textrm{(allowing arbitrary terms)}\\
+     
+\end{array}
+\]
+
+
+In this section, we show that completeness of $\Aunion(\card)$ and $\Ainter(\card)$ with arbitrarily large finite terms follows from their completeness with only binary terms.  We illustrate this for union terms, although the same argument can be given mutatis mutandis for intersection terms.
+
+Formally, we define an expanded logic $\Aunion_\mathrm{arb}(\card)$ as follows. We allow nested terms by changing our definition to an inductive one: a term is either a basic term or $(x\cup y)$, where $x$ and $y$ are terms. The semantics for terms is extended to nested terms in the obvious way. The sentences and rules of $\Aunion_\mathrm{arb}(\card)$ are the same as for $\Aunion(\card)$, except that they may now contain arbitrary nested terms.  We write $\provesarbitrary$ for the provability relation for $\Aunion_\mathrm{arb}(\card)$, reserving $\proves$ for the provability relation in $\Aunion(\card)$.
+
+Let $\Gamma$ be a set of sentences in $\Aunion_\mathrm{arb}(\card)$, and let $\varphi$ be another such sentence.  We show that if $\Gamma \models \varphi$ then $\Gamma \provesarbitrary \varphi$. For any given sentence $\psi$ of $\Aunion_\mathrm{arb}(\card)$, we may obtain a new sentence $\psi^\star$ involving only binary union terms by recursively replacing binary unions in $\psi$ by fresh basic terms $t_i$ until there is only one union per argument remaining in $\psi$.  
+Let $\Gamma^\star$ and $\varphi^\star$ be initially defined accordingly, modifying $\Gamma^\star$ as follows.  For every fresh term $t_i$ replacing binary union term, say $s_m \cup s_n$ in either $\Gamma$ \emph{or} $\varphi$, we include in $\Gamma^\star$ the sentences $\All{t_i}{(s_m \cup s_n)}$ and $\All{(s_m \cup s_n)}{t_i}$.  Note that $\Gamma^\star$ and $\varphi^\star$ involve only binary union terms.
+
+It follows from $\Gamma \models \varphi$ that $\Gamma^\star \models \varphi^\star$, since a model $\Model$ of $\Gamma^\star$ is a model of both $\Gamma$ (and hence $\varphi$) as well as a model of those sentences added to $\Gamma^\star$ that ensure the intended semantics of the fresh terms $t_i$.  Assuming completeness of $\Aunion(\card)$ (shown in this paper), we have $\Gamma^\star \proves \varphi^\star$.  Let $\mathcal{T}^\star$ be a proof tree witnessing $\Gamma^\star \proves \varphi^\star$.  We construct a proof tree $\mathcal{T}$ for $\Gamma \provesarbitrary \varphi$ from $\mathcal{T}^\star$ by substituting back every previously introduced term $t_i$ in each sentence $\psi^\star$ in $\mathcal{T}^\star$ with the union it represents.  It remains to show that the premises of $\mathcal{T}$ are in $\Gamma$ (or are axioms), its conclusion is $\varphi$, and that each of the deductions in $\mathcal{T}$ follow by $\provesarbitrary$.  
+Regarding the former facts, any premise of $\mathcal{T}^\star$ is either a sentence in $\Gamma$ with terms substituted, or is a new sentence that we added to $\Gamma^\star$.  A premise that simply has terms substituted will have the respective unions substituted back in for each $t_i$, and hence the corresponding premise of $\mathcal{T}$ is in $\Gamma$.  If a premise conclusion of $\mathcal{T}^\star$ is a sentence we added to $\Gamma^\star$, it is either $\All{t_i}{(s_m \cup s_n)}$ or $\All{(s_m \cup s_n)}{t_i}$.  Either way, after substituting back $s_m \cup s_n$ for $t_i$, we obtain $\All{(s_m \cup s_n)}{(s_m \cup s_n)}$, which is an instance of $(\axiom)$.  Similarly, after substitution the conclusion of $\mathcal{T}$ is $\varphi$.  As for the latter fact, each deduction still follows in $\mathcal{T}$ via the same rule that was used in that position of $\mathcal{T}^\star$.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ldots with Intersection Terms}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We obtain completeness of $\Ainter(\card)$ for free from the completeness of  $\Aunion(\card)$.
+Let $\lang^\cup$ be the language 
+of $\Aunion(\card)$, and
+%with binary union terms along with $\AllNoArgs$- and $\AtleastNoArgs$-sentences.
+let $\lang^\cap$ be the language of $\Ainter(\card)$. 
+%with binary intersection terms, and again with $\AllNoArgs$- and $\AtleastNoArgs$-sentences.
+$\lang^\cup$ and $\lang^\cap$ share the same basic terms.
+
+
+We  translate $\lang^\cap$ terms $x$ and sentences  $\phi$ to $\lang^\cup$ as follows:
+ For basic terms $a$, let $a^\cup = a$. 
+For an intersection term, say $a \cap b$, let $(a \cap b)^\cup = a \cup b$.  Let 
+$\mathsf{R}$  be $\AllNoArgs$ or $\AtleastNoArgs$.
+Then for the $\lang^\cap$-sentence
+$\psi = \R{x}{y}$, we let     $\psi^\cup$ be  
+ $\R{(y^\cup)}{(x^\cup)}$.  For a set $\Gamma$ of $\lang^\cap$ sentences,
+ let $\Gamma^\cup = \set{\psi^\cup : \psi\in \Gamma}$.
+ 
+
+
+\begin{lemma}
+\label{lemma-proof-translation}
+$\Gamma\proves\phi$ in $\Ainter(\card)$
+iff $\Gamma^\cup\proves\phi^\cup$ in $\Aunion(\card)$.
+\end{lemma}
+\begin{proof}
+Our mapping $\phi\mapsto\phi^\cup$ extends to instances of inference rules; instances of rules in $\Ainter(\card)$ are mapped to instances of the rules in $\Aunion(\card)$. 
+In particular, instances of (\interl), (\interr), and (\interall) are sent to instances of (\unionl), (\unionr), and (\unionall), respectively.  For every other rule, an instance of the rule is sent to an instance of the same rule.  So any proof tree in $\Aunion(\card)$ witnessing $\Gamma \proves \varphi$ is sent to a proof tree in $\Aunion(\card)$ witnessing $\Gamma^\cup \proves \varphi^\cup$.  Showing that $\Gamma^\cup \proves \varphi^\cup \implies \Gamma \proves \varphi$ is similar.
+\end{proof}
+
+
+We also need a semantic construction in the other direction.
+For a model $\Model$ of $\lang^\cup$, define a model 
+ $\Model^\cap$ of $\lang^\cap$ as follows:
+Let $\Model^\cap$ use the same underlying universe $M$. 
+For basic terms $a$, let $\semantics{a}_{\Model^\cap} = \overline{\semantics{a}_{\Model}}$.  That is, each
+basic term's semantics 
+in $\Model^\cap$
+is the complement of its semantics in $\Model$.
+
+
+
+\begin{lemma}
+For all  models $\Model$ of $\lang^\cup$ 
+and all $\lang^\cap$-sentences $\psi$, 
+$\Model^\cap \models \psi$ iff $\Model \models \psi^\cup$.
+\label{proposition-union-inter-conversion}
+\end{lemma}
+\begin{proof}
+Note that for all basic terms $a$ and $b$, 
+$\semantics{a\cap b}_{\Model^\cap} =\semantics{a}_{\Model^\cap}
+\cap \semantics{b}_{\Model^\cap}
+=  \overline{\semantics{a}_{\Model}
+\cup \semantics{b}_{\Model}  }
+=  \overline{\semantics{(a\cap b)^{\cup}}_{\Model}  }
+$.
+Thus, for all $\lang^\cap$-terms $x$, 
+$\semantics{x}_{\Model^\cap} = \overline{\semantics{x^\cup}}_{\Model}$.
+Let $\psi$ be the $\lang^\cap$-sentence $\All{x}{y}$.
+Then 
+$\Model^\cap \models \psi$
+iff
+$\semantics{x}_{\Model^\cap} \subseteq \semantics{y}_{\Model^\cap}$
+iff
+$\overline{\semantics{y}_{\Model^\cap}} \subseteq \overline{\semantics{x}_{\Model^\cap}}$
+iff
+$\semantics{y^\cup}_\Model \subseteq \semantics{x^\cup}_\Model$
+iff
+$\Model\models\All{y^\cup}{x^\cup}$
+iff
+$\Model\models\psi^\cup$.
+The same argument works for $\AtleastNoArgs$-sentences.
+\end{proof}
+
+From Lemmas~\ref{lemma-proof-translation} and \ref{proposition-union-inter-conversion}, completeness of $\Ainter(\card)$ follows.  %Arxiv:We prove this and the above lemmas in Section~\ref{s:supp:completeness-Aintercard}.
+
+\begin{theorem}
+    The logic $\Ainter(\card)$ is complete.
+    \label{theorem-completeness-intersection}
+\end{theorem}
+
+\begin{proof} Suppose that $\Gamma\cup\set{\phi}$ are $\lang^\cap$
+sentences, and $\Gamma \not \proves \varphi$ in $\Ainter(\card)$.
+By Lemma~\ref{lemma-proof-translation},  $\Gamma^\cup\not\proves\phi^\cup$ in $\Aunion(\card)$.
+By Theorem \ref{theorem-completeness-Aunioncard},
+we have a model $\Model$ for $\lang^\cup$
+such that $\Model \models \Gamma^\cup$ and $\Model \not \models \varphi^\cup$. 
+Consider $\Model^\cap$ as defined  above.
+By Proposition~\ref{proposition-union-inter-conversion},
+$\Model^\cap\models\Gamma$
+and $\Model^\cap\not\models\phi$.
+\end{proof}
+
+We can use this same trick to show the completeness of the logic $\Ainter$, described in Remark~\ref{remark-related-logics}.  Unfortunately, Lemma \ref{proposition-union-inter-conversion} does not hold for $\SomeNoArgs$-sentences, so we cannot use this approach to show the completeness of $\Sinter$. (discussed in Section~\ref{s:supp:completeness_Aunion_Sunion}).  
+Indeed, we have not proved that result.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ldots with $\MoreNoArgs$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we consider the extension of our logic $\Aunion(\card)$ with $\MoreNoArgs$-sentences.  We call the resulting logic $\Munion(\card)$ (similarly, we call the corresponding logic with $\cap$-terms $\Minter(\card)$).  We may extend the argument in Section \ref{s:comp_Aunion(card)} to prove the completeness of $\Munion(\card)$ (and hence, by Section \ref{s:completenes_intersections}, the completeness of $\Minter(\card)$).  Unfortunately, we cannot extend the complexity argument of Section \ref{s:complexity} to obtain polynomial decidability for $\Munion(\card)$.  We discuss avenues for ameliorating this situation in Section \ref{s:future_work}.
+
+We extend $\Aunion(\card)$ to $\Munion(\card)$ by allowing, in addition to $\AllNoArgs$- and $\AtleastNoArgs$-sentences, the sentence $\More{x}{y}$ (where $x$ and $y$ are terms).  The semantics of $\MoreNoArgs$-sentences is similar to that for $\AtleastNoArgs$-sentences:
+
+\[
+\begin{array}{lclcl}
+    \Model \models \More{x}{y} & \textrm{ iff } & 
+        |\semantics{x}| > |\semantics{y}|
+\end{array}
+\] 
+
+
+
+$\Munion(\card)$ employs the rules listed in Figure \ref{fig-more-rules}, in addition to those rules used in $\Aunion(\card)$ (similarly for $\Minter(\card)$).  The rules in Figure \ref{fig-more-rules}, with the exception of (\raa), we borrow from the logic $\mathscr{S}(\card)$ described in \cite{syllogistic_cardinality_comparisons}.  Again, one may verify that each of the rules in Figure \ref{fig-more-rules} is individually sound for our semantics.
+
+Note in particular the rules (\x) and (\raa).  The (\x) rule is \emph{ex falso} (or \emph{explosion}), fitted for our language of $\MoreNoArgs$- and $\AtleastNoArgs$-sentences.  Similarly, (\raa) is a special instance of \emph{reductio ad absurdum}.
+
+In contrast to $\Aunion(\card)$ and $\Ainter(\card)$, we must worry about expressing inconsistencies within $\Munion(\card)$ and $\Minter(\card)$.  We say that a set $\Gamma$ of sentences in $\Munion(\card)$ (or $\Minter(\card)$) is \emph{inconsistent} whenever every sentence $\varphi$ in the logic is provable from $\Gamma$ (otherwise, we say that $\Gamma$ is \emph{consistent}).  Note that for $\Munion(\card)$, using rule (\x), $\Gamma$ is inconsistent if and only if there is a term $z$ such that $\Gamma \proves \More{z}{z}$.
+
+\begin{theorem}
+The logic $\Munion(\card)$ is complete.
+\label{theorem-completeness-Munioncard}
+\end{theorem}
+
+The proof is a straightforward extension of the proof of Theorem~\ref{theorem-completeness-Aunioncard}; observe that in order to build a model of $\Gamma$ refuting $\More{x}{y}$, it suffices to construct a model of $\Gamma \cup \set{\Atleast{y}{x}}$. If $\Gamma\not\vdash \More{x}{y}$, then (\raa) ensures that $\Gamma \cup \set{\Atleast{y}{x}}$ is consistent, which is necessary since we can only apply the modified version of the model construction to consistent $\Gamma$. %Arxiv:The full proof of completeness is given in Section~\ref{s:supp:completeness-Munioncard}.
+
+\begin{proof}
+Suppose that $\Gamma$ is a finite, consistent set of sentences in $\Munion(\card)$, and suppose that $\Gamma \not \proves \varphi$.  Our plan is again to build a model of $\Gamma$ where $\varphi$ is false.
+When $\varphi$ is an $\AllNoArgs$- or $\AtleastNoArgs$-sentence, we build our model as in the proof of Theorem \ref{theorem-completeness-Aunioncard}.  We deal here with the case where $\varphi$ is $\More{x}{y}$
+
+Since $\Gamma \not \proves \More{x}{y}$, we cannot have a proof of $\More{x}{y}$ via (\raa) in particular.  That is, $\Gamma \cup \set{\Atleast{y}{x}} \not \proves \More{z}{z}$.  This means that $\Gamma \cup \set{\Atleast{y}{x}}$ is consistent.  We now only need to construct a model $\Model$ of $\Gamma \cup \set{\Atleast{y}{x}}$; such a model is a model of $\Gamma$, and in addition satisfies $\Model \not \models \More{x}{y}$, since $|\semantics{y}| \ge |\semantics{x}|$.
+
+For what follows, let $\Gamma^\star = \Gamma \cup \set{\Atleast{y}{x}}$.  In order to construct the model $\Model$ of $\Gamma^\star$, we first obtain the suitable pair $(\provextendedstar, \provsubstar)$ as before.  We obtain a $BT$-family of sets $(S_{a})_{a \in BT}$ such that, in addition to the implications in (\ref{arrows}) (with $\Gamma^\star$ in place of $\Gamma$), for all $(a, b), (c, d) \in \Pairs$ we have:
+
+\begin{equation}
+\label{arrows-more}
+\begin{array}{lcccc}
+\Gamma^\star \proves \More{(a \cup b)}{(c \cup d)} & \implies & 
+    (c,d) \provextendedstrictstar (a,b) & \iff & 
+    S_c \cup S_d < S_a \cup S_b\\
+& (\textrm{see below}) & & (\textrm{by Lemma \ref{lemma-representation}}) & 
+\end{array}
+\end{equation}
+
+For the $\implies$ on the left, suppose that $\Gamma^\star \proves \More{(a \cup b)}{(c \cup d)}$.  We have $\Gamma^\star \proves \Atleast{(a \cup b)}{(c \cup d)}$ by (\moreatleast).  Write $p$ for the pair $(a, b)$ and $q$ for $(c, d)$.  So we have $q \provlestar p$.  We cannot have $p \provlestar q$, since that would mean $\Gamma^\star \proves \Atleast{(c \cup d)}{(a \cup b)}$, and $\Gamma$ would be inconsistent.  So $q \provlestrictstar p$.  By the definition of ``linearization'', we have $q \provextendedstrictstar p$.
+
+We build $\Model$ from our family $S$ exactly as in the proof of Theorem \ref{theorem-completeness-Aunioncard}:  For every basic term $a$, let $\semantics{a} = S_a$.  By the implications in (\ref{arrows}), with $\Gamma$ replaced with $\Gamma^\star$, $\Model$ satisfies the $\AllNoArgs$- and $\AtleastNoArgs$-sentences in $\Gamma^\star$.  Additionally, by (\ref{arrows-more}), $\Model$ staisfies the $\MoreNoArgs$-sentences in $\Gamma^\star$.  So $\Model \models \Gamma^\star$, and we are done.
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion and Future Work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This paper has presented two complete, polynomial-time decidable logics for reasoning about the sizes of sets alongside the union or intersection of terms, respectively.  These logics are the most basic for reasoning of this kind; $\Aunion(\card)$ and $\Ainter(\card)$ are both minimally expressive and decidable in polynomial time.  Our logics may be viewed as more efficient fragments of $\BAPA$ and $\CardCompLogic$, two more expressive $\NP$-complete logics for reasoning about sizes with union and intersection.  A direct corollary of our work is the completeness of the logic additionally permitting $\MoreNoArgs$-sentences.
+
+\begin{nextsteps*}
+Since decidability in both $\BAPA$ and $\CardCompLogic$ is $\NP$-complete, it would be interesting to steadily build our fragment towards these logics and note at which point decidability is no longer decidable in polynomial time.  The first step in this direction is to attempt to extend our polynomial decidability argument in Section \ref{s:complexity} to the logic $\Munion(\card)$.  The main issue here is that $\Munion(\card)$ makes use of the (\raa) rule, and we cannot put a bound on the height of an (\raa) application.  One could remove the (\raa) rule from $\Munion(\card)$ and attempt to replace it with simpler rules that may also ensure completeness.  One such rule, not derivable from the rules of $\Munion(\card)$ sans (\raa) is:
+\[
+\infer[(\proverule{diamond})]
+    {\More{a}{x}}
+    {\All{x}{a} & \All{x}{b} & \More{(a \cup b)}{b}}
+\]
+(This rule is so-named because the terms $x$, $a$, $b$, and $a \cup b$ form a $\subseteq$-diamond.)
+To see that this rule of inference is sound, suppose $\Gamma \models \All{x}{a}$, $\Gamma \models \All{x}{b}$, and $\Gamma \models \More{(a \cup b)}{b}$.  Since $\Gamma \models \More{(a \cup b)}{b}$, there must be an element of $\semantics{a}$ not in $\semantics{b}$.  Since $\semantics{x} \subseteq \semantics{b}$, this element is not in $\semantics{x}$ either.  So $\semantics{x}$ must be a proper subset of $\semantics{a}$.  But then $\Gamma \models \More{a}{x}$.  If (\proverule{diamond}) and rules like it ensure completeness without (\raa), then our argument for polynomial decidability follows without issue.
+
+The next step would be to integrate union and intersection terms. But the further step of integrating union and intersection with term complement will likely result in an $\NP$-complete logic, so this is where the road ends.
+
+There is historical precedent in the syllogistic logic
+literature to allow $\SomeNoArgs$ sentences alongside
+$\AllNoArgs$-sentences.   As mentioned in Remark \ref{remark-related-logics}, the usual semantics for $\SomeNoArgs$-sentences is that $\Model \models \Some{x}{y}$ whenever $\semantics{x} \cap \semantics{y} \ne \emptyset$.
+The main trouble with introducing $\SomeNoArgs$-sentences is in addressing the following pesky rule:
+\[
+%\infer[(\proverule{pesky})]
+\infer[]
+    {\Some{a}{c}}
+    {\More{a}{b} & \Atleast{c}{d} & \Atleast{(b \cup d)}{(a \cup c)}}
+\]
+This rule simultaneously involves $\AtleastNoArgs$-, $\MoreNoArgs$-, and $\SomeNoArgs$-sentences with term union.
+Observe that this rule is sound as well, and that it is not provable from the rules of either $\Aunion(\card)$ or $\Sunion$.
+One could hope to extend our model construction to model sets $\Gamma$ which also include $\SomeNoArgs$-sentences, but it is far from obvious how to integrate the above rule into the model-building process.
+
+To see that this is a sound rule of inference, suppose that $\Gamma \not \models \Some{a}{c}$.  So
+\[
+\begin{array}{lclr}
+|\semantics{a \cup c}| & = & |\semantics{a}| + |\semantics{c}| & (\textrm{since } \semantics{a} \cap \semantics{c} = \emptyset) \\
+
+& > & |\semantics{b}| + |\semantics{d}| &
+(\textrm{since } \Gamma \models \More{a}{b}, \Gamma \models \Atleast{c}{d}) \\
+
+& \ge & |\semantics{b \cup d}| & 
+\end{array}
+\]
+but $\Gamma \models \Atleast{(b \cup d)}{(a \cup c)}$, so $|\semantics{b \cup d}| \ge |a \cup c|$.  This is a contradiction.  So $\Gamma \models \Some{a}{c}$.  This rule is also not provable from those of either $\Aunion(\card)$ or $\Sunion$.
+
+Note that a special case of this rule is
+\[
+\infer[(\proverule{more-some})]
+    {\Some{a}{a}}
+    {\More{a}{b}}
+\]
+which is a key rule relating $\SomeNoArgs$- and $\MoreNoArgs$-sentences in \cite{syllogistic_cardinality_comparisons}.
+
+Finally, our two main logics can be integrated with SMT solvers in order to efficiently automate those inferences which just involve sizes and subset alongside union or intersection.  A particularly appropriate SMT solver with which to test this is \cite{cardinality_constraints_smt}, which extends the SMT solver Z$3$ with reasoning in quantifier-free $\BAPA$.
+\end{nextsteps*}
+
+\paragraph{Acknowledgements} We thank the anonymous reviewers, as well as Vikraman Choudhury, Matthew Heimerdinger, and Chaitanya Koparkar, for their careful reviews and helpful comments.
+%We thank the anonymous reviewers, as well as Vikraman Choudhury, Matthew Heimerdinger, and Chaitanya Koparkar, for their careful reviews and helpful comments.
+
+%We thank the people who provided feedback to be named in the final form of the paper.
+%Vikraman Choudhury, Matthew Heimerdinger, Chaitanya Koparkar,
+%\emph{and others in alphabetical order} for useful comments.
+
+
+\bibliographystyle{abbrv}
+\bibliography{sizes}
+
+
+
+
+\end{document}

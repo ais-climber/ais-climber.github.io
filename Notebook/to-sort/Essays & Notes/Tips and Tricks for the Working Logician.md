@@ -1,0 +1,10 @@
+I find myself doing a lot of theoretical work in logic. Every now and then I try to prove something ambitious, and learn some hard lesson in the process. And sometimes I'll take a lesson from others, through papers, talks, and advice. This page is me attempting to write these down so that I don't make the same mistakes again and again. If you yourself work with logics, algebras, or any other abstract object in computer science, linguistics, or cognition, I hope you find these helpful. I make no guarantees, of course -- I'm writing this primarily for myself.
+
+**TODO:** Include examples for each tip, it helps to see how it's actually used
+
+1. This is a well-known phenomenon in dynamic epistemic logic circles, but it's worth saying. If you're trying to model a situation, but any model you come up with leads to some inconsistency $A \land \neg A$, consider modelling it dynamically.  That is, identify a process *before which* $A$ holds, and *after which* $\neg A$ holds. Very often, contradictions aren't really contradictions, but a result of not being explicit about the dynamics, actions, and effects at play.
+   **Example:** (example from recent logic seminar talk)
+2. If you're trying to characterize some property and you've tried various forms of 'for all ...' and 'there exists ...' with no success, the property you're trying to capture might be second-order.  That is, there may be no first-order description of the property whatsoever (which is easy to forget). I've found that a common second-order property is the 'core' construction from topology, which looks something like:
+   $a \in \bigcap_{X \in f(b)} X$
+   **Example:** (example from recent work, where I have a neural network closure function $g : \mathcal{P}(S) \to \mathcal{P}(S)$) and I want to make a relation $R : S \times S$ that aligns with it in some sense.)
+3. 

@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{enumerate}
+
+\newcommand{\Add}{\text{Add}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+A structure $(S,\leq, \vee, \bot, \preceq)$ is a \textbf{linearly preordered join semilattice} (LPJS) if: 
+\begin{enumerate}[(a)]
+    \item $(S,\leq,\vee,\bot)$ is a join semilattice. 
+    \item $(S,\preceq)$ is a linear preorder.
+    \item For all $x,y\in S$, if $x\leq y$, then $x\preceq y$.
+    \item For all $x,y\in S$, if $x\leq y$ and $y\preceq x$, then $y\leq x$. 
+\end{enumerate}
+
+Axiom (d) can be rephrased as follows: If $\sim$ is the equivalence relation associated to the linear preorder $\preceq$, then each $\sim$ equivalence class is an antichain in the partial order $\leq$. This gives more intuition for what an LPJS looks like, but we have stated the axiom in the form (d) because it corresponds exactly with one of our proof rules, and because we will use it in this form. 
+
+To any set $X$, we can associate the \textbf{full LPJS} of finite subsets of $X$: $$F(X) = (\mathcal{P}_\text{fin}(X), \subseteq, \cup, \emptyset, \preceq),$$ where if $A$ and $B$ are finite subsets of $X$, we have $A\preceq B$ if and only if $|A|\leq |B|$. It is easy to check that $F(X)$ satisfies axioms (a)-(d).
+
+A \textbf{representation} of $S$ on $X$ is a semilattice embedding $f\colon S\to F(X)$. That is, an assignment $f$ of a finite set to each element of $S$ such that:
+\begin{enumerate}[(1)]
+    \item $x\leq y$ iff $f(x)\subseteq f(y)$.
+    \item $f(x\vee y) = f(x)\cup f(y)$.
+    \item $f(\bot) = \emptyset$.
+\end{enumerate} 
+We say that the representation $f$ is \textbf{correct} on $S'\subseteq S$ if for all $x,y\in S'$, we have $x\preceq y$ iff $|f(x)|\leq |f(y)|$. We say that $f$ is \textbf{perfect} if it is correct on all of $S$. 
+
+\begin{theorem}\label{thm:rep}
+Every finite LPJS has a perfect representation.
+\end{theorem}
+
+Our strategy for proving this theorem is to build a representation for $S$ without regard to correctness, and then argue inductively that we can find representations which are correct on more and more of $S$.
+
+\begin{lemma}\label{lem:base}
+Every finite LPJS has a representation. 
+\end{lemma}
+\begin{proof}
+This is just the standard representation theorem for join semilattices, restricted to finite semilattices and finite sets. 
+
+We represent $(S,\leq,\vee,\bot,\preceq)$ on $F(S)$ by the map $$f(x) = \{y\in S\mid x\not\leq y\}.$$
+Let's check conditions (1)-(3):
+\begin{enumerate}[(1)]
+\item If $x\leq y$, then for all $z\in S$, if $z\notin f(y)$, then $y\leq z$, so $x\leq z$, and $z\notin f(x)$. It follows that $f(x)\subseteq f(y)$. 
+
+Conversely, if $x\not\leq y$, then $y\in f(x)$, but $y\notin f(y)$. So $f(x)\not\subseteq f(y)$.
+
+\item For any $z$, we have $x\vee y\leq z$ if and only if $x \leq z$ and $y\leq z$. So $z\notin f(x\vee y)$ iff $x\lor y \leq z$ iff $x\leq z$ and $y\leq z$ iff $z\notin f(x)$ and $z\notin f(y)$ iff $z\notin f(x)\cup f(y)$. It follows that $f(x\vee y) = f(x) \cup f(y)$. 
+
+\item Finally, $f(\bot) = \emptyset$, since for all $y\in S$, $\bot \leq y$. \qedhere
+\end{enumerate}
+\end{proof}
+
+Next, we introduce an operation on representations, which we will use to make them more correct. 
+
+Suppose $f\colon S\to F(X)$ is a representation, $x\in S$, and $r\in \mathbb{N}$. We define a  representation $\Add(f,x,r)$ as follows. Let $P = \{*_1,\dots,*_r\}$ be a set of $r$ new points which are not in $X$. Then $\Add(f,x,r)$ is a representation of $S$ on $X\cup P$, defined by $$y\mapsto \begin{cases} f(y)\cup P & \text{if }y\not\leq x\\ f(y) &\text{if }y\leq x.
+\end{cases}$$
+The intuition is that we ``clamp down'' $x$ and all of its subsets, while adding new points to all other sets in order to increase their sizes by $r$. 
+
+\begin{lemma}\label{lem:add}
+If $f$ is a representation of $S$, $x\in S$, and $r\in \mathbb{N}$, then $\Add(f,x,r)$ is a representation of $S$. Moreover, if $f$ is correct on $S'\subseteq S$, and $y\not\leq x$ for all $y\in S'$, then $\Add(f,x,r)$ is correct on $S'$. 
+\end{lemma}
+\begin{proof}
+Let $f' = \Add(f,x,r)$. We check conditions (1)-(3). 
+\begin{enumerate}[(1)]
+    \item If $y\leq z$, then $f(y) \subseteq f(z)$. Also, $z\leq x$ implies $y\leq x$. So we are left with three cases. 
+    
+    Case a: If $y\leq x$ and $z\leq x$, then $f'(y) = f(y)\subseteq f(z) = f'(z)$. 
+    
+    Case b: If $y\leq x$ and $z\not\leq x$, then $f'(y) = f(y) \subseteq f(z) \subseteq f(z)\cup P = f'(z)$. 
+    
+    Case c: If $y\not\leq x$ and $z\not\leq x$, then $f'(y) = f(y)\cup P \subseteq f(z)\cup P = f'(z)$. 
+    
+    Conversely, if $y\not\leq z$, then $f(y)\not\subseteq f(z)$, so there is some $a\in f(y)$ such that $a\notin f(z)$. Then also $a\in f'(y)$, and $a\notin P$, so $a\notin f'(z)$, and thus $f'(y)\not\subseteq f'(z)$. 
+    \item We have $y\vee z \leq x$ if and only if $y\leq x$ or $z\leq x$. 
+    
+    Case a: $y\vee z \not\leq x$. Then $f'(y\vee z) = f(y\vee z)\cup P = f(y)\cup f(z)\cup P = (f(y)\cup P)\cup (f(z)\cup P) = f'(y)\cup f'(z)$. 
+    
+    Case b: $y\vee z\leq x$. Then $f'(y\vee z) = f(y\vee z) = f(y)\cup f(z) = f'(y)\cup f'(z)$. 
+    
+    \item Since $\bot\leq x$, $f'(\bot) = f(\bot) = \emptyset$.
+\end{enumerate}
+
+We have established that $f'$ is a representation of $S$. Now suppose $f$ is correct on $S'\subseteq S$. Then for any $y,z\in S'$ we have $y\not\leq x$ and $z\not\leq x$, so $f'(y) = f(y)\cup P$ and $f'(z) = f(z)\cup P$. It follows that $|f'(y)| = |f(y)|+r$ and $|f'(z)| = |f(z)|+r$. So $y\preceq z$ iff $|f(y)|\leq |f(z)|$ iff $|f'(y)|\leq |f'(z)|$, and $f'$ is correct on $S'$. 
+\end{proof}
+
+With these tools in hand, we are ready to prove the theorem. 
+
+\begin{proof}[Proof of Theorem~\ref{thm:rep}]
+Let $S$ be a finite LPJS. Enumerate $S$ in decreasing order according to $\preceq$, as $$s_1\succeq s_2 \succeq s_3 \succeq \dots \succeq s_k.$$
+Note that since $\preceq$ is a preorder, we may also have $s_i \preceq s_{i+1}$ for some $i$. Letting $\sim$ be the equivalence relation associated to the preorder $\preceq$, we call the $\sim$ equivalence classes size classes.
+
+For $0\leq n \leq k$, let $S_n = \{s_i\mid i \leq n\}$. We show by induction on $n$ that $S$ has a representation which is correct on $S_n$.
+
+Base case: $S_0 = \emptyset$, so we only need a representation of $S$, which is given by Lemma~\ref{lem:base}. 
+
+Inductive step: Suppose $f$ is a representation of $S$ which is correct on $S_n$. For all $1\leq i \leq k$, let $r_i = |f(s_i)|$. 
+
+Since $s_{n+1}\preceq s_n$, it suffices to find a representation $f'$ which is correct on $S_n$ and such that $|f'(s_{n+1})| = |f'(s_n)|$ if $s_n \sim s_{n+1}$ and $|f'(s_{n+1})| < |f'(s_n)|$ otherwise.
+
+\emph{Case 1:} $r_{n+1} \geq r_n$. Then if $s_n\sim s_{n+1}$, let $r = r_{n+1} - r_n$. Otherwise, let $r = r_{n+1}-r_n+1$. Now consider the representation $f' = \Add(f,s_{n+1},r)$. 
+
+For all $i\leq n$, we have $s_{n+1}\preceq s_i$, so by axiom (d), $s_i\not\leq s_{n+1}$. By Lemma~\ref{lem:add}, $f'$ is correct on $S_n$. And we have $|f'(s_{n+1})| = r_{n+1}$, while \begin{align*}
+    |f'(s_n)| &= r_n + r\\ &= \begin{cases} r_n + (r_{n+1}-r_n) & \text{if }s_n\sim s_{n+1}\\
+r_n + (r_{n+1}-r_n+1) & \text{otherwise}\end{cases}\\
+&= \begin{cases} |f'(s_{n+1})| & \text{if }s_n\sim s_{n+1}\\
+|f'(s_{n+1})|+1 & \text{otherwise}.
+\end{cases}
+\end{align*}
+
+\emph{Case 2:} $r_{n+1} < r_n$. In this case, if $s_{n+1}\not\sim s_n$ (so $s_{n+1} \prec s_n$), then $f$ is already correct on $S_{n+1}$. So we may assume that $s_{n+1}\sim s_n$. 
+
+Let $C$ be the size class of $s_n$, so $C = \{s_j,\dots,s_{n+1}\}$ for some $1\leq j \leq n$. 
+Set $f_{n+1} = f$, and for $j\leq i \leq n$, set $$f_i = \Add(f_{i+1}, s_i, |f_{i+1}(s_i)| - |f_{i+1}(s_{n+1})|).$$
+
+Then 
+\begin{itemize}
+    \item $f_j$ is correct on $S_n\setminus C$.
+    \item For each $s_i\in C$, $f_j(s_i)$ has equal size.
+    \item This size is smaller than the size of $f_j(s_{j'})$ for all $j'<j$. 
+\end{itemize}
+So $f_j$ is correct on $S_{n+1}$. 
+
+It remains to write out the details of the assertions above. 
+\end{proof}
+\end{document}

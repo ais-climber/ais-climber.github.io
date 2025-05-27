@@ -1,0 +1,232 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{stmaryrd}
+\usepackage{listings}
+\usepackage{color}
+
+% Syntax highlighting for code
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+
+% 'Listing' settings for code blocks
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{dkgreen},
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{dkgreen},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+
+\newcommand{\snote}[1]{{Sa\'ul: {{\color{blue}#1}}}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{claim}{Claim}
+
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+These notes provide the bubble-sort inspired proof of the Combinatorial Lemma described in the file \code{interpretation\_of\_lemma.tex}.
+
+\begin{lemma}\label{Combinatorial-Lemma2}
+    Let $<_0$ be a strict linear order of pairs $(i, j)$ of indices $1, \ldots, n$ satisfying the \textbf{Singleton Condition}, that is: $i \ne j \implies (i, i) <_0 (i, j)$.  Then there exist sets $S_1$, \ldots, $S_n$ such that:
+    
+    \begin{itemize}
+        \item $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}
+
+Let $<_0$ be our strict linear order as described.  We construct the sets $S_1, \ldots, S_n$ by the \code{SiConstruction} algorithm outlined in Figure \ref{bubblesort-algorithm} (where \code{S[i]} refers to $S_i$, \code{indices} is the list containing $1, \ldots, n$, and \code{ordering} is a list of pairs representing our ordering $<_0$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+    \centering\textbf{}
+    \caption{Code for the Bubble-Sort-Of Algorithm}\label{bubblesort-algorithm}
+    
+    \begin{lstlisting}
+def SiConstruction(indices, ordering):
+    # S[i] refers to our set Si
+    n = len(indices)
+    S = [set() for i in range(n)]
+
+    # We keep a counter in order to produce fresh elements whenever we may need them.
+    fresh_elem = 1
+    
+    for (p, q) in ordering[1:len(ordering)]:
+        # We iterate backwards through pairs, swapping them as needed.
+        for (k, l) in ordering[1:len(ordering)][::-1]:
+            # (i, j) is the pair to the left of (k, l)
+            (i, j) = ordering[ordering.index((k, l))-1]
+            
+            if len(S[i].union(S[j])) >= len(S[k].union(S[l])):
+                # Swap the two unions.
+                
+                # First, we populate a list of fresh points to use for pumping.
+                pump_count = len(S[i].union(S[j])) - len(S[k].union(S[l])) + 1
+                fresh_points = []
+                for p in range(pump_count):
+                    fresh_points.append(fresh_elem)
+                    fresh_elem += 1
+
+                # Then, we pump up every set Sz that is not Si or Sj
+                for z in range(n):
+                    if (z != i and z != j):
+                        S[z].update(fresh_points)
+
+                if pump_count > 0:
+                    swapped = True
+    
+    return S
+    \end{lstlisting}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This algorithm follows the structure of bubblesort; at each stage, while there is still a pair out of order, we swap \textit{every} pair $S_i \cup Sj$, $S_k \cup S_l$ whose sizes are out of order (iterating backwards through the pairs).  In order to actually swap $S_i \cup S_j$ with $S_k \cup S_l$ (where, before swapping, $|S_i \cup S_j| \ge |S_k \cup S_l|$), we add $|S_i \cup S_j| - |S_k \cup S_l| + 1$ fresh points to \textit{every} set $S_z \ne S_i, S_j$.  This swap ensures that $S_k \cup S_l$ increases in size to be strictly greater than the size of $S_i \cup S_j$, while $S_i \cup S_j$ retains its original size.
+%%\snote{I think you're adding one more fresh point than what you're saying?}
+Since this swap step affects unions aside from the swapped $S_i \cup S_j$, $S_k \cup S_l$, the cut-and-paste proof that bubblesort works will not suffice for verifying that this algorithm works.  We do take inspiration from this proof, though, and so what follows is a bubblesort-inspired verification.
+
+We must show that \code{SiConstruction}:
+\begin{itemize}
+    \item terminates, and
+    \item the resulting $S_i \cup S_j$ (for $i, j \in \{1, \ldots n\}$) satisfy the ordering specified by $<_0$, i.e., that 
+    
+    $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$
+\end{itemize}
+
+It is straightforward that \code{SiConstruction} terminates, since it involves terminating iterations via \code{for} loops.  That is, the inner loop and outer loop both iterate through the finitely many pairs in \code{ordering}, and so both the inner loop and outer loop eventually end.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Correctness}
+We will describe loop invariants in order to inductively reason about \code{SiConstruction}.  Since our algorithm iterates through the pairs in the ordering $<_0$, we use convenient notation to indicate the expected order of our unions $S_i \cup S_j$ according to $<_0$.  We will call the union $S_i \cup S_j$ that is \textit{expected} to be in the $w^{th}$ position in the list $\cup_w$ (i.e. the pair $(i, j)$ is in the $w^{th}$ position of $<_0$).
+
+In a similar vein, we will use the list $[\cup_1, \ldots, \cup_n]$ to describe the final expected ordering (according to $<_0$) of the unions.  This, specifically, is the list that our algorithm iterates through.
+
+Note that this is distinct from the union \textit{currently} at position $w$ in the list.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inner Loop Invariant}
+
+\begin{claim}[Inner Loop Invariant]
+At the start of each inner loop iteration (the $v^{th}$ iteration, starting from $v = n$ and decrementing), $\cup_v$ has strictly smaller size than any of $[\cup_{v+1}, \ldots, \cup_{n}]$, while the relative order of the remaining unions in $[\cup_{v+1}, \ldots, \cup_n]$ is not necessarily preserved (i.e. the sizes of these unions may get shuffled when swapping).
+
+%\snote{The claim could be made more clear. What is meant by ``the rest"?}
+
+\end{claim}
+\begin{proof}
+By induction on the number of passes through the inner loop.
+
+\begin{itemize}
+    \item 
+
+\textbf{Base Step:} At the start of the first pass through the inner loop, $v = n$, so $\cup_v$ is the last union in the list $\cup_n$.  This means that $[\cup_{v+1}, \ldots, \cup_{n}]$ is empty.  So the inner loop invariant holds trivially.
+
+    \item
+\textbf{Inductive Step:}
+Suppose for induction that at the start of the $v^{th}$ pass through the inner loop, our loop invariant holds.  Since we are decrementing $v$, we want to show that the invariant holds at the start of the $(v-1)^{st}$ pass (rather than the $(v+1)^{st}$ pass).
+
+Since our loop invariant holds at the start of the $v^{th}$ pass, we have $\cup_v$ is strictly less than any of $[\cup_{v+1}, \ldots, \cup_{n}]$.%, whereas the rest get shuffled. 
+
+We now consider whether $\cup_{v-1}$ is strictly less than all unions in $[\cup_{v}, \cup_{v+1}, \ldots, \cup_{n}]$. Let $S_i \cup S_j = \cup_{v-1}$, and let $S_k \cup S_l = \cup_{v}$.  We have two cases:
+\begin{enumerate}
+    \item $|S_i \cup S_j| < |S_k \cup S_l|$
+    \item $|S_i \cup S_j| \ge |S_k \cup S_l|$
+\end{enumerate}
+
+In Case (1), we do not add any fresh elements.  We get that, since $|\cup_{v-1}| < |\cup_{v}|$, $\cup_{v-1}$ has strictly smaller size than any of $[\cup_{v}, \cup_{v+1}, \ldots, \cup{n}]$.%, %while the rest get shuffled.
+
+Case (2) is a little more tricky, since we don't ``just swap" the two unions.  We have that $|S_i \cup S_j| \ge |S_k \cup S_l|$, yet $(i, j) <_0 (k, l)$ (which is consistent with this point in the code).
+
+We add $|S_i \cup S_j| - |S_k \cup S_l| + 1$ fresh points to \textit{every} set $S_z \ne S_i, S_j$.  As a result, of course, $|S_i \cup S_j| < |S_k \cup S_l|$.  In addition, all of those $\cup_u$ \textit{above $S_k \cup S_l$ in our ordering $<_0$} also obtain these new fresh points, since they each involve a set $S_z \ne S_i, S_j$.  
+
+(This last claim requires justification.  $\cup_u$ cannot be $S_i \cup S_j$, since $\cup_u$ is above $S_k \cup S_l$ in $<_0$, and $S_k \cup S_l$ is above $S_i \cup S_l$ in $<_0$.
+
+In addition, $\cup_u$ cannot be $S_i \cup S_i$ or $S_j \cup S_j$ because $\cup_u$ is above $S_i \cup S_j$, and our ordering $<_0$ satisfies the Singleton Condition (which states that $S_i \cup S_j$ is above $S_i \cup S_i$ and $S_j \cup S_j$ in $<_0$).)
+
+It might be the case that these fresh elements result in $\cup_{v-2} \ge \cup_{v-1}$, but this is no matter at this stage.  We still get our desired result, i.e.:
+
+\begin{itemize}
+    \item At the start of the $(v-1)^{st}$ loop iteration, $\cup_{v-1}$ has strictly smaller size than any of $[\cup_v, \ldots, \cup_n]$   (though the relative order of the remaining unions in $[\cup_{v+1}, \ldots, \cup_n]$ is not necessarily preserved).
+\end{itemize}
+
+\end{itemize}
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outer Loop Invariant}
+
+%%%%%%%%%%%%%%%%TODO: FIX
+
+\begin{claim}[Outer Loop Invariant]
+At the start of each outer loop iteration (the $w^{th}$ iteration), we have that:
+
+\begin{enumerate}
+    \item $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$ for all $S_i \cup S_j, S_k \cup S_l$ in the initial segment $[\cup_1, \ldots, \cup_{w-1}]$ (i.e. this segment is completely sorted), and
+    
+    \item For every union $S_i \cup S_j \in [\cup_1, \ldots, \cup_{w-1}]$ and every union $S_p \cup S_q \in [\cup_w, \ldots, \cup_n]$, $|S_i \cup S_j| < |S_p \cup S_q|$.
+\end{enumerate}
+
+\end{claim}
+
+\begin{proof}
+By induction on the number of passes through the inner loop.
+
+\begin{itemize}
+    \item 
+\textbf{Base Step:}
+At the start of the first pass through the outer loop, the initial segment is empty.  This is trivially sorted, and its elements are trivially strictly less than those of the final segment.
+
+    \item
+\textbf{Inductive Step:}
+Suppose for induction that at the start of the $w^{th}$ pass through the outer loop, our loop invariant holds.
+
+We consider the start of the $(w+1)^{st}$ pass (i.e. after executing the inner loop during the $w^{th}$ pass).
+
+By (1), the initial segment $[\cup_1, \ldots, \cup_{w-1}]$ is completely sorted (before we do the $(w+1)^{st}$ pass).  During the next inner loop pass, we do not swap the relative order of any of the unions in $[\cup_1, \ldots, \cup_{w-1}]$, because each are always less than the union immediately to their left (in $<_0$).  So after this next pass, this initial segment is still completely sorted.  In addition, by (2), $|\cup_{w-1}| < |\cup_w|$.  This means that the initial segment \textit{including w} is completely sorted, i.e. that
+
+\begin{itemize}
+    \item $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$ for all $S_i \cup S_j, S_k \cup S_l$ in the initial segment $[\cup_1, \ldots, \cup_{w-1}, \cup_w]$.
+\end{itemize}
+
+This is the condition (1) for the start of the $(w+1)^{st}$ pass.  We will now show that condition (2) still holds.
+
+After the inner loop of the $w^{th}$ pass, $\cup_w$ has strictly smaller size than any of the unions in the final segment $[\cup_{w+1}, \ldots, \cup_n]$, while the rest of the unions in the final segment $[\cup_{w+1}, \ldots, \cup_n]$ are shuffled in size.  In addition, by (2) for the $w^{th}$ pass, all of the unions in $[\cup_1, \ldots, \cup_{w-1}]$ have smaller size than those in $[\cup_w, \ldots, \cup_n]$.  So we conclude that:
+
+\begin{itemize}
+    \item All of the unions in $[\cup_1, \ldots, \cup_{w-1}, \cup_{w}]$ have sizes that are \textit{strictly smaller} than those in the final segment $[\cup_{w+1}, \ldots, \cup_n]$.
+\end{itemize}
+
+So the Outer Loop Invariant holds at the start of each pass through the loop.
+
+\end{itemize}
+
+\end{proof}
+
+By our Outer Loop Invariant, after the algorithm is finished (i.e. after the $n^{th}$ iteration), the entire list $[\cup_1, \ldots, \cup_{w-1}]$ is completely sorted, i.e.
+
+\begin{itemize}
+    \item $|S_i \cup S_j| < |S_k \cup S_l|$ iff $(i, j) <_0 (k, l)$, for all unions $S_i \cup S_j, S_k \cup S_l$
+\end{itemize}
+
+This is exactly the statement of our lemma; so we are done.
+
+\end{proof}
+\end{document}

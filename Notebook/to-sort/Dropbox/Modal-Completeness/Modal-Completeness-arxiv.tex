@@ -1,0 +1,898 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{geometry,amsmath,amssymb,stmaryrd,xcolor,latexsym,theorem}
+\geometry{letterpaper}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\infixand}{\text{ and }}
+\newcommand{\infixiff}{\text{ iff }}
+\newcommand{\op}[1]{#1}
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmemail}[1]{\\ \textit{Email:} \texttt{#1}}
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmtextbf}[1]{\text{{\bfseries{#1}}}}
+\newcommand{\tmtextit}[1]{\text{{\itshape{#1}}}}
+\newcommand{\tmtextsc}[1]{\text{{\scshape{#1}}}}
+\newcommand{\tmtextsf}[1]{\text{{\sffamily{#1}}}}
+\newcommand{\todo}[1]{{\color{red!75!black}[To do: #1]}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newtheorem{definition}{Definition}
+\newcounter{nnnote}
+\def\thennnote{\unskip}
+{\theorembodyfont{\rmfamily}\newtheorem{note*}[nnnote]{Note}}
+\newtheorem{proposition}{Proposition}
+\newcommand{\tmkeywords}{\textbf{Keywords:} }
+%%%%%%%%%% End TeXmacs macros
+
+\providecommand{\infixiff}{\mathbin{\text{ iff }}}
+%
+
+\newcommand{\garnet}[1]{{\color[HTML]{990002}#1}}
+\newcommand{\myblue}[1]{{\color[HTML]{0749AC}#1}}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Net}{\mathcal{N}}
+\newcommand{\Set}{\textsf{\tmop{Set}}}
+\newcommand{\States}{\textsf{\tmop{State}}}
+\newcommand{\Primes}{\tmtextsf{P}}
+\newcommand{\semantics}[1]{\left\llbracket #1 \right\rrbracket}
+\newcommand{\Lang}{\mathcal{L}}
+\newcommand{\Logic}{\tmtextbf{\text{L}}}
+\newcommand{\vocab}{V}
+\newcommand{\wocab}{W}
+\newcommand{\proves}{{\vdash}}
+\newcommand{\orr}{{\vee}}
+\providecommand{\land}{{\wedge}}
+\newcommand{\NP}{\tmtextsc{NP}}
+\newcommand{\bigchi}{\Large{\chi}}
+\newcommand{\powerset}{\mathcal{P}}
+%
+
+\newcommand{\hash}{\tmtextsf{hash}}
+\newcommand{\unique}{\tmtextsf{unique}}
+\newcommand{\Know}{\tmmathbf{\text{K}}}
+\newcommand{\Knownby}{\tmmathbf{\text{K}^{\downarrow}}}
+\newcommand{\diaKnow}{\langle \ensuremath{\tmmathbf{\text{K}}} \rangle}
+\newcommand{\diaKnownby}{\langle \ensuremath{\tmmathbf{\text{K}^{\downarrow}}}
+\rangle}
+\newcommand{\Typ}{\tmmathbf{\text{T}}}
+\newcommand{\diaTyp}{\langle \ensuremath{\tmmathbf{\text{T}}} \rangle}
+\newcommand{\Reach}{\textsf{\tmop{Reach}}}
+\newcommand{\Reachedby}{\textsf{\tmop{Reach}}^{\downarrow}}
+\newcommand{\Prop}{\textsf{\tmop{Prop}}}
+\newcommand{\Hebb}{\tmtextsf{Update}}
+\newcommand{\Activ}{\textsf{\tmop{Act}}}
+\newcommand{\Inc}{\tmtextsf{Inc}}
+\newcommand{\AllNets}{\textsf{\tmop{Net}}}
+\newcommand{\AllModels}{\tmtextsf{Model}}
+\newcommand{\precede}{\tmtextsf{prec}}
+
+\begin{document}
+
+\title{Neural Network Semantics, {\`a} la Mode}
+
+\author{
+  Caleb Kisby$^1$, Sa{\'u}l A. Blanco$^1$, Lawrence S. Moss$^2$
+  \tmaffiliation{$^1$Department of Computer Science, Indiana University\\
+  $^2$Department of Mathematics, Indiana University\\
+  \tmemail{\{cckisby, sblancor, lmoss\}@indiana.edu}}
+}
+
+\maketitle
+
+\begin{abstract}
+  AI has historically been divided by its two main paradigms: connectionist
+  learning and symbolic reasoning. Neuro-symbolic AI has emerged in the last
+  few decades to integrate the two while retaining the complementary
+  advantages of both. But despite the cornucopia of proposals for doing this,
+  a shared sentiment in the field is that neuro-symbolic AI needs a unifying
+  theory. One theoretical framework that has been gaining traction is to
+  consider the dynamics of a neural network as the semantics of a logic (known
+  as \tmtextit{semantic encodings}, or \tmtextit{neural network semantics}).
+  Most previous work in this area focuses on forward propagation as the
+  semantics for conditionals $\varphi \Rightarrow \psi$; a classical result is
+  that forward propagation in a binary, feed-forward net (BFNN) is completely
+  axiomatized by the Loop-Cumulative axioms of conditional logic. However, it
+  is not clear how to account for neural network \tmtextit{learning} in this
+  conditional language. In our previous work we propose that we can integrate
+  learning by instead considering a modal language. The central idea is to
+  interpret modalities as operators on the state of the net, for example:
+  $\diaKnow$ as ``graph-reachable''; $\diaKnownby$ as ``reached-by'';
+  $\diaTyp$ as ``forward propagation''; $\langle \varphi \rangle$ as ``perform
+  Hebbian learning on $\varphi$.'' But we left several fundamental questions
+  unanswered --- in particular, whether the base modal logic is complete. In
+  this paper, we follow up by giving a complete axiomatization of the neural
+  semantics for {\diaKnow}, {\diaKnownby}, and {\diaTyp}. Our logic includes a
+  new axiom that alternatively characterizes {\diaTyp} by its interaction with
+  {\diaKnow} and {\diaKnownby}: ``Every forward propagation has a minimal
+  cause.'' Moreover, we prove completeness by way of neighborhood semantics.
+  And so this is a step towards understanding the relationship between neural
+  networks and classical (neighborhood) semantics for modal logic --- in the
+  case of BFNNs, they are equivalent.
+\end{abstract}
+
+\tmkeywords{Neurosymbolic AI {\cdot} Neural Encoding {\cdot} Modal Logic
+{\cdot} Neighborhood Semantics {\cdot} Neural Networks {\cdot} Nonmonotonic
+Reasoning}
+
+\section{Introduction}
+
+[Introduce reader to setting: The two different paradigms of AI,
+Neuro-symbolic AI, how popular neuro-symbolic AI has been in the last few
+years, workshop series dedicated to it for longer] [Neuro-symbolic AI ``needs
+a theory'']
+
+\tmtextbf{References: }Neural Logic Machines {\cite{dong2019neural}}, Kautz
+Future of AI {\cite{kautz-2020future}}, Valiant Three Problems
+{\cite{valiant2003three}}, Neuro-symbolic survey 1
+{\cite{bader2005dimensions}}, Neuro-symbolic survey 2
+{\cite{sarker2021neuro}}, McCarthy Epistemology
+{\cite{mccarthy1988epistemological}}, Vaishak Belle {\cite{belle2021logic}},
+Tensorflow {\cite{tensorflow2015-whitepaper}}, Eric Pacuit's book:
+{\cite{pacuit2017neighborhood}}, Neural State Machine
+{\cite{hudson2019learning}}, Another survey lol {\cite{yu2021survey}}, Lamb
+Graph Neural Networks {\cite{lamb2020graph}}, Bottou2014
+{\cite{bottou2014machine}}, Temporal Logic {\cite{gabbay1994temporal}} (for
+explaining K$\leftarrow$), {\todo{Todo: Track and find good introductions to
+neuro-symbolic AI, as well as workshops and conferences in the last 5 years
+--- including this one at KR and the recent one at AAAI, as well as the IBM
+Workshops, etc.}}
+
+[In fact, neuro-symbolic AI \tmtextbf{has} a theory] [This theory has focused
+on mapping forward-propagation to a language of conditionals] [But what about
+learning, (and what about other closure operators)] [How to integrate learning
+with conditionals is a deep open problem/philosophically debated] [So instead,
+we believe that it is more natural to work with modalities (instead of
+conditionals), because \tmtextit{modal language natively supports update}]
+
+[\tmtextbf{Show the language} that we will use in this paper] [Rough readings
+of K and T as ``knows'' and ``typically''] [Classical interpretation via
+neighborhood semantics] [Neural interpretation as graph-reachability and
+forward-propagation in a neural net]
+
+[In this paper, we will show that in fact, neural networks are equivalent to
+(simulable by, and vice-versa) a certain class of neighborhood models we call
+``preferential models'' (a nod to preferential semantics used by KLM \&
+Hannes)] [We use this fact to give a complete axiomatization of neural network
+models in this modal language] [\tmtextbf{Show axiomatization up-front!}] [Our
+axiomatization differs from previous work --- rather than an axiom like (Loop)
+(\tmtextbf{state it here!}), we instead get an axiom that relates K and T
+(\tmtextbf{state it explicitly here!})] [Finally, we demonstrate how we can
+account for learning by extending our language with a modality for
+``transitive closure of Hebbian Learning'', and prove completeness for this
+language by giving a reduction to the base language.]
+
+\section{Background and Related Work}
+
+\tmtextbf{References: }McCulloch\&Pitts: {\cite{mcculloch1943logical}},
+Balkenius\&Gardenfors: {\cite{balkenius1991nonmonotonic}}, Leitgeb2001:
+{\cite{leitgeb2001nonmonotonic}}, Leitgeb2003:
+{\cite{leitgeb2003nonmonotonic}}, Blutner2004:
+{\cite{blutner2004nonmonotonic}}, Leitgeb2018: {\cite{leitgeb2018neural}},
+Logic of Graph Neural Networks: {\cite{grohe2021logic}},
+Baltag-Supervised-Learning {\cite{baltag2019right}}, Baltag-Learning-Theory
+{\cite{baltag2019dynamic}}, Mechanizing Induction
+{\cite{ortner2011mechanizing}}, Neural-Symbolic Cog Reas
+{\cite{garcez2008neural}}, A Sound Approach {\cite{garcez2001symbolic}},
+Odense\&Garcez {\cite{odense2022semantic}}, KLM
+{\cite{kraus1990nonmonotonic}}, Giordano2009 {\cite{giordano2009alc+}},
+Giordano2021 {\cite{giordano2021}}, Meee {\cite{kisby2022logic}}, Giordano2022
+Self-Organizing Maps {\cite{giordano2022conditional}}, Giordano2021
+Multipreference {\cite{giordano2021weighted}} {\todo{Todo: find and track
+\tmtextbf{every paper} that I can possibly find that is about this theory!}}
+
+[Give reader a brief overview of this theory] [McCulloch \& Pitts] [History of
+previous work; fragmented, although everybody comes to a very similar idea]
+[Recent survey by Odense \& Garcez gives the intuition best] [We can associate
+propositions (read ``inputs'') as \tmtextit{sets of neurons} (states) in a
+neural network] [We can then associate logical operators with ``stable
+states'' of the net (i.e. closure operators from sets of neurons (states) to
+sets of neurons (states))] [Note that we are using the term ``closure
+operator'' very loosely -- we mean \tmtextit{extensive} and
+\tmtextit{idempotent} operators from state to state, but not necessarily
+\tmtextit{monotonic}]
+
+[General idea of this theory: \tmtextbf{Soundness} of the logic corresponds to
+\tmtextbf{``Net Model Checking''}, and \tmtextbf{Completeness} corresponds to
+\tmtextbf{``Net Model Building''}] [The mapping gives us a principled way to
+translate between knowledge bases and equivalent neural network models]
+
+[Example: Hannes Leitgeb's conditional logic for feed-forward nets] [Show
+language, and picture example of the ``stable state'' of a propagation]
+[Actually give his complete axiomatization, that this is exactly the
+nonmonotonic Loop-Cumulative conditional logic of KLM] [Hannes has extended
+this idea towards other types of nets, etc.]
+
+[List other, similar work in this area] [List work that's done this for
+\tmtextbf{fuzzy sets} (i.e. we can apply the same idea towards neural networks
+that have arbitrary real-valued activation functions, rather than just binary
+activations)]
+
+[Nearly all of this work has focused on the conditional language] [Exceptions:
+Our own work, and also some of Garcez' model-building] [Understand his modal
+logic model-building well enough to understand the difference between our work
+and his] [Then explain our previous work, which uses the modal language in
+order to natively support update, and then give a logical characterization of
+Hebbian Learning.]
+
+[Compare this theory with other kinds of semantic embeddings (e.g. Logic
+Tensor Networks)] [The main difference is the starting point] [In neural
+semantics, we start with an interesting neural network behavior and try to
+understand it through logic] [In these other semantic embeddings, we start
+with a logical operator and interpret it as some operation over a neural
+network] {\todo{Is this distinction important? Maybe it's more divisive than
+it needs to be. But we should definitely compare our work to Logic Tensor
+Networks.}}
+
+\section{Basic Definitions}
+
+\subsection{Neural Network Semantics}
+
+[Style note: Get to the actual semantics as quickly as possible]
+
+[We will relate neural networks with classical models for our modal language]
+[An \tmtextit{interpreted neural network} (ANN) is just an ordinary neural
+network, where we have interpreted propositions as sets of neurons]
+
+\begin{definition}
+  An interpreted ANN is a pointed directed graph $\Net = \langle N, E, W, A,
+  I \rangle$, where
+  \begin{itemize}
+    \item $N$ is a finite nonempty set (the set of neurons)
+    
+    \item $E \subseteq N \times N$ (the set of excitatory neurons)
+    
+    \item $W : E \rightarrow \mathbb{R}$ (the weight of a given connection)
+    
+    \item $A$ is a function which maps each $n \in N$ to $A^{(n)} :
+    \mathbb{R^k {\times R^k} } \rightarrow \mathbb{R}$ (the activation
+    function for $n$, where $k$ is the indegree of $n$)
+    
+    \item $I : \tmop{propositions} \rightarrow \powerset (N)$ is an assignment
+    of propositions to sets of neurons (the interpretation function).
+  \end{itemize}
+\end{definition}
+
+[Note that unlike previous work, we do not seperate the activation function
+from the output function] [Also, our activation function takes $\vec{x}$ and
+$\vec{w}$, and returns an activation for a \tmtextit{single} node, whereas
+activation functions in libraries such as Tensorflow typically apply
+activation functions to a layer ($A : \mathbb{R}^k \rightarrow \mathbb{R}^k$)
+and apply the weights separately.] [We will focus on \tmtextit{binary,
+feed-forward neural networks} (BFNNs) (feed-forward in order to build from the
+results of {\cite{leitgeb2001nonmonotonic}}, {\cite{leitgeb2003nonmonotonic}},
+(some of) {\cite{giordano2021weighted}}, {\todo{include some of Garcez' stuff
+here}})]
+
+\begin{definition}
+  A BFNN is an interpreted ANN $\Net = \langle N, E, W, A, I \rangle$ that is
+  \begin{itemize}
+    \item Binary: the output of each neuron is in \{0, 1\}
+    
+    \item Feed-forward: $E$ does not contain any cycles
+    
+    \item $A$ is zero at zero in the first parameter: $A^{(n)} (\vec{0},
+    \vec{w}) = 0$
+    
+    \item $A$ is monotonically increasing in the second parameter: for all
+    $\vec{x}, \overrightarrow{w }_1, \vec{w}_2 \in \mathbb{R}^k$, if
+    $\overrightarrow{w }_1 < \vec{w}_2$ then $A^{(n)} (\vec{x}, \vec{w}_1) <
+    A^{(n)} (\vec{x}, \vec{w}_2)$. {\todo{Do we need this condition??}}
+  \end{itemize}
+\end{definition}
+
+[Talk about the \tmtextit{binary net} choice] [This choice is entirely
+unrealistic in practice, and seems to trivialize our results.] [But in Section
+{\todo{}} we will show that this choice is not essential: We can lift all of
+our results to nets with fuzzy activation functions.] [And the connection with
+logic will be clearer if we start first with binary nets.]
+
+[As for the activation functions, most activation functions used in practice
+are monotonically increasing and zero at zero. {\todo{Relu is an exception,
+but maybe we can drop this condition?}}]
+
+[The states of a net $\Net$ are sets of neurons.] [We think of these sets as
+\tmtextit{possible activation patterns} of $\Net$.] [For a BFNN $\Net$, let
+$\States = \{ S \mid S \subseteq N \}$ be the set of all states.] [For all $n
+\in N$ and states $S \in \States$, the characteristic function $\bigchi_S : N
+\rightarrow \{ 0, 1 \}$ identifies whether $n \in S$] [Finally, if $n \in N$,
+$S \in \States$, and $\vec{m} = m_1, \ldots, m_k$ is a list of all nodes with
+$m_i \op{E} n$, then:]
+\[ \Activ_S (\vec{m}, n) = A^{(n)} \left( \left( \bigchi_S (m_1), \ldots,
+   \bigchi_S (m_k) \right) ; (W (m_1, n), \ldots, W (m_k, n)) \right) \]
+[That is, $\Activ_S (\vec{m}, n) = 1$ whenever those $m_i \in S$ activate
+$n$.]
+
+[Neurons in a state $S \in \States$ can subsequently activate new neurons,
+which activate yet more neurons, until eventually the state of $\Net$
+stabilizes.] [We formalize this as an operator: $\Prop (S)$, the
+\tmtextit{propagation} of $S$ (the star of the show):]
+
+\begin{definition}
+  Let $\Prop : \States \rightarrow \States$ be defined recursively as follows:
+  $n \in \Prop (S)$ iff either
+  \begin{description}
+    \item[Base Case] $n \in S$, or
+    
+    \item[Constructor] For those $\vec{m} = m_1, \ldots, m_k$ such that $(m_i,
+    n) \in E$, $\Activ_{\Prop (S)} (\vec{m}, n) = 1$.
+  \end{description}
+\end{definition}
+
+[As supporting cast, we will also consider two very well-behaved closure
+operators.] [$\Reach (S)$ is the set of all neurons \tmtextit{graph-reachable}
+from $S$, whereas $\Reachedby (S)$ is the set of all neurons \tmtextit{that
+graph-reach} some node in $S$.]
+
+\begin{definition}
+  Let $\Reach : \States \rightarrow \States$ be given by $\Reach (S) = \left\{
+  n \mid \exists m \in S \text{ with } E \text{-path from } m \text{ to } n
+  \right\}$
+\end{definition}
+
+\begin{definition}
+  Let $\Reachedby : \States \rightarrow \States$ be given by $\Reachedby (S) =
+  \left\{ m \mid \text{} \exists n \in S \text{with} E \textrm{-} \tmop{path}
+  \tmop{from} m \tmop{to} n \right\}$
+\end{definition}
+
+[We will also need the following alternative characterization of
+$\Reachedby$:]
+
+\begin{proposition}
+  \label{alternative-reachedby}For all $S \in \Set$, $\Reachedby (S) =
+  {\bigcup_{n \in S}}  \bigcap_{n \not{\in} \Reach (X)} X^{\complement}$
+\end{proposition}
+
+\begin{proof}
+  {\todo{}}
+\end{proof}
+
+[The key insight of semantic encodings / neural semantics is that we can
+neatly characterize the algebraic structure of these operators as closure
+operators (extensive and idempotent)] [This is a formal way of saying that
+they actually give a stable state from $S$]
+
+[The key to our neuro-symbolic translation is that $\Prop$, $\Reach$, and
+$\Reachedby$ are closure operators (extensive and idempotent), which is a
+formal way of saying that they actually give a stable state from $S$] [First:
+$\Reach$ and $\Reachedby$ are fully monotonic, acyclic closure operators (very
+well-behaved):]
+
+\begin{proposition}
+  \label{thm:reach-props}Let $\Net \in \AllNets$. For all $S, T \in \Set$, $n,
+  m \in N$, $\Reach$ is
+  \begin{description}
+    \item[Extensive] $S \subseteq \Reach (S)$
+    
+    \item[Idempotent] $\Reach (S) = \Reach (\Reach (S))$
+    
+    \item[Antisymmetric] If $m \in \Reach (\{ n \})$ and $n \in \Reach (\{ m
+    \})$ then $n = m$.
+    
+    \item[Monotonic] If $S \subseteq T$ then $\Reach (S) \subseteq \Reach (T)$
+  \end{description}
+  These properties also hold, mutatis mutandis, for $\Reachedby$.
+\end{proposition}
+
+\begin{proof}
+  {\todo{}}
+\end{proof}
+
+[In contrast, $\Prop$ can be characterized as a \tmtextit{non-monotonic}
+closure operator.] [Leitgeb {\cite{leitgeb2001nonmonotonic}} shows that
+$\Prop$ satisfies the \tmtextit{loop-cumulative} laws of KLM {\todo{cite
+KLM}}] [State the loop-cumulative laws here] [For all $S_1, S_2, \ldots, S_n
+\in \Set$,]
+\begin{description}
+  \item[Cumulative] If $S_1 \subseteq S_2 \subseteq \Prop (S_1)$ then $\Prop
+  (S_1) \subseteq \Prop (S_2)$
+  
+  \item[Loop] If $S_1 \subseteq \Prop (S_0), \ldots, S_n \subseteq \Prop (S_{n
+  - 1})$ and $S_0 \subseteq \Prop (S_n)$,
+  
+  then $\Prop (S_i) = \Prop (S_j)$ for all $i, j \in \{ 0, \ldots, n \}$
+\end{description}
+[But we can alternatively characterize $\Prop$ by its interactions with
+$\Reach$ and $\Reachedby$:]
+
+\begin{proposition}
+  (Adapted from {\cite[Remark 4]{leitgeb2001nonmonotonic}})
+  \label{thm:prop-props}Let $\Net \in \AllNets$. For all $S, T \in \Set$,
+  $\Prop$ is
+  \begin{description}
+    \item[Extensive] $S \subseteq \Prop (S)$
+    
+    \item[Idempotent] $\Prop (S) = \Prop (\Prop (S))$
+    
+    \item[Contained in {\Reach}] $\Prop (S) \subseteq \Reach (S)$
+    
+    \item[Minimal Cause] $\Reachedby (T) \subseteq \Prop (S)$ iff $\Reachedby
+    (T) \subseteq \Prop \left( \Prop (S) \cap \Reachedby (T) \right)$
+  \end{description}
+\end{proposition}
+
+\begin{proof}
+  {\todo{}}
+\end{proof}
+
+[Explain minimal cause here!] [We will see in Section {\todo{}} that this is a
+\tmtextit{complete} characterization of $\Prop$.] [For now, we will
+double-check the following:]
+
+\begin{proposition}
+  [The KLM Cumulative and Loop properties follow from our own properties of
+  $\Prop$, {\Reach}, and $\Reachedby$.]
+\end{proposition}
+
+[At last, here is how we semantically encode neural networks in our language]
+[Each proposition represents a fixed state in the net that corresponds to the
+features of the corresponding concept.] [For example, $p$ might be the set of
+neurons that encapsulates the color \tmtextit{pink}.] [We presume that we
+already agree on these states, although we acknowledge that this is a major
+unsolved empirical issue] [As for modalities, we map the \tmtextit{dual} modal
+operators $\diaKnow, \diaKnownby, \diaTyp$ to the closure operators $\Reach,
+\Reachedby, \Prop$, respectively:]
+
+\begin{definition}
+  Let $\Net \in \AllNets$. The semantics $\semantics{\cdot}_{\Net} : \Lang
+  \rightarrow \Set$ for $\Lang$ is defined recursively as follows [we omit the
+  subscript when $\Net$ can be inferred from context]:
+  \[ \begin{array}{|lll|}
+       \hline
+       \semantics{p} & = & I (p) \in \Set\\
+       \semantics{\neg \varphi} & = & \semantics{\varphi}^{\complement}\\
+       \semantics{\varphi \wedge \psi} & = & \semantics{\varphi} \cap
+       \semantics{\psi}\\
+       \semantics{\diaKnow \varphi} & = & \Reach \left( \semantics{\varphi}
+       \right)\\
+       \semantics{\diaKnownby \varphi} & = & \Reachedby \left( 
+       \semantics{\varphi} \right)\\
+       \semantics{\diaTyp \varphi} & = & \Prop \left( \semantics{\varphi}
+       \right)\\
+       \hline
+     \end{array} \]
+\end{definition}
+
+[In typical modal-logic fashion, we consider two kinds of truth: Truth
+\tmtextit{at a neuron} and truth \tmtextit{in a net}.] [Intuition: $\varphi$
+is true at neuron $n$ if $n$ is active in $\semantics{\varphi}$, i.e. if the
+concept $\semantics{\varphi}$ has feature $n$] [$\varphi$ is true in the whole
+net $\Net$ if \tmtextit{every} neuron is active in $\semantics{\varphi}$]
+
+\begin{definition}
+  (\tmtextbf{Truth at a neuron}) $\Net, n \Vdash \varphi$ iff $n \in
+  \semantics{\varphi}_{\Net}$.
+\end{definition}
+
+\begin{definition}
+  \tmtextbf{(Truth in a net)} $\Net \models \varphi$ iff $\Net, n \Vdash
+  \varphi$ for all $n \in N$.
+\end{definition}
+
+[Finally, entailment:]
+
+\begin{definition}
+  \tmtextbf{(Entailment)} $\Gamma \models_{\text{BFNN}} \varphi$ if for all
+  BFNNs $\Net$ and for all neurons $n \in N$, if $\Net, n \Vdash \Gamma$ then
+  $\Net, n \Vdash \varphi$.
+\end{definition}
+
+\begin{note*}
+  [Note that we pick intersection, union, and subset ``normally'', whereas
+  some accounts of neural semantics (e.g. Hannes') give ``flipped''
+  interpretations of these] [Explain here the appeal of both] [But the choice
+  doesn't matter --- proposition that says the two are equivalent if we take
+  the dual of the modalities.]
+\end{note*}
+
+\subsection{(Classical) Neighborhood Semantics}
+
+[Our plan, again, is to relate this neural semantics with classical
+possible-worlds semantics for our language.] [In our neural semantics, we
+mapped $\diaTyp$ to the non-monotonic $\Prop$. This means in particular that
+$\Typ$ does \tmtextit{not} satisfy [state normal modal logic axiom]] [So our
+modal logic is not normal --- but it is classical, and so we will give the
+usual \tmtextit{neighborhood semantics} for classical modal logics] [The best
+references are [cite Chellas and Pacuit]] [First, some basic definitions from
+Pacuit:]
+
+\begin{definition}
+  {\cite[Definition 1.9]{pacuit2017neighborhood}} A neighborhood frame is a
+  pair $\mathcal{F} = \langle W, f \rangle$, where $W$ is a non-empty set of
+  worlds and $f : W \to \powerset (\powerset (W))$ is a neighborhood function.
+  [A multi-frame may have more than one neighborhood function, but to keep
+  things simple I won't distinguish between frames and multi-frames.]
+\end{definition}
+
+\begin{definition}
+  {\cite[Section 1.1]{pacuit2017neighborhood}} Let $\mathfrak{\mathcal{F}} =
+  \langle W, f \rangle$ be a neighborhood frame, and let $w \in W$. The set
+  $\bigcap_{X \in f (w)} X$ is called the core of $f (w)$, abbreviated $\cap f
+  (w)$. If $X \subseteq W$, the set $\bigcup_{w \in X} \cap f (w)$ is called
+  the core of $f (X)$, abbreviated $\cap f (X)$.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 1.4]{pacuit2017neighborhood}} Let $\mathcal{F} = \langle
+  W, f \rangle$ be a frame. $\mathcal{F}$ is a proper filter iff $f$ is:
+  \begin{itemize}
+    \item $f$ is closed under finite intersections: for all $w \in W$, if
+    $X_1, \ldots, X_n \in f (w)$ then their intersection $\bigcap^k_{i = 1}
+    X_i \in f (w)$
+    
+    \item $f$ is closed under supersets: for all $w \in W$, if $X \in f (w)$
+    and $X \subseteq Y \subseteq W$, then $Y \in f (w)$
+    
+    \item $f$ contains the unit: iff $W \in f (w)$
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  {\cite[Corollary 1.1]{pacuit2017neighborhood}}
+  \label{filter-contains-core}If $\mathcal{F} = \langle W, f \rangle$ is a
+  filter, and $W$ is finite, then $\mathcal{F}$ contains its core.
+\end{proposition}
+
+[We will focus on a particular kind of frame that we call a
+\tmtextit{preferential filter}.] [We call it that because it is essentially a
+possible-worlds variant of preferential models used in conditional logic]
+[This is the class of frames that we will show are equivalent to BFNNs.]
+
+\begin{definition}
+  $\mathcal{F} = \langle W, f, g \rangle$ is a preferential filter iff:
+  \begin{itemize}
+    \item W is finite
+    
+    \item $\langle W, f \rangle$ forms a proper filter, and $g$ contains the
+    unit
+    
+    \item $f$ is antisymmetric: for all $u, v \in W$, if $u \in \cap f (v)$
+    and $v \in \cap f (u)$ then $u = v$.
+    
+    \item $f, g$ are reflexive: for all $w \in W$, $w \in \cap f (w)$
+    (similarly for $g$)
+    
+    \item $f, g$ are transitive: for all $w \in W$, if $X \in f (w)$ then $\{
+    u \mid X \in f (u) \} \in f (w)$ (similarly for $g$)
+    
+    \item $g$ contains $f$: for all $w \in W$, if $X \in f (w)$ then $X \in g
+    (w)$
+    
+    \item $f$ is a skeleton of $g$: for all $w \in W$ and $Y \subseteq W$ such
+    that $w \in \cap f (Y)$,
+    \[ X \in g (w) \infixiff \{ u \mid X \in g (u) \} \cup (\cap f
+       (Y))^{\complement} \in g (w) \]
+  \end{itemize}
+\end{definition}
+
+[Explain the skeleton property!] [In fact, this skeleton property corresponds
+to the Minimal Cause property.] [Note in particular that for $Y = \{ w \}$,
+since $w \in \cap f (w)$, the skeleton property says:]
+\begin{equation}
+  X \in g (w) \infixiff \{ u \mid X \in g (u) \} \cup (\cap f
+  (w))^{\complement} \in g (w)
+\end{equation}
+[We use the usual neighborhood semantics model, truth, and entailment
+definitions]
+
+\begin{definition}
+  {\cite[Definition 1.11]{pacuit2017neighborhood}} Let $\mathcal{F} = \langle
+  W, f, g \rangle$ be a neighborhood frame. A neighborhood model based on
+  $\mathcal{F}$ is $\Model = \langle W, f, g, V \rangle$, where $V : \Lang \to
+  \powerset (W)$ is a valuation function.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 1.12]{pacuit2017neighborhood}} Let $\Model = \langle W, f,
+  g, V \rangle$ be a model based on $\mathcal{F} = \langle W, f, g \rangle$
+  Truth at a world $\Vdash$ is defined recursively as follows:
+  \[ \begin{array}{|lll|}
+       \hline
+       \Model, w \Vdash p & \tmop{iff} & w \in V (p)\\
+       \Model, w \Vdash \neg \varphi & \tmop{iff} & \Model, w \not{\Vdash}
+       \varphi\\
+       \Model, w \Vdash \varphi \wedge \psi & \tmop{iff} & \Model, w \Vdash
+       \varphi \infixand \Model, w \Vdash \psi\\
+       \Model, w \Vdash \Know \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+       \Vdash \varphi \right\} \in f (w)\\
+       \Model, w \Vdash \Knownby \varphi & \tmop{iff} & \forall u \in W,
+       \text{ if } w \in \cap f (u) \text{ then } \Model, u \Vdash \varphi\\
+       \Model, w \Vdash \Typ \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+       \Vdash \varphi \right\} \in g (w)\\
+       \hline
+     \end{array} \]
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 1.13]{pacuit2017neighborhood}} \tmtextbf{(Truth in a
+  model)} $\Model \models \varphi$ iff $\Model, w \Vdash \varphi$ for all $w
+  \in W$.
+\end{definition}
+
+\begin{definition}
+  {\cite[Definition 2.32]{pacuit2017neighborhood}} \tmtextbf{(Frame
+  entailment)} Let $\mathsf{F}$ be a collection of neighborhood frames.
+  $\Gamma \models_{\mathsf{F}} \varphi$ if for all models $\Model$ based on a
+  frame $\mathcal{F} \in \mathsf{F}$ and for all worlds $w \in W$, if $\Model,
+  w \Vdash \Gamma$ then $\Model, w \Vdash \varphi$. [Note: This is the
+  \tmtextit{local} consequence relation in modal logic.]
+\end{definition}
+
+[In neighborhood semantics, the operators $\Know$, and $\Typ$ are more natural
+to interpret.] [But when we gave our neural semantics, we instead interpreted
+the \tmtextit{duals} $\diaKnow$, and $\diaTyp$.] [Since we need to relate the
+two, I'll write the explicit neighborhood semantics for the duals here:]
+\[ \begin{array}{lll}
+     \Model, w \Vdash \diaKnow \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+     \not{\Vdash} \varphi \right\} \not{\in} f (w)\\
+     \Model, w \Vdash \diaKnownby \varphi & \tmop{iff} & \exists u \in W
+     \text{ such that } w \in \cap f (u) \text{ and } \Model, u \Vdash
+     \varphi\\
+     \Model, w \Vdash \diaTyp \varphi & \tmop{iff} & \left\{ u \mid \Model, u
+     \not{\Vdash} \varphi \right\} \not{\in} g (w)
+   \end{array} \]
+
+\section{From Nets to Neighborhood Models and Back}
+
+\subsection{Building Nets from Neighborhood Models}
+
+\subsection{Building Neighborhood Models from Nets}
+
+\section{Completeness and Model Building}
+
+\section{Completeness for Hebbian Learning}
+
+[How modal logic handles update --- Dynamic Epistemic Logic] [Examples of
+success: Dynamic logics for announcement \& preference upgrade]
+
+[The simplest possible neural network learning policy: Unstable Hebbian
+Learning] [Introduce Hebbian Learning here, talk about it as a modal operator]
+
+\tmtextbf{References: }Preference Upgrade {\cite{van2007prefupgrade}}, Belief
+Revision {\cite{van2007beliefrevision}}, Hebb Organization
+{\cite{hebb-organization-of-behavior-1949}}, Dynamic Epistemic Logic
+{\cite{gerbrandy1999dynamic}}, Moss Finite Models {\cite{moss2007finite}} ---
+{\todo{although track down original source for this proof}}, {\todo{Todo:
+Track down old dissertation that introduces reductions}}
+
+[In fact, if we take the \tmtextit{reflexive-transitive closure} of the
+Hebbian Learning operator, we get a closure operator (i.e. a stable state in
+the space of all these neural network models)] [Formalize this, and give a
+reading for it as ``what the net learns in the limit'']
+
+[Technique of proving completeness for update operators by
+\tmtextit{reduction} (try to track down again where this comes from --- Van
+Benthem mentions that it's from somebody's PhD thesis)] [In the case of
+unstable Hebbian Learning, we \tmtextit{do} have a reduction:]
+
+[Give reduction, and proof of it]
+
+[This solves an open problem left by our previous work, with a subtle
+difference between the two] [One-step update vs closure update] [Although it
+is possible to go from one-step to closure update (see Larry's paper), it is
+an open question how to go in the reverse direction (get completeness for a
+reflexive-transitive \tmtextit{reduction})] [Argue that, from the POV of
+\tmtextit{interpreting the behavior of a neural network}, we are really
+interested in \tmtextit{closure updates}, not one-step updates.]
+
+\section{Completeness for Fuzzy Neural Networks}
+
+[So far, we have worked with binary nets in order to make the connection with
+binary modal logic clearer] [We prefer to work in the binary case, because it
+doesn't convolute the insight that this is \tmtextit{essentially modal logic}
+(badly phrased, rephrase)] [Actually, the choice doesn't matter / But this
+choice is not essential --- we can lift all of our results about binary nets
+to nets with fuzzy activation functions] [This is just a matter of considering
+a fuzzy version of our logic, and then checking that everything still holds]
+
+[List our primary references, i.e. other work that gives neural network
+semantics for \tmtextit{fuzzy} logic] [{\cite{giordano2022conditional}},
+{\cite{giordano2021weighted}}, {\todo{any more?}}]
+
+[Introduce the fuzzy language, then re-state all of our definitions and
+theorems {\todo{Is this a good choice, writing-wise? Is there any more-general
+thing I can say that will knock this out more easily? What is the theorem that
+I actually want?}}]
+
+\section{Conclusions and Future Work}
+
+\tmtextbf{References: }{\todo{Include Merril's paper that talks about
+recurrent nets via automata, track down recurrent net papers, track down FOL
+and Higher-order logic papers, and also include here other logics of
+learning}}
+
+[Extend theory to account for \tmtextit{recurrent nets} and
+\tmtextit{attention mechanisms}] [The trouble is what Odense and Garcez bring
+up in their survey: Determining the \tmtextit{stable states} of the net]
+[Forward propagation] [Give \tmtextit{some} pointer for direction on what
+conditions would make a recurrent net stable.]
+
+[Mention work on first-order and higher-order logic quantifiers here] [Include
+Garcez' Logic Tensor Networks] [Mention Masters thesis on variable binding in
+neural networks] [Also mention neuroscience literature on regions of the brain
+that are active during quantifier reasoning as inspiration]
+
+[Another next step would be to give sound axioms for other learning operators,
+e.g. \tmtextit{stable} Hebbian Learning; backpropagation] [In addition, relate
+work to other dynamic logics of preference upgrade (which I should mention in
+the section for Hebbian Learning as well.)]
+
+{\bibliographystar{bib}{tm-plain}{neurosymbolic}{References}{\bibitem{1}\label{bib-bader2005dimensions}Sebastian
+Bader  and  Pascal Hitzler. {\newblock}Dimensions of neural-symbolic
+integration-a structured survey. {\newblock}\tmtextit{ArXiv preprint
+cs/0511042}, 2005.{\newblock}
+
+\bibitem{2}\label{bib-balkenius1991nonmonotonic}Christian Balkenius  and 
+Peter G{\"a}rdenfors. {\newblock}Nonmonotonic Inferences in Neural Networks.
+{\newblock}In \tmtextit{KR},  pages  32--39. 1991.{\newblock}
+
+\bibitem{3}\label{bib-baltag2019dynamic}Alexandru Baltag, Nina Gierasimczuk,
+Ayb{\"u}ke {\"O}zg{\"u}n, Ana~Lucia~Vargas Sandoval, and  Sonja Smets.
+{\newblock}A dynamic logic for learning theory. {\newblock}\tmtextit{Journal
+of Logical and Algebraic Methods in Programming}, 109:100485, 2019.{\newblock}
+
+\bibitem{4}\label{bib-baltag2019right}Alexandru Baltag, Dazhu Li, and 
+Mina~Young Pedersen. {\newblock}On the right path: a modal logic for
+supervised learning. {\newblock}In \tmtextit{International Workshop on Logic,
+Rationality and Interaction},  pages  1--14. Springer, 2019.{\newblock}
+
+\bibitem{5}\label{bib-belle2021logic}Vaishak Belle. {\newblock}Logic Meets
+Learning: From Aristotle to Neural Networks. {\newblock}In
+\tmtextit{Neuro-Symbolic Artificial Intelligence: The State of the Art}, 
+pages  78--102. IOS Press, 2021.{\newblock}
+
+\bibitem{6}\label{bib-blutner2004nonmonotonic}Reinhard Blutner.
+{\newblock}Nonmonotonic inferences and neural networks. {\newblock}In
+\tmtextit{Information, Interaction and Agency},  pages  203--234. Springer,
+2004.{\newblock}
+
+\bibitem{7}\label{bib-bottou2014machine}L{\'e}on Bottou. {\newblock}From
+machine learning to machine reasoning. {\newblock}\tmtextit{Machine learning},
+94(2):133--149, 2014.{\newblock}
+
+\bibitem{8}\label{bib-dong2019neural}Honghua Dong, Jiayuan Mao, Tian Lin,
+Chong Wang, Lihong Li, and  Denny Zhou. {\newblock}Neural logic machines.
+{\newblock}\tmtextit{ArXiv preprint arXiv:1904.11694}, 2019.{\newblock}
+
+\bibitem{9}\label{bib-gabbay1994temporal}Dov~M Gabbay, Ian Hodkinson, and 
+Mark~A Reynolds. {\newblock}Temporal logic: mathematical foundations and
+computational aspects. {\newblock}1994.{\newblock}
+
+\bibitem{10}\label{bib-garcez2001symbolic}Artur~S~d'Avila Garcez, Krysia
+Broda, and  Dov~M Gabbay. {\newblock}Symbolic knowledge extraction from
+trained neural networks: a sound approach. {\newblock}\tmtextit{Artificial
+Intelligence}, 125(1-2):155--207, 2001.{\newblock}
+
+\bibitem{11}\label{bib-garcez2008neural}Artur~S~d'Avila Garcez, Luis~C Lamb,
+and  Dov~M Gabbay. {\newblock}\tmtextit{Neural-symbolic cognitive reasoning}.
+{\newblock}\begin{tabular}{ll}
+  Springer Science & Business Media
+\end{tabular}, 2008.{\newblock}
+
+\bibitem{12}\label{bib-gerbrandy1999dynamic}Jelle Gerbrandy.
+{\newblock}Dynamic epistemic logic. {\newblock}In \tmtextit{Logic, language
+and computation, vol. 2},  pages  67--84. 1999.{\newblock}
+
+\bibitem{13}\label{bib-giordano2021}Laura Giordano, Valentina Gliozzi, and 
+Daniele~Theseider Dupr{\'e}. {\newblock}From common sense reasoning to neural
+network models through multiple preferences: An overview.
+{\newblock}\tmtextit{CoRR}, abs/2107.04870, 2021.{\newblock}
+
+\bibitem{14}\label{bib-giordano2022conditional}Laura Giordano, Valentina
+Gliozzi, and  Daniele Theseider Dupr{\'E}. {\newblock}A conditional, a fuzzy
+and a probabilistic interpretation of self-organizing maps.
+{\newblock}\tmtextit{Journal of Logic and Computation}, 32(2):178--205,
+2022.{\newblock}
+
+\bibitem{15}\label{bib-giordano2009alc+}Laura Giordano, Nicola Olivetti,
+Valentina Gliozzic, and  Gian~Luca Pozzato. {\newblock}$\mathcal{ALC} +$ T: a
+preferential extension of description logics. {\newblock}\tmtextit{Fundamenta
+Informaticae}, 96(3):341--372, 2009.{\newblock}
+
+\bibitem{16}\label{bib-giordano2021weighted}Laura Giordano  and  Daniele
+Theseider Dupr{\'e}. {\newblock}Weighted defeasible knowledge bases and a
+multipreference semantics for a deep neural network model. {\newblock}In
+\tmtextit{Logics in Artificial Intelligence: 17th European Conference, JELIA
+2021, Virtual Event, May 17--20, 2021, Proceedings 17},  pages  225--242.
+Springer, 2021.{\newblock}
+
+\bibitem{17}\label{bib-grohe2021logic}Martin Grohe. {\newblock}The logic of
+graph neural networks. {\newblock}In \tmtextit{2021 36th Annual ACM/IEEE
+Symposium on Logic in Computer Science (LICS)},  pages  1--17. IEEE,
+2021.{\newblock}
+
+\bibitem{18}\label{bib-hebb-organization-of-behavior-1949}Donald Hebb.
+{\newblock}\tmtextit{The organization of behavior: A neuropsychological
+theory}. {\newblock}Wiley, New York, 1949.{\newblock}
+
+\bibitem{19}\label{bib-hudson2019learning}Drew Hudson  and  Christopher~D
+Manning. {\newblock}Learning by abstraction: the neural state machine.
+{\newblock}\tmtextit{Advances in Neural Information Processing Systems}, 32,
+2019.{\newblock}
+
+\bibitem{20}\label{bib-kautz-2020future}The Third AI Summer, AAAI Robert S.
+Engelmore Memorial Award Lecture. {\newblock}AAAI, 2020.{\newblock}
+
+\bibitem{21}\label{bib-kisby2022logic}Caleb Kisby, Sa{\'u}l Blanco, and 
+Lawrence Moss. {\newblock}The logic of hebbian learning. {\newblock}In
+\tmtextit{The International FLAIRS Conference Proceedings},  volume~35.
+2022.{\newblock}
+
+\bibitem{22}\label{bib-kraus1990nonmonotonic}Sarit Kraus, Daniel Lehmann, and 
+Menachem Magidor. {\newblock}Nonmonotonic reasoning, preferential models and
+cumulative logics. {\newblock}\tmtextit{Artificial intelligence},
+44(1-2):167--207, 1990.{\newblock}
+
+\bibitem{23}\label{bib-lamb2020graph}Luis~C Lamb, Artur Garcez, Marco Gori,
+Marcelo Prates, Pedro Avelar, and  Moshe Vardi. {\newblock}Graph neural
+networks meet neural-symbolic computing: a survey and perspective.
+{\newblock}\tmtextit{ArXiv preprint arXiv:2003.00330}, 2020.{\newblock}
+
+\bibitem{24}\label{bib-leitgeb2001nonmonotonic}Hannes Leitgeb.
+{\newblock}Nonmonotonic reasoning by inhibition nets.
+{\newblock}\tmtextit{Artificial Intelligence}, 128(1-2):161--201,
+2001.{\newblock}
+
+\bibitem{25}\label{bib-leitgeb2003nonmonotonic}Hannes Leitgeb.
+{\newblock}Nonmonotonic reasoning by inhibition nets II.
+{\newblock}\tmtextit{International Journal of Uncertainty, Fuzziness and
+Knowledge-Based Systems}, 11(supp02):105--135, 2003.{\newblock}
+
+\bibitem{26}\label{bib-leitgeb2018neural}Hannes Leitgeb. {\newblock}Neural
+Network Models of Conditionals. {\newblock}In \tmtextit{Introduction to Formal
+Philosophy},  pages  147--176. Springer, 2018.{\newblock}
+
+\bibitem{27}\label{bib-tensorflow2015-whitepaper}Mart{\'i}nAbadi et~al.
+{\newblock}TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems.
+{\newblock}2015. {\newblock}Software available from tensorflow.org.{\newblock}
+
+\bibitem{28}\label{bib-mccarthy1988epistemological}John McCarthy.
+{\newblock}Epistemological challenges for connectionism.
+{\newblock}\tmtextit{Behavioral and Brain Sciences}, 11(1):44--44,
+1988.{\newblock}
+
+\bibitem{29}\label{bib-mcculloch1943logical}Warren~S McCulloch  and  Walter
+Pitts. {\newblock}A logical calculus of the ideas immanent in nervous
+activity. {\newblock}\tmtextit{The bulletin of mathematical biophysics},
+5(4):115--133, 1943.{\newblock}
+
+\bibitem{30}\label{bib-moss2007finite}Lawrence~S Moss. {\newblock}Finite
+models constructed from canonical formulas. {\newblock}\tmtextit{Journal of
+Philosophical Logic}, 36(6):605--640, 2007.{\newblock}
+
+\bibitem{31}\label{bib-odense2022semantic}Simon Odense  and  Artur~d'Avila
+Garcez. {\newblock}A semantic framework for neural-symbolic computing.
+{\newblock}\tmtextit{ArXiv preprint arXiv:2212.12050}, 2022.{\newblock}
+
+\bibitem{32}\label{bib-ortner2011mechanizing}Ronald Ortner  and  Hannes
+Leitgeb. {\newblock}Mechanizing induction. {\newblock}In \tmtextit{Handbook of
+the History of Logic},  volume~10,  pages  719--772. Elsevier,
+2011.{\newblock}
+
+\bibitem{33}\label{bib-pacuit2017neighborhood}Eric Pacuit.
+{\newblock}\tmtextit{Neighborhood semantics for modal logic}.
+{\newblock}Springer, 2017.{\newblock}
+
+\bibitem{34}\label{bib-sarker2021neuro}Md~Kamruzzaman Sarker, Lu Zhou, Aaron
+Eberhart, and  Pascal Hitzler. {\newblock}Neuro-symbolic artificial
+intelligence: current trends. {\newblock}\tmtextit{ArXiv preprint
+arXiv:2105.05330}, 2021.{\newblock}
+
+\bibitem{35}\label{bib-valiant2003three}Leslie~G Valiant. {\newblock}Three
+problems in computer science. {\newblock}\tmtextit{Journal of the ACM (JACM)},
+50(1):96--99, 2003.{\newblock}
+
+\bibitem{36}\label{bib-van2007beliefrevision}Johan Van Benthem.
+{\newblock}Dynamic logic for belief revision. {\newblock}\tmtextit{Journal of
+applied non-classical logics}, 17(2):129--155, 2007.{\newblock}
+
+\bibitem{37}\label{bib-van2007prefupgrade}Johan Van Benthem  and  Fenrong Liu.
+{\newblock}Dynamic logic of preference upgrade. {\newblock}\tmtextit{Journal
+of Applied Non-Classical Logics}, 17(2):157--182, 2007.{\newblock}
+
+\bibitem{38}\label{bib-yu2021survey}Dongran Yu, Bo Yang, Dayou Liu, and  Hui
+Wang. {\newblock}A survey on neural-symbolic systems.
+{\newblock}\tmtextit{ArXiv preprint arXiv:2111.08164}, 2021.{\newblock}}}
+
+\end{document}

@@ -1,0 +1,36 @@
+## A Semantic Theory for Neural-Symbolic AI
+- **Prolegomenon.**
+	- Discussion introduction & related work.
+	- I have a bit of space here to talk about the neural-symbolic problem
+	- Idea: *begin* with the "Neural-Symbolic AI Needs a Theory" paper, and walk through its points (what does a theory for neural-symbolic AI need to be able to answer?  What questions should it allow us to "begin to ask?")
+	- What does this theory say?  A "correspondence" -- specifically emphasize the mapping from neural models to classical logic models ("semantically encode").  Show explicitly the correspondences that I'll outline
+	- Important to explain here why we want formal **soundness** (neural network verification) and **completeness** (neural network model-building)
+	- Because we want the theory to be "close to implementation", we use Lean.  We can write our neural network code in Lean, train and evaluate the net in Lean, and prove all of our theorems in Lean.  (Reasons why I chose to use a proof assistant; reasons why I choose to make Lean our "home," specifically, including 1) its math library, 2) code is evaluated and verified at the same level, 3) Lean's interaction with the neural-symbolic community).  Overall, the idea is that our theoretical results directly correspond to verification and neural network model-building results in the actual code.
+	- Outline the paper, including appendices (I should put the base logic completeness results & also explicit Lean code in the appendices!!)
+- **Related work.** 
+	- Are there other theories for neural-symbolic AI?  What questions do they ask/answer, compared to this one?
+	- What existing neural-symbolic proposals does this theory encompass?  Here, follow the survey by Odense and Garcez.  The answer is *quite a lot* of them!  So frame this as:  This neural-symbolic theory *already* answers for a large chunk of the work done in neural-symbolic AI.
+	- The first big result of this theory (forward propagation is conditional belief) has also been rediscovered by many different authors
+- **Prediction is Conditional Belief.**
+	- Emphasize what we owe to Hannes Leitgeb.  I base my work in this section on his previous work.  Actually, the system here is an adaptation of his, with two differences: 1) I add in graph-reachability, 2) our language is slightly richer, we have a "prototype" operator that we use to express conditional belief, and 3) I extend the completeness result to fuzzy nets.
+	- Introduce basic neural network definitions (neural networks, feed-forward nets, binary vs fuzzy nets, etc.) & interpreted neural network models. For now, we stick with binary, feed-forward nets (but we will relax 'binary' assumption at the end of this section.)
+	- **Neural Network Semantics.** Introduce forward propagation & graph-reachability operators.  Then give our logic language, and spell out how we interpret sentences using neural networks (how we interpret 'truth at a state', 'truth across the whole net', etc.)  Justify why we call each operator the respective thing, etc.  Emphasize the prediction/conditional belief connection
+	- Note here about duals and "flipping" the semantics.
+	- **Classical Preferential Semantics for Conditional Belief.**  We claim that forward propagation is a "prototype" operator, graph-reachability is knowledge, and prediction is conditional belief.  Here we give the classical possible-worlds/preferential reading for those things; we will formally prove that the two semantics correspond.
+	- **Correspondence, Soundness, and Completeness.** Give the correspondence theorem (we can build a net from a preferential model).  Then give the complete set of axioms, and prove soundness, model-building, and completeness for the neural network semantics.
+	- **Soundness and Completeness for Fuzzy Activation Values.** Now show that we can easily lift these results for fuzzy nets. (Note: this just means that anything we can say in a non-fuzzy/non-probabilistic *language* is true for fuzzy feed-forward nets.  It does *not* mean that this tells the whole story -- we should look towards fuzzy/probabilistic *logic languages*.).  For the rest of this thesis, I'll stick to binary nets (because it's easier), but I need to prove in Lean that everything does actually hold for fuzzy nets.
+- **Hebbian Learning is Belief Revision.**
+	- This section is essentially the journal version of the Hebbian learning papers
+	- **Dynamic Logic for Belief Revision.** Introduce the idea of extending a language with a dynamic operator.  By example: consider PAL (updates knowledge), lexicographic & elite upgrade (update conditional belief).  Show that each operator is reducible to its base language; what this means; how completeness follows
+	- Introduce Hebbian Learning idea ("neurons that fire together wire together").  We show through successive update operators how three variants of this correspond to different types of belief revision.
+	- **"Make Neurons Wire Together."** Most basic neural update operator.  Just take a set, and make all neurons in that set "equivalent".  (idea is that we just "maximally connect" that set of neurons, but we use the equivalence relation in order to avoid cycles).  Show that this operator is equivalent to Lexicographic Upgrade (and has the same reduction axioms).
+	- **"If Neurons Fired Together."** Do the same, but for all neurons within a certain propagated set.
+	- **Classical (Unstable) Hebbian Learning.** What belief revision operator does this correspond to?  Give complete reduction axioms, etc.
+- **Supervised Learning is Supervised Belief Revision.**
+	- This is the most experimental section, and it all depends on what comes of my KR paper about "Supervised Belief Revision."
+- **Conclusions and Future Work.**
+	- Close by explaining, point-for-point, how this theory addresses the "Neural-Symbolic AI Needs a Theory" paper. (What questions are we now able to ask?)
+	- Say other questions we're now able to ask/better understand (e.g. we say nothing about knowledge *extraction*, but now we have a different point of view on it (making up a valuation))
+	- Say something about formal verification of neural networks; Say something about AI alignment
+	- What questions does this theory not address at all/are best left to other approaches?
+	- Laundry List of the most important questions in this Theory of Neural-Symbolic AI

@@ -1,0 +1,56 @@
+﻿\definecolor{myblue}{rgb}{0.03, 0.27, 0.65}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\set}[1]{\{ #1 \}}
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit}
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+% nodes
+\node[circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a){$a$};
+\node[below=0.6 of a,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b){$b$};
+\node[below=0.6 of b,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](c){$c$};
+\node[below=0.6 of c,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](d){$d$};
+\node[below=0.6 of d,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](e){$e$};
+
+\node[right=2.2 of $(a)!0.5!(c)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](f){$f$};
+\node[right=2.2 of $(c)!0.5!(e)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](g){$g$};
+
+\node[right=2.2 of $(f)!0.5!(g)$,circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](h){$h$};
+
+% Hidden nodes
+\node (bpivot) [left=0.3 of b] {\phantom{p}};
+\node (dpivot) [left=0.3 of d] {\phantom{p}};
+\node (bpivot2) [right=0.3 of b] {\phantom{p}};
+\node (epivot) [right=0.3 of e] {\phantom{p}};
+
+% sets
+\node[fill=myblue,color=myblue, opacity=0.5,oval,fit=(a),inner sep=-1pt]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(a) (b)]{};
+\node[fill=myblue, opacity=0.25,rectangle,rounded corners=2ex,fit=(h)]{};
+
+
+% set labels
+\node [color=myblue,opacity=1,left=0.3 of $(a)$]{bird};
+\node [color=myblue,opacity=0.75,left=0.3 of $(b)$]{penguin};
+\node [color=myblue,opacity=0.75,below=0.3 of $(h)$]{flies};
+
+\draw[edge, color=myblue, opacity=0.6] (a) -- (f) node [near start, above] {\small{\textbf{$1$}}};
+\draw[edge, color=myblue, opacity=0.6] (a) -- (g) node [near start, above] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (b) -- (f) node [below=-0.1, near start] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (b) -- (g) node [near start, above=-0.15] {\small{\textbf{$-2$}}};
+\draw[edge, color=myblue, opacity=0.6] (c) -- (f) node [near start, below=-0.1] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue, opacity=0.6] (c) -- (g) node [near start, above=-0.1] {\small{\textbf{$3$}}};
+\draw[edge, color=myblue] (d) -- (f) node [near start, below=-0.1] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue] (d) -- (g) node [near start, above=-0.1] {\small{\textbf{$3$}}};
+\draw[edge, color=myblue, opacity=0.6] (e) -- (f) node [near start, below] {\small{\textbf{$0$}}};
+\draw[edge, color=myblue, opacity=0.6] (e) -- (g) node [near start, below] {\small{\textbf{$3$}}};
+\draw[edge, color=myblue] (f) -- (h) node [near start, below] {\small{\textbf{$2$}}};
+\draw[edge, color=myblue] (g) -- (h) node [near start, above] {\small{\textbf{$-2$}}};
+
+% KEY
+\node[draw, color=myblue, text width=0.20\linewidth,inner sep=1mm,align=left] at (current bounding box.south east)
+    {\small $\semantics{\textup{orca}} = \set{b, c}$\\
+    $\semantics{\textup{zebra}} = \set{b, d}$\\
+    $\semantics{\textup{panda}} = \set{b, e}$\\};
+
+\end{tikzpicture}

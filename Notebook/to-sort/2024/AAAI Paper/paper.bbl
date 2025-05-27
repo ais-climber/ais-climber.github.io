@@ -1,0 +1,189 @@
+\begin{thebibliography}{32}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Albarghouthi et~al.(2021)}]{albarghouthi2021introduction}
+Albarghouthi, A.; et~al. 2021.
+\newblock Introduction to neural network verification.
+\newblock \emph{Foundations and Trends{\textregistered} in Programming
+  Languages}, 7(1--2): 1--157.
+
+\bibitem[{Bader and Hitzler(2005)}]{bader2005dimensions}
+Bader, S.; and Hitzler, P. 2005.
+\newblock Dimensions of neural-symbolic integration-a structured survey.
+\newblock In \emph{We Will Show Them! Essays in Honour of Dov Gabbay, Volume
+  1}, 167--194. College Publications.
+
+\bibitem[{Balkenius and G{\"a}rdenfors(1991)}]{balkenius1991nonmonotonic}
+Balkenius, C.; and G{\"a}rdenfors, P. 1991.
+\newblock Nonmonotonic inferences in neural networks.
+\newblock In \emph{KR}, 32--39. Morgan Kaufmann.
+
+\bibitem[{Baltag et~al.(2019)Baltag, Gierasimczuk, {\"O}zg{\"u}n, Sandoval, and
+  Smets}]{baltag2019dynamic}
+Baltag, A.; Gierasimczuk, N.; {\"O}zg{\"u}n, A.; Sandoval, A. L.~V.; and Smets,
+  S. 2019.
+\newblock A dynamic logic for learning theory.
+\newblock \emph{Journal of Logical and Algebraic Methods in Programming}, 109:
+  100485.
+
+\bibitem[{Baltag, Li, and Pedersen(2019)}]{baltag2019right}
+Baltag, A.; Li, D.; and Pedersen, M.~Y. 2019.
+\newblock On the right path: a modal logic for supervised learning.
+\newblock In \emph{International Workshop on Logic, Rationality and
+  Interaction}, 1--14. Springer.
+
+\bibitem[{Baltag, Moss, and Solecki(1998)}]{baltag1998PALC}
+Baltag, A.; Moss, L.~S.; and Solecki, S. 1998.
+\newblock The logic of public announcements, common knowledge, and private
+  suspicions.
+\newblock In \emph{Proceedings of the 7th conference on Theoretical aspects of
+  rationality and knowledge}, 43--56.
+
+\bibitem[{Baltag, Moss, and Solecki(2023)}]{logicsforepistemicactions}
+Baltag, A.; Moss, L.~S.; and Solecki, S. 2023.
+\newblock Logics for epistemic actions: completeness, decidability,
+  expressivity.
+\newblock \emph{Logics}, 1(2): 97--147.
+
+\bibitem[{Baltag and Smets(2009)}]{baltag2009iterated}
+Baltag, A.; and Smets, S. 2009.
+\newblock Group belief dynamics under iterated revision: fixed points and
+  cycles of joint upgrades.
+\newblock In \emph{Proceedings of the 12th Conference on Theoretical Aspects of
+  Rationality and Knowledge}, 41--50.
+
+\bibitem[{Besold et~al.(2017)Besold, d'Avila Garcez, Bader
+  et~al.}]{Besold2017NeuralSymbolicLA}
+Besold, T.; d'Avila Garcez, A.; Bader, S.; et~al. 2017.
+\newblock Neural-Symbolic Learning and Reasoning: A Survey and Interpretation.
+\newblock In \emph{Neuro-Symbolic Artificial Intelligence}.
+
+\bibitem[{Blutner(2004)}]{blutner2004nonmonotonic}
+Blutner, R. 2004.
+\newblock Nonmonotonic inferences and neural networks.
+\newblock \emph{Synthese}, 142: 143--174.
+
+\bibitem[{d'Avila Garcez, Broda, and Gabbay(2001)}]{garcez2001symbolic}
+d'Avila Garcez, A.; Broda, K.; and Gabbay, D.~M. 2001.
+\newblock Symbolic knowledge extraction from trained neural networks: A sound
+  approach.
+\newblock \emph{Artificial Intelligence}, 125(1-2): 155--207.
+
+\bibitem[{Giordano, Gliozzi, and
+  Theseider~Dupr{\'e}(2022)}]{giordano2022conditional}
+Giordano, L.; Gliozzi, V.; and Theseider~Dupr{\'e}, D. 2022.
+\newblock A conditional, a fuzzy and a probabilistic interpretation of
+  self-organizing maps.
+\newblock \emph{Journal of Logic and Computation}, 32(2): 178--205.
+
+\bibitem[{Giordano and Theseider~Dupr{\'e}(2021)}]{giordano2021weighted}
+Giordano, L.; and Theseider~Dupr{\'e}, D. 2021.
+\newblock Weighted defeasible knowledge bases and a multipreference semantics
+  for a deep neural network model.
+\newblock In \emph{Logics in Artificial Intelligence: 17th European Conference,
+  JELIA 2021, Virtual Event, May 17--20, 2021, Proceedings 17}, 225--242.
+  Springer.
+
+\bibitem[{Gross(2002)}]{gross2002genealogy}
+Gross, C.~G. 2002.
+\newblock Genealogy of the “grandmother cell”.
+\newblock \emph{The Neuroscientist}, 8(5): 512--518.
+
+\bibitem[{Harmelen(2022)}]{harmelen2022preface}
+Harmelen, F. 2022.
+\newblock Preface: The 3rd AI Wave Is Coming, and It Needs a Theory.
+\newblock In \emph{Neuro-Symbolic Artificial Intelligence: The State of the
+  Art}, V--VII. IOS Press BV.
+
+\bibitem[{Hebb(1949)}]{hebb-organization-of-behavior-1949}
+Hebb, D. 1949.
+\newblock \emph{The Organization of Behavior}.
+\newblock Psychology Press.
+
+\bibitem[{Kisby, Blanco, and Moss(2022)}]{kisby2022logic}
+Kisby, C.; Blanco, S.; and Moss, L. 2022.
+\newblock The Logic of Hebbian Learning.
+\newblock In \emph{The International FLAIRS Conference Proceedings}, volume~35.
+
+\bibitem[{Kraus, Lehmann, and Magidor(1990)}]{kraus1990nonmonotonic}
+Kraus, S.; Lehmann, D.; and Magidor, M. 1990.
+\newblock Nonmonotonic reasoning, preferential models and cumulative logics.
+\newblock \emph{Artificial intelligence}, 44(1-2): 167--207.
+
+\bibitem[{Leitgeb(2001)}]{leitgeb2001nonmonotonic}
+Leitgeb, H. 2001.
+\newblock Nonmonotonic reasoning by inhibition nets.
+\newblock \emph{Artificial Intelligence}, 128(1-2): 161--201.
+
+\bibitem[{Leitgeb(2003)}]{leitgeb2003nonmonotonic}
+Leitgeb, H. 2003.
+\newblock Nonmonotonic reasoning by inhibition nets II.
+\newblock \emph{International Journal of Uncertainty, Fuzziness and
+  Knowledge-Based Systems}, 11(supp02): 105--135.
+
+\bibitem[{Leitgeb(2018)}]{leitgeb2018neural}
+Leitgeb, H. 2018.
+\newblock Neural Network Models of Conditionals.
+\newblock In \emph{Introduction to Formal Philosophy}, 147--176. Springer.
+
+\bibitem[{McCulloch and Pitts(1943)}]{mcculloch1943logical}
+McCulloch, W.~S.; and Pitts, W. 1943.
+\newblock A logical calculus of the ideas immanent in nervous activity.
+\newblock \emph{The Bulletin of Mathematical Biophysics}, 5(4): 115--133.
+
+\bibitem[{Moura and Ullrich(2021)}]{moura2021lean}
+Moura, L.~d.; and Ullrich, S. 2021.
+\newblock The {L}ean 4 theorem prover and programming language.
+\newblock In \emph{Automated Deduction--CADE 28: 28th International Conference
+  on Automated Deduction, Virtual Event, July 12--15, 2021, Proceedings 28},
+  625--635. Springer.
+
+\bibitem[{Murphy(2004)}]{murphy2004big}
+Murphy, G. 2004.
+\newblock \emph{The big book of concepts}.
+\newblock MIT press.
+
+\bibitem[{Odense and d'Avila Garcez(2022)}]{Odense2022ASF}
+Odense, S.; and d'Avila Garcez, A.~S. 2022.
+\newblock A Semantic Framework for Neural-Symbolic Computing.
+\newblock \emph{ArXiv}, abs/2212.12050.
+
+\bibitem[{Oja(1982)}]{oja1982simplified}
+Oja, E. 1982.
+\newblock Simplified neuron model as a principal component analyzer.
+\newblock \emph{Journal of mathematical biology}, 15: 267--273.
+
+\bibitem[{Plaza(2007)}]{Plaza2007PAL}
+Plaza, J.~A. 2007.
+\newblock Logics of public communications.
+\newblock \emph{Synthese}, 158: 165--179.
+
+\bibitem[{Sarker et~al.(2022)Sarker, Zhou, Eberhart, and
+  Hitzler}]{sarker2021neuro}
+Sarker, M.~K.; Zhou, L.; Eberhart, A.; and Hitzler, P. 2022.
+\newblock Neuro-Symbolic Artificial Intelligence: Current Trends.
+\newblock \emph{AI Communications}, 34.
+
+\bibitem[{Srivastava, Greff, and Schmidhuber(2015)}]{srivastava2015highway}
+Srivastava, R.~K.; Greff, K.; and Schmidhuber, J. 2015.
+\newblock Training Very Deep Networks.
+\newblock In Cortes, C.; Lawrence, N.; Lee, D.; Sugiyama, M.; and Garnett, R.,
+  eds., \emph{Advances in Neural Information Processing Systems}, volume~28.
+  Curran Associates, Inc.
+
+\bibitem[{Van~Benthem(2007)}]{van2007beliefrevision}
+Van~Benthem, J. 2007.
+\newblock Dynamic logic for belief revision.
+\newblock \emph{Journal of applied non-classical logics}, 17(2): 129--155.
+
+\bibitem[{Van~Benthem(2011)}]{van2011logicaldynamics}
+Van~Benthem, J. 2011.
+\newblock \emph{Logical dynamics of information and interaction}.
+\newblock Cambridge University Press.
+
+\bibitem[{Van~Ditmarsch, van Der~Hoek, and Kooi(2007)}]{DELBook}
+Van~Ditmarsch, H.; van Der~Hoek, W.; and Kooi, B. 2007.
+\newblock \emph{Dynamic epistemic logic}, volume 337.
+\newblock Springer.
+
+\end{thebibliography}

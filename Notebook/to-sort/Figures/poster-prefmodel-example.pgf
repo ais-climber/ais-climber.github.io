@@ -1,0 +1,56 @@
+﻿\definecolor{myred}{rgb}{0.5, 0, 0}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\Typ}{\textrm{\textup{\textbf{T}}}}
+\newcommand{\Know}{\textrm{\textup{\textbf{K}}}}
+
+\usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit}
+\begin{tikzpicture}[loose/.style={inner sep=.7em},edge/.style = {->,-Latex},
+oval/.style={ellipse,draw}]
+
+%Functions
+\node(accfunc1){$F_\Know$};
+\node[below=2.2 of accfunc1](accfunc2){$F_\Typ$};
+
+% Nodes
+\node[yshift=0.8cm, left=1 of accfunc1, circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a1){$a$};
+\node[yshift=0.8cm, right=1 of accfunc1, circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b1){$b$};
+\node[right=-0.4 of $(a1)!0.5!(b1)$]{$\cdots$};
+\node[yshift=0.8cm, left=1 of accfunc2, circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](a2){$a$};
+\node[yshift=0.8cm, right=1 of accfunc2, circle,minimum size=10pt,inner sep=0pt,outer sep=2pt,fill=white,draw](b2){$b$};
+\node[right=-0.4 of $(a2)!0.5!(b2)$]{$\cdots$};
+
+% Sets
+\node[yshift=0.81cm, left=0.4 of a1,yshift=0.1cm](s1){$\{a,f\}$};
+\node[yshift=0.69cm, right=0.4 of a1,yshift=0.2cm](e1){$\cdots$};
+\node[above=0.21 of a1,yshift=0.1cm](s2){$\{a, c\}$};
+
+\node[yshift=0.81cm, left=0.4 of b1,yshift=0.1cm](s3){$\{b,f\}$};
+\node[yshift=0.69cm, right=0.4 of b1,yshift=0.2cm](e2){$\cdots$};
+\node[above=0.21 of b1,yshift=0.1cm](s4){$\{b, e\}$};
+
+\node[yshift=0.81cm, left=0.5 of a2,yshift=0.1cm](s5){$\{a\}$};
+\node[yshift=0.69cm, right=0.5 of a2,yshift=0.2cm](e3){$\cdots$};
+\node[above=0.21 of a2,yshift=0.1cm](s6){$\{a, e, f\}$};
+
+\node[yshift=0.81cm, left=0.5 of b2,yshift=0.1cm](s7){$\{b\}$};
+\node[yshift=0.69cm, right=0.5 of b2,yshift=0.2cm](e4){$\cdots$};
+\node[above=0.21 of b2,yshift=0.1cm](s8){$\{a, b, f\}$};
+
+\draw[edge] (a1) -- ([xshift=0.15cm,yshift=0.05cm]s1.south);
+\draw[edge] (a1) -- ([yshift=0.1cm]s2.south);
+\draw[edge] (a1) -- (e1.south);
+
+\draw[edge] (b1) -- ([xshift=0.15cm,yshift=0.05cm]s3.south);
+\draw[edge] (b1) -- ([yshift=0.1cm]s4.south);
+\draw[edge] (b1) -- (e2.south);
+
+\draw[edge] (a2) -- ([xshift=0.15cm,yshift=0.05cm]s5.south);
+\draw[edge] (a2) -- ([yshift=0.1cm]s6.south);
+\draw[edge] (a2) -- (e3.south);
+
+\draw[edge] (b2) -- ([xshift=0.15cm,yshift=0.05cm]s7.south);
+\draw[edge] (b2) -- ([yshift=0.1cm]s8.south);
+\draw[edge] (b2) -- (e4.south);
+
+\end{tikzpicture}

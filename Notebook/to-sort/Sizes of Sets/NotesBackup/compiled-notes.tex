@@ -1,0 +1,1389 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{lscape}
+
+% Packages Caleb added: %%%
+\usepackage{xcolor}
+\usepackage{stmaryrd}
+\usepackage{comment}
+\usepackage{soul}
+\usepackage{enumerate} % Used by Alex
+\usepackage[shortlabels]{enumitem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{bigstrut}
+%\usepackage{MnSymbol}
+\usepackage{bbm}
+\usepackage{proof}
+\usepackage{bussproofs}
+\usepackage{tikz}
+\usepackage{lingmacros}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+\newcommand{\existsgeq}{\mbox{\sf AtLeast}}
+\newcommand{\Pol}{\mbox{\emph{Pol}}}
+  \newcommand{\nonered}{\textcolor{red}{=}}
+  \newcommand{\equalsred}{\nonered}
+  \newcommand{\redstar}{\textcolor{red}{\star}}
+    \newcommand{\dred}{\textcolor{red}{d}}
+    \newcommand{\dmark}{\dred}
+    \newcommand{\redflip}{\textcolor{red}{flip}}
+        \newcommand{\flipdred}{\textcolor{red}{\mbox{\scriptsize \em flip}\ d}}
+        \newcommand{\mdred}{\textcolor{blue}{m}\textcolor{red}{d}}
+        \newcommand{\ndred}{\textcolor{blue}{n}\textcolor{red}{d}}
+\newcommand{\arrowm}{\overset{\textcolor{blue}{m}}{\rightarrow} }
+\newcommand{\arrown}{\overset{\textcolor{blue}{n}}{\rightarrow} }
+\newcommand{\arrowmn}{\overset{\textcolor{blue}{mn}}{\longrightarrow} }
+\newcommand{\arrowmonemtwo}{\overset{\textcolor{blue}{m_1 m_2}}{\longrightarrow} }
+\newcommand{\bluen}{\textcolor{blue}{n}}
+\newcommand{\bluem}{\textcolor{blue}{m}}
+\newcommand{\bluemone}{\textcolor{blue}{m_1}}
+\newcommand{\bluemtwo}{\textcolor{blue}{m_2}}
+\newcommand{\blueminus}{\textcolor{blue}{-}}
+
+\newcommand{\bluedot}{\textcolor{blue}{\cdot}}
+\newcommand{\bluepm}{\textcolor{blue}{\pm}}
+\newcommand{\blueplus}{\textcolor{blue}{+ }}
+\newcommand{\translate}[1]{{#1}^{tr}}
+\newcommand{\Caba}{\mbox{\sf Caba}} 
+\newcommand{\Set}{\mbox{\sf Set}} 
+\newcommand{\Pre}{\mbox{\sf Pre}} 
+\newcommand{\wmarkpolarity}{\scriptsize{\mbox{\sf W}}}
+\newcommand{\wmarkmarking}{\scriptsize{\mbox{\sf Mon}}}
+\newcommand{\smark}{\scriptsize{\mbox{\sf S}}}
+\newcommand{\bmark}{\scriptsize{\mbox{\sf B}}}
+\newcommand{\mmark}{\scriptsize{\mbox{\sf M}}}
+\newcommand{\jmark}{\scriptsize{\mbox{\sf J}}}
+\newcommand{\kmark}{\scriptsize{\mbox{\sf K}}}
+\newcommand{\tmark}{\scriptsize{\mbox{\sf T}}}
+\newcommand{\greatermark}{\mbox{\tiny $>$}}
+\newcommand{\lessermark}{\mbox{\tiny $<$}}
+%%{\mbox{\ensuremath{>}}}
+\newcommand{\true}{\top}
+\newcommand{\false}{\bot}
+\newcommand{\upred}{\textcolor{red}{\uparrow}}
+\newcommand{\downred}{\textcolor{red}{\downarrow}}
+\usepackage[all,cmtip]{xy}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{multicol}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\semantics}[1]{[\![\mbox{\em $ #1 $\/}]\!]}
+\newcommand{\abovearrow}[1]{\rightarrow\hspace{-.14in}\raiseonebox{1.0ex}
+{$\scriptscriptstyle{#1}$}\hspace{.13in}}
+\newcommand{\toplus}{\abovearrow{r}}
+\newcommand{\tominus}{\abovearrow{i}} 
+\newcommand{\todestroy}{\abovearrow{d}}
+\newcommand{\tom}{\abovearrow{m}}
+\newcommand{\tomprime}{\abovearrow{m'}}
+\newcommand{\A}{\textsf{App}}
+\newcommand{\At}{\textsf{At}}
+\newcommand{\Emb}{\textsf{Emb}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\usepackage{verbatim}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\Marking}{\mbox{Mar}}
+\newcommand{\Markings}{\Marking}
+\newcommand{\Mar}{\Marking}
+\newcommand{\Model}{\mathcal{M}}
+\newcommand{\Nodel}{\mathcal{N}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TTM}{\TT_{\Markings}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\erase}{\mbox{\textsf{erase}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\arrowplus}{\overset{\blueplus}{\rightarrow} }
+\newcommand{\arrowminus}{\overset{\blueminus}{\rightarrow} }
+\newcommand{\arrowdot}{\overset{\bluedot}{\rightarrow} }
+\newcommand{\arrowboth}{\overset{\bluepm}{\rightarrow} }
+\newcommand{\arrowpm}{\arrowboth}
+\newcommand{\arrowplusminus}{\arrowboth}
+\newcommand{\arrowmone}{\overset{m_1}{\rightarrow} }
+\newcommand{\arrowmtwo}{\overset{m_2}{\rightarrow} }
+\newcommand{\arrowmthree}{\overset{m_3}{\rightarrow} }
+\newcommand{\arrowmcomplex}{\overset{m_1 \orr m_2}{\longrightarrow} }
+\newcommand{\arrowmproduct}{\overset{m_1 \cdot m_2}{\longrightarrow} }
+\newcommand{\proves}{\vdash}
+\newcommand{\Dual}{\mbox{\sc dual}}
+\newcommand{\orr}{\vee}
+\newcommand{\uar}{\uparrow}
+\newcommand{\dar}{\downarrow}
+\newcommand{\andd}{\wedge}
+\newcommand{\bigandd}{\bigwedge}
+\newcommand{\arrowmprime}{\overset{m'}{\rightarrow} }
+\newcommand{\quadiff}{\quad \mbox{ iff } \quad}
+\newcommand{\Con}{\mbox{\sf Con}}
+\newcommand{\type}{\mbox{\sf type}}
+\newcommand{\lang}{\mathcal{L}}
+\newcommand{\necc}{\Box}
+\newcommand{\vocab}{\mathcal{V}}
+\newcommand{\wocab}{\mathcal{W}}
+\newcommand{\Types}{\mathcal{T}_\mathcal{M}}
+\newcommand{\mon}{\mbox{\sf mon}}
+\newcommand{\anti}{\mbox{\sf anti}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\rem}[1]{\relax}
+
+
+\newcommand{\raiseone}{\mbox{raise}^1}
+\newcommand{\raisetwo}{\mbox{raise}^2}
+\newcommand{\wrapper}[1]{{#1}}
+\newcommand{\sfa}{\wrapper{\mbox{\sf a}}}
+\newcommand{\sfb}{\wrapper{\mbox{\sf b}}}
+\newcommand{\sfv}{\wrapper{\mbox{\sf v}}}
+\newcommand{\sfw}{\wrapper{\mbox{\sf w}}}
+\newcommand{\sfx}{\wrapper{\mbox{\sf x}}}
+\newcommand{\sfy}{\wrapper{\mbox{\sf y}}}
+\newcommand{\sfz}{\wrapper{\mbox{\sf z}}}
+  \newcommand{\sff}{\wrapper{\mbox{\sf f}}}
+    \newcommand{\sft}{\wrapper{\mbox{\sf t}}}
+      \newcommand{\sfc}{\wrapper{\mbox{\sf c}}}
+      \newcommand{\sfu}{\wrapper{\mbox{\sf u}}}
+            \newcommand{\sfs}{\wrapper{\mbox{\sf s}}}
+  \newcommand{\sfg}{\wrapper{\mbox{\sf g}}}
+
+\newcommand{\sfvomits}{\wrapper{\mbox{\sf vomits}}}
+\newlength{\mathfrwidth}
+  \setlength{\mathfrwidth}{\textwidth}
+  \addtolength{\mathfrwidth}{-2\fboxrule}
+  \addtolength{\mathfrwidth}{-2\fboxsep}
+\newsavebox{\mathfrbox}
+\newenvironment{mathframe}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}\begin{center}}
+    {\end{center}\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}}
+    \newenvironment{mathframenocenter}
+    {\begin{lrbox}{\mathfrbox}\begin{minipage}{\mathfrwidth}}
+    {\end{minipage}\end{lrbox}\noindent\fbox{\usebox{\mathfrbox}}} 
+ \renewcommand{\hat}{\widehat}
+ \newcommand{\nott}{\neg}
+  \newcommand{\preorderO}{\mathbb{O}}
+ \newcommand{\PreorderP}{\mathbb{P}}
+  \newcommand{\preorderE}{\mathbb{E}}
+\newcommand{\preorderP}{\mathbb{P}}
+\newcommand{\preorderN}{\mathbb{N}}
+\newcommand{\preorderQ}{\mathbb{Q}}
+\newcommand{\preorderX}{\mathbb{X}}
+\newcommand{\preorderA}{\mathbb{A}}
+\newcommand{\preorderR}{\mathbb{R}}
+\newcommand{\preorderOm}{\mathbb{O}^{\bluem}}
+\newcommand{\preorderPm}{\mathbb{P}^{\bluem}}
+\newcommand{\preorderQm}{\mathbb{Q}^{\bluem}}
+\newcommand{\preorderOn}{\mathbb{O}^{\bluen}}
+\newcommand{\preorderPn}{\mathbb{P}^{\bluen}}
+\newcommand{\preorderQn}{\mathbb{Q}^{\bluen}}
+ \newcommand{\PreorderPop}{\mathbb{P}^{\blueminus}}
+  \newcommand{\preorderEop}{\mathbb{E}^{\blueminus}}
+\newcommand{\preorderPop}{\mathbb{P}^{\blueminus}}
+\newcommand{\preorderNop}{\mathbb{N}^{\blueminus}}
+\newcommand{\preorderQop}{\mathbb{Q}^{\blueminus}}
+\newcommand{\preorderXop}{\mathbb{X}^{\blueminus}}
+\newcommand{\preorderAop}{\mathbb{A}^{\blueminus}}
+\newcommand{\preorderRop}{\mathbb{R}^{\blueminus}}
+ \newcommand{\PreorderPflat}{\mathbb{P}^{\flat}}
+  \newcommand{\preorderEflat}{\mathbb{E}^{\flat}}
+\newcommand{\preorderPflat}{\mathbb{P}^{\flat}}
+\newcommand{\preorderNflat}{\mathbb{N}^{\flat}}
+\newcommand{\preorderQflat}{\mathbb{Q}^{\flat}}
+\newcommand{\preorderXflat}{\mathbb{X}^{\flat}}
+\newcommand{\preorderAflat}{\mathbb{A}^{\flat}}
+\newcommand{\preorderRflat}{\mathbb{R}^{\flat}}
+\newcommand{\pstar}{\preorderBool^{\preorderBool^{E}}}
+\newcommand{\pstarplus}{(\pstar)^{\blueplus}}
+\newcommand{\pstarminus}{(\pstar)^{\blueminus}}
+\newcommand{\pstarm}{(\pstar)^{\bluem}}
+\newcommand{\Reals}{\preorderR}
+\newcommand{\preorderS}{\mathbb{S}}
+\newcommand{\preorderBool}{\mathbbm{2}}
+ \renewcommand{\o}{\cdot}
+ \newcommand{\NP}{\mbox{\sc np}}
+ \newcommand{\NPplus}{\NP^{\blueplus}}
+  \newcommand{\NPminus}{\NP^{\blueminus}}
+   \newcommand{\NPplain}{\NP}
+    \newcommand{\npplus}{np^{\blueplus}}
+  \newcommand{\npminus}{np^{\blueminus}}
+   \newcommand{\npplain}{np}
+   \newcommand{\np}{np}
+   \newcommand{\Term}{\mbox{\sc t}}
+  \newcommand{\N}{\mbox{\sc n}}
+   \newcommand{\X}{\mbox{\sc x}}
+      \newcommand{\Y}{\mbox{\sc y}}
+            \newcommand{\V}{\mbox{\sc v}}
+    \newcommand{\Nbar}{\overline{\mbox{\sc n}}}
+    \newcommand{\Pow}{\mathcal{P}}
+    \newcommand{\powcontravariant}{\mathcal{Q}}
+    \newcommand{\Id}{\mbox{Id}}
+    \newcommand{\pow}{\Pow}
+   \newcommand{\Sent}{\mbox{\sc s}}
+   \newcommand{\lookright}{\slash}
+   \newcommand{\lookleft}{\backslash}
+   \newcommand{\dettype}{(e \to t)\arrowminus ((e\to t)\arrowplus t)}
+\newcommand{\ntype}{e \to t}
+\newcommand{\etttype}{(e\to t)\arrowplus t}
+\newcommand{\nptype}{(e\to t)\arrowplus t}
+\newcommand{\verbtype}{TV}
+\newcommand{\who}{\infer{(\nptype)\arrowplus ((\ntype)\arrowplus (\ntype))}{\mbox{who}}}
+\newcommand{\iverbtype}{IV}
+\newcommand{\Nprop}{\N_{\mbox{prop}}}
+\newcommand{\VP}{{\mbox{\sc vp}}}
+\newcommand{\CN}{{\mbox{\sc cn}}}
+\newcommand{\Vintrans}{\mbox{\sc iv}}
+\newcommand{\Vtrans}{\mbox{\sc tv}}
+\newcommand{\Num}{\mbox{\sc num}}
+%\newcommand{\S}{\mathbb{A}}
+\newcommand{\Det}{\mbox{\sc det}}
+\newcommand{\preorderB}{\mathbb{B}}
+\newcommand{\simA}{\sim_A}
+\newcommand{\simB}{\sim_B}
+\newcommand{\polarizedtype}{\mbox{\sf poltype}}
+
+
+\begin{document}
+%\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logic of `All' with Unions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Here's the syntax.   We start with \emph{basic nouns} and from these we construct \emph{union terms}
+We
+use letters $x$, $y$, $z$, for basic nouns.  The union terms are terms $x\cup y$, where $x$ and $y$ are basic nouns.
+We use letters like $t$ for terms which are either basic nouns  or union terms.
+
+In the semantics, we interpret the basic noun $x$ by $\semantics{x}\subseteq M$, and then we always interpret a union term $x\cup y$ by 
+$\semantics{x}\cup\semantics{y}$.
+
+\begin{figure}[t]
+\begin{mathframe}
+\[
+\begin{array}{l@{\qquad}l@{\qquad}l}
+\infer{\mbox{\sf All $t$ $t$}}{}
+&
+\infer{\mbox{\sf All $t$ $v$}}{\mbox{\sf All $t$ $u$} & \mbox{\sf All $u$ $v$}}
+&
+\infer{\mbox{\sf All ($x\cup x$) $x$}}{}  \\  \\
+\infer{\mbox{\sf All $x$ ($x\cup y$) }}{} &
+\infer{\mbox{\sf All ($y \cup x$) ($x\cup y$) }}{} &
+\infer{\mbox{\sf All ($x\cup y$) $t$}}{\mbox{\sf All $x$ $t$} & \mbox{\sf All $y$ $t$}}
+\end{array}
+\]
+\caption{The logic of {\sf All} and set unions.\label{fig-all-unions-1}}
+\end{mathframe}
+\end{figure}
+
+For a fixed set $\Gamma$, we write $t\leq u$ to mean that $\Gamma\proves \mbox{\sf All $t$ $u$}$.
+(We do this to lighten the notation.)    We also write $x \equiv y$ to mean $x\leq y \leq x$.
+
+\begin{example}
+For any set $\Gamma$, if $x\leq y$ and $z\leq w$, then $x\cup z \leq y\cup w$.
+\label{ex-1}
+\end{example}
+
+\begin{example}
+For any set $\Gamma$, if $a\equiv x\cup y$, $b\equiv a\cup z$, 
+$c \equiv y \cup z$, and $d \equiv x \cup c$, then $b \equiv d$.
+\label{ex-2}
+\end{example}
+
+\begin{definition} 
+A set $S$ of terms is an \emph{up-set (for $\Gamma$)} if whenever $t\in S$ and $t\leq u$, then also $u\in S$.
+$S$ is \emph{prime} if whenever $x\cup y \in S$, then either $x\in S$ or $y\in S$.
+\end{definition}
+
+Note that the notion of an up-set is relative to a set $\Gamma$, but the notion of a prime set does not refer to any set at all.
+
+When $\Gamma$ is clear from the context, we just speak of a set $S$ being an up-set (without referencing $\Gamma$).
+
+\begin{example}
+If $\Model$ is any model, then for all $m\in M$, $S_m = \set{t : m \in \semantics{t}}$
+is   prime.  If $\Model\models\Gamma$, then $S_m$ is an up-set for $\Gamma$.
+\label{ex-3}
+\end{example}
+
+\begin{lemma}  Fix a set $\Gamma$.
+Let $t$ be any term, and assume that $t \not\leq y\cup z$.
+Then there is a prime up-set containing $t$ but not containing either $y$ or $z$.
+\label{lemma-zorn}
+\end{lemma}
+
+\begin{proof}
+
+Let $\SS$ be the family of sets $T$ which contains $t$, is closed upwards, and contains neither  $y$ nor $z$.
+One such set in $\SS$ is $\uparrow t$.  Note first that $\uparrow t$ does not contain either $y$ or $z$.  (For if $t\leq y$, then since $y\leq y \cup z$, we would have a contradiction.)
+
+By Zorn's Lemma, let $S$ be a maximal element of $\SS$ with respect to inclusion.
+We claim that 
+$S$ is  prime.   To see this, suppose that $a \cup b\in S$.  Suppose towards a contradiction that neither $a$ nor $b$ were in $S$.
+By maximality, $S\cup\uparrow a$ and $S\cup\uparrow b$  would not belong to $\SS$. 
+So they each contain $y$ or $z$.   Without loss of generality, $a\leq y$ and $b\leq z$.  
+By Example~\ref{ex-1},  $a\cup b \leq y\cup z$.   Since $S$ is an up-set, $y\cup z$ belongs to $S$.    And this is a contradiction.
+\end{proof}
+
+\begin{theorem}[Completeness]
+The logic of {\sf all} and unions in Figure~\ref{fig-all-unions-1} is complete.
+\label{theorem-first-completeness-union}
+\end{theorem}
+
+\begin{proof}
+We need to show that if $\Gamma\models \mbox{\sf All $t$ $u$}$,
+$\Gamma\proves \mbox{\sf All $t$ $u$}$.
+We may assume that $u$ is a union term.  (If $u$ were a basic noun $x$, replace $x$ with $x\cup x$.)
+We also may assume that $t$ is a basic noun.   Here is the reason.   Suppose that our original assumption were
+$\Gamma\models \mbox{\sf All ($x\cup y$) $u$}$.   It follows that both $\Gamma\models \mbox{\sf All $x$ $u$}$
+and $\Gamma\models \mbox{\sf All $y$ $u$}$.   If we were to prove that $x \leq u$ and $y\leq u$, then by the logic,
+we would have our desired conclusion:
+$x\cup y \leq y$.
+
+Thus, we reduce to showing that if  $\Gamma\models x\leq y \cup z$, then also  $\Gamma \proves x\leq y \cup z$.
+We show the contrapositive.   Assume
+ that $\Gamma\not\proves x\leq y \cup z$.   We shall find a model of $\Gamma$ where
+$ \semantics{x} \not\subseteq (\semantics{y}\cup\semantics{z})$.
+By Lemma~\ref{lemma-zorn}, let $S$ be a prime up-set containing $x$ but not containing either $y$ or $z$.
+
+We use $S$ to make a model $\Model$ with one point, say $*$.   We put $*\in \semantics{u}$ iff $u\in S$.
+Let us check that $\Model\models \Gamma$.  
+Suppose that $\Gamma$ contains the sentence {\sf All $ a$ $(b\cup c)$.}    We may assume that $\semantics{a} = \set{*}$, 
+since otherwise $\semantics{a} = \emptyset$, and trivially $\semantics{a}\subseteq \semantics{b}\cup\semantics{c}$.
+So $a \in S$.  As $S$ is closed upwards and $a\leq b\cup c$, $b\cup c\in S$ also.   Since $S$ is prime, either $b\in S$ or $c\in S$.
+So either $*\in\semantics{b}$ or $*\in \semantics{c}$.  Either way, $\semantics{b}\cup\semantics{c} = \set{*}$.  And again we have 
+$\semantics{a}\subseteq \semantics{b}\cup\semantics{c}$.
+Thus, $\Model\models \Gamma$.  
+
+By the defining property of $S$, $*\in \semantics{x} \setminus (\semantics{y}\cup\semantics{z})$ in our model.   Thus, 
+$ \semantics{x} \not\subseteq (\semantics{y}\cup\semantics{z})$.
+So we are done.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Constructing models from prime up-sets}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\bf skip this subsection; it's probably not needed for anything.}
+
+Here is a more general result than what we saw in Theorem~\ref{theorem-first-completeness-union}.
+
+\begin{lemma} 
+Fix $\Gamma$.
+Let $M$ be any set, and suppose that for each $m\in M$ we have a prime up-set of terms $T_m$. 
+Equip $M$ with the structure of a model by  interpreting 
+basic nouns on $M$ thus:
+ \[
+ \semantics{x} = \set{m\in M : x \in T_m }.
+ \]
+ Then $\Model\models\Gamma$.   Moreover, for all terms $t$, 
+  \begin{equation}
+  \semantics{t} = \set{m\in M : t \in T_m }.
+  \label{mono}
+    \end{equation}
+ \end{lemma}
+ 
+ \begin{proof}
+Since each $T_m$ is prime, 
+ \[
+ \semantics{x\cup y} =  \set{m\in M : x \in T_m }\cup\set{m\in M : y \in T_m } = \set{m\in M : x\cup y  \in T_m }.
+ \]
+ (\ref{mono}) follows, for all terms $t$.
+ We are left with the verification that $\Model\models\Gamma$.
+ Suppose that $\Gamma$ contains the sentence {\sf All $u$ $t$}.  
+ Then $u \leq t$.
+ Let $m\in \semantics{u}$, so by (\ref{mono}), $u\in T_m$.
+ Since $T_m$ is an up-set, $t\in T_m$.    By (\ref{mono}) again, $m\in \semantics{t}$.  This shows that 
+$\semantics{u} \subseteq \semantics{t}$; that is, our sentence  {\sf All $u$ $t$}  is true in $\Model$. 
+ \end{proof}
+ 
+ Another fact worth knowing: the union of two prime up-sets is again a prime up-set.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logic of `All' and `Some' with Unions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \begin{figure}[t]
+\begin{mathframe}
+\[
+\begin{array}{l@{\qquad}l@{\qquad}l}
+\infer[\mbox{\sc exists}]{\mbox{\sf Some $t$ $t$}}{\mbox{\sf Some $t$ $u$}}
+&
+\infer[\mbox{\sc conv}]{\mbox{\sf Some $u$ $t$}}{\mbox{\sf Some $t$ $u$}}
+&
+\infer[\mbox{\sc darii}]{\mbox{\sf Some $t$ $u$}}{\mbox{\sf Some $t$ $v$} & \mbox{\sf All $v$ $u$}}
+\end{array}
+\]
+\caption{Additions for sentences of the form {\sf Some $t$ $u$}.\label{fig-adding-some}}
+\end{mathframe}
+\end{figure}
+
+ We add sentence of the form  {\sf Some $t$ $u$}, where $t$ and $u$
+ are union terms.  (That is, $t$ and $u$ might be basic terms like $x$ or $y$, or they
+ might be union terms like $x\cup y$.)
+ The semantics is the obvious one: a model $\Model$ had $\Model\models\mbox{\sf Some $t$ $u$}$
+ iff $\semantics{t} \cap \semantics{u} \neq \emptyset$ in $\Model$.
+ 
+ For the logic, we take our previous rules from Figure~\ref{fig-all-unions-2} and add the
+ rules in Figure~\ref{fig-adding-some}.
+ The name {\sf conv} is short for the traditional name of the rule,
+ [\mbox{\sc conversion}].  The name {\sf darii} is traditional from medieval logic.
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Completeness of this Base Logic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}
+ \label{theorem-completeness-all-some-unions}
+ If $\Gamma\models\phi$, then $\Gamma\proves\phi$.
+  \end{theorem}
+ 
+ The rest of this section is devoted to the proof.
+ 
+  \begin{lemma}\label{lemma-1-all-some-unions}
+ If $\Gamma\not\proves \mbox{\sf All $t$ $u$}$, then there is a model of $\Gamma$
+ where $\semantics{t}\not\subseteq\semantics{u}$.
+\end{lemma}
+
+\begin{proof}
+Let $\Gamma_{\scriptsize all}$ be the {\sf All}-sentences in $\Gamma$.
+Note that $\Gamma_{\scriptsize all}\not\proves \mbox{\sf All $t$ $u$}$.
+By Theorem~\ref{theorem-first-completeness-union}, let $\Model$
+be a model of $\Gamma_{\scriptsize all}$ where $\mbox{\sf All $t$ $u$}$ is false.
+Then add a fresh point $*$ to $\semantics{x}$ for all basic nouns $x$.
+The very same point  $*$  is added to the interpretation of all basic nouns.
+Call the resulting model $\Nodel$.
+For all $x$, $\semantics{x}_{\Nodel} = \semantics{x}_{\Model}\cup\set{*}$.
+This has the effect of making $\Nodel$ satisfy every sentence $\mbox{\sf Some $a$ $b$}$,
+no matter whether this sentence is in $\Gamma$ or not.
+And the addition of the fresh point to the interpretation of every term
+has no effect on the {\sf All}-sentences, as a moment's thought shows.
+That is, $\Model\models\mbox{\sf All $c$ $d$}$ iff  $\Nodel\models\mbox{\sf All $c$ $d$}$.
+So $\Nodel\models\Gamma$, and $\Nodel\not\models\mbox{\sf All $t$ $u$}$.
+\end{proof}
+
+ \begin{lemma} \label{lemma-2-all-some-unions}
+ If $\Gamma\not\proves \mbox{\sf Some $t$ $u$}$, then there is a model of $\Gamma$
+ where $\semantics{t}\cap\semantics{u} = \emptyset$.
+\end{lemma}
+
+ 
+Before we prove this, we need a lemma.
+ 
+ \begin{lemma}
+ Suppose that $\Gamma\not\proves \mbox{\sf Some $t$ $u$}$.
+ Suppose also that $\Gamma$ contains the sentence $\mbox{\sf Some $a$ $b$}$, where $a$ and $b$
+ are set terms.
+ Then there is a prime up-set $S$ containing both $a$ and $b$ such that
+ $S$
+ does not contain both $t$ and $u$.
+ \end{lemma}
+ 
+
+\begin{proof}
+Let $\SS$ be the family of sets $T$ such that (1) $T$ contains both $a$ and $b$;
+(2) $T$ is closed upwards;
+(3) $T$  does not contain both $t$ and $u$.
+One such set in $\SS$ is $(\uparrow a)\cup (\uparrow b)$.  
+  This set obviously has (1) and (2).
+Here is the argument for (3):
+ If $a\leq t$
+and $b\leq u$, using ({\sc darii})
+and 
+ the fact that $\Gamma$ contains the sentence $\mbox{\sf Some $a$ $b$}$,
+ we have
+ $\Gamma\proves  \mbox{\sf Some $t$ $u$}$, a contradiction.)
+The same would happen in other cases such as $a\leq t$ and $b\leq u$.
+The other two rules of the logic are needed in the other cases of this lemma.
+
+By Zorn's Lemma, let $S$ be a maximal element of $\SS$ with respect to inclusion.
+We claim that 
+$S$ is  prime.   To see this, suppose that $x \cup y\in S$,
+where $x$ and $y$ are basic.
+Suppose towards a contradiction that neither $x$ nor $y$ were in $S$.
+By maximality, $S\cup(\uparrow x)$ and $S\cup(\uparrow y)$  do not belong to $\SS$. 
+The only problems could come from condition (3).
+Then $x\leq t$, $x\leq u$, $y\leq t$, and $y\leq u$.
+But then $x\cup y \leq t$ and $x\cup y\leq u$.
+So $S$, being closed upwards, contains both $t$ and $u$, and this is a contradiction.
+ \end{proof}
+ 
+ Now we turn to the proof of 
+ Lemma~\ref{lemma-2-all-some-unions}.
+ 
+ \begin{proof}
+ For each sentence $\mbox{\sf Some $p$ $q$}$ in $\Gamma$,
+ choose a prime upset $S_{p,q}$ containing both $p$ and $q$
+ but not containing both $t$ and $u$.
+ Let 
+ \[ M = \set{S_{p,q}: \Gamma \mbox{ contains \mbox{\sf Some $p$ $q$}}}.\]
+ For a basic noun $x$, let 
+ \[\semantics{x} = \set{S_{p,q}
+\in M: p\leq x \mbox{ or } q \leq x}.\]
+ This equips $M$ with the structure of a model which we call $\Model$.
+ Of course, for a binary union term $x\cup y$, 
+ we automatically have $\semantics{x\cup y} = \semantics{x} \cup\semantics{y}$.
+ Then the fact that each $S_{p,q}$ is closed upwards implies that $\Model$
+satisfies the {\sf All} sentences in $\Gamma$.
+For a {\sf Some} sentence in $\Gamma$, say $\mbox{\sf Some $p$ $q$}$,
+note that $S_{p,q}\in \semantics{p}\cap\semantics{q}$.  
+Thus, $\Model\models\Gamma$.   
+
+We conclude this proof with the claim that $\semantics{t}\cap\semantics{u} = \emptyset$
+in $\Model$.   To see this, suppose towards a contradiction that $S_{p,q} \in\semantics{t}\cap\semantics{u} $.
+Now $S_{p,q}\in M$, so $\Gamma$ contains
+the sentence {\sf Some $p$ $q$}.
+We have a number of cases, one representative one is when
+$S_{p,q} \in\semantics{t}$ due to $p \leq t$,
+and $S_{p,q} \in\semantics{u}$ due to $q \leq u$.
+But then using the logic, $\Gamma\proves\mbox{\sf Some $t$ $u$}$.
+This is a contradiction.
+ \end{proof}
+ 
+This completes the proof of Theorem~\ref{theorem-completeness-all-some-unions}. 
+      
+      
+ \begin{figure}[t]
+\begin{mathframe}
+ \[
+ \infer{\mbox{\sf Some} (a, c)}{\mbox{\sf More}(a,b) & \mbox{\sf AtLeast}(c,d) & \mbox{\sf{AtLeast}}(b \cup d, a \cup c)}
+\] 
+\caption{The Friday rule.\label{fig-friday}}
+\end{mathframe}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logic with `All', `More', `At Least', with Unions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Setup (Pairs and our Preorders)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Diag}{\mbox{Diag}}
+\newcommand{\OffDiag}{\mbox{Off-diag}}
+\newcommand{\Pairs}{\mbox{Pairs}}
+\newcommand{\Bad}{\mbox{Bad}}
+\newcommand{\argmax}{\mbox{argmax}}
+\newcommand{\Clamp}{\mbox{Clamp}}
+\newcommand{\sClamp}{\mbox{subset-Clamp}}
+\newcommand{\ordercanonical}{<_{\scriptstyle can}}
+\newcommand{\lex}{\ordercanonical}
+\newcommand{\lexcanonical}{\ordercanonical}
+\newcommand{\precsubseteq}{\preceq_{\scriptsize subset}}
+\newcommand{\approxsubset}{\approx_{\scriptsize subset}}
+
+
+\begin{definition}
+Let $n\geq 1$.   We write $[n]$ for $\set{1,\ldots, n}$.
+An \emph{$n$-family} is  a family of  finite sets
+\[ S = (S_1, \ldots, S_n)\]
+For a family $S$, we write $s_{i,j}$
+for $|S_i\cup S_j|$.  Note that $s_{i,j}$
+is a number, not a set.
+We also write $s_i$ for $s_{i,i}$.
+For a family $T$, we would of course use the notation $t_{i,j}$.
+\end{definition}
+
+\begin{definition}
+Let $n\geq 1$.
+We define  sets $\Diag(n)$, $\OffDiag(n)$, and $\Pairs(n)$ as follows:
+\[
+\begin{array}{lcl}
+\Diag(n) & = & \set{(i,j)\in [n]^2:  i = j}\\
+\OffDiag(n) & = & \set{(i,j)\in [n]^2:  i < j}\\
+\Pairs(n) & = & \Diag(n)\cup\OffDiag(n)\\
+m  & = & |\Pairs(n)|\\
+\end{array}
+\]
+\end{definition}
+
+\paragraph{Notation}
+For the elements of $\Pairs(n)$, we use two kinds of notation.
+We could denote pairs by, well, pairs, writing $(a,b)$, or $(i,j)$, or something similar.
+But sometimes we just want to say: let $p$ be a pair.  And so at times we
+use notation like $p$, $q$, etc. for pairs.
+I'm sure that this will be confusing, but the fact is that each
+kind of notation has its place in what we're going to do.
+
+\begin{definition}
+A \emph{suitable pair of relations on $\Pairs(n)$} is a pair of relations\footnote{I know that
+the notation $\precsubseteq$ is lousy.   I don't think we can use the letter $s$ alone there,
+since we use that all over the place for other things.    But surely there is a better notation.
+Anyways, it's all a macro that can be changed.}
+\[ (\preceq, \precsubseteq) \]
+such that 
+\begin{enumerate}
+\item $\preceq$ and $\precsubseteq$ are preorders on $\Pairs(n)$.
+\item  
+ For all $(i,j), (k,l)\in \Pairs(n)$,
+ either $(i,j) \preceq (k,l)$ or $(k,l) \prec (i,j)$.
+ \item If $i < j$, then $(i,i) \precsubseteq (i,j)$.  If $j < i$, then $(i,i) \precsubseteq (j,i)$. 
+ \item If $(i,i) \precsubseteq (k,\ell)$ and $(j,j) \precsubseteq (k,\ell)$ and $i < j$,
+ then $(i,j) \precsubseteq (k,\ell)$.
+\item If $p \precsubseteq q$, then $p\preceq q$.
+\item If $p \precsubseteq q$ and $q\preceq p$, then $q \precsubseteq p$.
+\end{enumerate}
+\label{def-suitable-pair}
+\end{definition}
+
+
+%(Compare with Definition~\ref{def-suitable}.)
+
+\begin{definition}
+An $n$-family $S$ is \emph{$\precsubseteq$-preserving}
+if $p\precsubseteq q$ implies that $S_p \subseteq S_q$.
+
+$S$ is \emph{$\precsubseteq$-reflecting} if 
+$S_p \subseteq S_q$ implies that $p\precsubseteq q$. 
+\end{definition}
+
+
+\begin{example} Let  $S$  be a family of sets.
+Then the pair of relations $(\preceq, \precsubseteq)$
+is suitable, where 
+\[ \begin{array}{lcl}
+(i,j) \preceq (k,l) & \quadiff  & s_{i,j} \leq s_{k,l}\\
+(i,j) \precsubseteq (k,l) & \quadiff  & S_{i,j} \subseteq S_{k,l}\\
+\end{array}
+\]
+Moreover, $S$ preserves and reflects $\precsubseteq$.
+\label{example-suitable-pair}
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Combinatorial Representation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Here is our main representation result:
+
+\begin{theorem}
+Let $(\preceq, \precsubseteq)$ be a suitable pair of relations.
+Then there is a family of sets $S$
+such that for all $(i,j)$, $(k,l)\in\Pairs(n)$,
+\begin{equation}
+    \label{goal-main1}
+ (i,j) \preceq  (k,l) \quadiff 
+ s_{i,j}\leq s_{k,l}.
+ \end{equation}
+ And also
+ \begin{equation}
+    \label{goal-main2}
+ (i,j) \precsubseteq  (k,l) \quadiff 
+S_{i,j}\subseteq S_{k,l}.
+ \end{equation}
+ That is, (\ref{goal-main1}) holds for $\preceq$, and $S$ preserves and reflects $\precsubseteq$.
+ \label{theorem-thoughts-subset}
+ \end{theorem}
+ 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notes: How this Lemma is Used in Proving Completeness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\more}{\mbox{\sf More}}
+
+We consider the logic of $\more(t,u)$, where $t$ and $u$ are terms (possibly union terms).
+The logic that we use is transitivity of $\more(t,u)$, and also $\more(x\cup y, x)$ for $x$ and $y$
+basic nouns.  Further, we have the contradiction rule:
+from $\Gamma\proves\more(t,t)$, derive anything.
+We write $\Gamma\proves\more(t,u)$
+for the evident provability relation.  
+
+Recall that an \emph{antichain model} is one where for all basic $x$ and $y$, if $x$ and $y$ are different,
+then $\semantics{x} \not\subseteq \semantics{y}$.
+We also write $\Gamma\models\more(t,u)$
+to mean that for all {antichain models} $\Model$, if $\Model$ satisfies every sentence in $\Gamma$,
+then it also satisfies $\more(t,u)$.
+
+\begin{proposition}
+$\Gamma\proves \more(t,u)$ iff $\Gamma\models\more(t,u)$.
+\end{proposition}
+
+\begin{proof}
+The only non-trivial step is to show that if 
+$\Gamma\not\proves \more(t,u)$, then there is a model of $\Gamma$
+where $\more(t,u)$ is false.
+
+Write $<$ for the order on basic or union nouns determined by provability from
+$\Gamma$:  $i < j$ iff $\Gamma\proves \more(j,i)$.
+This order is transitive and irreflexive.   (For if $\Gamma\proves\more(i,i)$,
+then by the contradiction rule,  we have $\Gamma\proves \more(t,u)$, 
+contrary to our assumption.)
+
+Recall Lemma 3.4 of ``Syllogistic Logic with Cardinality Comparisions'' 
+(or any other source on this): if $(T, <)$ transitive irreflexive relation
+on a finite set,
+and if $x \not{<} y$ in $T$, then there is a listing of $T$ as 
+\[ t_1, \ldots, t_n \]
+Such that 
+\begin{enumerate}
+    \item For $i < j$ in the listing $t_i < t_j$ in $T$
+    \item $y$ is listed before $x$.
+\end{enumerate}
+In effect, we linearize $T$.
+
+We apply this result to the order $<$ on 
+basic and union terms determined from $\Gamma$, 
+and incorporating the extra condition that 
+$\Gamma\not\proves \more(t,u)$.
+We then apply Lemma 1.  (But that lemma also should be strengthened
+to say that the sets $S_i$ are an antichain.)
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Checking that the Lemma is a Representation Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% I'm trying on different choices of symbols for our relations.
+% 
+% This choice is inspired by the "Syllogistic Logic with Cardinality Comparisons" paper.
+% Here, 'p' could mean "pairs", but in the paper *should mean* "provable"
+\newcommand{\provsub}{\subseteq_{\Gamma}}
+\newcommand{\provle}{\le_{\Gamma}}
+\newcommand{\provlt}{<_{\Gamma}}
+
+\newcommand{\nprovle}{\nleq_{\Gamma}}
+\newcommand{\provextended}{\preceq_{\Gamma}}
+\newcommand{\provextendedstrict}{\prec_{\Gamma}}
+\newcommand{\nprovextended}{\npreceq_{\Gamma}}
+
+\newcommand{\proverule}{\textsc}
+
+
+% Something I use for words in a 'code' font.
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hl{TODO:} What do we do about $\varphi$?  Do we need to ensure anything about its falseness in our model before the extension?  This will be dealt with in the actual completeness proof.
+
+The rules of our logic include those rules from ``Syllogistic Logic with Cardinality Comparisons'', excluding rules involving $some(x, y)$ and noun complement.  In addition, we have the rules displayed in Figure \ref{fig-all-unions-2}
+
+In order to apply the Clamping Construction to build our model (in the completeness proof for this logic), we need to construct orderings $\provextended, \provsub$ that (1) preserve those sentences provable from $\Gamma$, (2) ensure the particular sentence $\varphi$ is false, and (3) form a `suitable' pair.
+
+We first define:
+
+\begin{itemize}
+    \item $(i, j) \provle (k, l)$ iff $\Gamma \vdash atleast(k \cup l, i \cup j)$
+    
+    \item $(i, j) \provsub (k, l)$ iff $\Gamma \vdash all(i \cup j, k \cup l)$
+\end{itemize}
+% We would like to extend $\provle$ to a linear ordering $\provextended$ over $\Pairs(n)$.
+
+\begin{lemma}
+    We can extend $\provle$ to a \textit{linear} ordering $\provextended$ over $\Pairs(n)$ that preserves those relevant sentences provable from $\Gamma$, i.e.
+    
+    \begin{enumerate}
+        \item If $\Gamma \vdash atleast(k \cup l, i \cup j)$, then $(i,j) \provextended (k,l)$, and
+        
+        \item If $\Gamma \vdash more(k \cup l, i \cup j)$, then $(i,j) \provextendedstrict (k,l)$, where
+        \[ x \provextendedstrict y \quadiff x \provextended y \mbox{ but } y \nprovextended x\]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+To construct $\provextended$, we simply invoke the fact that any partial order can be extended to a linear order (extending $\provle$ to $\provextended$).
+We easily check (1): If $\Gamma \vdash atleast(k \cup l, i \cup j)$, then $(i,j) \provle (k,l)$, and by extension $(i,j) \provextended (k,l)$.
+
+Regarding (2): If $\Gamma \vdash more(k \cup l, i \cup j)$, since $\Gamma$ is consistent (and using $\proverule{(x)}$), $\Gamma \nvdash atleast(i \cup j, k \cup l)$.  So $(k,l) \nprovle (i,j)$.  
+Since $(i,j)$ and $(k,l)$ were comparable before the extension, we have $(k,l) \nprovextended (i,j)$.  In addition, since $\Gamma \vdash more(k \cup l, i \cup j)$, we have $\Gamma \vdash atleast(k \cup l, i \cup j)$ (by $\proverule{(More At Least)}$) and hence $(i,j) \provextended (k,l)$.  By definition of $\provextendedstrict$, this gives us $(i,j) \provextendedstrict (k,l)$.
+
+\end{proof}
+
+We now need to show that $(\provextended, \provsub)$ is, in fact, a suitable pair. This will allow us to apply our Clamping construction from before.  
+
+\begin{lemma}
+    Let $\Gamma$ be a set of sentences involving $atleast(x, y)$, $more(x, y)$, and $all(x, y)$, where $x, y$ are union terms.  Then $(\provextended, \provsub)$ is a suitable pair.
+    
+\end{lemma}
+
+\begin{proof}
+
+
+% We show each implication:
+% \paragraph{$(\longrightarrow)$} Suppose $(i, j) \provlt (k, l)$.  So $\Gamma \vdash more(k \cup l, i \cup j)$.  By ($\proverule{More At Least}$), $\Gamma \vdash atleast(k \cup l, i \cup j)$.  So $(i, j) \provle (k, l)$.  Additionally, using ($\proverule{x}$), since $\Gamma$ is consistent and $\Gamma vdash more(k \cup l, i \cup j)$, $\Gamma \nvdash atleast(i \cup j, k \cup l)$.  So it is not the case that $(k, l) \provle (i, j)$
+% \paragraph{$(\longleftarrow)$} TODO
+ 
+
+We show that $(\provextended, \provsub)$ satisfy each of the 6 properties in turn:
+
+\begin{enumerate}
+    \item We must show that $\provextended$ and $\provsub$ are both reflexive and transitive.  $\provsub$ is reflexive by ($\proverule{Axiom}$), and is transitive by ($\proverule{Barbara}$).  $\provextended$ is reflexive and transitive simply because it was constructed to be a linear ordering.
+    
+    % OLD: $\provle$ is reflexive by application of ($\proverule{Axiom}$) and ($\proverule{Subset  Size}$).  $\provle$ is transitive by ($\proverule{Card Trans}$)
+    
+    \item $\provextended$ is a linear ordering, and hence is trichotomous.  So for any $(i, j), (k, l) \in \Pairs(n)$, either $(i,j) \provextended (k,l)$ or $(k,l) \provextendedstrict (i,j)$.
+    
+    \item Suppose $i < j$.  Well, $\Gamma \vdash all(i, i \cup j)$ by ($\proverule{Union Extend}$).  So $(i, i) \provsub (i, j)$.  Similarly, if $j < i$ we may use ($\proverule{Union Extend}$) again to obtain $(i, i) \provsub (j, i)$.
+    
+    \item Suppose $(i, i) \provsub (k, l)$, $(j, j) \provsub (k, l)$, and $i < j$.  So $\Gamma \vdash all(i, k \cup l)$ and $\Gamma \vdash all(j, k \cup l)$.  So by ($\proverule{Union All}$), $\Gamma \vdash all(i \cup j, k \cup l)$.  So $(i, j) \provsub (k, l)$.
+    
+    \item Suppose $(i, j) \provsub (k, l)$.  Then $\Gamma \vdash all(i \cup j, k \cup l)$.  By ($\proverule{Subset Size}$), $\Gamma \vdash atleast(k \cup l, i \cup j)$, i.e. $(i, j) \provextended (k, l)$.
+    
+    \item Suppose $(i, j) \provsub (k, l)$ and $(k, l) \provextended (i, j)$.  So $\Gamma \vdash all(i \cup j, k \cup l)$.  By ($\proverule{Subset Size}$), $\Gamma \vdash atleast(k \cup l, i \cup j)$.  This means that $(i,j)$ and $(k,l)$ were comparable before the extension!  So $(k,l) \provextended (i,j) \implies (k,l) \provle (i,j)$.  This means that $\Gamma \vdash atleast(i \cup j, k \cup l)$.  So by ($\proverule{Card Trans}$) we may conclude that $\Gamma \vdash all(i \cup j, k \cup l)$.
+    
+\end{enumerate}
+\end{proof}
+
+\begin{figure}[t]
+\begin{mathframe}
+\[
+\begin{array}{l@{\qquad}l@{\qquad}l}
+\infer[(\proverule{union-idemp})]{\mbox{\sf All ($x\cup x$) $x$}}{} &
+\infer[(\proverule{union-extend})]{\mbox{\sf All $x$ ($x\cup y$) }}{}   \\  \\
+\infer[(\proverule{union-symm})]{\mbox{\sf All ($y \cup x$) ($x\cup y$) }}{} &
+\infer[(\proverule{union-all})]{\mbox{\sf All ($x\cup y$) $t$}}{\mbox{\sf All $x$ $t$} & \mbox{\sf All $y$ $t$}}
+\end{array}
+\]
+\caption{The additional rules for our logic with unions
+\label{fig-all-unions-2}}
+\end{mathframe}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Clamping Construction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ Let $S$ be an $n$-family.
+ Let $(i,j)\in\Pairs(n)$.
+ Let $r\in \omega$.
+ We define a new family 
+ \[ \sClamp(S,i,j,r)\]
+ from $S$, $i$, $j$, and $r$, as follows:
+$*_1,\ldots, *_r$ be   fresh points.
+For $a\in[n]$, let 
+\[ \begin{array}{lcl}
+\sClamp(S,i,j,r)_a & = & \left\{
+\begin{array}{ll}
+S_a \cup \set{*_1,\ldots, *_r} & \mbox{if $\nott ((a,a)\precsubseteq (i,j))$}\\
+ S_a & \mbox{if $(a,a)\precsubseteq (i,j)$}\\ 
+ \end{array}
+ \right.
+\end{array}
+\]
+In words, we are adding $r$ new points
+simultaneously to all sets $S_a$, except when 
+$\precsubseteq$ ``wants 
+$S_a$ to be a subset of  $S_i\cup S_j$.''
+
+Note that $\precsubseteq$ is involved in the definition of $\sClamp$, but it is not
+part of the notation.
+
+
+\begin{proposition}
+Let $S$ be a family on $n$, and fix $i,j\in[n]$
+and $r\in\omega$.
+Write $T$ for $\sClamp(S,i,j,r)$.
+\begin{enumerate}
+    %\item  $T$ is an antichain family.
+ %   \item For $(a,b)\notin \set{(i,j),(i,i),(j,j)}$, 
+   % $|T_{a} \cup T_{b}| =|S_{a} \cup S_{b}| +p $.
+    \item For $(a,b)\precsubseteq (i,j)$, $T_{a,b} = S_{a,b}$.
+    \label{part-easy}
+\item For $(a,b)$ such that $(i,j) \prec (a,b)$, $T_{a,b} =  S_{a,b}\cup\set{*_1,\ldots, *_r}$.
+\label{part-bigger}
+\rem{    \item For all $(a,b), (c,d)$
+    in \[\Pairs(n)\setminus
+    \set{(i,j),(i,i),(j,j)} \]
+we have 
+\[ s_{a,b} - s_{c,d} = t_{a,b} - t_{c,d}.\]
+%|S_{a}\cup S_{b}| - |S_{c}\cup S_{d}|
+%= |T_{a}\cup T_{b}| - |T_{c}\cup T_{d}|.\]
+}
+%item If $s_{k,l}, s_{m,n} > s_{i,j}$,
+%then $s_{m,n}\leq s_{k,l}$ iff
+% $t_{m,n}\leq t_{k,l}$.
+\item If $S$ preserves $\precsubseteq$,
+then $T$  preserves $\precsubseteq$.
+\label{part-preserve}
+\item If $S$  reflects $\precsubseteq$,
+then $T$  reflects $\precsubseteq$.
+\label{part-reflect}
+\end{enumerate}
+\label{proposition-sClamp}
+\end{proposition}
+
+\begin{proof}
+Here is the proof of part (\ref{part-easy}).
+If $(a,b)\precsubseteq (i,j)$, then both $(a,a)\precsubseteq (i,j)$ and $(b,b)\precsubseteq (i,j)$.
+And so $T_a = S_a$ and $T_b = S_b$.
+ Thus, $T_{a,b} = T_a \cup T_b = S_a \cup S_b = S_{a,b}$.
+ 
+ Turning to part (\ref{part-bigger}), let  $(i,j) \prec (a,b)$.
+ We claim that either $\nott ((a,a) \precsubseteq (i,j))$ or $\nott ((b,b) \precsubseteq (i,j))$.
+To see this, suppose towards a contradiction that both $(a,a) \precsubseteq(i,j)$ and $(b,b) \precsubseteq (i,j)$.
+ Then $(a,b) \precsubseteq (i,j)$, and so $(a,b) \preceq (i,j)$.  And this contradicts 
+$(i,j) \prec (a,b)$.
+
+Without loss of generality, 
+$\nott ((a,a) \precsubseteq (i,j))$.
+Then $T_a = S_a \cup \set{*_1,\ldots, *_r}$.
+And so
+\[ T_{a,b} = T_a \cup T_b = S_a\cup\set{*_1,\ldots, *_r} \cup S_b = S_{a,b}\cup\set{*_1,\ldots, *_r}.\]
+This completes the proof.
+
+
+In  part (\ref{part-preserve}),
+let $(a,b) \precsubseteq (c,d)$.  We show that $T_{a,b} \subseteq T_{c,d}$.
+
+If $(a,b)\precsubseteq (i,j)$, then $T_{a,b} = S_{a,b}$.
+By our assumption that $S$ preserves $\precsubseteq$, $S_{a,b} \subseteq S_{c,d}$.
+And clearly $S_{c,d} \subseteq T_{c,d}$.
+So in this case we easily get $T_{a,b} \subseteq T_{c,d}$.
+
+It remains to argue the case when
+$\nott((a,b)\precsubseteq (i,j))$.
+So in this case,  
+$T_{a,b} =  S_{a,b} \cup \set{*_1,\ldots, *_r}$.
+We claim that in this case,
+$T_{c,d} =  S_{c,d} \cup \set{*_1,\ldots, *_r}$.
+This again would imply $T_{a,b} \subseteq T_{c,d}$.
+
+Suppose towards a contradiction that 
+$T_{c,d} \neq  S_{c,d} \cup \set{*_1,\ldots, *_r}$.
+Then $T_{c,d} =  S_{c,d} $.
+In this case, $T_{c,c} = S_{c,c}$ and $T_{d,d} = S_{d,d}$.
+So  $(c,c)\precsubseteq (i,j)$,
+and   $(d,d)\precsubseteq (i,j)$.
+And now we have   $(c,d)\precsubseteq (i,j)$.
+Recall that 
+$(a,b) \precsubseteq (c,d)$. 
+And so we have $(a,b) \precsubseteq (i,j)$. 
+This is a contradiction to the assumption in this case that 
+$\nott((a,b)\precsubseteq (i,j))$.
+
+Part (\ref{part-reflect}) is easier:  if we take any family which reflects $\precsubseteq$ and
+add fresh points in any way whatsoever, the resulting family will reflect $\precsubseteq$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equalizing the Sizes in a Size Class}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section, we fix a suitable pair 
+$(\preceq, \precsubseteq)$.
+
+Recall that a \emph{size class} of $\preceq$ is an equivalence class $C$
+of the induced equivalence relation $\approx$ induced by $\preceq$.
+
+The size classes of $\preceq$ have an induced strict order.
+
+\begin{lemma}
+Let $S$ be a family which preserves and reflects $\precsubseteq$.  Let $k\geq 2$, and let 
+\[ C = \set{p_1, \ldots, p_k} \]
+be a size class of  $\preceq$.
+ 
+Then there is a family $T$ such that 
+\begin{enumerate}
+    \item 
+ For $1\leq r,s \leq k$, $t_{p_r} = t_{p_s}$.
+ In words, the  unions corresponding to the pairs in $C$ have equal size in $T$.   
+%    $t_{a_1, b_1} = t_{a_2, b_2} = \cdots = t_{a_k, b_k}$.
+    \item If $(k,l)$ and $(m,n)$ are any pairs 
+    which belong to larger size classes than $C$,
+    then 
+    \[ \mbox{$t_{k,l} \leq t_{m,n} $ if and only if $s_{k,l} \leq s_{m,n} $}.\]
+    \item $T$ preserves and reflects $\precsubseteq$. 
+\label{equalize2}
+\end{enumerate}
+\label{lemma-equalize-subset}
+\end{lemma}
+
+
+\begin{proof}
+Before we begin the construction of $T$,
+we have an observation.
+$C$, being a size class of $\approx$, splits into one or more
+$\approxsubset$ classes, where $\approxsubset$ is the equivalence relation induced by $\precsubseteq$.
+The observation is that if $q_1$ and $q_2$ are members of $C$ which are in different $\approxsubset$
+classes, then neither $q_1 \precsubseteq q_2$ nor  $q_2 \precsubseteq q_1$.
+To see this, suppose towards a contradiction that  $q_1 \precsubseteq q_2$.
+Then since we also have $q_2 \preceq q_1$, we have 
+$q_1 \precsubseteq q_2$ by one of the properties of the suitable pair $(\preceq, \precsubseteq)$.
+
+
+
+Let us chose one pair in each $\approxsubset$-class of 
+$C$, and list the chosen pairs in size order according to $S$.
+That is, we have 
+\[ (a_1, b_1), \ldots, (a_k,b_k) \]
+so that every element of $C$ is $\approxsubset$ to exactly one pair on this list,
+and the order is chosen so that as numbers,
+\[  s_{a_1, b_1} \leq s_{a_2, b_2} \leq \cdots\leq s_{a_k, b_k}.
+\]
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \sClamp(S,a_2,b_2,s_{a_2, b_2} - s_{a_1, b_1})\\
+T^2 & = & \sClamp(T^1,a_3, b_3, s_{a_3, b_3} - s_{a_2, b_2} )\\
+  & \vdots   & \\
+T^{k-1} & = & \sClamp(T^{k-2},a_k,b_k,
+s_{a_k, b_k} - s_{a_{k-1}, b_{k-1}})\\
+\end{array}
+\]
+Let $T = T^{k-1}$
+
+To save on a lot of notation, let us write $s_i$ for $s_{a_i, b_i}$
+and similarly for $t^j_i$.
+
+An induction on $1\leq i \leq k -1$ shows that
+for $1 \leq j \leq i+1$,
+\begin{equation}
+\label{equalization}
+s_{i+1}  = t^i_{1} = t^i_{i} = \cdots t^i_{i} =  t^i_{i+1}.
+\end{equation}
+For $i = 1$, recall that $s_1 \leq s_2$.
+Also, $t^1_1 = s_1 + (s_2 - s_1) = s_2$.
+This is one place where we use our observation at the beginning of the proof.
+That is, $\nott ((a_1,b_1) \precsubseteq (a_2,b_2))$.
+Moreover, $t^1_2= s_2$, since 
+the definition of $T^1$ uses $\sClamp$ at $p_2$.
+
+
+
+Assume (\ref{equalization}) for  $i$.
+Let   $1\leq j \leq i+1$.
+Then \[ t^{i+1}_j = s_{i+1} + (s_{i+2} - s_{i+1}) 
+= s_{i+2}\]
+Again, we are using  our observation at the beginning of the proof.
+Also, $t^{i+1}_{i+2} = s_{i+2} $ since $T^{i+1}$ uses $\sClamp$
+at $p_{i+2}$.
+
+Taking $i = k -1$ in (\ref{equalization}) proves the first part of our result.
+
+The second is an easy induction using Proposition~\ref{proposition-sClamp}, part (\ref{part-bigger}).
+
+The last part is also an easy induction, this time using 
+ Proposition~\ref{proposition-sClamp}, parts (\ref{part-preserve}) and (\ref{part-reflect}).
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Making a List of Pairs Larger than all $\prec$-Predecessors}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lemma}
+Let $S$ be a family which  preserves and reflects $\precsubseteq$.  
+Let $q_1$, $\ldots$, $q_{\ell}$ be a sequence from 
+%$q_1\preceq q_2 \preceq \cdots \preceq q_k$ be a sequence 
+from $\Pairs(n)$.  
+Then there is a family $T$ such that
+\begin{enumerate} 
+    \item For $1\leq i,j \leq k$, $s_i \leq s_j$ iff $t_i \leq t_j$.
+    (Here we are writing $s_i$ and $s_j$ for $s_{q_i}$ and $s_{q_j}$, respectively.)
+    \label{competitor1}
+    \item For all 
+pairs $p $ which are $\prec$-below all $q_j$, we also have 
+$t_{p}  <  t_{q_i}$ for all $i$.
+\label{competitor2}
+  \item $T$ preserves and reflects $\precsubseteq$. 
+
+\end{enumerate}
+\label{lemma-competitor-subset}
+\end{lemma}
+ 
+
+ \begin{proof}
+ Let $m =  \min_i s_{i} = \min_i s_{q_i}$.
+We call a pair $p$ a \emph{size competitor} if 
+$p\prec q_j$ for all $j$, and yet  $t_p \geq m$.
+ 
+List the size competitors as $p_1, \ldots, p_k$. 
+ Note that for all size competitors $p_i$ and all of the original points
+ $q_j$,  we have $\nott (q_j \precsubseteq p_i)$.
+For if we did have $q_j \precsubseteq p_i$, then we would have 
+$q_j \preceq p_i$; and the definition of a size competitor
+insures that that $p_i \prec q_j$ for all $i, j$.
+
+
+ Let \[ \begin{array}{lcl}
+ T^1  & = &  \sClamp(S,p_1,  s_{p_1} -m + 1)\\
+
+T^2 & = & \sClamp(T^1,p_2,  s_{p_2}-m + 1 )\\
+  & \vdots   & \\
+T^{k} & = & \sClamp(T^{k-1},p_k, s_{p_k}-m + 1 )\\
+\end{array}
+\]
+Let $T = T^{k}$.
+We claim that the original points $q_j$ have $t_{q_j} > t_{p}$
+for all $p \prec q_1$.
+The reason is that 
+\[ t_{q_j} = s_{q_j} + ( s_{p_1} -m + 1) + (s_{p_2}-m + 1) + \cdots 
++ ( s_{p_k} -m + 1)
+\]
+On the other hand, for one of the size competitors, say $p_i$, we have
+\begin{equation}
+\label{nearendsubset}
+\begin{array}{lcl}
+t_{p_i} & = & s_{p_i} + ( s_{p_1}-m  + 1) + \cdots +
+(s_{p_{i-1}} -m  + 1)
++ (s_{p_{i+1}} -m  + 1) + \cdots +(s_{p_k}-m + 1)\\
+%& > &  \\
+\end{array}
+\end{equation}
+That is, $p_i$ is $s$-clamped as we move from $T^{i-1}$ to $T^i$.
+The upshot is that 
+\begin{equation}\label{upshot}
+t_{q_j} - t_{p_i} \geq s_{q_j} + (s_{p_i}-m + 1)  -
+s_{p_i} = s_{q_j} - m + 1
+\geq  s_{q_j} -s_{q_i} +1  = 1.
+\end{equation}
+The reason that the first $\geq$ is not an equals sign $=$
+is that it may be the case that $p_i\precsubseteq p_{i'}$.
+
+At the end of (\ref{upshot}), we used the fact that $m \leq s_{q_i}$.
+By (\ref{upshot}), we see that $t_{q_j} > t_{p_i}$.
+
+
+For all $p \prec q_1$ which are not  size competitors,
+the calculations are easier.  For such $p$,
+$s_p < s_{q_j}$ for all $j$.
+So we get 
+$t_{q_j} - t_{p} \geq s_{q_j} - s_{p} > 0$.
+
+
+This completes the proof of the first part of our lemma, and the other parts follow as in Lemma~\ref{lemma-equalize-subset}.
+This completes the proof.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proving the Representation Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We prove Theorem~\ref{theorem-thoughts-subset} by designing an algorithm
+which represents a suitable pair $(\preceq,\precsubseteq)$ on $\Pairs(n)$ by a family
+of sets.   We construct the required family using Lemmas~\ref{lemma-equalize-subset}
+and~\ref{lemma-competitor-subset} on each of the 
+size classes of $\preceq$.
+
+
+Consider the given ordering $\preceq$.
+Recall that a \emph{size class} is a set of $\equiv$
+ pairs $p$.   We list the size classes in order, from $\prec$-largest to 
+ $\prec$-smallest.   Let's say the size classes in this order are 
+ \[  C_1, C_2, \ldots, C_K \]
+ Since we are listing them from 
+ $\prec$-largest to 
+ $\prec$-smallest, we have the following fact:
+ if $(a,b) \prec (c,d)$, and also  $(a,b)\in C_i$, and finally
+ $(c,d)\in C_j$,
+ then $j < i$.
+ 
+ Our algorithm has $K+1$ steps, one to start
+ and one for each size class $C_i$. 
+ We construct families $S^0, S^1, \ldots, S^K$.
+ In Step $i$,
+ we assure the following two assertions:
+ \begin{enumerate}
+ \item For all $(a,b)$, $(c,d)\in \bigcup_{1\leq j\leq i} C_j$,
+\begin{equation}
+    \label{goal-in-alg}
+ (a,b) \preceq  (c,d) \quadiff 
+ s^i_{a,b}\leq s^i_{c,d}.
+ \end{equation}
+%     \item  For $1 \leq j \leq i$,
+ %the sizes of all pairs in $C_j$ are the same.
+ %That is, for $p, q\in C_j$,  $s^i_p = s^i_q$.
+     \item 
+The sizes of all pairs in $\bigcup_{j< i} C_j$ are larger than the sizes of all pairs in $\bigcup_{j\geq i} C_j$.
+   That is, for  $j < i$, $q\in C_j$ and $p\in C_i$, $s^i_q > s^i_p$.
+   \item $S^i$ preserves and reflects $\precsubseteq$.
+ \end{enumerate}
+ If we do this for $i = 0, 1, \ldots, K$, then $S^K$ will
+ prove Theorem~\ref{theorem-thoughts-subset}.
+ 
+ We begin by taking $S^0$ to be any family
+ which preserves and reflects $\precsubseteq$.
+ The canonical choice is to take $S^0_i$ to be the join-prime up-closed
+ subsets of $(X,\preceq)$ that contain $(i,i)$ as an element, where $X$ is the set of all unary and binary union terms.
+ 
+
+ Assertions (1) and (2) from above are trivially satisfied.
+ 
+ \paragraph{Step i ($1 \leq i \leq K$)}
+ At the start of this step, we have a family $S^{i-1}$.
+ We assume (1) and (2) for $i -1$.
+ 
+ \paragraph{Substep $a$}
+ Let $C_i$ be listed as $p_1, \ldots, p_k$.
+ If $k = 1$, set $T = S^{i-1}$ and go to  Substep $b$ in the 
+ next paragraph.  Otherwise, 
+  use Lemma~\ref{lemma-equalize-subset} with these pairs 
+  $p_1, \ldots, p_k$ and with the family
+  $S^{i-1}$.
+  By the lemma, we get a new family which we'll call $T$.
+  In it, all pairs in $C_i$ have the same size.
+ By (2) for $i$, and by part~\ref{equalize2} of Lemma~\ref{lemma-equalize-subset},
+ we have (1) for $T$.
+ (3) holds by  Lemma~\ref{lemma-equalize-subset}.
+  
+ \paragraph{Substep $b$}  
+Write $\bigcup_{1\leq j \leq i} C_j$ as 
+$\set{q_1, q_2,\ldots, q_k}$.
+Apply Lemma~\ref{lemma-competitor-subset}
+to this set and to the family $T$
+from Substep $a$.  We get a new family, say 
+$S^i$.  
+Lemma~\ref{lemma-competitor-subset}, part~\ref{competitor1}, insures that (1) holds for $S^i$, since it held for $T$.
+ And Lemma~\ref{lemma-competitor-subset}, part~\ref{competitor2},
+ insures that (2) holds for $S^i$.
+  (3) holds by  Lemma~\ref{lemma-competitor-subset}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Representation with Arbitrary Finite Unions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Add}{\text{Add}}
+
+A structure $(S,\leq, \vee, \bot, \preceq)$ is a \textbf{linearly preordered join semilattice} (LPJS) if: 
+\begin{enumerate}[(a)]
+    \item $(S,\leq,\vee,\bot)$ is a join semilattice. 
+    \item $(S,\preceq)$ is a linear preorder.
+    \item For all $x,y\in S$, if $x\leq y$, then $x\preceq y$.
+    \item For all $x,y\in S$, if $x\leq y$ and $y\preceq x$, then $y\leq x$. 
+\end{enumerate}
+
+Axiom (d) can be rephrased as follows: If $\sim$ is the equivalence relation associated to the linear preorder $\preceq$, then each $\sim$ equivalence class is an antichain in the partial order $\leq$. This gives more intuition for what an LPJS looks like, but we have stated the axiom in the form (d) because it corresponds exactly with one of our proof rules, and because we will use it in this form. 
+
+To any set $X$, we can associate the \textbf{full LPJS} of finite subsets of $X$: $$F(X) = (\mathcal{P}_\text{fin}(X), \subseteq, \cup, \emptyset, \preceq),$$ where if $A$ and $B$ are finite subsets of $X$, we have $A\preceq B$ if and only if $|A|\leq |B|$. It is easy to check that $F(X)$ satisfies axioms (a)-(d).
+
+A \textbf{representation} of $S$ on $X$ is a semilattice embedding $f\colon S\to F(X)$. That is, an assignment $f$ of a finite set to each element of $S$ such that:
+\begin{enumerate}[(1)]
+    \item $x\leq y$ iff $f(x)\subseteq f(y)$.
+    \item $f(x\vee y) = f(x)\cup f(y)$.
+    \item $f(\bot) = \emptyset$.
+\end{enumerate} 
+We say that the representation $f$ is \textbf{correct} on $S'\subseteq S$ if for all $x,y\in S'$, we have $x\preceq y$ iff $|f(x)|\leq |f(y)|$. We say that $f$ is \textbf{perfect} if it is correct on all of $S$. 
+
+\begin{theorem}\label{thm:rep}
+Every finite LPJS has a perfect representation.
+\end{theorem}
+
+Our strategy for proving this theorem is to build a representation for $S$ without regard to correctness, and then argue inductively that we can find representations which are correct on more and more of $S$.
+
+\begin{lemma}\label{lem:base}
+Every finite LPJS has a representation. 
+\end{lemma}
+\begin{proof}
+This is just the standard representation theorem for join semilattices, restricted to finite semilattices and finite sets. 
+
+We represent $(S,\leq,\vee,\bot,\preceq)$ on $F(S)$ by the map $$f(x) = \{y\in S\mid x\not\leq y\}.$$
+Let's check conditions (1)-(3):
+\begin{enumerate}[(1)]
+\item If $x\leq y$, then for all $z\in S$, if $z\notin f(y)$, then $y\leq z$, so $x\leq z$, and $z\notin f(x)$. It follows that $f(x)\subseteq f(y)$. 
+
+Conversely, if $x\not\leq y$, then $y\in f(x)$, but $y\notin f(y)$. So $f(x)\not\subseteq f(y)$.
+
+\item For any $z$, we have $x\vee y\leq z$ if and only if $x \leq z$ and $y\leq z$. So $z\notin f(x\vee y)$ iff $x\lor y \leq z$ iff $x\leq z$ and $y\leq z$ iff $z\notin f(x)$ and $z\notin f(y)$ iff $z\notin f(x)\cup f(y)$. It follows that $f(x\vee y) = f(x) \cup f(y)$. 
+
+\item Finally, $f(\bot) = \emptyset$, since for all $y\in S$, $\bot \leq y$. \qedhere
+\end{enumerate}
+\end{proof}
+
+Next, we introduce an operation on representations, which we will use to make them more correct. 
+
+Suppose $f\colon S\to F(X)$ is a representation, $x\in S$, and $r\in \mathbb{N}$. We define a  representation $\Add(f,x,r)$ as follows. Let $P = \{*_1,\dots,*_r\}$ be a set of $r$ new points which are not in $X$. Then $\Add(f,x,r)$ is a representation of $S$ on $X\cup P$, defined by $$y\mapsto \begin{cases} f(y)\cup P & \text{if }y\not\leq x\\ f(y) &\text{if }y\leq x.
+\end{cases}$$
+The intuition is that we ``clamp down'' $x$ and all of its subsets, while adding new points to all other sets in order to increase their sizes by $r$. 
+
+\begin{lemma}\label{lem:add}
+If $f$ is a representation of $S$, $x\in S$, and $r\in \mathbb{N}$, then $\Add(f,x,r)$ is a representation of $S$. Moreover, if $f$ is correct on $S'\subseteq S$, and $y\not\leq x$ for all $y\in S'$, then $\Add(f,x,r)$ is correct on $S'$. 
+\end{lemma}
+\begin{proof}
+Let $f' = \Add(f,x,r)$. We check conditions (1)-(3). 
+\begin{enumerate}[(1)]
+    \item If $y\leq z$, then $f(y) \subseteq f(z)$. Also, $z\leq x$ implies $y\leq x$. So we are left with three cases. 
+    
+    Case a: If $y\leq x$ and $z\leq x$, then $f'(y) = f(y)\subseteq f(z) = f'(z)$. 
+    
+    Case b: If $y\leq x$ and $z\not\leq x$, then $f'(y) = f(y) \subseteq f(z) \subseteq f(z)\cup P = f'(z)$. 
+    
+    Case c: If $y\not\leq x$ and $z\not\leq x$, then $f'(y) = f(y)\cup P \subseteq f(z)\cup P = f'(z)$. 
+    
+    Conversely, if $y\not\leq z$, then $f(y)\not\subseteq f(z)$, so there is some $a\in f(y)$ such that $a\notin f(z)$. Then also $a\in f'(y)$, and $a\notin P$, so $a\notin f'(z)$, and thus $f'(y)\not\subseteq f'(z)$. 
+    \item We have $y\vee z \leq x$ if and only if $y\leq x$ or $z\leq x$. 
+    
+    Case a: $y\vee z \not\leq x$. Then $f'(y\vee z) = f(y\vee z)\cup P = f(y)\cup f(z)\cup P = (f(y)\cup P)\cup (f(z)\cup P) = f'(y)\cup f'(z)$. 
+    
+    Case b: $y\vee z\leq x$. Then $f'(y\vee z) = f(y\vee z) = f(y)\cup f(z) = f'(y)\cup f'(z)$. 
+    
+    \item Since $\bot\leq x$, $f'(\bot) = f(\bot) = \emptyset$.
+\end{enumerate}
+
+We have established that $f'$ is a representation of $S$. Now suppose $f$ is correct on $S'\subseteq S$. Then for any $y,z\in S'$ we have $y\not\leq x$ and $z\not\leq x$, so $f'(y) = f(y)\cup P$ and $f'(z) = f(z)\cup P$. It follows that $|f'(y)| = |f(y)|+r$ and $|f'(z)| = |f(z)|+r$. So $y\preceq z$ iff $|f(y)|\leq |f(z)|$ iff $|f'(y)|\leq |f'(z)|$, and $f'$ is correct on $S'$. 
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proof of Representation Theorem with Arbitrary Finite Unions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+With these tools in hand, we are ready to prove the theorem. 
+
+\begin{proof}[Proof of Theorem~\ref{thm:rep}]
+Let $S$ be a finite LPJS. Enumerate $S$ in decreasing order according to $\preceq$, as $$s_1\succeq s_2 \succeq s_3 \succeq \dots \succeq s_k.$$
+Note that since $\preceq$ is a preorder, we may also have $s_i \preceq s_{i+1}$ for some $i$. Letting $\sim$ be the equivalence relation associated to the preorder $\preceq$, we call the $\sim$ equivalence classes size classes.
+
+For $0\leq n \leq k$, let $S_n = \{s_i\mid i \leq n\}$. We show by induction on $n$ that $S$ has a representation which is correct on $S_n$.
+
+Base case: $S_0 = \emptyset$, so we only need a representation of $S$, which is given by Lemma~\ref{lem:base}. 
+
+Inductive step: Suppose $f$ is a representation of $S$ which is correct on $S_n$. For all $1\leq i \leq k$, let $r_i = |f(s_i)|$. 
+
+Since $s_{n+1}\preceq s_n$, it suffices to find a representation $f'$ which is correct on $S_n$ and such that $|f'(s_{n+1})| = |f'(s_n)|$ if $s_n \sim s_{n+1}$ and $|f'(s_{n+1})| < |f'(s_n)|$ otherwise.
+
+\emph{Case 1:} $r_{n+1} \geq r_n$. Then if $s_n\sim s_{n+1}$, let $r = r_{n+1} - r_n$. Otherwise, let $r = r_{n+1}-r_n+1$. Now consider the representation $f' = \Add(f,s_{n+1},r)$. 
+
+For all $i\leq n$, we have $s_{n+1}\preceq s_i$, so by axiom (d), $s_i\not\leq s_{n+1}$. By Lemma~\ref{lem:add}, $f'$ is correct on $S_n$. And we have $|f'(s_{n+1})| = r_{n+1}$, while \begin{align*}
+    |f'(s_n)| &= r_n + r\\ &= \begin{cases} r_n + (r_{n+1}-r_n) & \text{if }s_n\sim s_{n+1}\\
+r_n + (r_{n+1}-r_n+1) & \text{otherwise}\end{cases}\\
+&= \begin{cases} |f'(s_{n+1})| & \text{if }s_n\sim s_{n+1}\\
+|f'(s_{n+1})|+1 & \text{otherwise}.
+\end{cases}
+\end{align*}
+
+\emph{Case 2:} $r_{n+1} < r_n$. In this case, if $s_{n+1}\not\sim s_n$ (so $s_{n+1} \prec s_n$), then $f$ is already correct on $S_{n+1}$. So we may assume that $s_{n+1}\sim s_n$. 
+
+Let $C$ be the size class of $s_n$, so $C = \{s_j,\dots,s_{n+1}\}$ for some $1\leq j \leq n$. 
+Set $f_{n+1} = f$, and for $j\leq i \leq n$, set $$f_i = \Add(f_{i+1}, s_i, |f_{i+1}(s_i)| - |f_{i+1}(s_{n+1})|).$$
+
+Then 
+\begin{itemize}
+    \item $f_j$ is correct on $S_n\setminus C$.
+    \item For each $s_i\in C$, $f_j(s_i)$ has equal size.
+    \item This size is smaller than the size of $f_j(s_{j'})$ for all $j'<j$. 
+\end{itemize}
+So $f_j$ is correct on $S_{n+1}$. 
+
+It remains to write out the details of the assertions above. 
+\end{proof}
+
+
+\end{document}
