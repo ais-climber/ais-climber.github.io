@@ -7,8 +7,7 @@
 
   <section*|Teaching>
 
-  <notes-link|Here is a practice notes link. It leads to
-  Publications.|publications.tm>
+  \;
 </body>
 
 <\initial>

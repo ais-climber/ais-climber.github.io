@@ -35,8 +35,8 @@
 ******************************************************************************/
 
 :root {
-    --main-family: 'Source Serif Pro', serif;
-    --title-family: 'Source Sans Pro', sans-serif;
+    --main-family: 'Source Serif Pro', serif; /* Source Serif Pro */
+    --title-family: 'Source Sans Pro', serif; /* Source Sans Pro */
     --tt-family: 'Source Code Pro', monospace;
     --color-title: #282828; /* #8f3f71;*/
     --color-text: rgb(41, 34, 34);

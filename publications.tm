@@ -38,12 +38,17 @@
     <boxed-button-row|<boxed-button|paper|>|<boxed-button|slides|>|<boxed-button|code|>|>
   </enumerate>
 
-  <notes-link|Here is a practice notes link. It leads to
-  Teaching.|teaching.tm>
+  \;
+
+  <tabular|<tformat|<twith|table-width|1par>|<twith|table-hmode|exact>|<cwith|1|1|2|2|cell-row-span|2>|<cwith|1|1|2|2|cell-col-span|1>|<cwith|1|1|1|1|cell-row-span|2>|<cwith|1|1|1|1|cell-col-span|1>|<cwith|1|1|1|1|cell-valign|c>|<cwith|1|1|2|2|cell-halign|r>|<cwith|1|1|2|2|cell-valign|b>|<cwith|1|-1|1|-1|cell-tborder|0ln>|<cwith|1|-1|1|-1|cell-bborder|0ln>|<cwith|1|-1|1|1|cell-lborder|0ln>|<cwith|1|-1|2|2|cell-rborder|0ln>|<table|<row|<cell|<large|Caleb
+  Schultz Kisby>>|<cell|<tabular|<tformat|<table|<row|<cell|<notes-button|<large|About>|index.tm>>|<cell|<notes-button|<large|Publications>|publications.tm>>|<cell|<notes-button|<large|Teaching>|teaching.tm>>|<cell|<notes-button|<large|Writing>|writing.tm>>|<cell|<notes-button|<large|Links>|links.tm>>>>>>>>|<row|<cell|>|<cell|>>>>>
+
+  \;
 </body>
 
 <\initial>
   <\collection>
+    <associate|framed-width|1ln>
     <associate|item-hsep|<macro|1.0fn>>
     <associate|page-height|auto>
     <associate|page-medium|paper>

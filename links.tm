@@ -31,12 +31,6 @@
 
   Here are some links to some helpful resources and fun sights!
 
-  This page is where I post things that I find myself needing to write. Some
-  are meant to be fun reads, some more serious, and others are just meant to
-  help myself think (sorry!). If you're looking for my published academic
-  writing, please see <hlink|this page|https://caleb.schultzkisby.me/publications>
-  instead.
-
   <subsection*|Useful Resources>
 
   <\itemize>
