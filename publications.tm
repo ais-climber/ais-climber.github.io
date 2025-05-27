@@ -39,8 +39,6 @@
   </enumerate>
 
   \;
-
-  \;
 </body>
 
 <\initial>

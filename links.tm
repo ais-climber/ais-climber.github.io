@@ -29,7 +29,7 @@
 
   <section*|Links>
 
-  Here are some links to some helpful resources and fun sights!
+  Here are some links to various helpful resources and fun reads!
 
   <subsection*|Useful Resources>
 

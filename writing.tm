@@ -11,11 +11,10 @@
 
   <section*|Writing>
 
-  This page is where I post things that I find myself needing to write. Some
-  are meant to be fun reads, some more serious, and others are just meant to
-  help myself think (sorry!). If you're looking for my published academic
-  writing, please see <hlink|this page|https://caleb.schultzkisby.me/publications>
-  instead.
+  This page is where I post essays, blog-like things, etc. Some are meant to
+  be fun reads, some more serious, and others are just meant to help myself
+  think (sorry!). If you're looking for my published academic writing, please
+  see <hlink|this page|https://caleb.schultzkisby.me/publications> instead.
 
   <\itemize>
     <item>
