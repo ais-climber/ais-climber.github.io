@@ -15,7 +15,9 @@
   co-supervised by <hlink|Larry Moss|https://iulg.sitehost.iu.edu/moss/> and
   <hlink|Saúl Blanco|https://homes.luddy.indiana.edu/sblancor>. I'm also a
   member of the <hlink|IU logic group|https://iulg.sitehost.iu.edu/> and
-  <hlink|plwonks|https://wonks.github.io/>.
+  <hlink|plwonks|https://wonks.github.io/>, and have participated in the
+  <hlink|IU Cognitive Lunch|https://cogs.indiana.edu/news-events/events/coglunch-events/index.html>
+  seminar.
 
   <paragraph|Updates:>I am finishing up my dissertation at last! <hlink|Click
   here|Research_Papers/Dissertation/dissertation.pdf> for an in-progress
@@ -47,9 +49,9 @@
   formalizing the underlying ideas and proving things about them. My
   particular approach to formalizing neural networks and learning algorithms
   involves tools and techniques at the intersection of dynamic epistemic
-  logic, finite model theory, learning theory, and complexity theory. But
-  this work is necessarily interdisciplinary, so I also find myself applying
-  ideas from philosophy, psychology, linguistics, and neuroscience.
+  logic, finite model theory, learning theory, and complexity theory. But I
+  also try to embrace the inderdisciplinary nature of these questions, and
+  apply ideas from philosophy, psychology, linguistics, and neuroscience.
 
   <section*|News and Activity>
 
