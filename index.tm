@@ -11,20 +11,17 @@
 
   <with|font-series|bold|<very-large|Caleb Schultz Kisby>>
 
-  <tabular|<tformat|<twith|table-width|1par>|<twith|table-hmode|exact>|<cwith|1|1|2|2|cell-row-span|2>|<cwith|1|1|2|2|cell-col-span|1>|<cwith|1|1|1|1|cell-row-span|2>|<cwith|1|1|1|1|cell-col-span|1>|<cwith|1|1|2|2|cell-halign|c>|<cwith|1|1|1|1|cell-lsep|0fn>|<cwith|1|1|2|2|cell-valign|t>|<cwith|1|1|1|1|cell-valign|t>|<cwith|1|1|1|1|cell-hyphen|t>|<cwith|1|1|2|2|cell-width|0.4par>|<cwith|1|1|2|2|cell-hmode|exact>|<table|<row|<\cell>
-    Welcome! I'm a PhD Candidate in Computer Science at Indiana University,
-    co-supervised by <hlink|Larry Moss|https://iulg.sitehost.iu.edu/moss/>
-    and <hlink|Saúl Blanco|https://homes.luddy.indiana.edu/sblancor>. I'm
-    also a member of the <hlink|IU logic group|https://iulg.sitehost.iu.edu/>
-    and <hlink|plwonks|https://wonks.github.io/>.
+  Welcome! I'm a PhD Candidate in Computer Science at Indiana University,
+  co-supervised by <hlink|Larry Moss|https://iulg.sitehost.iu.edu/moss/> and
+  <hlink|Saúl Blanco|https://homes.luddy.indiana.edu/sblancor>. I'm also a
+  member of the <hlink|IU logic group|https://iulg.sitehost.iu.edu/> and
+  <hlink|plwonks|https://wonks.github.io/>.
 
-    <paragraph|Updates:>I am finishing up my dissertation at last!
-    <hlink|Click here|Research_Papers/Dissertation/dissertation.pdf> for an
-    in-progress draft. I'm also on the research job market this year (Fall
-    2025).
+  <paragraph|Updates:>I am finishing up my dissertation at last! <hlink|Click
+  here|Research_Papers/Dissertation/dissertation.pdf> for an in-progress
+  draft. I'm also on the research job market this year (Fall 2025).
 
-    <paragraph|Contact:>cckisby (at) gmail.com
-  </cell>|<cell|<image|file:///home/cckisby/Desktop/Website/resources/images/me.jpg|11fn|||>>>|<row|<cell|>|<cell|>>>>>
+  <paragraph|Contact:>cckisby (at) gmail.com
 
   <section*|Research>
 
@@ -46,10 +43,13 @@
     <item>Is provably correct AI alignment possible?
   </itemize>
 
-  I am a theoretical computer scientist by training, so I tend to answer
-  these questions by formalizing these ideas and proving things about them.
-  But this work is necessarily interdisciplinary, so I also borrow ideas from
-  philosophy, psychology, linguistics, and neuroscience.
+  I'm a mathematician by training, so I try to answer these questions by
+  formalizing the underlying ideas and proving things about them. My
+  particular approach to formalizing neural networks and learning algorithms
+  involves tools and techniques at the intersection of dynamic epistemic
+  logic, finite model theory, learning theory, and complexity theory. But
+  this work is necessarily interdisciplinary, so I also find myself applying
+  ideas from philosophy, psychology, linguistics, and neuroscience.
 
   <section*|News and Activity>
 
