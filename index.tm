@@ -7,7 +7,7 @@
     \;
   </hide-preamble>
 
-  <my-page-header>
+  <about-page-header>
 
   <with|font-series|bold|<very-large|Caleb Schultz Kisby>>
 
@@ -19,11 +19,12 @@
   <hlink|IU Cognitive Lunch|https://cogs.indiana.edu/news-events/events/coglunch-events/index.html>
   seminar.
 
-  <paragraph|Updates:>I am finishing up my dissertation at last! <hlink|Click
-  here|Research_Papers/Dissertation/dissertation.pdf> for an in-progress
-  draft. I'm also on the research job market this year (Fall 2025).
+  <with|font-series|bold|Updates:> I am finishing up my dissertation at last!
+  <hlink|Click here|Research_Papers/Dissertation/dissertation.pdf> for an
+  in-progress draft. I'm also on the research job market this year (Fall
+  2025).
 
-  <paragraph|Contact:>cckisby (at) gmail.com
+  <with|font-series|bold|Contact:> cckisby (<aw|star|0.75>) gmail.com
 
   <section*|Research>
 
@@ -64,6 +65,8 @@
     homepage|https://sites.google.com/view/nasslli25-learning-in-del/home>.
   </news-line|Jun 2025>
 
+  \;
+
   <vspace|5em>
 
   <small|This website was made using <hlink|TeXmacs|https://www.texmacs.org/tmweb/home/welcome.en.html>,
@@ -101,31 +104,22 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|1|?>>
-    <associate|auto-2|<tuple|2|?>>
-    <associate|auto-3|<tuple|2|?>>
-    <associate|auto-4|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|?>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-2|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|?>>
+    <associate|auto-3|<tuple|<with|mode|<quote|math>|><shift|<with|font-size|<quote|0.595>|\<#25C6\>>||0.1em>|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <with|par-left|<quote|3tab>|Updates:
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-1>>
-
-      <with|par-left|<quote|3tab>|Contact:
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2>>
-
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|Research>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-3><vspace|0.5fn>
+      <no-break><pageref|auto-1><vspace|0.5fn>
 
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|News
       and Activity> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4><vspace|0.5fn>
+      <no-break><pageref|auto-2><vspace|0.5fn>
     </associate>
   </collection>
 </auxiliary>

@@ -25,7 +25,7 @@
     </cell>>>>>>|<cell|<tformat|<tformat|<table|<row|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-1E7E7520-11BCEC4E>|<link|hyperlink|<id|%2256C888-1E7E7520-11BCEC4E>|<url|https://caleb.schultzkisby.me/>>|<with|font-size|1.189|About>><assign|locus-color|global><assign|visited-color|global>>|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-231C6638-2F4D73A5>|<link|hyperlink|<id|%2256C888-231C6638-2F4D73A5>|<url|https://caleb.schultzkisby.me/publications>>|<with|font-size|1.189|Publications>><assign|locus-color|global><assign|visited-color|global>>|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-1E0550B0-5AF1007D>|<link|hyperlink|<id|%2256C888-1E0550B0-5AF1007D>|<url|https://caleb.schultzkisby.me/teaching>>|<with|font-size|1.189|Teaching>><assign|locus-color|global><assign|visited-color|global>>|<cell|<assign|locus-color|black><assign|visited-color|black><locus|<id|%2256C888-1D7C3EE8--5090DFCD>|<link|hyperlink|<id|%2256C888-1D7C3EE8--5090DFCD>|<url|https://caleb.schultzkisby.me/writing>>|<with|font-size|1.189|Writing>><assign|locus-color|global><assign|visited-color|global>>|<cell|<button|<large|Links>|https://caleb.schultzkisby.me/links>>>>>>>>|<row|<cell|>|<cell|>>>>>>|<cell|>>>>><vspace|5em>>
   </hide-preamble>
 
-  <value|my-page-header>
+  <my-page-header>
 
   <section*|My Writing and Project Ideas>
 
@@ -418,6 +418,52 @@
     about how I express this inequality <math|q<rsub|i>\<neq\>q<rsub|j>> (is
     it just <math|\<neg\><around*|(|q<rsub|i>\<leftrightarrow\>q<rsub|j>|)>>,
     or is it something different?)
+  </idea|<with|color|#EA4335|<aw|comment|1fn>>>
+
+  <\idea>
+    Our inner voices and internal beliefs are shaped in part by the questions
+    people have\ 
+
+    asked us in the past. When somebody asks us a question, we aren't just
+    prompted to
+
+    <with|font-shape|italic|answer> the question; we
+    <with|font-shape|italic|learn> something from them asking the question!
+
+    \;
+
+    I don't think current ways of modelling questions in logic handles this
+    correctly. I
+
+    would like to try. Here's an approach:
+
+    \;
+
+    Within a context <math|C>, a number of questions come to mind. If you are
+    in a context <math|C>,
+
+    and somebody asks you <math|P?>, it increases your tendancy to ask
+    <math|P?> in context <math|C> in the
+
+    future. Of course, the questions asked in a moment + context need to all
+    be consistent
+
+    with one another.
+
+    \;
+
+    A fun example comes from childhood experiences: <todo|come up with a
+    personal example.>
+
+    \;
+
+    <with|font-series|bold|Update:> This is much deeper than just learning
+    from questions! In general, what
+
+    I'm really asking is <with|font-shape|italic|how do we learn what action
+    to take?> Then we can add questions
+
+    and contexts to this story.
   </idea|<with|color|#EA4335|<aw|comment|1fn>>>
 </body>
 
